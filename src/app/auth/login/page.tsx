@@ -27,17 +27,17 @@ function LoginForm() {
     setMounted(true)
   }, [])
 
-  // Redirect if already authenticated - immediate redirect
+  // Redirect if already authenticated
   useEffect(() => {
     if (mounted && status === 'authenticated' && session?.user) {
-      console.log('User already authenticated, redirecting to:', callbackUrl)
-      // Use window.location for full page reload to ensure session is synced
-      window.location.href = callbackUrl
+      // Use router for client-side navigation (smoother than window.location)
+      router.push(callbackUrl)
     }
-  }, [mounted, status, session, callbackUrl])
+  }, [mounted, status, session, callbackUrl, router])
 
-  // Show loading while checking session
-  if (status === 'loading' || !mounted) {
+  // Show minimal loading state only for initial mount
+  // Don't show loading spinner for session status to avoid blink
+  if (!mounted) {
     return (
       <div style={{ 
         minHeight: '100vh', 
@@ -47,59 +47,8 @@ function LoginForm() {
         justifyContent: 'center',
         padding: '1rem'
       }}>
-        <div style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
-          <div style={{ 
-            width: '48px', 
-            height: '48px', 
-            border: '3px solid #f97316', 
-            borderTop: '3px solid transparent',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto'
-          }}></div>
-          <p style={{ marginTop: '1rem', color: '#6b7280' }}>Checking session...</p>
-          <style>{`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}</style>
-        </div>
-      </div>
-    )
-  }
-
-  // If already authenticated, show loading (will redirect)
-  if (status === 'authenticated') {
-    return (
-      <div style={{ 
-        minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        padding: '1rem'
-      }}>
-        <div style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
-          <div style={{ 
-            width: '48px', 
-            height: '48px', 
-            border: '3px solid #16a34a', 
-            borderTop: '3px solid transparent',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto'
-          }}></div>
-          <p style={{ marginTop: '1rem', color: '#16a34a', fontWeight: '500' }}>
-            Redirecting to dashboard...
-          </p>
-          <style>{`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}</style>
-        </div>
+        {/* Minimal placeholder - no loading spinner */}
+        <div style={{ width: '100%', maxWidth: '400px' }}></div>
       </div>
     )
   }
@@ -132,9 +81,8 @@ function LoginForm() {
         }
         setMessageType('error')
       } else if (result?.ok) {
-        // Login successful - redirect with full page reload
-        console.log('Login successful, redirecting to:', callbackUrl)
-        window.location.href = callbackUrl
+        // Login successful - use router for smooth navigation
+        router.push(callbackUrl)
       } else {
         setMessage('An error occurred. Please try again.')
         setMessageType('error')
