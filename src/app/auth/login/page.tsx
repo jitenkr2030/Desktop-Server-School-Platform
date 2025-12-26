@@ -2,13 +2,14 @@
 
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -19,13 +20,16 @@ export default function LoginPage() {
       const result = await signIn('credentials', {
         email,
         password,
-        redirect: true,
-        callbackUrl: '/dashboard'
+        redirect: false,
       })
 
       if (result?.error) {
         setError('Invalid email or password')
         setLoading(false)
+      } else {
+        // Success - refresh to update session and redirect
+        router.refresh()
+        router.push('/dashboard')
       }
     } catch (err) {
       setError('An error occurred')
@@ -34,11 +38,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
+    <div style={{
+      minHeight: '100vh',
       background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-      display: 'flex', 
-      alignItems: 'center', 
+      display: 'flex',
+      alignItems: 'center',
       justifyContent: 'center',
       padding: '1rem'
     }}>
