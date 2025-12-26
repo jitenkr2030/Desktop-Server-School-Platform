@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { NewNavigation } from "@/components/new-navigation";
+import { auth } from "@/auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,11 +53,15 @@ const cssLoadScript = `
   })();
 `;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch session on server to pass to client-side SessionProvider
+  // This eliminates client-side session checking and prevents blinking
+  const session = await auth()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -70,7 +75,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ margin: 0, padding: 0, fontFamily: 'system-ui, -apple-system, sans-serif' }}
       >
-        <Providers>
+        <Providers session={session}>
           <NewNavigation />
           <div style={{ paddingTop: '64px', minHeight: '100vh' }}>
             {children}

@@ -47,7 +47,9 @@ export default async function DashboardPage() {
   const completedCourses = demoCourses.filter(c => c.completed).length
   const totalTimeSpent = demoCourses.reduce((sum, c) => sum + c.timeSpent, 0)
   const averageProgress = Math.round(demoCourses.reduce((sum, c) => sum + c.progress, 0) / totalCourses)
-  const currentStreak = Math.floor(Math.random() * 7) + 1
+  // Use deterministic streak based on user ID hash (no Math.random to avoid hydration mismatch)
+  const userIdHash = userEmail.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  const currentStreak = (userIdHash % 7) + 1
 
   const formatDuration = (minutes: number) => {
     if (minutes < 60) return `${minutes} min`
