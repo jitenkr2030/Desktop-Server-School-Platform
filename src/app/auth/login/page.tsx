@@ -1,58 +1,30 @@
 "use client"
 
-import { useState, useEffect, Suspense } from 'react'
-import { signIn, useSession } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAuth } from '@/contexts/auth-context'
 
-// Inner component that uses useSearchParams
-function LoginForm() {
-  const { data: session, status } = useSession()
+export default function LoginPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const { login, isAuthenticated, loading } = useAuth()
   
-  const [mounted, setMounted] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const [messageType, setMessageType] = useState<'error' | 'success' | ''>('')
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+  const [error, setError] = useState('')
+  const [submitLoading, setSubmitLoading] = useState(false)
 
-  // Callback URL - where to redirect after login
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
-
+  // Redirect if already authenticated
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Redirect if already authenticated - with multiple checks
-  useEffect(() => {
-    if (mounted && status === 'authenticated') {
-      console.log('Already authenticated, redirecting to:', callbackUrl)
-      router.push(callbackUrl, { scroll: false })
+    if (!loading && isAuthenticated) {
+      router.push('/dashboard')
     }
-  }, [mounted, status, router, callbackUrl])
+  }, [loading, isAuthenticated, router])
 
-  // Fallback: redirect if session cookie exists but status is still loading
-  useEffect(() => {
-    if (mounted && status === 'loading') {
-      // Check if any session cookie exists
-      const hasSession = document.cookie.includes('next-auth.session-token') || 
-                        document.cookie.includes('__Secure-next-auth.session-token')
-      if (hasSession) {
-        // Session cookie exists but status is loading - wait a bit then redirect
-        const timer = setTimeout(() => {
-          console.log('Session cookie detected, redirecting to dashboard')
-          router.push('/dashboard', { scroll: false })
-        }, 500)
-        return () => clearTimeout(timer)
-      }
-    }
-  }, [mounted, status, router])
-
-  if (!mounted) {
+  // Show loading while checking session
+  if (loading) {
     return (
       <div style={{ 
         minHeight: '100vh', 
@@ -83,80 +55,26 @@ function LoginForm() {
     )
   }
 
-  // Loading state while checking session
-  if (status === 'loading') {
-    return (
-      <div style={{ 
-        minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        padding: '1rem'
-      }}>
-        <div style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
-          <div style={{ 
-            width: '48px', 
-            height: '48px', 
-            border: '3px solid #f97316', 
-            borderTop: '3px solid transparent',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto'
-          }}></div>
-          <p style={{ marginTop: '1rem', color: '#6b7280' }}>Loading...</p>
-          <style>{`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}</style>
-        </div>
-      </div>
-    )
+  // Don't render form if authenticated (will redirect)
+  if (isAuthenticated) {
+    return null
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setMessage('')
-    setMessageType('')
+    setError('')
+    setSubmitLoading(true)
 
-    try {
-      // Use NextAuth's signIn function from next-auth/react
-      const result = await signIn('credentials', {
-        email: formData.email,
-        password: formData.password,
-        redirect: false,
-      })
-
-      console.log('SignIn result:', result)
-
-      if (result?.error) {
-        // Handle specific error messages
-        if (result.error.includes('Too many login attempts')) {
-          setMessage('Too many login attempts. Please wait 15 minutes before trying again.')
-        } else if (result.error.includes('Account locked')) {
-          setMessage('Your account has been locked due to too many failed login attempts. Please try again later.')
-        } else {
-          // Generic error message to prevent user enumeration
-          setMessage('Invalid email or password')
-        }
-        setMessageType('error')
-      } else if (result?.ok) {
-        // Login successful - force a full page reload to ensure session is synced
-        window.location.href = callbackUrl
-      } else {
-        setMessage('An error occurred. Please try again.')
-        setMessageType('error')
-      }
-    } catch (error) {
-      setMessage('An error occurred. Please try again.')
-      setMessageType('error')
-      console.error('Login error:', error)
+    const result = await login(formData.email, formData.password)
+    
+    if (result.success) {
+      // Login successful - redirect to dashboard
+      router.push('/dashboard')
+    } else {
+      setError(result.error || 'An error occurred')
     }
-
-    setLoading(false)
+    
+    setSubmitLoading(false)
   }
 
   return (
@@ -224,18 +142,18 @@ function LoginForm() {
             </p>
           </div>
 
-          {/* Message Display */}
-          {message && (
+          {/* Error Message */}
+          {error && (
             <div style={{
               padding: '0.75rem',
               borderRadius: '6px',
               marginBottom: '1rem',
               fontSize: '0.875rem',
-              backgroundColor: messageType === 'error' ? '#fef2f2' : '#f0fdf4',
-              color: messageType === 'error' ? '#dc2626' : '#16a34a',
-              border: `1px solid ${messageType === 'error' ? '#fecaca' : '#bbf7d0'}`
+              backgroundColor: '#fef2f2',
+              color: '#dc2626',
+              border: '1px solid #fecaca'
             }}>
-              {message}
+              {error}
             </div>
           )}
 
@@ -301,32 +219,32 @@ function LoginForm() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={submitLoading}
               style={{
                 width: '100%',
                 height: '44px',
-                backgroundColor: loading ? '#9ca3af' : '#ea580c',
+                backgroundColor: submitLoading ? '#9ca3af' : '#ea580c',
                 color: 'white',
                 border: 'none',
                 borderRadius: '6px',
                 fontSize: '0.875rem',
                 fontWeight: '600',
-                cursor: loading ? 'not-allowed' : 'pointer',
+                cursor: submitLoading ? 'not-allowed' : 'pointer',
                 marginTop: '0.5rem',
                 transition: 'background 0.2s'
               }}
               onMouseEnter={(e) => {
-                if (!loading) {
+                if (!submitLoading) {
                   e.currentTarget.style.backgroundColor = '#c2410c'
                 }
               }}
               onMouseLeave={(e) => {
-                if (!loading) {
+                if (!submitLoading) {
                   e.currentTarget.style.backgroundColor = '#ea580c'
                 }
               }}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {submitLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
@@ -377,46 +295,5 @@ function LoginForm() {
         </div>
       </div>
     </div>
-  )
-}
-
-// Loading fallback for Suspense
-function LoginLoading() {
-  return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      padding: '1rem'
-    }}>
-      <div style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
-        <div style={{ 
-          width: '48px', 
-          height: '48px', 
-          border: '3px solid #f97316', 
-          borderTop: '3px solid transparent',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite',
-          margin: '0 auto'
-        }}></div>
-        <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `}</style>
-      </div>
-    </div>
-  )
-}
-
-// Main page component with Suspense boundary
-export default function LoginPage() {
-  return (
-    <Suspense fallback={<LoginLoading />}>
-      <LoginForm />
-    </Suspense>
   )
 }
