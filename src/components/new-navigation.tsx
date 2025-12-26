@@ -47,28 +47,9 @@ export function NewNavigation() {
     { href: '/about', label: 'About' }
   ]
 
+  // Show minimal nav while mounting to prevent hydration mismatch
+  // Session is passed from server in Providers, so useSession won't show loading state
   if (!mounted) {
-    return (
-      <nav style={{
-        background: 'white',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-        position: 'fixed',
-        width: '100%',
-        top: 0,
-        zIndex: 100
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '0 1rem',
-          height: '64px'
-        }}></div>
-      </nav>
-    )
-  }
-
-  // Loading state
-  if (status === 'loading') {
     return (
       <nav style={{
         background: 'white',
@@ -87,7 +68,8 @@ export function NewNavigation() {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <div style={{ width: '32px', height: '32px', background: '#f3f4f6', borderRadius: '4px' }}></div>
+          {/* Logo placeholder */}
+          <div style={{ width: '140px', height: '32px', background: '#f3f4f6', borderRadius: '4px' }}></div>
         </div>
       </nav>
     )
