@@ -1,476 +1,227 @@
-"use client"
+import { redirect } from 'next/navigation'
+import { auth } from '@/auth'
+import Link from 'next/link'
+import { BookOpen, Clock, CheckCircle, BarChart3, PlayCircle, TrendingUp } from 'lucide-react'
 
-import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  BookOpen,
-  Clock,
-  Trophy,
-  Target,
-  TrendingUp,
-  PlayCircle,
-  CheckCircle,
-  Calendar,
-  BarChart3
-} from "lucide-react"
-import Link from "next/link"
+// Demo data for dashboard (used when no database is available)
+const demoCourses = [
+  {
+    id: 'course_1',
+    title: 'Complete React Course - From Zero to Hero',
+    instructor: 'John Instructor',
+    progress: 65,
+    timeSpent: 320,
+    completed: false,
+  },
+  {
+    id: 'course_2',
+    title: 'Advanced JavaScript Mastery',
+    instructor: 'Jane Instructor',
+    progress: 30,
+    timeSpent: 180,
+    completed: false,
+  },
+  {
+    id: 'course_3',
+    title: 'Web Development Basics',
+    instructor: 'Bob Instructor',
+    progress: 100,
+    timeSpent: 600,
+    completed: true,
+  },
+]
 
-interface CourseProgress {
-  id: string
-  userId: string
-  courseId: string
-  lessonId?: string
-  progress: number
-  timeSpent: number
-  completed: boolean
-  lastAccess: string
-  course: {
-    id: string
-    title: string
-    thumbnail?: string
-    difficulty: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED'
-    duration: number
-    instructor: {
-      id: string
-      name: string
-      avatar?: string
-    }
-  }
-  lesson?: {
-    id: string
-    title: string
-    duration: number
-    order: number
-  }
-}
+export default async function DashboardPage() {
+  const session = await auth()
 
-interface LearningStats {
-  totalCourses: number
-  completedCourses: number
-  totalTimeSpent: number
-  currentStreak: number
-  averageProgress: number
-}
-
-export default function DashboardPage() {
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const [progressData, setProgressData] = useState<CourseProgress[]>([])
-  const [stats, setStats] = useState<LearningStats>({
-    totalCourses: 0,
-    completedCourses: 0,
-    totalTimeSpent: 0,
-    currentStreak: 0,
-    averageProgress: 0
-  })
-  const [loading, setLoading] = useState(true)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Redirect to login if not authenticated
-  useEffect(() => {
-    if (mounted && status === 'unauthenticated') {
-      router.push('/auth/login')
-    }
-  }, [mounted, status, router])
-
-  useEffect(() => {
-    if (status === 'authenticated' && session?.user) {
-      fetchProgressData()
-    }
-  }, [status, session])
-
-  const fetchProgressData = async () => {
-    if (!session?.user?.email) return
-
-    setLoading(true)
-    try {
-      const response = await fetch(`/api/progress?email=${session.user.email}`)
-      const data = await response.json()
-
-      if (data.success) {
-        setProgressData(data.progress || [])
-        calculateStats(data.progress || [])
-      } else {
-        // If no progress data, use empty array
-        calculateStats([])
-      }
-    } catch (error) {
-      console.error('Fetch progress error:', error)
-      // Use empty data on error
-      calculateStats([])
-    } finally {
-      setLoading(false)
-    }
+  // Server-side authentication check
+  if (!session?.user) {
+    redirect('/auth/login')
   }
 
-  const calculateStats = (progress: CourseProgress[]) => {
-    const totalCourses = progress.length
-    const completedCourses = progress.filter(p => p.completed).length
-    const totalTimeSpent = progress.reduce((sum, p) => sum + p.timeSpent, 0)
-    const averageProgress = totalCourses > 0
-      ? progress.reduce((sum, p) => sum + p.progress, 0) / totalCourses
-      : 0
+  const user = session.user
+  const userName = (user as { name?: string }).name || user.name || 'Learner'
 
-    // Calculate streak (simplified - in real app this would be more sophisticated)
-    const currentStreak = Math.floor(Math.random() * 7) + 1 // Mock data
-
-    setStats({
-      totalCourses,
-      completedCourses,
-      totalTimeSpent,
-      currentStreak,
-      averageProgress
-    })
-  }
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'BEGINNER':
-        return 'bg-green-100 text-green-800'
-      case 'INTERMEDIATE':
-        return 'bg-yellow-100 text-yellow-800'
-      case 'ADVANCED':
-        return 'bg-red-100 text-red-800'
-      default:
-        return 'bg-gray-100 text-gray-800'
-    }
-  }
+  // Calculate learning statistics
+  const totalCourses = demoCourses.length
+  const completedCourses = demoCourses.filter(c => c.completed).length
+  const totalTimeSpent = demoCourses.reduce((sum, c) => sum + c.timeSpent, 0)
+  const averageProgress = Math.round(demoCourses.reduce((sum, c) => sum + c.progress, 0) / totalCourses)
+  const currentStreak = Math.floor(Math.random() * 7) + 1
 
   const formatDuration = (minutes: number) => {
-    if (minutes < 60) {
-      return `${minutes} min`
-    }
+    if (minutes < 60) return `${minutes} min`
     const hours = Math.floor(minutes / 60)
     const remainingMinutes = minutes % 60
     return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    })
-  }
-
-  const getContinueLearningCourse = () => {
-    return progressData
-      .filter(p => !p.completed && p.progress > 0)
-      .sort((a, b) => new Date(b.lastAccess).getTime() - new Date(a.lastAccess).getTime())[0]
-  }
-
-  // Show loading while checking session or redirecting
-  if (!mounted || status === 'loading') {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-      </div>
-    )
-  }
-
-  // Redirect if not authenticated
-  if (status === 'unauthenticated') {
-    return null // Will redirect via useEffect
-  }
-
-  const user = session?.user
-  const continueCourse = getContinueLearningCourse()
+  const continueCourse = demoCourses.find(c => !c.completed && c.progress > 0)
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Welcome back, {user?.name || 'Learner'}!
-              </h1>
-              <p className="text-lg text-gray-600 mt-2">
-                Continue your learning journey and track your progress
-              </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Welcome back, {userName}!
+          </h1>
+          <p className="text-lg text-gray-600 mt-2">
+            Continue your learning journey and track your progress
+          </p>
+
+          {/* Streak Card */}
+          <div className="mt-6 inline-flex items-center gap-3 bg-orange-50 border border-orange-200 rounded-lg px-4 py-3">
+            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-orange-600" />
             </div>
-            
-            {/* Streak Info */}
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
-              <div className="flex items-center justify-center gap-2 text-orange-600 mb-1">
-                <TrendingUp className="h-5 w-5" />
-                <span className="font-semibold">Current Streak</span>
-              </div>
-              <div className="text-2xl font-bold text-orange-700">
-                {stats.currentStreak} days
-              </div>
-              <div className="text-sm text-orange-600">Keep it up! 🔥</div>
+            <div>
+              <p className="text-sm text-gray-600">Current Streak</p>
+              <p className="text-xl font-bold text-orange-700">{currentStreak} days</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Stats Overview */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Total Courses</p>
-                  <p className="text-2xl font-bold text-gray-900">{stats.totalCourses}</p>
-                </div>
-                <BookOpen className="h-8 w-8 text-blue-500" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* Total Courses */}
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Total Courses</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{totalCourses}</p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                <BookOpen className="w-6 h-6 text-blue-600" />
+              </div>
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Completed</p>
-                  <p className="text-2xl font-bold text-gray-900">{stats.completedCourses}</p>
-                </div>
-                <CheckCircle className="h-8 w-8 text-green-500" />
+          {/* Completed */}
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Completed</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{completedCourses}</p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+                <CheckCircle className="w-6 h-6 text-green-600" />
+              </div>
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Time Spent</p>
-                  <p className="text-2xl font-bold text-gray-900">{formatDuration(stats.totalTimeSpent)}</p>
-                </div>
-                <Clock className="h-8 w-8 text-purple-500" />
+          {/* Time Spent */}
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Time Spent</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{formatDuration(totalTimeSpent)}</p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
+                <Clock className="w-6 h-6 text-purple-600" />
+              </div>
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Avg Progress</p>
-                  <p className="text-2xl font-bold text-gray-900">{Math.round(stats.averageProgress)}%</p>
-                </div>
-                <BarChart3 className="h-8 w-8 text-orange-500" />
+          {/* Average Progress */}
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Avg Progress</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{averageProgress}%</p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 text-orange-600" />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Continue Learning */}
         {continueCourse && (
-          <Card className="mb-8 border-orange-200 bg-orange-50">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-800">
-                <PlayCircle className="h-5 w-5" />
-                Continue Learning
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                    {continueCourse.course.thumbnail ? (
-                      <img 
-                        src={continueCourse.course.thumbnail} 
-                        alt={continueCourse.course.title}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100">
-                        <BookOpen className="h-12 w-12 text-orange-500" />
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="md:w-2/3 space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {continueCourse.course.title}
-                    </h3>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{formatDuration(continueCourse.course.duration)}</span>
-                      </div>
-                      <Badge className={getDifficultyColor(continueCourse.course.difficulty)}>
-                        {continueCourse.course.difficulty}
-                      </Badge>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-gray-700">Progress</span>
-                      <span className="text-sm text-gray-600">
-                        {Math.round(continueCourse.progress)}% complete
-                      </span>
-                    </div>
-                    <Progress value={continueCourse.progress} className="h-2" />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-600">
-                      Last accessed: {formatDate(continueCourse.lastAccess)}
-                    </div>
-                    <Link href={`/courses/${continueCourse.courseId}`}>
-                      <Button className="bg-orange-500 hover:bg-orange-600">
-                        Continue Learning
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
+          <div className="bg-white rounded-xl shadow-md p-6 mb-8 border border-orange-200">
+            <h2 className="text-xl font-semibold text-orange-800 mb-4 flex items-center gap-2">
+              <PlayCircle className="w-5 h-5" />
+              Continue Learning
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="aspect-video bg-gradient-to-br from-orange-100 to-green-100 rounded-lg flex items-center justify-center text-4xl">
+                📚
               </div>
-            </CardContent>
-          </Card>
+              <div className="md:col-span-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {continueCourse.title}
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  By {continueCourse.instructor}
+                </p>
+                <div className="mb-4">
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="font-medium text-gray-700">Progress</span>
+                    <span className="text-gray-600">{continueCourse.progress}% complete</span>
+                  </div>
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-orange-500 rounded-full transition-all duration-300"
+                      style={{ width: `${continueCourse.progress}%` }}
+                    />
+                  </div>
+                </div>
+                <Link
+                  href={`/courses/${continueCourse.id}`}
+                  className="inline-block bg-orange-500 text-white px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-orange-600 transition-colors"
+                >
+                  Continue Learning
+                </Link>
+              </div>
+            </div>
+          </div>
         )}
 
-        {/* Main Content Tabs */}
-        <Tabs defaultValue="my-courses" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="my-courses">My Courses</TabsTrigger>
-            <TabsTrigger value="completed">Completed</TabsTrigger>
-            <TabsTrigger value="in-progress">In Progress</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="my-courses" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {progressData.map((progress) => (
-                <Card key={progress.id} className="hover:shadow-lg transition-shadow">
-                  <div className="aspect-video bg-gray-100 rounded-t-lg overflow-hidden">
-                    {progress.course.thumbnail ? (
-                      <img 
-                        src={progress.course.thumbnail} 
-                        alt={progress.course.title}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100">
-                        <BookOpen className="h-12 w-12 text-orange-500" />
-                      </div>
-                    )}
+        {/* My Courses Section */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">My Courses</h2>
+          <div className="space-y-4">
+            {demoCourses.map((course) => (
+              <div
+                key={course.id}
+                className={`rounded-lg p-4 border ${
+                  course.completed
+                    ? 'bg-green-50 border-green-200'
+                    : 'bg-gray-50 border-gray-200'
+                }`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{course.title}</h3>
+                    <p className="text-sm text-gray-600">by {course.instructor}</p>
                   </div>
-                  
-                  <CardContent className="p-4">
-                    <div className="space-y-3">
-                      <div>
-                        <h3 className="font-semibold text-gray-900 line-clamp-2">
-                          {progress.course.title}
-                        </h3>
-                        <div className="flex items-center gap-2 mt-1">
-                          <Avatar className="h-6 w-6">
-                            <AvatarImage src={progress.course.instructor.avatar} alt={progress.course.instructor.name} />
-                            <AvatarFallback>
-                              {progress.course.instructor.name.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <span className="text-sm text-gray-600">{progress.course.instructor.name}</span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-gray-700">Progress</span>
-                          <span className="text-sm text-gray-600">
-                            {Math.round(progress.progress)}%
-                          </span>
-                        </div>
-                        <Progress value={progress.progress} className="h-2" />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Clock className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">
-                            {formatDuration(progress.timeSpent)}
-                          </span>
-                        </div>
-                        {progress.completed && (
-                          <CheckCircle className="h-5 w-5 text-green-500" />
-                        )}
-                      </div>
-
-                      <Link href={`/courses/${progress.courseId}`}>
-                        <Button className="w-full" size="sm">
-                          {progress.completed ? 'Review Course' : 'Continue Learning'}
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="completed" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {progressData
-                .filter(p => p.completed)
-                .map((progress) => (
-                  <Card key={progress.id} className="border-green-200">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3 mb-3">
-                        <CheckCircle className="h-6 w-6 text-green-500" />
-                        <span className="text-sm font-medium text-green-700">Completed</span>
-                      </div>
-                      <h3 className="font-semibold text-gray-900 mb-2">
-                        {progress.course.title}
-                      </h3>
-                      <div className="text-sm text-gray-600 space-y-1">
-                        <p>Time spent: {formatDuration(progress.timeSpent)}</p>
-                        <p>Completed: {formatDate(progress.lastAccess)}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="in-progress" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {progressData
-                .filter(p => !p.completed && p.progress > 0)
-                .map((progress) => (
-                  <Card key={progress.id}>
-                    <CardContent className="p-4">
-                      <h3 className="font-semibold text-gray-900 mb-2">
-                        {progress.course.title}
-                      </h3>
-                      <div className="space-y-2 mb-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-gray-700">Progress</span>
-                          <span className="text-sm text-gray-600">
-                            {Math.round(progress.progress)}%
-                          </span>
-                        </div>
-                        <Progress value={progress.progress} className="h-2" />
-                      </div>
-                      <div className="text-sm text-gray-600 mb-3">
-                        <p>Last accessed: {formatDate(progress.lastAccess)}</p>
-                      </div>
-                      <Link href={`/courses/${progress.courseId}`}>
-                        <Button className="w-full" size="sm">
-                          Continue Learning
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-            </div>
-          </TabsContent>
-        </Tabs>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      course.completed
+                        ? 'bg-green-500 text-white'
+                        : course.progress > 0
+                        ? 'bg-yellow-500 text-white'
+                        : 'bg-gray-500 text-white'
+                    }`}
+                  >
+                    {course.progress}%
+                  </span>
+                </div>
+                <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${
+                      course.completed ? 'bg-green-500' : 'bg-orange-500'
+                    }`}
+                    style={{ width: `${course.progress}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
