@@ -10,7 +10,7 @@ function LoginForm() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
-  
+
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -19,6 +19,7 @@ function LoginForm() {
     email: '',
     password: ''
   })
+  const [redirecting, setRedirecting] = useState(false)
 
   // Callback URL - where to redirect after login
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
@@ -30,28 +31,61 @@ function LoginForm() {
   // Redirect if already authenticated
   useEffect(() => {
     if (mounted && status === 'authenticated' && session?.user) {
-      // Use router for client-side navigation (smoother than window.location)
       router.push(callbackUrl)
     }
   }, [mounted, status, session, callbackUrl, router])
 
   // Show minimal loading state only for initial mount
-  // Don't show loading spinner for session status to avoid blink
   if (!mounted) {
     return (
-      <div style={{ 
-        minHeight: '100vh', 
+      <div style={{
+        minHeight: '100vh',
         background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-        display: 'flex', 
-        alignItems: 'center', 
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
         padding: '1rem',
         paddingTop: '80px',
         position: 'relative',
         zIndex: 1
       }}>
-        {/* Minimal placeholder - no loading spinner */}
         <div style={{ width: '100%', maxWidth: '400px' }}></div>
+      </div>
+    )
+  }
+
+  // Show redirecting message
+  if (redirecting) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+        paddingTop: '80px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            border: '3px solid #22c55e',
+            borderTop: '3px solid transparent',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto'
+          }}></div>
+          <p style={{ marginTop: '1rem', color: '#16a34a', fontWeight: '500' }}>
+            Login successful! Redirecting to dashboard...
+          </p>
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
+        </div>
       </div>
     )
   }
@@ -75,7 +109,7 @@ function LoginForm() {
       if (result?.error) {
         // Handle specific error messages
         if (result.error.includes('Too many login attempts')) {
-          setMessage('Too many login attempts. Please wait 15 minutes before trying again.')
+          setMessage('Too many login attempts. Please try again later.')
         } else if (result.error.includes('Account locked')) {
           setMessage('Your account has been locked due to too many failed login attempts. Please try again later.')
         } else {
@@ -83,15 +117,13 @@ function LoginForm() {
           setMessage('Invalid email or password')
         }
         setMessageType('error')
-      } else if (result?.ok) {
-        // Login successful - wait for session cookie to be set before redirecting
-        // This prevents middleware from not seeing the session
+      } else {
+        // No error means login was successful
+        // Show redirecting message and then redirect
+        setRedirecting(true)
         setTimeout(() => {
           window.location.href = callbackUrl
-        }, 500)
-      } else {
-        setMessage('An error occurred. Please try again.')
-        setMessageType('error')
+        }, 1000)
       }
     } catch (error) {
       console.error('Login error:', error)
@@ -103,11 +135,11 @@ function LoginForm() {
   }
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
+    <div style={{
+      minHeight: '100vh',
       background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-      display: 'flex', 
-      alignItems: 'center', 
+      display: 'flex',
+      alignItems: 'center',
       justifyContent: 'center',
       padding: '1rem',
       paddingTop: '80px',
@@ -116,10 +148,10 @@ function LoginForm() {
     }}>
       <div style={{ width: '100%', maxWidth: '400px' }}>
         {/* Back to Home */}
-        <Link href="/" style={{ 
-          display: 'inline-flex', 
+        <Link href="/" style={{
+          display: 'inline-flex',
           alignItems: 'center',
-          color: '#6b7280', 
+          color: '#6b7280',
           textDecoration: 'none',
           marginBottom: '1.5rem',
           fontSize: '0.875rem'
@@ -140,9 +172,9 @@ function LoginForm() {
         }}>
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-            <div style={{ 
-              width: '48px', 
-              height: '48px', 
+            <div style={{
+              width: '48px',
+              height: '48px',
               background: 'linear-gradient(135deg, #ea580c, #16a34a)',
               borderRadius: '12px',
               display: 'flex',
@@ -153,16 +185,16 @@ function LoginForm() {
             }}>
               📚
             </div>
-            <h1 style={{ 
-              fontSize: '1.5rem', 
-              fontWeight: 'bold', 
+            <h1 style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
               color: '#1f2937',
               margin: 0
             }}>
               Welcome Back
             </h1>
-            <p style={{ 
-              color: '#6b7280', 
+            <p style={{
+              color: '#6b7280',
               marginTop: '0.5rem',
               fontSize: '0.875rem'
             }}>
@@ -188,10 +220,10 @@ function LoginForm() {
           {/* Form */}
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <label style={{ 
-                display: 'block', 
-                fontSize: '0.875rem', 
-                fontWeight: '500', 
+              <label style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
                 color: '#374151',
                 marginBottom: '0.5rem'
               }}>
@@ -217,10 +249,10 @@ function LoginForm() {
             </div>
 
             <div>
-              <label style={{ 
-                display: 'block', 
-                fontSize: '0.875rem', 
-                fontWeight: '500', 
+              <label style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
                 color: '#374151',
                 marginBottom: '0.5rem'
               }}>
@@ -283,9 +315,9 @@ function LoginForm() {
             borderRadius: '6px',
             marginTop: '1.5rem'
           }}>
-            <p style={{ 
-              fontSize: '0.875rem', 
-              fontWeight: '600', 
+            <p style={{
+              fontSize: '0.875rem',
+              fontWeight: '600',
               color: '#374151',
               margin: '0 0 0.5rem 0'
             }}>
@@ -303,14 +335,14 @@ function LoginForm() {
           </div>
 
           {/* Register Link */}
-          <div style={{ 
-            textAlign: 'center', 
+          <div style={{
+            textAlign: 'center',
             marginTop: '1.5rem',
             fontSize: '0.875rem'
           }}>
             <span style={{ color: '#6b7280' }}>Don't have an account? </span>
-            <Link href="/auth/register" style={{ 
-              fontWeight: '600', 
+            <Link href="/auth/register" style={{
+              fontWeight: '600',
               color: '#ea580c',
               textDecoration: 'none'
             }}
@@ -329,20 +361,20 @@ function LoginForm() {
 // Loading fallback for Suspense
 function LoginLoading() {
   return (
-    <div style={{ 
-      minHeight: '100vh', 
+    <div style={{
+      minHeight: '100vh',
       background: 'linear-gradient(135deg, #fef7f0, #ffffff, #f0fdf4)',
-      display: 'flex', 
-      alignItems: 'center', 
+      display: 'flex',
+      alignItems: 'center',
       justifyContent: 'center',
       padding: '1rem',
-      paddingTop: '80px' // Account for fixed navigation header
+      paddingTop: '80px'
     }}>
       <div style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
-        <div style={{ 
-          width: '48px', 
-          height: '48px', 
-          border: '3px solid #f97316', 
+        <div style={{
+          width: '48px',
+          height: '48px',
+          border: '3px solid #f97316',
           borderTop: '3px solid transparent',
           borderRadius: '50%',
           animation: 'spin 1s linear infinite',
