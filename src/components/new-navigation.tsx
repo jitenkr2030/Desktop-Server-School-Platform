@@ -37,7 +37,6 @@ export function NewNavigation() {
       redirect: false,
       callbackUrl: '/'
     })
-    // Force page reload to clear any state
     window.location.reload()
   }
 
@@ -49,7 +48,7 @@ export function NewNavigation() {
     { href: '/about', label: 'About' }
   ]
 
-  // Show minimal nav while mounting to prevent hydration mismatch
+  // Show minimal nav while mounting
   if (!mounted) {
     return (
       <nav style={{
@@ -69,7 +68,6 @@ export function NewNavigation() {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          {/* Logo placeholder */}
           <div style={{ width: '140px', height: '32px', background: '#f3f4f6', borderRadius: '4px' }}></div>
         </div>
       </nav>
@@ -125,28 +123,30 @@ export function NewNavigation() {
           }}>INR99.Academy</span>
         </Link>
 
-        {/* Navigation Links */}
-        <div style={{
-          display: 'none',
-          gap: '1.5rem'
-        }} className="nav-links">
-          {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              style={{
-                color: '#4b5563',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                fontWeight: '500'
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        {/* Navigation Links - Show only when logged out */}
+        {!user && (
+          <div style={{
+            display: 'none',
+            gap: '1.5rem'
+          }} className="nav-links">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                style={{
+                  color: '#4b5563',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  fontWeight: '500'
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
 
-        {/* User Menu or Login Button */}
+        {/* Login Button (when not logged in) or User Menu (when logged in) */}
         {user ? (
           <div style={{ position: 'relative' }}>
             <button
@@ -184,7 +184,7 @@ export function NewNavigation() {
               </svg>
             </button>
 
-            {/* Dropdown - Use anchor tags for reliable navigation */}
+            {/* Simplified Dropdown - Only Dashboard and Logout */}
             {showDropdown && (
               <div style={{
                 position: 'absolute',
@@ -195,52 +195,20 @@ export function NewNavigation() {
                 borderRadius: '0.5rem',
                 boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
                 border: '1px solid #e5e7eb',
-                minWidth: '200px',
+                minWidth: '180px',
                 overflow: 'hidden',
                 zIndex: 200
               }}>
+                {/* User info */}
                 <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid #e5e7eb' }}>
                   <p style={{ fontWeight: '600', color: '#1f2937', fontSize: '0.875rem' }}>{user.name}</p>
                   <p style={{ color: '#6b7280', fontSize: '0.75rem' }}>{user.email}</p>
-                  <span style={{
-                    display: 'inline-block',
-                    marginTop: '0.25rem',
-                    background: '#fed7aa',
-                    color: '#c2410c',
-                    padding: '0.125rem 0.5rem',
-                    borderRadius: '9999px',
-                    fontSize: '0.75rem',
-                    fontWeight: '500'
-                  }}>
-                    {user.role}
-                  </span>
                 </div>
 
-                {/* Use anchor tags instead of Link components for dropdown items */}
+                {/* Only Dashboard and Logout */}
                 <a href={dashboardLink} style={{ display: 'block', padding: '0.75rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  📊 My Dashboard
+                  📊 Dashboard
                 </a>
-                <a href="/profile" style={{ display: 'block', padding: '0.75rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  👤 My Profile
-                </a>
-                <a href="/dashboard/student/courses" style={{ display: 'block', padding: '0.75rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  📚 My Courses
-                </a>
-                <a href="/dashboard/student/certificates" style={{ display: 'block', padding: '0.75rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  🎓 Certificates
-                </a>
-
-                {(user.role === 'ADMIN' || user.role === 'SUPER_ADMIN') && (
-                  <a href="/admin" style={{ display: 'block', padding: '0.75rem 1rem', color: '#7c3aed', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500' }}>
-                    ⚙️ Admin Dashboard
-                  </a>
-                )}
-
-                {user.role === 'INSTRUCTOR' && (
-                  <a href="/instructor" style={{ display: 'block', padding: '0.75rem 1rem', color: '#7c3aed', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500' }}>
-                    📚 Instructor Dashboard
-                  </a>
-                )}
 
                 <div style={{ borderTop: '1px solid #e5e7eb', padding: '0.5rem' }}>
                   <button
@@ -282,12 +250,11 @@ export function NewNavigation() {
               <polyline points="10 17 15 12 10 7" />
               <line x1="15" y1="12" x2="3" y2="12" />
             </svg>
-            Login / Signup
+            Login
           </Link>
         )}
       </div>
 
-      {/* Mobile menu placeholder */}
       <style>{`
         @media (min-width: 768px) {
           .nav-links {
