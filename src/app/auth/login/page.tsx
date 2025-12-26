@@ -25,8 +25,10 @@ export default function LoginPage() {
         setError('Invalid email or password')
         setLoading(false)
       } else {
-        // Success - use full page redirect to ensure session is recognized
-        window.location.href = '/dashboard'
+        // Success - wait for cookie to be set, then redirect
+        setTimeout(() => {
+          window.location.href = '/dashboard'
+        }, 500)
       }
     } catch (err) {
       setError('An error occurred')
