@@ -27,12 +27,30 @@ function LoginForm() {
     setMounted(true)
   }, [])
 
-  // Redirect if already authenticated
+  // Redirect if already authenticated - with multiple checks
   useEffect(() => {
     if (mounted && status === 'authenticated') {
+      console.log('Already authenticated, redirecting to:', callbackUrl)
       router.push(callbackUrl, { scroll: false })
     }
   }, [mounted, status, router, callbackUrl])
+
+  // Fallback: redirect if session cookie exists but status is still loading
+  useEffect(() => {
+    if (mounted && status === 'loading') {
+      // Check if any session cookie exists
+      const hasSession = document.cookie.includes('next-auth.session-token') || 
+                        document.cookie.includes('__Secure-next-auth.session-token')
+      if (hasSession) {
+        // Session cookie exists but status is loading - wait a bit then redirect
+        const timer = setTimeout(() => {
+          console.log('Session cookie detected, redirecting to dashboard')
+          router.push('/dashboard', { scroll: false })
+        }, 500)
+        return () => clearTimeout(timer)
+      }
+    }
+  }, [mounted, status, router])
 
   if (!mounted) {
     return (

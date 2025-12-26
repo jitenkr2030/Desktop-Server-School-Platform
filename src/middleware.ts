@@ -108,7 +108,20 @@ export async function middleware(request: NextRequest) {
   if (isAuthRoute && isAuthenticated) {
     // User is already logged in, redirect to dashboard
     const dashboardUrl = new URL('/dashboard', request.url)
+    dashboardUrl.searchParams.set('callbackUrl', pathname)
     return NextResponse.redirect(dashboardUrl)
+  }
+  
+  // 6b. Also check for session cookie to catch edge cases
+  // If there's a session cookie but session() didn't return valid auth, still redirect
+  if (isAuthRoute) {
+    const hasSessionCookie = request.cookies.get('next-auth.session-token') || 
+                             request.cookies.get('__Secure-next-auth.session-token')
+    if (hasSessionCookie && !isAuthenticated) {
+      // Session cookie exists but session not loaded yet - still redirect to dashboard
+      const dashboardUrl = new URL('/dashboard', request.url)
+      return NextResponse.redirect(dashboardUrl)
+    }
   }
   
   return response
