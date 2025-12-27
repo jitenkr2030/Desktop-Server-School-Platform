@@ -123,17 +123,12 @@ export function AssessmentPlayer({ assessment, onComplete, onExit }: AssessmentP
     setIsSubmitting(true)
     
     try {
-      // In a real app, get userId from auth context
-      const userId = 'demo-user'
-      
       const response = await fetch(`/api/assessments/${assessment.id}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'x-user-id': userId
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          userId,
           answers: answers
         })
       })

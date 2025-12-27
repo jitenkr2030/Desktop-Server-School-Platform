@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { getAuthenticatedUser } from '@/lib/auth'
 
 export async function GET(
   request: NextRequest,
@@ -7,6 +8,10 @@ export async function GET(
 ) {
   try {
     const assessmentId = params.id
+
+    // Get the authenticated user
+    const user = await getAuthenticatedUser()
+    const userId = user.id
 
     // Get assessment with questions
     const assessment = await db.assessment.findUnique({
@@ -43,9 +48,6 @@ export async function GET(
     }
 
     // Check if user has already completed this assessment
-    // In a real app, you'd get userId from auth context
-    const userId = request.headers.get('x-user-id') || 'demo-user'
-    
     const existingResult = await db.userAssessment.findUnique({
       where: {
         userId_assessmentId: {
@@ -91,11 +93,15 @@ export async function POST(
   try {
     const assessmentId = params.id
     const body = await request.json()
-    const { answers, userId } = body
+    const { answers } = body
 
-    if (!answers || !userId) {
+    // Get the authenticated user
+    const user = await getAuthenticatedUser()
+    const userId = user.id
+
+    if (!answers) {
       return NextResponse.json(
-        { success: false, message: 'Answers and userId are required' },
+        { success: false, message: 'Answers are required' },
         { status: 400 }
       )
     }
