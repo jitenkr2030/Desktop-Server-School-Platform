@@ -1,148 +1,202 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { 
-  getDiscussions, 
-  getDiscussionsByCourseId, 
-  searchDiscussions,
-  filterDiscussionsByDifficulty,
-  filterDiscussionsByTag,
-  getDiscussionTags,
-  getTrendingDiscussions
-} from '@/lib/simple-db'
-import { getSampleUsers, getUserById } from '@/lib/simple-db'
-import { createAuthToken } from '@/lib/auth'
+import { db } from '@/lib/db'
+import { getAuthenticatedUser } from '@/lib/auth'
 
+// GET /api/discussions - List discussions
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const courseId = searchParams.get('courseId')
     const search = searchParams.get('search')
-    const difficulty = searchParams.get('difficulty') as 'Beginner' | 'Intermediate' | 'Advanced' | null
     const tag = searchParams.get('tag')
-    const trending = searchParams.get('trending')
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '10')
     const offset = (page - 1) * limit
 
-    let discussions = []
-
-    // Get discussions based on filters
-    if (trending === 'true') {
-      discussions = getTrendingDiscussions()
-    } else if (search) {
-      discussions = searchDiscussions(search)
-    } else if (difficulty) {
-      discussions = filterDiscussionsByDifficulty(difficulty)
-    } else if (tag) {
-      discussions = filterDiscussionsByTag(tag)
-    } else if (courseId) {
-      discussions = getDiscussionsByCourseId(courseId)
-    } else {
-      discussions = getDiscussions()
+    // Build where clause
+    const where: any = {
+      isActive: true
     }
 
-    // Get user data for each discussion
-    const discussionsWithUserData = discussions
-      .slice(offset, offset + limit)
-      .map(discussion => {
-        const user = getUserById(discussion.userId)
-        const course = { id: discussion.courseId, title: 'Course Title' } // Course data would come from course service
-        
-        return {
-          ...discussion,
-          user: user ? {
-            id: user.id,
-            name: user.name || 'Anonymous',
-            avatar: null
-          } : {
-            id: 'unknown',
-            name: 'Unknown User',
-            avatar: null
-          },
-          course,
-          _count: {
-            replies: 0 // This would come from replies service
+    if (courseId) {
+      where.courseId = courseId
+    }
+
+    if (search) {
+      where.OR = [
+        { title: { contains: search } },
+        { content: { contains: search } }
+      ]
+    }
+
+    if (tag) {
+      where.tags = { has: tag }
+    }
+
+    // Fetch discussions
+    const discussions = await db.discussion.findMany({
+      where,
+      orderBy: [
+        { isPinned: 'desc' },
+        { createdAt: 'desc' }
+      ],
+      skip: offset,
+      take: limit,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true
+          }
+        },
+        course: {
+          select: {
+            id: true,
+            title: true
+          }
+        },
+        _count: {
+          select: {
+            replies: true
           }
         }
-      })
+      }
+    })
 
-    const total = discussions.length
+    // Transform the response
+    const transformedDiscussions = discussions.map(discussion => ({
+      id: discussion.id,
+      title: discussion.title,
+      content: discussion.content,
+      isPinned: discussion.isPinned,
+      createdAt: discussion.createdAt,
+      updatedAt: discussion.updatedAt,
+      user: discussion.user,
+      course: discussion.course,
+      tags: discussion.tags,
+      difficultyLevel: discussion.difficultyLevel,
+      subjectCategory: discussion.subjectCategory,
+      viewCount: discussion.viewCount,
+      likeCount: discussion.likeCount,
+      _count: {
+        replies: discussion._count.replies
+      }
+    }))
+
+    // Get total count for pagination
+    const total = await db.discussion.count({ where })
+
+    // Get unique tags from all discussions
+    const allTags = await db.discussion.findMany({
+      where: { isActive: true },
+      select: { tags: true }
+    })
+
+    const tagsSet = new Set<string>()
+    allTags.forEach(d => d.tags.forEach(t => tagsSet.add(t)))
+    const tags = Array.from(tagsSet).sort()
 
     return NextResponse.json({
-      discussions: discussionsWithUserData,
+      success: true,
+      discussions: transformedDiscussions,
       pagination: {
         page,
         limit,
         total,
         totalPages: Math.ceil(total / limit)
       },
-      tags: getDiscussionTags()
+      tags
     })
+
   } catch (error) {
     console.error('Error fetching discussions:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json(
+      { success: false, message: 'Internal server error' },
+      { status: 500 }
+    )
   }
 }
 
+// POST /api/discussions - Create a new discussion
 export async function POST(request: NextRequest) {
   try {
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    const user = getAuthenticatedUser(request)
+    
+    if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-
-    const token = authHeader.substring(7)
-    // In a real implementation, you'd validate the JWT token
-    // For demo purposes, we'll extract user ID from token
-    const userId = 'demo_user' // This would be extracted from the JWT
 
     const { title, content, courseId, tags, difficultyLevel, subjectCategory } = await request.json()
 
     if (!title || !content || !courseId) {
-      return NextResponse.json({ error: 'Title, content, and course ID are required' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'Title, content, and course ID are required' },
+        { status: 400 }
+      )
     }
 
-    // Verify user exists
-    const user = getUserById(userId)
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    // Verify course exists
+    const course = await db.course.findUnique({
+      where: { id: courseId }
+    })
+
+    if (!course) {
+      return NextResponse.json({ error: 'Course not found' }, { status: 404 })
     }
 
-    // In a real implementation, you would save to database
-    // For demo purposes, we'll return a mock response
-    const newDiscussion = {
-      id: `disc_${Date.now()}`,
-      title,
-      content,
-      isPinned: false,
-      isActive: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      userId,
-      courseId,
-      tags: tags || [],
-      difficultyLevel: difficultyLevel || 'Beginner',
-      subjectCategory: subjectCategory || 'General',
-      viewCount: 0,
-      likeCount: 0
-    }
-
-    return NextResponse.json({
-      ...newDiscussion,
-      user: {
-        id: user.id,
-        name: user.name || 'Anonymous',
-        avatar: null
+    // Create the discussion
+    const newDiscussion = await db.discussion.create({
+      data: {
+        title,
+        content,
+        courseId,
+        userId: user.id,
+        tags: tags || [],
+        difficultyLevel: difficultyLevel || 'Beginner',
+        subjectCategory: subjectCategory || 'General',
+        isActive: true,
+        isPinned: false,
+        viewCount: 0,
+        likeCount: 0
       },
-      course: {
-        id: courseId,
-        title: 'Course Title'
-      },
-      _count: {
-        replies: 0
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true
+          }
+        },
+        course: {
+          select: {
+            id: true,
+            title: true
+          }
+        },
+        _count: {
+          select: {
+            replies: true
+          }
+        }
       }
     })
+
+    return NextResponse.json({
+      success: true,
+      discussion: {
+        ...newDiscussion,
+        _count: {
+          replies: 0
+        }
+      }
+    })
+
   } catch (error) {
     console.error('Error creating discussion:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json(
+      { success: false, message: 'Internal server error' },
+      { status: 500 }
+    )
   }
 }
