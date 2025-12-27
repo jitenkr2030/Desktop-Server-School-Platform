@@ -49,15 +49,46 @@ export function Navigation() {
               <Link href="/learning-paths" className="text-gray-600 hover:text-orange-500 transition-colors">
                 Learning Paths
               </Link>
+              <Link href="/instructors" className="text-gray-600 hover:text-orange-500 transition-colors">
+                Instructors
+              </Link>
               <Link href="/community" className="text-gray-600 hover:text-orange-500 transition-colors">
                 Community
+              </Link>
+              <Link href="/blog" className="text-gray-600 hover:text-orange-500 transition-colors">
+                Blog
               </Link>
               <Link href="/subscription" className="text-gray-600 hover:text-orange-500 transition-colors">
                 Pricing
               </Link>
-              <Link href="/about" className="text-gray-600 hover:text-orange-500 transition-colors">
-                About
-              </Link>
+              <div className="relative group">
+                <button className="text-gray-600 hover:text-orange-500 transition-colors flex items-center gap-1">
+                  More
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <Link href="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500">
+                    About Us
+                  </Link>
+                  <Link href="/faq" className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500">
+                    FAQ
+                  </Link>
+                  <Link href="/careers" className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500">
+                    Careers
+                  </Link>
+                  <Link href="/contact" className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500">
+                    Contact
+                  </Link>
+                  <Link href="/terms" className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500">
+                    Terms of Service
+                  </Link>
+                  <Link href="/privacy" className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500">
+                    Privacy Policy
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {/* Right Side Actions */}

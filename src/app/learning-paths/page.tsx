@@ -14,17 +14,22 @@ interface LearningPath {
   icon?: string
   color?: string
   courseCount: number
-  sampleCourses: Array<{
+  previewCourses: Array<{
     id: string
     title: string
+    description?: string
     thumbnail?: string
     difficulty: string
     duration: number
+    lessonCount?: number
     instructor: {
       id: string
       name: string
+      avatar?: string | null
     }
   }>
+  totalDuration?: number
+  totalLessons?: number
 }
 
 interface PathStats {
