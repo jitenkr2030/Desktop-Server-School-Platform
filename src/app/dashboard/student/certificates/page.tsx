@@ -1,200 +1,268 @@
-import DashboardLayout from '@/components/DashboardLayout'
+"use client"
 
-const certificates = [
-  { id: 1, number: 'INR99-2024-001', course: 'Web Development Basics', date: '2024-03-15', instructor: 'Bob Instructor' },
-  { id: 2, number: 'INR99-2024-002', course: 'Introduction to Python', date: '2024-02-20', instructor: 'Alice Instructor' }
-]
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import DashboardLayout from '@/components/DashboardLayout'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Loader2, Download, Share, ExternalLink } from "lucide-react"
+import Link from "next/link"
+
+interface Certificate {
+  id: string
+  certificateNumber: string
+  issuedAt: string
+  verified: boolean
+  verificationUrl: string
+  course: {
+    id: string
+    title: string
+    description: string
+    difficulty: string
+    thumbnail?: string
+    instructor: {
+      name: string
+    }
+  }
+}
 
 export default function StudentCertificates() {
-  const profile = {
-    name: 'Demo Student 1',
-    email: 'student1@inr99.com'
+  const { data: session } = useSession()
+  const router = useRouter()
+  
+  const [certificates, setCertificates] = useState<Certificate[]>([])
+  const [loading, setLoading] = useState(true)
+  const [generating, setGenerating] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchCertificates()
+  }, [session])
+
+  const fetchCertificates = async () => {
+    if (!session?.user) {
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/certificates')
+      const data = await response.json()
+
+      if (data.success) {
+        setCertificates(data.certificates || [])
+      }
+    } catch (error) {
+      console.error('Error fetching certificates:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleGenerateCertificate = async (courseId: string) => {
+    setGenerating(courseId)
+    try {
+      const response = await fetch('/api/certificates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ courseId })
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        fetchCertificates()
+      } else {
+        alert(data.error || 'Failed to generate certificate')
+      }
+    } catch (error) {
+      console.error('Error generating certificate:', error)
+      alert('Failed to generate certificate')
+    } finally {
+      setGenerating(null)
+    }
+  }
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'BEGINNER':
+        return 'bg-green-100 text-green-800'
+      case 'INTERMEDIATE':
+        return 'bg-yellow-100 text-yellow-800'
+      case 'ADVANCED':
+        return 'bg-red-100 text-red-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
+    }
+  }
+
+  const userName = session?.user?.name || 'Guest'
+  const userEmail = session?.user?.email || 'guest@example.com'
+
+  if (loading) {
+    return (
+      <DashboardLayout userRole="student" userInfo={{ name: userName, email: userEmail }}>
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+        </div>
+      </DashboardLayout>
+    )
   }
 
   return (
-    <DashboardLayout userRole="student" userInfo={profile}>
+    <DashboardLayout userRole="student" userInfo={{ name: userName, email: userEmail }}>
       <div>
-        <h1 style={{ 
-          fontSize: '1.875rem', 
-          fontWeight: '700', 
-          color: '#1f2937', 
-          marginBottom: '2rem' 
-        }}>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
           🎓 My Certificates
         </h1>
 
         {/* Certificate Stats */}
-        <div style={{ 
-          background: 'white', 
-          borderRadius: '0.75rem', 
-          padding: '2rem', 
-          marginBottom: '2rem',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-          textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '3rem', fontWeight: '700', color: '#ea580c', marginBottom: '0.5rem' }}>
-            {certificates.length}
-          </div>
-          <div style={{ fontSize: '1.125rem', color: '#6b7280' }}>
-            Certificates Earned
-          </div>
-          <div style={{ fontSize: '0.875rem', color: '#9ca3af', marginTop: '0.5rem' }}>
-            Keep learning to earn more certificates!
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6 text-center">
+              <div className="text-4xl font-bold text-orange-600 mb-2">
+                {certificates.length}
+              </div>
+              <div className="text-gray-600">
+                Certificates Earned
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6 text-center">
+              <div className="text-4xl font-bold text-green-600 mb-2">
+                {certificates.filter(c => c.verified).length}
+              </div>
+              <div className="text-gray-600">
+                Verified Certificates
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6 text-center">
+              <div className="text-4xl font-bold text-blue-600 mb-2">
+                {certificates.filter(c => c.verified).length > 0 ? '100%' : '0%'}
+              </div>
+              <div className="text-gray-600">
+                Verification Rate
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Certificates List */}
         {certificates.length === 0 ? (
-          <div style={{ 
-            background: 'white', 
-            borderRadius: '0.75rem', 
-            padding: '3rem', 
-            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-            textAlign: 'center' 
-          }}>
-            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📜</div>
-            <h3 style={{ 
-              fontSize: '1.25rem', 
-              fontWeight: '600', 
-              color: '#1f2937', 
-              marginBottom: '1rem' 
-            }}>
-              No certificates yet
-            </h3>
-            <p style={{ color: '#6b7280', marginBottom: '2rem' }}>
-              Complete your courses to earn certificates and showcase your achievements.
-            </p>
-            <button style={{
-              padding: '0.75rem 2rem',
-              background: '#ea580c',
-              color: 'white',
-              border: 'none',
-              borderRadius: '0.5rem',
-              fontWeight: '500',
-              cursor: 'pointer'
-            }}>
-              Browse Courses
-            </button>
-          </div>
+          <Card>
+            <CardContent className="py-12 text-center">
+              <div className="text-6xl mb-4">📜</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                No certificates yet
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Complete your courses to earn certificates and showcase your achievements.
+              </p>
+              <Link href="/courses">
+                <Button className="bg-orange-500 hover:bg-orange-600">
+                  Browse Courses
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         ) : (
-          <div style={{ display: 'grid', gap: '1.5rem' }}>
-            {certificates.map(cert => (
-              <div 
-                key={cert.id}
-                style={{
-                  background: 'white',
-                  borderRadius: '0.75rem',
-                  padding: '2rem',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                  border: '1px solid #e5e7eb',
-                  position: 'relative'
-                }}
-              >
-                {/* Certificate Ribbon */}
-                <div style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  background: '#16a34a',
-                  color: 'white',
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '1rem',
-                  fontSize: '0.75rem',
-                  fontWeight: '500'
-                }}>
-                  ✓ VERIFIED
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'start', gap: '2rem', flexWrap: 'wrap' }}>
-                  {/* Certificate Icon */}
-                  <div style={{
-                    minWidth: '80px',
-                    height: '80px',
-                    background: 'linear-gradient(135deg, #ea580c, #f59e0b)',
-                    borderRadius: '0.75rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '2rem'
-                  }}>
-                    🏆
-                  </div>
-
-                  {/* Certificate Details */}
-                  <div style={{ flex: 1 }}>
-                    <h3 style={{ 
-                      fontSize: '1.25rem', 
-                      fontWeight: '700', 
-                      color: '#1f2937', 
-                      marginBottom: '1rem' 
-                    }}>
-                      Certificate of Completion
-                    </h3>
-                    
-                    <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ fontWeight: '500', color: '#374151', minWidth: '100px' }}>Course:</span>
-                        <span style={{ color: '#6b7280' }}>{cert.course}</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ fontWeight: '500', color: '#374151', minWidth: '100px' }}>Instructor:</span>
-                        <span style={{ color: '#6b7280' }}>{cert.instructor}</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ fontWeight: '500', color: '#374151', minWidth: '100px' }}>Date:</span>
-                        <span style={{ color: '#6b7280' }}>{cert.date}</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ fontWeight: '500', color: '#374151', minWidth: '100px' }}>ID:</span>
-                        <span style={{ color: '#6b7280', fontFamily: 'monospace' }}>{cert.number}</span>
+          <div className="space-y-6">
+            {certificates.map((cert) => (
+              <Card key={cert.id} className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="flex flex-col md:flex-row gap-6">
+                    {/* Certificate Icon/Preview */}
+                    <div className="flex-shrink-0">
+                      <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center text-4xl shadow-lg">
+                        🏆
                       </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                      <button style={{
-                        padding: '0.75rem 1.5rem',
-                        background: '#ea580c',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '0.5rem',
-                        fontWeight: '500',
-                        cursor: 'pointer',
-                        fontSize: '0.875rem'
-                      }}>
-                        📥 Download PDF
-                      </button>
-                      <button style={{
-                        padding: '0.75rem 1.5rem',
-                        background: 'white',
-                        color: '#374151',
-                        border: '1px solid #d1d5db',
-                        borderRadius: '0.5rem',
-                        fontWeight: '500',
-                        cursor: 'pointer',
-                        fontSize: '0.875rem'
-                      }}>
-                        🔗 Share Certificate
-                      </button>
-                      <button style={{
-                        padding: '0.75rem 1.5rem',
-                        background: 'white',
-                        color: '#374151',
-                        border: '1px solid #d1d5db',
-                        borderRadius: '0.5rem',
-                        fontWeight: '500',
-                        cursor: 'pointer',
-                        fontSize: '0.875rem'
-                      }}>
-                        ✅ Verify Online
-                      </button>
+                    {/* Certificate Details */}
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900 mb-1">
+                            Certificate of Completion
+                          </h3>
+                          <p className="text-gray-600">{cert.course.title}</p>
+                        </div>
+                        <Badge className={cert.verified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}>
+                          {cert.verified ? '✓ Verified' : 'Pending Verification'}
+                        </Badge>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500">Course:</span>
+                          <span className="font-medium">{cert.course.title}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500">Instructor:</span>
+                          <span className="font-medium">{cert.course.instructor.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500">Date:</span>
+                          <span className="font-medium">{formatDate(cert.issuedAt)}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500">Certificate ID:</span>
+                          <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
+                            {cert.certificateNumber}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-3">
+                        <Button size="sm" className="bg-orange-500 hover:bg-orange-600">
+                          <Download className="h-4 w-4 mr-2" />
+                          Download PDF
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Share className="h-4 w-4 mr-2" />
+                          Share
+                        </Button>
+                        <Link href={`/verify-certificate/${cert.certificateNumber}`}>
+                          <Button size="sm" variant="outline">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Verify Online
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         )}
+
+        {/* Info Section */}
+        <Card className="mt-8 bg-orange-50 border-orange-200">
+          <CardContent className="p-6">
+            <h3 className="font-semibold text-orange-900 mb-2">
+              How to earn certificates
+            </h3>
+            <ul className="text-sm text-orange-800 space-y-2">
+              <li>✓ Complete all lessons in a course</li>
+              <li>✓ Pass all assessments with a score of 70% or higher</li>
+              <li>✓ Click "Generate Certificate" after completing a course</li>
+              <li>✓ Your certificate will be verified and available for download</li>
+            </ul>
+          </CardContent>
+        </Card>
       </div>
     </DashboardLayout>
   )

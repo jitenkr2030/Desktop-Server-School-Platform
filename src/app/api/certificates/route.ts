@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { getAuthenticatedUser } from '@/lib/auth'
 
+// GET /api/certificates - Get certificates for the current user
 export async function GET(request: NextRequest) {
   try {
     const user = getAuthenticatedUser(request)
@@ -23,9 +24,16 @@ export async function GET(request: NextRequest) {
         },
         course: {
           select: {
+            id: true,
             title: true,
             description: true,
-            difficulty: true
+            difficulty: true,
+            thumbnail: true,
+            instructor: {
+              select: {
+                name: true
+              }
+            }
           }
         }
       },
@@ -34,13 +42,21 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    return NextResponse.json(certificates)
+    return NextResponse.json({
+      success: true,
+      certificates
+    })
+
   } catch (error) {
     console.error('Error fetching certificates:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json(
+      { success: false, message: 'Internal server error' },
+      { status: 500 }
+    )
   }
 }
 
+// POST /api/certificates - Generate a certificate for a completed course
 export async function POST(request: NextRequest) {
   try {
     const user = getAuthenticatedUser(request)
@@ -52,7 +68,10 @@ export async function POST(request: NextRequest) {
     const { courseId } = await request.json()
 
     if (!courseId) {
-      return NextResponse.json({ error: 'Course ID is required' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'Course ID is required' },
+        { status: 400 }
+      )
     }
 
     // Check if user has completed the course
@@ -65,7 +84,10 @@ export async function POST(request: NextRequest) {
     })
 
     if (!courseProgress) {
-      return NextResponse.json({ error: 'Course not completed' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'Course not completed. You must complete all lessons to earn a certificate.' },
+        { status: 400 }
+      )
     }
 
     // Check if certificate already exists
@@ -77,11 +99,14 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingCertificate) {
-      return NextResponse.json({ error: 'Certificate already issued' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'Certificate already issued for this course' },
+        { status: 400 }
+      )
     }
 
     // Generate certificate number
-    const certificateNumber = `INR99-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+    const certificateNumber = `INR99-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
     const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/verify-certificate/${certificateNumber}`
 
     // Create certificate
@@ -102,17 +127,32 @@ export async function POST(request: NextRequest) {
         },
         course: {
           select: {
+            id: true,
             title: true,
             description: true,
-            difficulty: true
+            difficulty: true,
+            thumbnail: true,
+            instructor: {
+              select: {
+                name: true
+              }
+            }
           }
         }
       }
     })
 
-    return NextResponse.json(certificate)
+    return NextResponse.json({
+      success: true,
+      message: 'Certificate generated successfully',
+      certificate
+    })
+
   } catch (error) {
     console.error('Error creating certificate:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json(
+      { success: false, message: 'Internal server error' },
+      { status: 500 }
+    )
   }
 }
