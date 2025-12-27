@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import DashboardLayout from "@/components/DashboardLayout"
-import { Settings, Save, Bell, Shield, Globe, Palette, Database, Mail, Key } from "lucide-react"
+import { Settings, Save, Bell, Shield, Globe, Database, Mail, Key } from "lucide-react"
 
 interface PlatformSettings {
   siteName: string
@@ -16,18 +16,20 @@ interface PlatformSettings {
   timezone: string
 }
 
+const defaultSettings: PlatformSettings = {
+  siteName: "LMS Platform",
+  siteDescription: "Learning Management System",
+  siteUrl: "https://lms-platform.com",
+  maintenanceMode: false,
+  allowRegistration: true,
+  emailNotifications: true,
+  maxUploadSize: 100,
+  defaultCurrency: "USD",
+  timezone: "UTC",
+}
+
 export default function AdminSettingsPage() {
-  const [settings, setSettings] = useState<PlatformSettings>({
-    siteName: "LMS Platform",
-    siteDescription: "Learning Management System",
-    siteUrl: "https://lms-platform.com",
-    maintenanceMode: false,
-    allowRegistration: true,
-    emailNotifications: true,
-    maxUploadSize: 100,
-    defaultCurrency: "USD",
-    timezone: "UTC",
-  })
+  const [settings, setSettings] = useState<PlatformSettings>(defaultSettings)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
@@ -41,7 +43,7 @@ export default function AdminSettingsPage() {
       const response = await fetch("/api/admin/settings")
       if (response.ok) {
         const data = await response.json()
-        setSettings({ ...settings, ...data })
+        setSettings((prev) => ({ ...prev, ...data }))
       }
       // If API doesn't exist, use default settings
     } catch (err) {
@@ -65,11 +67,11 @@ export default function AdminSettingsPage() {
       if (response.ok) {
         setMessage({ type: "success", text: "Settings saved successfully!" })
       } else {
-        // Simulate success for demo
+        // Simulate success for demo purposes
         setMessage({ type: "success", text: "Settings saved successfully!" })
       }
     } catch (err) {
-      // Simulate success for demo
+      // Simulate success for demo purposes
       setMessage({ type: "success", text: "Settings saved successfully!" })
     } finally {
       setSaving(false)
@@ -200,6 +202,7 @@ export default function AdminSettingsPage() {
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       settings.maintenanceMode ? "bg-indigo-600" : "bg-gray-200"
                     }`}
+                    type="button"
                   >
                     <span
                       className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -219,6 +222,7 @@ export default function AdminSettingsPage() {
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       settings.allowRegistration ? "bg-indigo-600" : "bg-gray-200"
                     }`}
+                    type="button"
                   >
                     <span
                       className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -238,6 +242,7 @@ export default function AdminSettingsPage() {
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       settings.emailNotifications ? "bg-indigo-600" : "bg-gray-200"
                     }`}
+                    type="button"
                   >
                     <span
                       className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -261,7 +266,7 @@ export default function AdminSettingsPage() {
                     max="500"
                     step="10"
                     value={settings.maxUploadSize}
-                    onChange={(e) => handleChange("maxUploadSize", parseInt(e.target.value))}
+                    onChange={(e) => handleChange("maxUploadSize", parseInt(e.target.value) || 100)}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                   />
                 </div>
@@ -289,7 +294,7 @@ export default function AdminSettingsPage() {
                       <p className="text-sm text-gray-500">Manage API keys for integrations</p>
                     </div>
                   </div>
-                  <button className="px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                  <button className="px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" type="button">
                     Manage Keys
                   </button>
                 </div>
@@ -302,7 +307,7 @@ export default function AdminSettingsPage() {
                       <p className="text-sm text-gray-500">Last backup: 2 hours ago</p>
                     </div>
                   </div>
-                  <button className="px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                  <button className="px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" type="button">
                     Backup Now
                   </button>
                 </div>
@@ -315,7 +320,7 @@ export default function AdminSettingsPage() {
                       <p className="text-sm text-gray-500">Require 2FA for admin accounts</p>
                     </div>
                   </div>
-                  <button className="px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                  <button className="px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" type="button">
                     Configure
                   </button>
                 </div>
@@ -363,7 +368,7 @@ export default function AdminSettingsPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Email Password</label>
                   <input
                     type="password"
-                    placeholder="••••••••"
+                    placeholder="********"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
@@ -376,6 +381,7 @@ export default function AdminSettingsPage() {
                 onClick={handleSave}
                 disabled={saving}
                 className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                type="button"
               >
                 {saving ? (
                   <>

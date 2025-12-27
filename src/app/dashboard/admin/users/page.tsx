@@ -33,7 +33,7 @@ export default function AdminUsersPage() {
         const data = await response.json()
         setUsers(data.users || data)
       } else {
-        // Fallback mock data if API doesn't exist
+        // Fallback mock data if API returns error
         setUsers([
           { id: "1", name: "John Doe", email: "john@example.com", role: "STUDENT", status: "active", joinedDate: "2024-01-15" },
           { id: "2", name: "Jane Smith", email: "jane@example.com", role: "INSTRUCTOR", status: "active", joinedDate: "2024-02-20" },
@@ -46,6 +46,7 @@ export default function AdminUsersPage() {
         ])
       }
     } catch (err) {
+      console.error("Failed to fetch users:", err)
       setError("Failed to fetch users")
       // Fallback mock data
       setUsers([
@@ -60,9 +61,11 @@ export default function AdminUsersPage() {
   }
 
   const filteredUsers = users.filter((user) => {
+    const userName = user.name || ""
+    const userEmail = user.email || ""
     const matchesSearch =
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      userEmail.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesRole = roleFilter === "all" || user.role === roleFilter
     return matchesSearch && matchesRole
   })
@@ -127,6 +130,25 @@ export default function AdminUsersPage() {
         return "bg-yellow-100 text-yellow-800"
       default:
         return "bg-gray-100 text-gray-800"
+    }
+  }
+
+  const getInitials = (name: string) => {
+    if (!name) return "?"
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2)
+  }
+
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "N/A"
+    try {
+      return new Date(dateString).toLocaleDateString()
+    } catch {
+      return "N/A"
     }
   }
 
@@ -239,40 +261,37 @@ export default function AdminUsersPage() {
                           <div className="flex items-center">
                             <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
                               <span className="text-indigo-600 font-medium">
-                                {user.name
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")}
+                                {getInitials(user.name)}
                               </span>
                             </div>
                             <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                              <div className="text-sm text-gray-500">{user.email}</div>
+                              <div className="text-sm font-medium text-gray-900">{user.name || "Unknown"}</div>
+                              <div className="text-sm text-gray-500">{user.email || "N/A"}</div>
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4">
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${getRoleBadgeColor(user.role)}`}>
-                            {user.role}
+                            {user.role || "UNKNOWN"}
                           </span>
                         </td>
                         <td className="px-6 py-4">
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusBadgeColor(user.status)}`}>
-                            {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
+                            {(user.status || "unknown").charAt(0).toUpperCase() + (user.status || "unknown").slice(1)}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-500">
-                          {new Date(user.joinedDate).toLocaleDateString()}
+                          {formatDate(user.joinedDate)}
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
-                            <button className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                            <button className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" title="Send Email">
                               <Mail className="h-4 w-4" />
                             </button>
-                            <button className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                            <button className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" title="Edit Permissions">
                               <Shield className="h-4 w-4" />
                             </button>
-                            <button className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                            <button className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="More Options">
                               <MoreVertical className="h-4 w-4" />
                             </button>
                           </div>
