@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import DashboardLayout from "@/components/DashboardLayout"
+import { useSession } from "next-auth/react"
 import { Users, Search, Filter, MoreVertical, Mail, Shield, Trash2 } from "lucide-react"
 
 interface User {
@@ -15,12 +16,16 @@ interface User {
 }
 
 export default function AdminUsersPage() {
+  const { data: session } = useSession()
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
   const [roleFilter, setRoleFilter] = useState("all")
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
+
+  const userName = session?.user?.name || "Admin"
+  const userEmail = session?.user?.email || ""
 
   useEffect(() => {
     fetchUsers()
@@ -152,8 +157,24 @@ export default function AdminUsersPage() {
     }
   }
 
+  if (loading) {
+    return (
+      <DashboardLayout userRole="admin" userInfo={{ name: userName, email: userEmail }}>
+        <div className="p-6">
+          <div className="mb-8">
+            <h1 className="text-2xl font-bold text-gray-900">Users Management</h1>
+            <p className="text-gray-600">Manage all users on the platform</p>
+          </div>
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+          </div>
+        </div>
+      </DashboardLayout>
+    )
+  }
+
   return (
-    <DashboardLayout>
+    <DashboardLayout userRole="admin" userInfo={{ name: userName, email: userEmail }}>
       <div className="p-6">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Users Management</h1>
@@ -202,12 +223,7 @@ export default function AdminUsersPage() {
 
         {/* Users Table */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          {loading ? (
-            <div className="p-8 text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
-              <p className="mt-2 text-gray-600">Loading users...</p>
-            </div>
-          ) : error ? (
+          {error ? (
             <div className="p-8 text-center text-red-600">{error}</div>
           ) : (
             <div className="overflow-x-auto">
