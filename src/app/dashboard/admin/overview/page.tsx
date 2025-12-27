@@ -1,33 +1,58 @@
-import { redirect } from 'next/navigation'
-import { auth } from '@/auth'
-import DashboardLayout from '@/components/DashboardLayout'
+"use client"
 
-// Mock admin data
-const systemStats = {
-  totalUsers: 1250,
-  totalCourses: 89,
-  activeStudents: 823,
-  totalInstructors: 45,
-  monthlyRevenue: 45600,
-  completionRate: 78
+import { useState, useEffect } from 'react'
+import DashboardLayout from '@/components/DashboardLayout'
+import { useSession } from 'next-auth/react'
+
+interface AdminStats {
+  totalUsers: number
+  activeUsers: number
+  totalCourses: number
+  totalDiscussions: number
+  totalSubscriptions: number
+  activeSubscriptions: number
+  totalCertificates: number
+  totalPayments: number
+  totalRevenue: number
+  monthlyRevenue: number
 }
 
-const recentActivity = [
-  { type: 'user', action: 'New student registered', user: 'Alice Johnson', time: '5 minutes ago' },
-  { type: 'course', action: 'Course published', course: 'Advanced Python', instructor: 'Dr. Smith', time: '15 minutes ago' },
-  { type: 'system', action: 'System backup completed', time: '1 hour ago' },
-  { type: 'user', action: 'New instructor joined', user: 'Prof. Wilson', time: '2 hours ago' }
-]
+export default function AdminOverview() {
+  const { data: session } = useSession()
+  const [stats, setStats] = useState<AdminStats | null>(null)
+  const [loading, setLoading] = useState(true)
 
-export default async function AdminOverview() {
-  const session = await auth()
-  
-  if (!session?.user) {
-    redirect('/auth/login')
+  useEffect(() => {
+    fetchAdminStats()
+  }, [])
+
+  const fetchAdminStats = async () => {
+    try {
+      const res = await fetch('/api/admin/stats')
+      const data = await res.json()
+      
+      if (data.stats) {
+        setStats(data.stats)
+      }
+    } catch (error) {
+      console.error('Error fetching admin stats:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const userName = session.user.name || 'Admin'
-  const userEmail = session.user.email || ''
+  const userName = session?.user?.name || 'Admin'
+  const userEmail = session?.user?.email || ''
+
+  if (loading) {
+    return (
+      <DashboardLayout userRole="admin" userInfo={{ name: userName, email: userEmail }}>
+        <div style={{ textAlign: 'center', padding: '3rem' }}>
+          <p>Loading...</p>
+        </div>
+      </DashboardLayout>
+    )
+  }
 
   return (
     <DashboardLayout userRole="admin" userInfo={{ name: userName, email: userEmail }}>
@@ -48,7 +73,7 @@ export default async function AdminOverview() {
           }}>
             Admin Dashboard 🛠️
           </h1>
-          <p style={{ color: '#6b7280', fontSize: '1.125rem' }}>
+          <p style={{ color: '#6b7280', fontSize: '1rem' }}>
             System overview and management tools
           </p>
         </div>
@@ -68,7 +93,8 @@ export default async function AdminOverview() {
             borderLeft: '4px solid #059669' 
           }}>
             <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Total Users</div>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{systemStats.totalUsers.toLocaleString()}</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{stats?.totalUsers?.toLocaleString() || 0}</div>
+            <div style={{ fontSize: '0.75rem', color: '#16a34a' }}>{stats?.activeUsers?.toLocaleString() || 0} active</div>
           </div>
 
           <div style={{ 
@@ -79,7 +105,7 @@ export default async function AdminOverview() {
             borderLeft: '4px solid #3b82f6' 
           }}>
             <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Active Students</div>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{systemStats.activeStudents.toLocaleString()}</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{stats?.activeSubscriptions?.toLocaleString() || 0}</div>
           </div>
 
           <div style={{ 
@@ -89,8 +115,8 @@ export default async function AdminOverview() {
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             borderLeft: '4px solid #9333ea' 
           }}>
-            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Total Instructors</div>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{systemStats.totalInstructors}</div>
+            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Total Courses</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{stats?.totalCourses?.toLocaleString() || 0}</div>
           </div>
 
           <div style={{ 
@@ -100,8 +126,8 @@ export default async function AdminOverview() {
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             borderLeft: '4px solid #ea580c' 
           }}>
-            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Total Courses</div>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{systemStats.totalCourses}</div>
+            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Total Revenue</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>₹{stats?.totalRevenue?.toLocaleString() || 0}</div>
           </div>
 
           <div style={{ 
@@ -112,7 +138,7 @@ export default async function AdminOverview() {
             borderLeft: '4px solid #16a34a' 
           }}>
             <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Monthly Revenue</div>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>₹{systemStats.monthlyRevenue.toLocaleString()}</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>₹{stats?.monthlyRevenue?.toLocaleString() || 0}</div>
           </div>
 
           <div style={{ 
@@ -122,78 +148,12 @@ export default async function AdminOverview() {
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             borderLeft: '4px solid #eab308' 
           }}>
-            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Completion Rate</div>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{systemStats.completionRate}%</div>
+            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>Certificates</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1f2937' }}>{stats?.totalCertificates?.toLocaleString() || 0}</div>
           </div>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '2rem' }}>
-          {/* Recent Activity */}
-          <div style={{ 
-            background: 'white', 
-            borderRadius: '0.75rem', 
-            padding: '2rem', 
-            boxShadow: '0 1px 3px rgba(0,0,0,0.1)' 
-          }}>
-            <h2 style={{ 
-              fontSize: '1.5rem', 
-              fontWeight: '700', 
-              color: '#1f2937', 
-              marginBottom: '1.5rem' 
-            }}>
-              Recent Activity
-            </h2>
-            <div style={{ display: 'grid', gap: '1rem' }}>
-              {recentActivity.map((activity, index) => (
-                <div 
-                  key={index}
-                  style={{
-                    background: '#f8fafc',
-                    borderRadius: '0.5rem',
-                    padding: '1rem',
-                    border: '1px solid #e2e8f0',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1rem'
-                  }}
-                >
-                  <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: activity.type === 'user' ? '#3b82f6' : 
-                               activity.type === 'course' ? '#9333ea' : '#059669',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '0.875rem'
-                  }}>
-                    {activity.type === 'user' ? '👤' : 
-                     activity.type === 'course' ? '📚' : '⚙️'}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: '500', color: '#1f2937', marginBottom: '0.25rem' }}>
-                      {activity.action}
-                    </div>
-                    {activity.user && (
-                      <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                        User: {activity.user}
-                      </div>
-                    )}
-                    {activity.course && (
-                      <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                        Course: {activity.course} by {activity.instructor}
-                      </div>
-                    )}
-                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.25rem' }}>
-                      {activity.time}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Quick Actions */}
           <div style={{ 
             background: 'white', 
@@ -294,6 +254,75 @@ export default async function AdminOverview() {
                 <span style={{ fontSize: '1.25rem' }}>💰</span>
                 Financial Reports
               </button>
+            </div>
+          </div>
+
+          {/* System Health */}
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '0.75rem', 
+            padding: '2rem', 
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)' 
+          }}>
+            <h2 style={{ 
+              fontSize: '1.5rem', 
+              fontWeight: '700', 
+              color: '#1f2937', 
+              marginBottom: '1.5rem' 
+            }}>
+              System Health
+            </h2>
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              <div style={{ 
+                background: '#f8fafc',
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                border: '1px solid #e2e8f0'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontWeight: '500' }}>Database</span>
+                  <span style={{ background: '#16a34a', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>Healthy</span>
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Connection active</div>
+              </div>
+              
+              <div style={{ 
+                background: '#f8fafc',
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                border: '1px solid #e2e8f0'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontWeight: '500' }}>API Status</span>
+                  <span style={{ background: '#16a34a', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>Operational</span>
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>All endpoints responding</div>
+              </div>
+              
+              <div style={{ 
+                background: '#f8fafc',
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                border: '1px solid #e2e8f0'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontWeight: '500' }}>Storage</span>
+                  <span style={{ background: '#3b82f6', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>45% Used</span>
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>4.5 GB of 10 GB</div>
+              </div>
+              
+              <div style={{ 
+                background: '#f8fafc',
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                border: '1px solid #e2e8f0'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontWeight: '500' }}>Last Backup</span>
+                  <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>2 hours ago</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -63,6 +63,16 @@ export function NewNavigation() {
           <span style={{ fontWeight: 'bold', fontSize: '1.25rem', color: '#1f2937' }}>Academy</span>
         </Link>
 
+        {/* Navigation Links */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <Link href="/courses" style={{ color: '#374151', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500' }}>
+            Courses
+          </Link>
+          <Link href="/about" style={{ color: '#374151', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500' }}>
+            About
+          </Link>
+        </div>
+
         {/* Right side - Login or Logout */}
         {user ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
