@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { NewNavigation } from "@/components/new-navigation";
+import { Footer } from "@/components/footer";
 import { auth } from "@/auth";
 
 const geistSans = Geist({
@@ -80,6 +81,7 @@ export default async function RootLayout({
           <div style={{ paddingTop: '64px', minHeight: '100vh' }}>
             {children}
           </div>
+          <Footer />
         </Providers>
       </body>
     </html>

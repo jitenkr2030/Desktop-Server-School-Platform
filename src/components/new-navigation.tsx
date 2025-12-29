@@ -8,7 +8,6 @@ export function NewNavigation() {
   const { data: session } = useSession()
   const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [moreMenuOpen, setMoreMenuOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -85,66 +84,6 @@ export function NewNavigation() {
           <Link href="/subscription" style={{ color: '#374151', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500' }}>
             Pricing
           </Link>
-          
-          {/* More Dropdown */}
-          <div style={{ position: 'relative' }} 
-            onMouseEnter={() => setMoreMenuOpen(true)}
-            onMouseLeave={() => setMoreMenuOpen(false)}
-          >
-            <button style={{ 
-              color: '#374151', 
-              textDecoration: 'none', 
-              fontSize: '0.875rem', 
-              fontWeight: '500',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.25rem'
-            }}>
-              More
-              <svg style={{ width: '16px', height: '16px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            
-            {moreMenuOpen && (
-              <Link href="#" role="button" style={{
-                position: 'absolute',
-                top: '100%',
-                left: '0',
-                marginTop: '0.5rem',
-                background: 'white',
-                borderRadius: '0.5rem',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                minWidth: '200px',
-                padding: '0.5rem 0',
-                zIndex: 50,
-                display: 'block',
-                textDecoration: 'none'
-              }}>
-                <Link href="/about" style={{ display: 'block', padding: '0.5rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  About Us
-                </Link>
-                <Link href="/faq" style={{ display: 'block', padding: '0.5rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  FAQ
-                </Link>
-                <Link href="/career" style={{ display: 'block', padding: '0.5rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  Careers
-                </Link>
-                <Link href="/contact" style={{ display: 'block', padding: '0.5rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  Contact
-                </Link>
-                <Link href="/terms" style={{ display: 'block', padding: '0.5rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  Terms of Service
-                </Link>
-                <Link href="/privacy" style={{ display: 'block', padding: '0.5rem 1rem', color: '#374151', textDecoration: 'none', fontSize: '0.875rem' }}>
-                  Privacy Policy
-                </Link>
-              </Link>
-            )}
-          </div>
         </div>
 
         {/* Right side - Login or Logout or User Menu */}
