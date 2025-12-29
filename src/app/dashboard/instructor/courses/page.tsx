@@ -227,17 +227,17 @@ export default function InstructorCoursesPage() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span
-                      className={`px-2 py-1 text-xs rounded-full ${getDifficultyColor(
-                        course.difficulty
-                      )}`}
+                    <Link
+                      href={`/dashboard/instructor/courses/${course.id}`}
+                      className="px-3 py-1.5 text-sm text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 rounded-lg transition-colors"
                     >
-                      {course.difficulty.charAt(0) + course.difficulty.slice(1).toLowerCase()}
-                    </span>
+                      Manage Course
+                    </Link>
                     <div className="flex items-center gap-2">
                       <Link
                         href={`/dashboard/instructor/courses/${course.id}`}
                         className="p-2 text-gray-400 hover:text-indigo-600 transition-colors"
+                        title="Edit Course"
                       >
                         <Edit className="w-4 h-4" />
                       </Link>
@@ -248,6 +248,21 @@ export default function InstructorCoursesPage() {
                         <Eye className="w-4 h-4" />
                       </Link>
                     </div>
+                  </div>
+                  <div className="flex items-center justify-between mt-4">
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${getDifficultyColor(
+                        course.difficulty
+                      )}`}
+                    >
+                      {course.difficulty.charAt(0) + course.difficulty.slice(1).toLowerCase()}
+                    </span>
+                    <Link
+                      href={`/dashboard/instructor/courses/${course.id}`}
+                      className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                    >
+                      Manage →
+                    </Link>
                   </div>
                   <div className="mt-4 pt-4 border-t flex items-center justify-between text-sm">
                     <span className="flex items-center gap-1 text-gray-500">
