@@ -895,9 +895,6 @@
 # uploads/
 # downloads/
 
-# Allow src/lib for course data
- !src/lib/
-
 # Claude Agent SDK debug files
 **/.claude/debug/
 **/.claude/debug/**
