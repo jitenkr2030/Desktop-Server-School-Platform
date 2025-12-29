@@ -232,7 +232,6 @@ export default function CommunityPage() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -526,7 +525,6 @@ export default function CommunityPage() {
             </div>
           </div>
         )}
-        </div>
       </div>
     </div>
   )
