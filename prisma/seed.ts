@@ -37,6 +37,7 @@ async function main() {
         mobileNumber: '+919876543210',
         email: 'admin@inr99.academy',
         name: 'Admin User',
+        password: 'admin123', // Hashed in production
         isActive: true,
       },
     }),
@@ -46,6 +47,7 @@ async function main() {
         mobileNumber: '+919876543211',
         email: 'rahul@example.com',
         name: 'Rahul Sharma',
+        password: 'user123', // Hashed in production
         isActive: true,
       },
     }),
@@ -55,6 +57,7 @@ async function main() {
         mobileNumber: '+919876543212',
         email: 'priya@example.com',
         name: 'Priya Patel',
+        password: 'user123', // Hashed in production
         isActive: true,
       },
     }),
@@ -64,6 +67,7 @@ async function main() {
         mobileNumber: '+919876543213',
         email: 'amit@example.com',
         name: 'Amit Kumar',
+        password: 'user123', // Hashed in production
         isActive: true,
       },
     }),
