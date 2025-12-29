@@ -1,65 +1,84 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getCourses, getInstructors, getLearningPaths } from '@/lib/simple-db'
+import { db } from '@/lib/db'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const learningPathId = searchParams.get('learningPathId')
     const difficulty = searchParams.get('difficulty')
+    const categoryId = searchParams.get('categoryId')
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '12')
     const offset = (page - 1) * limit
 
-    // Get data from simple fallback database
-    const courses = getCourses()
-    const instructors = getInstructors()
-    const learningPaths = getLearningPaths()
-
-    // Filter courses based on parameters
-    let filteredCourses = courses.filter(course => course.isActive)
+    // Build where clause for filtering
+    const where: Record<string, unknown> = {
+      isActive: true,
+    }
 
     if (learningPathId) {
-      filteredCourses = filteredCourses.filter(course => course.learningPathId === learningPathId)
+      where.learningPathId = learningPathId
     }
 
     if (difficulty && ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'].includes(difficulty)) {
-      filteredCourses = filteredCourses.filter(course => course.difficulty === difficulty)
+      where.difficulty = difficulty
     }
 
-    // Apply pagination
-    const paginatedCourses = filteredCourses.slice(offset, offset + limit)
+    if (categoryId) {
+      where.categoryId = categoryId
+    }
 
-    // Map courses with instructor and learning path info
-    const coursesWithDetails = paginatedCourses.map(course => {
-      const instructor = instructors.find(i => i.id === course.instructorId)
-      const learningPath = learningPaths.find(lp => lp.id === course.learningPathId)
+    // Fetch courses with Prisma including related data
+    const [courses, total] = await Promise.all([
+      db.course.findMany({
+        where,
+        skip: offset,
+        take: limit,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          instructor: {
+            select: {
+              id: true,
+              name: true,
+              avatar: true,
+              expertise: true,
+            },
+          },
+          learningPath: {
+            select: {
+              id: true,
+              title: true,
+              color: true,
+              icon: true,
+            },
+          },
+          _count: {
+            select: {
+              lessons: true,
+              assessments: true,
+            },
+          },
+        },
+      }),
+      db.course.count({ where }),
+    ])
 
-      return {
-        id: course.id,
-        title: course.title,
-        description: course.description,
-        thumbnail: course.thumbnail,
-        difficulty: course.difficulty,
-        duration: course.duration,
-        instructor: instructor ? {
-          id: instructor.id,
-          name: instructor.name,
-          avatar: instructor.avatar,
-          expertise: instructor.expertise
-        } : null,
-        learningPath: learningPath ? {
-          id: learningPath.id,
-          title: learningPath.title,
-          color: learningPath.color,
-          icon: learningPath.icon
-        } : null,
-        lessonCount: 5, // Mock data
-        assessmentCount: 2, // Mock data
-        createdAt: course.createdAt
-      }
-    })
-
-    const total = filteredCourses.length
+    // Map courses to include lessonCount and assessmentCount dynamically
+    const coursesWithDetails = courses.map(course => ({
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      thumbnail: course.thumbnail,
+      difficulty: course.difficulty,
+      duration: course.duration,
+      instructor: course.instructor,
+      learningPath: course.learningPath,
+      lessonCount: course._count.lessons,
+      assessmentCount: course._count.assessments,
+      createdAt: course.createdAt,
+    }))
 
     return NextResponse.json({
       success: true,
@@ -68,14 +87,14 @@ export async function GET(request: NextRequest) {
         page,
         limit,
         total,
-        totalPages: Math.ceil(total / limit)
-      }
+        totalPages: Math.ceil(total / limit),
+      },
     })
 
   } catch (error) {
     console.error('Get courses error:', error)
     return NextResponse.json(
-      { success: false, message: 'Internal server error', error: error.message },
+      { success: false, message: 'Internal server error', error: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
