@@ -22,6 +22,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { courses, type Course, type Lesson, type Module } from '@/lib/course-data'
+import { LearningProgressProvider } from '@/contexts/learning-progress-context'
 
 // Helper function to find a lesson across all courses
 function findLessonById(lessonId: string): { 
@@ -190,6 +191,7 @@ export default function LessonDetailPage() {
   const { lesson, course, module } = lessonData
 
   return (
+    <LearningProgressProvider>
     <div className="min-h-screen bg-gray-50">
       {/* Completion Toast */}
       {showCompletionToast && (
@@ -529,6 +531,6 @@ export default function LessonDetailPage() {
           </div>
         </div>
       </div>
-    </div>
+    </LearningProgressProvider>
   )
 }

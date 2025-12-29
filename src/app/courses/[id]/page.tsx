@@ -22,10 +22,12 @@ import {
   User,
   Target,
   CheckCircle,
-  Star
+  Star,
+  Users
 } from "lucide-react"
 import Link from "next/link"
 import { getCourseById, type Course } from '@/lib/course-data'
+import { LearningProgressProvider } from '@/contexts/learning-progress-context'
 
 export default function CourseDetailPage() {
   const params = useParams()
@@ -186,6 +188,7 @@ export default function CourseDetailPage() {
   }
 
   return (
+    <LearningProgressProvider>
     <div className="min-h-screen bg-gray-50">
       {/* Course Header */}
       <div className="bg-white shadow-sm">
@@ -692,5 +695,6 @@ export default function CourseDetailPage() {
         </div>
       )}
     </div>
+    </LearningProgressProvider>
   )
 }
