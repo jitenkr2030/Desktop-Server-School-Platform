@@ -1752,8 +1752,8 @@ What you'll learn:
 - Installing and managing apps safely
 - Using everyday digital tools
 - Avoiding common mistakes and scams`,
-    thumbnail: "/courses/confusion-removers/digital-basics.jpg",
-    previewVideo: "https://www.youtube.com/watch?v=cr_digital_preview",
+    thumbnail: "/assets/courses/cr_digital.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -1841,8 +1841,8 @@ What you'll learn:
 - Understanding failed transactions
 - Banking basics everyone should know
 - Staying safe from payment fraud`,
-    thumbnail: "/courses/confusion-removers/digital-money.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_upi.svg",
+    previewVideo: "https://www.youtube.com/embed/Qc38r-w1e1E",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -1930,8 +1930,8 @@ What you'll learn:
 - How to use DigiLocker correctly
 - Common mistakes to avoid
 - Official processes explained simply`,
-    thumbnail: "/courses/confusion-removers/gov-docs.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_gov.svg",
+    previewVideo: "https://www.youtube.com/embed/w8g7p6jTz_o",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -2019,8 +2019,8 @@ What you'll learn:
 - Common online scams to avoid
 - Protecting your personal data
 - What to do if you're scammed`,
-    thumbnail: "/courses/confusion-removers/online-safety.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_fraud.svg",
+    previewVideo: "https://www.youtube.com/embed/z5nc9MDd-hY",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -2108,8 +2108,8 @@ What you'll learn:
 - Smart saving strategies
 - How EMI and loans work
 - Budgeting made simple`,
-    thumbnail: "/courses/confusion-removers/personal-money.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_money.svg",
+    previewVideo: "https://www.youtube.com/embed/4j2emMn7UaI",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -2197,8 +2197,8 @@ What you'll learn:
 - Phone conversation basics
 - Professional email writing
 - Practical speaking scenarios`,
-    thumbnail: "/courses/confusion-removers/english-communication.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_english.svg",
+    previewVideo: "https://www.youtube.com/embed/JuJi9w8_v1o",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -2288,8 +2288,8 @@ What you'll learn:
 - Real cost calculation
 - Building trust in groups
 - Common pitfalls to avoid`,
-    thumbnail: "/courses/confusion-removers/bulk-buying.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_bulk.svg",
+    previewVideo: "https://www.youtube.com/embed/tyjZ2t6w4O0",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -2377,8 +2377,8 @@ What you'll learn:
 - Finding legitimate programs
 - Your rights and benefits
 - Participating with dignity`,
-    thumbnail: "/courses/confusion-removers/food-work.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_foodwork.svg",
+    previewVideo: "https://www.youtube.com/embed/7FvF9qz8z4g",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -2466,8 +2466,8 @@ What you'll learn:
 - Understanding NGOs and their work
 - CSR programs and how to access them
 - Government welfare schemes`,
-    thumbnail: "/courses/confusion-removers/community-systems.jpg",
-    previewVideo: "",
+    thumbnail: "/assets/courses/cr_community.svg",
+    previewVideo: "https://www.youtube.com/embed/1fJ_g4-D3jY",
     price: 0,
     originalPrice: 0,
     currency: "INR",

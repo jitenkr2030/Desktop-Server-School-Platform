@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="400" height="225" fill="url(#bg-grad)"/>
+  <path d="M200 45 L275 90 L275 145 Q275 175 200 175 Q125 175 125 145 L125 90 Z" fill="#FFFFFF" filter="url(#shadow)"/>
+  <path d="M155 110 L185 140 L245 80" stroke="#EF4444" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="200" cy="95" r="25" fill="none" stroke="#EF4444" stroke-width="4" opacity="0.5"/>
+  <circle cx="160" cy="70" r="8" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="240" cy="70" r="8" fill="#FFFFFF" opacity="0.3"/>
+  <path d="M160 165 L240 165" stroke="#EF4444" stroke-width="2" opacity="0.3"/>
+  <text x="200" y="205" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Stay Safe Online</text>
+</svg>
