@@ -163,7 +163,7 @@ export default function ConfusionRemoversPage() {
             {lifeEssentialsCourses.map((course) => (
               <Link 
                 key={course.id}
-                href={`/confusion/${course.id}`}
+                href={`/confusion/course/${course.id}`}
                 className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 transform hover:-translate-y-1"
               >
                 <div className="relative h-48 bg-slate-100 overflow-hidden">
@@ -224,7 +224,7 @@ export default function ConfusionRemoversPage() {
             {communityCourses.map((course) => (
               <Link 
                 key={course.id}
-                href={`/confusion/${course.id}`}
+                href={`/confusion/course/${course.id}`}
                 className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 transform hover:-translate-y-1"
               >
                 <div className="relative h-48 bg-slate-100 overflow-hidden">
