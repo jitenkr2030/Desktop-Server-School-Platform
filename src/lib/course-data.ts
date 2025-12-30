@@ -1753,7 +1753,7 @@ What you'll learn:
 - Using everyday digital tools
 - Avoiding common mistakes and scams`,
     thumbnail: "/courses/confusion-removers/digital-basics.jpg",
-    previewVideo: "",
+    previewVideo: "https://www.youtube.com/watch?v=cr_digital_preview",
     price: 0,
     originalPrice: 0,
     currency: "INR",
@@ -1766,9 +1766,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 60,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.8,
     reviewCount: 150,
     enrollmentCount: 500,
@@ -1778,13 +1778,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-digital-1",
-        title: "Digital Basics",
+        title: "Getting Started with Smartphone",
         order: 1,
         lessons: [
-          { id: "les-cr-digital-1", title: "What is a Smartphone?", type: "video", duration: 10, content: "", isFree: true, order: 1 },
-          { id: "les-cr-digital-2", title: "Understanding Apps", type: "video", duration: 15, content: "", isFree: true, order: 2 },
-          { id: "les-cr-digital-3", title: "Apps & Installation Safety", type: "video", duration: 15, content: "", isFree: false, order: 3 },
-          { id: "les-cr-digital-4", title: "Common Settings", type: "video", duration: 20, content: "", isFree: false, order: 4 }
+          { id: "les-cr-digital-1", title: "What is a Smartphone?", type: "video", duration: 12, content: "", isFree: true, order: 1 },
+          { id: "les-cr-digital-2", title: "Parts of Your Phone", type: "video", duration: 15, content: "", isFree: true, order: 2 },
+          { id: "les-cr-digital-3", title: "Turning On/Off and Basic Gestures", type: "video", duration: 12, content: "", isFree: true, order: 3 },
+          { id: "les-cr-digital-4", title: "Understanding the Home Screen", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-digital-2",
+        title: "Apps and Installation",
+        order: 2,
+        lessons: [
+          { id: "les-cr-digital-5", title: "What Are Apps?", type: "video", duration: 12, content: "", isFree: false, order: 1 },
+          { id: "les-cr-digital-6", title: "Apps & Installation Safety", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-digital-7", title: "How to Download Apps Safely", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-digital-8", title: "Managing and Organizing Apps", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-digital-3",
+        title: "Essential Phone Skills",
+        order: 3,
+        lessons: [
+          { id: "les-cr-digital-9", title: "Making Calls and Sending Messages", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-digital-10", title: "Using Camera and Gallery", type: "video", duration: 15, content: "", isFree: false, order: 2 },
+          { id: "les-cr-digital-11", title: "Connecting to WiFi and Internet", type: "video", duration: 18, content: "", isFree: false, order: 3 },
+          { id: "les-cr-digital-12", title: "Phone Security and Privacy Basics", type: "video", duration: 18, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -1833,9 +1855,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 75,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.9,
     reviewCount: 200,
     enrollmentCount: 750,
@@ -1845,13 +1867,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-upi-1",
-        title: "Digital Money Basics",
+        title: "Understanding UPI",
         order: 1,
         lessons: [
           { id: "les-cr-upi-1", title: "What is UPI?", type: "video", duration: 15, content: "", isFree: true, order: 1 },
-          { id: "les-cr-upi-2", title: "Bank Account Types", type: "video", duration: 20, content: "", isFree: false, order: 2 },
-          { id: "les-cr-upi-3", title: "Online Banking Safety", type: "video", duration: 20, content: "", isFree: false, order: 3 },
-          { id: "les-cr-upi-4", title: "What to Do If Transaction Fails", type: "video", duration: 20, content: "", isFree: false, order: 4 }
+          { id: "les-cr-upi-2", title: "How UPI Transactions Work", type: "video", duration: 18, content: "", isFree: true, order: 2 },
+          { id: "les-cr-upi-3", title: "Setting Up UPI App", type: "video", duration: 18, content: "", isFree: false, order: 3 },
+          { id: "les-cr-upi-4", title: "Creating UPI PIN", type: "video", duration: 12, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-upi-2",
+        title: "Banking Basics",
+        order: 2,
+        lessons: [
+          { id: "les-cr-upi-5", title: "Bank Account Types", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-upi-6", title: "Online Banking Safety", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-upi-7", title: "Understanding Bank Statements", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-upi-8", title: "Linking Bank Accounts to UPI", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-upi-3",
+        title: "Safe Digital Payments",
+        order: 3,
+        lessons: [
+          { id: "les-cr-upi-9", title: "Scanning QR Codes Correctly", type: "video", duration: 12, content: "", isFree: false, order: 1 },
+          { id: "les-cr-upi-10", title: "What to Do If Transaction Fails", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-upi-11", title: "Common UPI Scams to Avoid", type: "video", duration: 20, content: "", isFree: false, order: 3 },
+          { id: "les-cr-upi-12", title: "Digital Payment Receipts and Records", type: "video", duration: 14, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -1900,9 +1944,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 60,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.7,
     reviewCount: 180,
     enrollmentCount: 600,
@@ -1912,13 +1956,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-gov-1",
-        title: "Government Documents",
+        title: "Aadhaar - Your Identity Proof",
         order: 1,
         lessons: [
           { id: "les-cr-gov-1", title: "What is Aadhaar?", type: "video", duration: 12, content: "", isFree: true, order: 1 },
-          { id: "les-cr-gov-2", title: "PAN Card Importance", type: "video", duration: 15, content: "", isFree: false, order: 2 },
-          { id: "les-cr-gov-3", title: "DigiLocker Basics", type: "video", duration: 18, content: "", isFree: false, order: 3 },
-          { id: "les-cr-gov-4", title: "Passport Services", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+          { id: "les-cr-gov-2", title: "Why Do You Need Aadhaar?", type: "video", duration: 15, content: "", isFree: true, order: 2 },
+          { id: "les-cr-gov-3", title: "Aadhaar Card vs Number", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-gov-4", title: "Updating Aadhaar Details", type: "video", duration: 18, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-gov-2",
+        title: "PAN and Financial Identity",
+        order: 2,
+        lessons: [
+          { id: "les-cr-gov-5", title: "What is PAN Card?", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-gov-6", title: "PAN vs Aadhaar - When to Use What", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-gov-7", title: "Linking PAN with Aadhaar", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-gov-8", title: "PAN Card Mistakes to Avoid", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-gov-3",
+        title: "Digital Government Services",
+        order: 3,
+        lessons: [
+          { id: "les-cr-gov-9", title: "What is DigiLocker?", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-gov-10", title: "Setting Up DigiLocker Account", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-gov-11", title: "Accessing Your Documents", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-gov-12", title: "Other Important Government Portals", type: "video", duration: 12, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -1967,9 +2033,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 90,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.9,
     reviewCount: 300,
     enrollmentCount: 1000,
@@ -1979,13 +2045,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-fraud-1",
-        title: "Online Safety",
+        title: "Understanding Common Frauds",
         order: 1,
         lessons: [
           { id: "les-cr-fraud-1", title: "How OTP Fraud Works", type: "video", duration: 20, content: "", isFree: true, order: 1 },
-          { id: "les-cr-fraud-2", title: "Investment Frauds", type: "video", duration: 25, content: "", isFree: false, order: 2 },
-          { id: "les-cr-fraud-3", title: "Personal Data Protection", type: "video", duration: 25, content: "", isFree: false, order: 3 },
-          { id: "les-cr-fraud-4", title: "Reporting Fraud", type: "video", duration: 20, content: "", isFree: false, order: 4 }
+          { id: "les-cr-fraud-2", title: "UPI Payment Frauds", type: "video", duration: 18, content: "", isFree: true, order: 2 },
+          { id: "les-cr-fraud-3", title: "Investment Scams", type: "video", duration: 20, content: "", isFree: false, order: 3 },
+          { id: "les-cr-fraud-4", title: "Fake Calls and Messages", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-fraud-2",
+        title: "Protecting Yourself Online",
+        order: 2,
+        lessons: [
+          { id: "les-cr-fraud-5", title: "Creating Strong Passwords", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-fraud-6", title: "Two-Factor Authentication", type: "video", duration: 15, content: "", isFree: false, order: 2 },
+          { id: "les-cr-fraud-7", title: "Safe Browsing Habits", type: "video", duration: 18, content: "", isFree: false, order: 3 },
+          { id: "les-cr-fraud-8", title: "Recognizing Phishing Attempts", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-fraud-3",
+        title: "Responding to Fraud",
+        order: 3,
+        lessons: [
+          { id: "les-cr-fraud-9", title: "Personal Data Protection", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-cr-fraud-10", title: "What to Do If You're Scammed", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-fraud-11", title: "Reporting Fraud to Authorities", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-fraud-12", title: "Protecting Your Family", type: "video", duration: 18, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -2034,9 +2122,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 60,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.8,
     reviewCount: 220,
     enrollmentCount: 800,
@@ -2046,13 +2134,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-money-1",
-        title: "Personal Money",
+        title: "Understanding Your Income",
         order: 1,
         lessons: [
-          { id: "les-cr-money-1", title: "Understanding Your Income", type: "video", duration: 12, content: "", isFree: true, order: 1 },
-          { id: "les-cr-money-2", title: "Credit Cards Explained", type: "video", duration: 15, content: "", isFree: false, order: 2 },
-          { id: "les-cr-money-3", title: "Budgeting Methods", type: "video", duration: 18, content: "", isFree: false, order: 3 },
-          { id: "les-cr-money-4", title: "Savings Strategies", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+          { id: "les-cr-money-1", title: "Types of Income", type: "video", duration: 12, content: "", isFree: true, order: 1 },
+          { id: "les-cr-money-2", title: "Take-Home vs Gross Salary", type: "video", duration: 15, content: "", isFree: true, order: 2 },
+          { id: "les-cr-money-3", title: "Deductions Explained", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-money-4", title: "Side Income Possibilities", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-money-2",
+        title: "Credit, Loans, and EMI",
+        order: 2,
+        lessons: [
+          { id: "les-cr-money-5", title: "Credit Cards Explained", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-cr-money-6", title: "How EMI Works", type: "video", duration: 15, content: "", isFree: false, order: 2 },
+          { id: "les-cr-money-7", title: "Types of Loans", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-money-8", title: "Good Debt vs Bad Debt", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-money-3",
+        title: "Saving and Budgeting",
+        order: 3,
+        lessons: [
+          { id: "les-cr-money-9", title: "Budgeting Methods", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-money-10", title: "Savings Strategies", type: "video", duration: 15, content: "", isFree: false, order: 2 },
+          { id: "les-cr-money-11", title: "Emergency Fund Basics", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-money-12", title: "Tracking Your Expenses", type: "video", duration: 15, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -2101,9 +2211,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 60,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.7,
     reviewCount: 250,
     enrollmentCount: 900,
@@ -2113,13 +2223,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-english-1",
-        title: "English Communication",
+        title: "Overcoming English Fear",
         order: 1,
         lessons: [
-          { id: "les-cr-english-1", title: "Removing Fear from English", type: "video", duration: 12, content: "", isFree: true, order: 1 },
-          { id: "les-cr-english-2", title: "Phone Etiquette", type: "video", duration: 15, content: "", isFree: false, order: 2 },
-          { id: "les-cr-english-3", title: "Reading Skills", type: "video", duration: 18, content: "", isFree: false, order: 3 },
-          { id: "les-cr-english-4", title: "Professional Communication", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+          { id: "les-cr-english-1", title: "Removing Fear from English", type: "video", duration: 15, content: "", isFree: true, order: 1 },
+          { id: "les-cr-english-2", title: "Why We Fear English", type: "video", duration: 12, content: "", isFree: true, order: 2 },
+          { id: "les-cr-english-3", title: "Small Steps to Build Confidence", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-english-4", title: "Practice Methods That Work", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-english-2",
+        title: "Speaking and Listening",
+        order: 2,
+        lessons: [
+          { id: "les-cr-english-5", title: "Phone Etiquette", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-english-6", title: "Introduce Yourself Confidently", type: "video", duration: 12, content: "", isFree: false, order: 2 },
+          { id: "les-cr-english-7", title: "Common Phrases for Daily Use", type: "video", duration: 15, content: "", isFree: false, order: 3 },
+          { id: "les-cr-english-8", title: "Listening Practice", type: "video", duration: 15, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-english-3",
+        title: "Reading and Writing",
+        order: 3,
+        lessons: [
+          { id: "les-cr-english-9", title: "Reading Skills for Understanding", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-cr-english-10", title: "Professional Email Writing", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-cr-english-11", title: "Message Writing Basics", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-english-12", title: "Document Reading Practice", type: "video", duration: 15, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -2170,9 +2302,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 45,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 135,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.6,
     reviewCount: 100,
     enrollmentCount: 400,
@@ -2182,13 +2314,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-bulk-1",
-        title: "Community Bulk Buying",
+        title: "Understanding Community Buying",
         order: 1,
         lessons: [
           { id: "les-cr-bulk-1", title: "What is Community Buying?", type: "video", duration: 10, content: "", isFree: true, order: 1 },
-          { id: "les-cr-bulk-2", title: "Real Cost Calculation", type: "video", duration: 12, content: "", isFree: false, order: 2 },
-          { id: "les-cr-bulk-3", title: "Building Trust", type: "video", duration: 13, content: "", isFree: false, order: 3 },
-          { id: "les-cr-bulk-4", title: "Safety in Groups", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+          { id: "les-cr-bulk-2", title: "How Bulk Buying Groups Form", type: "video", duration: 12, content: "", isFree: true, order: 2 },
+          { id: "les-cr-bulk-3", title: "Types of Community Buying Models", type: "video", duration: 11, content: "", isFree: false, order: 3 },
+          { id: "les-cr-bulk-4", title: "Benefits of Community Purchasing", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-bulk-2",
+        title: "Economics and Calculations",
+        order: 2,
+        lessons: [
+          { id: "les-cr-bulk-5", title: "Real Cost Calculation", type: "video", duration: 12, content: "", isFree: false, order: 1 },
+          { id: "les-cr-bulk-6", title: "Hidden Costs to Consider", type: "video", duration: 10, content: "", isFree: false, order: 2 },
+          { id: "les-cr-bulk-7", title: "Savings Breakdown Examples", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-bulk-8", title: "When Bulk Buying Makes Sense", type: "video", duration: 11, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-bulk-3",
+        title: "Safety and Trust Building",
+        order: 3,
+        lessons: [
+          { id: "les-cr-bulk-9", title: "Building Trust", type: "video", duration: 11, content: "", isFree: false, order: 1 },
+          { id: "les-cr-bulk-10", title: "Safety in Groups", type: "video", duration: 12, content: "", isFree: false, order: 2 },
+          { id: "les-cr-bulk-11", title: "Common Scams to Watch", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-bulk-12", title: "Successful Participation Tips", type: "video", duration: 10, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -2237,9 +2391,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 45,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 135,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.7,
     reviewCount: 120,
     enrollmentCount: 450,
@@ -2249,13 +2403,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-foodwork-1",
-        title: "Food-for-Work Models",
+        title: "Understanding Food-for-Work",
         order: 1,
         lessons: [
           { id: "les-cr-foodwork-1", title: "What is Food-for-Work?", type: "video", duration: 10, content: "", isFree: true, order: 1 },
-          { id: "les-cr-foodwork-2", title: "Finding Programs", type: "video", duration: 12, content: "", isFree: false, order: 2 },
-          { id: "les-cr-foodwork-3", title: "Your Rights & Benefits", type: "video", duration: 13, content: "", isFree: false, order: 3 },
-          { id: "les-cr-foodwork-4", title: "Participating with Dignity", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+          { id: "les-cr-foodwork-2", title: "How Food-for-Work Programs Work", type: "video", duration: 12, content: "", isFree: true, order: 2 },
+          { id: "les-cr-foodwork-3", title: "History and Evolution", type: "video", duration: 11, content: "", isFree: false, order: 3 },
+          { id: "les-cr-foodwork-4", title: "Who Benefits from These Programs", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-foodwork-2",
+        title: "Finding and Accessing Programs",
+        order: 2,
+        lessons: [
+          { id: "les-cr-foodwork-5", title: "Finding Programs Near You", type: "video", duration: 12, content: "", isFree: false, order: 1 },
+          { id: "les-cr-foodwork-6", title: "Eligibility Requirements", type: "video", duration: 11, content: "", isFree: false, order: 2 },
+          { id: "les-cr-foodwork-7", title: "Application Process", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-foodwork-8", title: "Documentation Needed", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-foodwork-3",
+        title: "Rights, Benefits, and Participation",
+        order: 3,
+        lessons: [
+          { id: "les-cr-foodwork-9", title: "Your Rights and Benefits", type: "video", duration: 12, content: "", isFree: false, order: 1 },
+          { id: "les-cr-foodwork-10", title: "Participating with Dignity", type: "video", duration: 11, content: "", isFree: false, order: 2 },
+          { id: "les-cr-foodwork-11", title: "Common Problems and Solutions", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-foodwork-12", title: "Supporting Others in Need", type: "video", duration: 10, content: "", isFree: false, order: 4 }
         ]
       }
     ],
@@ -2304,9 +2480,9 @@ What you'll learn:
     
     difficulty: "beginner",
     language: "Hindi",
-    totalDuration: 45,
-    lessonCount: 4,
-    moduleCount: 1,
+    totalDuration: 135,
+    lessonCount: 12,
+    moduleCount: 3,
     rating: 4.6,
     reviewCount: 130,
     enrollmentCount: 500,
@@ -2316,13 +2492,35 @@ What you'll learn:
     modules: [
       {
         id: "mod-cr-community-1",
-        title: "Community Systems",
+        title: "Local Government and Panchayats",
         order: 1,
         lessons: [
           { id: "les-cr-community-1", title: "How Panchayats Work", type: "video", duration: 10, content: "", isFree: true, order: 1 },
-          { id: "les-cr-community-2", title: "Understanding NGOs", type: "video", duration: 12, content: "", isFree: false, order: 2 },
-          { id: "les-cr-community-3", title: "CSR Programs", type: "video", duration: 13, content: "", isFree: false, order: 3 },
-          { id: "les-cr-community-4", title: "Government Welfare Schemes", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+          { id: "les-cr-community-2", title: "Panchayat Structure Explained", type: "video", duration: 12, content: "", isFree: true, order: 2 },
+          { id: "les-cr-community-3", title: "Your Sarpanch and Ward Member", type: "video", duration: 11, content: "", isFree: false, order: 3 },
+          { id: "les-cr-community-4", title: "Gram Sabha and Your Voice", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-community-2",
+        title: "NGOs and Civil Society",
+        order: 2,
+        lessons: [
+          { id: "les-cr-community-5", title: "Understanding NGOs", type: "video", duration: 12, content: "", isFree: false, order: 1 },
+          { id: "les-cr-community-6", title: "Types of NGOs", type: "video", duration: 11, content: "", isFree: false, order: 2 },
+          { id: "les-cr-community-7", title: "Verifying Legitimate NGOs", type: "video", duration: 12, content: "", isFree: false, order: 3 },
+          { id: "les-cr-community-8", title: "Working with NGOs", type: "video", duration: 10, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-cr-community-3",
+        title: "CSR and Government Schemes",
+        order: 3,
+        lessons: [
+          { id: "les-cr-community-9", title: "CSR Programs Explained", type: "video", duration: 11, content: "", isFree: false, order: 1 },
+          { id: "les-cr-community-10", title: "Government Welfare Schemes", type: "video", duration: 12, content: "", isFree: false, order: 2 },
+          { id: "les-cr-community-11", title: "Accessing Community Benefits", type: "video", duration: 11, content: "", isFree: false, order: 3 },
+          { id: "les-cr-community-12", title: "Participating in Community Development", type: "video", duration: 10, content: "", isFree: false, order: 4 }
         ]
       }
     ],
