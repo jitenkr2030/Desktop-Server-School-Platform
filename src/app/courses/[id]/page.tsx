@@ -40,7 +40,10 @@ export default function CourseDetailPage() {
   const [loading, setLoading] = useState(true)
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set())
   const [isEnrolled, setIsEnrolled] = useState(false)
-  const [showEnrollmentModal, setShowEnrollmentModal] = useState(false)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success'>('idle')
+  const [showReceipt, setShowReceipt] = useState(false)
+  const [receiptData, setReceiptData] = useState<any>(null)
 
   useEffect(() => {
     // Load course from static data
@@ -337,7 +340,14 @@ export default function CourseDetailPage() {
                   <Button 
                     size="lg" 
                     className="bg-orange-500 hover:bg-orange-600"
-                    onClick={() => setShowEnrollmentModal(true)}
+                    onClick={() => {
+                      if (!session?.user) {
+                        router.push('/auth/login')
+                        return
+                      }
+                      setShowPaymentModal(true)
+                      setPaymentStatus('idle')
+                    }}
                   >
                     Enroll Now - ₹{course.price}
                   </Button>
@@ -657,38 +667,193 @@ export default function CourseDetailPage() {
         </div>
       </div>
 
-      {/* Enrollment Modal */}
-      {showEnrollmentModal && course && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <h2 className="text-xl font-bold mb-4">Enroll in {course.title}</h2>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                <span className="text-gray-600">Course Price</span>
-                <span className="text-xl font-bold">₹{course.price}</span>
+      {/* UPI Payment Modal */}
+      {showPaymentModal && course && session?.user && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full">
+            {paymentStatus === 'success' && showReceipt ? (
+              // Payment Receipt
+              <div className="p-6">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="h-8 w-8 text-green-500" />
+                  </div>
+                  <h2 className="text-xl font-bold text-gray-900">Payment Successful!</h2>
+                  <p className="text-gray-600">Your enrollment has been confirmed</p>
+                </div>
+                
+                <div className="border rounded-lg p-4 mb-6 bg-gray-50">
+                  <div className="flex items-center justify-between mb-4 pb-4 border-b">
+                    <span className="text-sm text-gray-600">Receipt Number</span>
+                    <span className="font-mono font-medium">{receiptData?.receiptNumber}</span>
+                  </div>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Course</span>
+                      <span className="font-medium">{course.title}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Student</span>
+                      <span className="font-medium">{session.user.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Email</span>
+                      <span className="font-medium">{session.user.email}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Amount Paid</span>
+                      <span className="font-bold text-green-600">₹{course.price}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Date</span>
+                      <span className="font-medium">{new Date().toLocaleDateString('en-IN')}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Payment Method</span>
+                      <span className="font-medium">UPI</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Transaction ID</span>
+                      <span className="font-mono text-xs">{receiptData?.transactionId}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => {
+                      setShowPaymentModal(false)
+                      setShowReceipt(false)
+                      setIsEnrolled(true)
+                    }}
+                  >
+                    Close
+                  </Button>
+                  <Button 
+                    className="flex-1 bg-orange-500 hover:bg-orange-600"
+                    onClick={() => {
+                      // Start learning after successful payment
+                      setShowPaymentModal(false)
+                      setShowReceipt(false)
+                      setIsEnrolled(true)
+                      handleStartLearning()
+                    }}
+                  >
+                    Start Learning
+                  </Button>
+                </div>
               </div>
-              <div className="text-sm text-gray-500">
-                This is a demo enrollment. In a real application, you would be redirected to a payment processor.
+            ) : paymentStatus === 'success' ? (
+              // Processing success state
+              <div className="p-6 text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                <p className="text-gray-600">Processing your enrollment...</p>
               </div>
-            </div>
-            <div className="flex gap-4 mt-6">
-              <Button 
-                variant="outline" 
-                className="flex-1"
-                onClick={() => setShowEnrollmentModal(false)}
-              >
-                Cancel
-              </Button>
-              <Button 
-                className="flex-1 bg-orange-500 hover:bg-orange-600"
-                onClick={() => {
-                  setIsEnrolled(true)
-                  setShowEnrollmentModal(false)
-                }}
-              >
-                Confirm & Enroll
-              </Button>
-            </div>
+            ) : (
+              // Payment Modal with QR Code
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold">Complete Payment</h2>
+                  <button 
+                    onClick={() => setShowPaymentModal(false)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="text-center mb-6">
+                  <p className="text-gray-600 mb-2">Scan QR Code to Pay</p>
+                  <div className="border-2 border-orange-200 rounded-lg p-4 inline-block">
+                    <img 
+                      src="/images/qrcode.jpeg" 
+                      alt="UPI QR Code" 
+                      className="w-48 h-48 object-contain"
+                    />
+                  </div>
+                  <p className="text-sm text-gray-500 mt-2">
+                    Scan with any UPI app (PhonePe, GPay, Paytm, etc.)
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-gray-600">Course</span>
+                    <span className="font-medium">{course.title}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-gray-600">Amount</span>
+                    <span className="text-xl font-bold text-orange-600">₹{course.price}</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-3 border-t">
+                    <span className="text-gray-600">UPI ID</span>
+                    <span className="font-mono text-sm">9871087168@kotak</span>
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    After payment, enter transaction ID to confirm:
+                  </p>
+                  <input
+                    type="text"
+                    id="transactionId"
+                    placeholder="Enter UPI Transaction ID"
+                    className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+
+                <div className="flex gap-4">
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => setShowPaymentModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    className="flex-1 bg-orange-500 hover:bg-orange-600"
+                    onClick={async () => {
+                      const transactionId = (document.getElementById('transactionId') as HTMLInputElement)?.value
+                      
+                      if (!transactionId || transactionId.trim() === '') {
+                        alert('Please enter your UPI Transaction ID after making the payment')
+                        return
+                      }
+
+                      setPaymentStatus('success')
+
+                      // Generate receipt data
+                      const receipt = {
+                        receiptNumber: 'RCP-' + Date.now().toString(36).toUpperCase(),
+                        transactionId: transactionId,
+                        courseId: course.id,
+                        courseTitle: course.title,
+                        studentName: session.user?.name,
+                        studentEmail: session.user?.email,
+                        amount: course.price,
+                        paymentMethod: 'UPI',
+                        paymentDate: new Date().toISOString()
+                      }
+                      setReceiptData(receipt)
+
+                      // Simulate processing delay
+                      setTimeout(() => {
+                        setShowReceipt(true)
+                      }, 1500)
+                    }}
+                  >
+                    Confirm Payment
+                  </Button>
+                </div>
+
+                <p className="text-xs text-gray-500 text-center mt-4">
+                  By confirming, you agree that you have completed the payment via UPI
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
