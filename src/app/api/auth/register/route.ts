@@ -50,8 +50,12 @@ export async function POST(req: Request) {
     console.error("Registration error:", error)
     
     if (error instanceof z.ZodError) {
+      // Zod v5+ uses .issues instead of .errors
+      const issues = (error as any).issues || error.errors || []
+      const firstIssue = issues[0]
+      const errorMessage = firstIssue?.message || 'Validation error'
       return NextResponse.json(
-        { user: null, message: error.errors[0].message },
+        { user: null, message: errorMessage },
         { status: 400 }
       )
     }

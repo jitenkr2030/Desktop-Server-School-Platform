@@ -136,6 +136,19 @@ export default function LoginPage() {
               <p>Password: demo123</p>
             </div>
           </div>
+
+          {/* Registration Link */}
+          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+            <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+              Don't have an account?{' '}
+              <a
+                href="/auth/register"
+                style={{ color: '#ea580c', fontWeight: '600', textDecoration: 'none' }}
+              >
+                Create one
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
