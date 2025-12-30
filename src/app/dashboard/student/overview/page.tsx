@@ -1,14 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
+import { db } from '@/lib/db'
 import DashboardLayout from '@/components/DashboardLayout'
-
-// Courses data
-const courses = [
-  { id: 1, title: 'Complete React Course', instructor: 'John Instructor', duration: '20 hours', progress: 65, color: '#dbeafe' },
-  { id: 2, title: 'Advanced JavaScript', instructor: 'Jane Instructor', duration: '15 hours', progress: 30, color: '#f3e8ff' },
-  { id: 3, title: 'Web Development Basics', instructor: 'Bob Instructor', duration: '10 hours', progress: 100, color: '#dcfce7' },
-  { id: 4, title: 'Python for Beginners', instructor: 'Alice Instructor', duration: '18 hours', progress: 0, color: '#fef3c7' }
-]
 
 export default async function StudentOverview() {
   let session = null
@@ -27,6 +20,52 @@ export default async function StudentOverview() {
   const userName = session.user.name || 'Student'
   const userEmail = session.user.email || 'student@example.com'
 
+  // Fetch user's real enrolled courses from database
+  let enrolledCourses: any[] = []
+  try {
+    const userId = (session.user as { id?: string })?.id
+    if (userId) {
+      const enrollments = await db.enrollment.findMany({
+        where: {
+          userId: userId,
+          status: 'ACTIVE'
+        },
+        orderBy: {
+          enrolledAt: 'desc'
+        },
+        include: {
+          course: {
+            include: {
+              instructor: {
+                select: {
+                  name: true
+                }
+              },
+              _count: {
+                select: {
+                  lessons: true
+                }
+              }
+            }
+          }
+        }
+      })
+
+      enrolledCourses = enrollments.map(enrollment => ({
+        id: enrollment.course.id,
+        title: enrollment.course.title,
+        instructor: enrollment.course.instructor.name,
+        duration: `${Math.round((enrollment.course._count.lessons * 10) / 60)} hours`,
+        progress: 0 // Default progress, would need separate progress tracking
+      }))
+    }
+  } catch (error) {
+    console.error('Error fetching enrollments:', error)
+  }
+
+  // If no real courses, show empty state
+  const courses = enrolledCourses.length > 0 ? enrolledCourses : []
+
   const profile = {
     name: userName,
     email: userEmail
@@ -35,7 +74,7 @@ export default async function StudentOverview() {
   const totalCourses = courses.length
   const completedCourses = courses.filter(c => c.progress === 100).length
   const inProgressCourses = courses.filter(c => c.progress > 0 && c.progress < 100).length
-  const avgProgress = Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / totalCourses)
+  const avgProgress = totalCourses > 0 ? Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / totalCourses) : 0
 
   return (
     <DashboardLayout userRole="student" userInfo={profile}>
@@ -114,69 +153,87 @@ export default async function StudentOverview() {
         </div>
 
         {/* Recent Courses */}
-        <div style={{ 
-          background: 'white', 
-          borderRadius: '0.75rem', 
-          padding: '2rem', 
-          boxShadow: '0 1px 3px rgba(0,0,0,0.1)' 
-        }}>
-          <h2 style={{ 
-            fontSize: '1.5rem', 
-            fontWeight: '700', 
-            color: '#1f2937', 
-            marginBottom: '1.5rem' 
+        {courses.length === 0 ? (
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '0.75rem', 
+            padding: '3rem', 
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+            textAlign: 'center'
           }}>
-            Your Courses
-          </h2>
-          <div style={{ display: 'grid', gap: '1rem' }}>
-            {courses.map(course => (
-              <div 
-                key={course.id}
-                style={{
-                  background: course.color,
-                  borderRadius: '0.5rem',
-                  padding: '1.5rem',
-                  border: '1px solid rgba(0,0,0,0.1)'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
-                  <div>
-                    <h3 style={{ fontWeight: '600', fontSize: '1.125rem', color: '#1f2937', marginBottom: '0.25rem' }}>
-                      {course.title}
-                    </h3>
-                    <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-                      by {course.instructor} • {course.duration}
-                    </p>
-                  </div>
-                  <span style={{
-                    background: course.progress === 100 ? '#16a34a' : course.progress > 0 ? '#eab308' : '#6b7280',
-                    color: 'white',
-                    padding: '0.25rem 0.75rem',
-                    borderRadius: '1rem',
-                    fontSize: '0.75rem',
-                    fontWeight: '500'
-                  }}>
-                    {course.progress}%
-                  </span>
-                </div>
-                <div style={{ 
-                  width: '100%', 
-                  height: '6px', 
-                  background: 'rgba(0,0,0,0.1)', 
-                  borderRadius: '3px',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{
-                    width: `${course.progress}%`,
-                    height: '100%',
-                    background: course.progress === 100 ? '#16a34a' : '#ea580c',
-                    transition: 'width 0.3s ease'
-                  }}></div>
-                </div>
-              </div>
-            ))}
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📚</div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+              No courses enrolled yet
+            </h2>
+            <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+              Start learning by enrolling in a course!
+            </p>
           </div>
-        </div>
+        ) : (
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '0.75rem', 
+            padding: '2rem', 
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)' 
+          }}>
+            <h2 style={{ 
+              fontSize: '1.5rem', 
+              fontWeight: '700', 
+              color: '#1f2937', 
+              marginBottom: '1.5rem' 
+            }}>
+              Your Courses
+            </h2>
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              {courses.map(course => (
+                <div 
+                  key={course.id}
+                  style={{
+                    background: '#fef3c7',
+                    borderRadius: '0.5rem',
+                    padding: '1.5rem',
+                    border: '1px solid rgba(0,0,0,0.1)'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
+                    <div>
+                      <h3 style={{ fontWeight: '600', fontSize: '1.125rem', color: '#1f2937', marginBottom: '0.25rem' }}>
+                        {course.title}
+                      </h3>
+                      <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
+                        by {course.instructor} • {course.duration}
+                      </p>
+                    </div>
+                    <span style={{
+                      background: course.progress === 100 ? '#16a34a' : course.progress > 0 ? '#eab308' : '#6b7280',
+                      color: 'white',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '1rem',
+                      fontSize: '0.75rem',
+                      fontWeight: '500'
+                    }}>
+                      {course.progress}%
+                    </span>
+                  </div>
+                  <div style={{ 
+                    width: '100%', 
+                    height: '6px', 
+                    background: 'rgba(0,0,0,0.1)', 
+                    borderRadius: '3px',
+                    overflow: 'hidden'
+                  }}>
+                    <div style={{
+                      width: `${course.progress}%`,
+                      height: '100%',
+                      background: course.progress === 100 ? '#16a34a' : '#ea580c',
+                      transition: 'width 0.3s ease'
+                    }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </DashboardLayout>
   )
