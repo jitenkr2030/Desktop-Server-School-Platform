@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation'
+import { auth } from '@/auth'
 import DashboardLayout from '@/components/DashboardLayout'
 
 // Courses data
@@ -8,10 +10,26 @@ const courses = [
   { id: 4, title: 'Python for Beginners', instructor: 'Alice Instructor', duration: '18 hours', progress: 0, color: '#fef3c7' }
 ]
 
-export default function StudentOverview() {
+export default async function StudentOverview() {
+  let session = null
+
+  try {
+    session = await auth()
+  } catch (error) {
+    // Continue without session
+  }
+
+  if (!session?.user) {
+    redirect('/auth/login')
+  }
+
+  // Get user data from session
+  const userName = session.user.name || 'Student'
+  const userEmail = session.user.email || 'student@example.com'
+
   const profile = {
-    name: 'Demo Student 1',
-    email: 'student1@inr99.com'
+    name: userName,
+    email: userEmail
   }
 
   const totalCourses = courses.length

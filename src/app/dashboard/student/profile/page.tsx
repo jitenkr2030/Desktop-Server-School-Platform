@@ -1,9 +1,27 @@
+import { redirect } from 'next/navigation'
+import { auth } from '@/auth'
 import DashboardLayout from '@/components/DashboardLayout'
 
-export default function StudentProfile() {
+export default async function StudentProfile() {
+  let session = null
+
+  try {
+    session = await auth()
+  } catch (error) {
+    // Continue without session
+  }
+
+  if (!session?.user) {
+    redirect('/auth/login')
+  }
+
+  // Get user data from session
+  const userName = session.user.name || 'Student'
+  const userEmail = session.user.email || 'student@example.com'
+
   const profile = {
-    name: 'Demo Student 1',
-    email: 'student1@inr99.com',
+    name: userName,
+    email: userEmail,
     mobile: '+91 9876543210',
     location: 'India',
     memberSince: 'January 2024',
