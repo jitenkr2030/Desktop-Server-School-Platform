@@ -1601,6 +1601,119 @@ Topics covered:
           { id: "les-const-4", title: "The Preamble", type: "video", duration: 18, content: "", isFree: false, order: 4 },
           { id: "les-const-5", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 5 }
         ]
+      },
+      {
+        id: "mod-const-2",
+        title: "Fundamental Rights",
+        order: 2,
+        lessons: [
+          { id: "les-const-6", title: "Understanding Fundamental Rights", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-const-7", title: "Right to Equality", type: "video", duration: 22, content: "", isFree: false, order: 2 },
+          { id: "les-const-8", title: "Right to Freedom", type: "video", duration: 20, content: "", isFree: false, order: 3 },
+          { id: "les-const-9", title: "Right Against Exploitation", type: "video", duration: 18, content: "", isFree: false, order: 4 },
+          { id: "les-const-10", title: "Right to Education", type: "video", duration: 15, content: "", isFree: false, order: 5 },
+          { id: "les-const-11", title: "Cultural & Educational Rights", type: "video", duration: 16, content: "", isFree: false, order: 6 }
+        ]
+      },
+      {
+        id: "mod-const-3",
+        title: "Fundamental Duties",
+        order: 3,
+        lessons: [
+          { id: "les-const-12", title: "What are Fundamental Duties?", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-const-13", title: "List of Fundamental Duties", type: "video", duration: 25, content: "", isFree: false, order: 2 },
+          { id: "les-const-14", title: "Rights vs Duties Balance", type: "video", duration: 18, content: "", isFree: false, order: 3 },
+          { id: "les-const-15", title: "Citizens' Responsibility", type: "video", duration: 16, content: "", isFree: false, order: 4 },
+          { id: "les-const-16", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-const-4",
+        title: "Union Government",
+        order: 4,
+        lessons: [
+          { id: "les-const-17", title: "President of India", type: "video", duration: 22, content: "", isFree: false, order: 1 },
+          { id: "les-const-18", title: "Prime Minister & Cabinet", type: "video", duration: 25, content: "", isFree: false, order: 2 },
+          { id: "les-const-19", title: "Parliament Structure", type: "video", duration: 22, content: "", isFree: false, order: 3 },
+          { id: "les-const-20", title: "Lok Sabha vs Rajya Sabha", type: "video", duration: 20, content: "", isFree: false, order: 4 },
+          { id: "les-const-21", title: "Legislative Process", type: "video", duration: 20, content: "", isFree: false, order: 5 },
+          { id: "les-const-22", title: "Vice President Role", type: "video", duration: 15, content: "", isFree: false, order: 6 }
+        ]
+      },
+      {
+        id: "mod-const-5",
+        title: "State & Local Governance",
+        order: 5,
+        lessons: [
+          { id: "les-const-23", title: "Governor & Chief Minister", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-const-24", title: "State Legislature", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-const-25", title: "Panchayati Raj System", type: "video", duration: 25, content: "", isFree: false, order: 3 },
+          { id: "les-const-26", title: "Municipalities & Corporations", type: "video", duration: 20, content: "", isFree: false, order: 4 },
+          { id: "les-const-27", title: "73rd & 74th Amendments", type: "video", duration: 22, content: "", isFree: false, order: 5 },
+          { id: "les-const-28", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 6 }
+        ]
+      },
+      {
+        id: "mod-const-6",
+        title: "Electoral Process",
+        order: 6,
+        lessons: [
+          { id: "les-const-29", title: "Election Commission of India", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-const-30", title: "Voting Process Explained", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-const-31", title: "Electoral Reforms", type: "video", duration: 22, content: "", isFree: false, order: 3 },
+          { id: "les-const-32", title: "Voter Registration", type: "video", duration: 15, content: "", isFree: false, order: 4 },
+          { id: "les-const-33", title: "Model Code of Conduct", type: "video", duration: 16, content: "", isFree: false, order: 5 },
+          { id: "les-const-34", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 6 }
+        ]
+      },
+      {
+        id: "mod-const-7",
+        title: "Judicial System",
+        order: 7,
+        lessons: [
+          { id: "les-const-35", title: "Supreme Court of India", type: "video", duration: 25, content: "", isFree: false, order: 1 },
+          { id: "les-const-36", title: "High Courts & Subordinate Courts", type: "video", duration: 22, content: "", isFree: false, order: 2 },
+          { id: "les-const-37", title: "Judicial Review Power", type: "video", duration: 20, content: "", isFree: false, order: 3 },
+          { id: "les-const-38", title: "Public Interest Litigation", type: "video", duration: 18, content: "", isFree: false, order: 4 },
+          { id: "les-const-39", title: "Judicial Appointments", type: "video", duration: 15, content: "", isFree: false, order: 5 },
+          { id: "les-const-40", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 6 }
+        ]
+      },
+      {
+        id: "mod-const-8",
+        title: "Constitutional Bodies",
+        order: 8,
+        lessons: [
+          { id: "les-const-35", title: "Union Public Service Commission", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-const-36", title: "Finance Commission", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-const-37", title: "Election Commission", type: "video", duration: 20, content: "", isFree: false, order: 3 },
+          { id: "les-const-38", title: "Comptroller & Auditor General", type: "video", duration: 15, content: "", isFree: false, order: 4 },
+          { id: "les-const-39", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-const-9",
+        title: "Citizens' Rights & Responsibilities",
+        order: 9,
+        lessons: [
+          { id: "les-const-40", title: "RTI - Right to Information", type: "video", duration: 25, content: "", isFree: false, order: 1 },
+          { id: "les-const-41", title: "Consumer Rights", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-const-42", title: "Women & Child Rights", type: "video", duration: 22, content: "", isFree: false, order: 3 },
+          { id: "les-const-43", title: "Environmental Duties", type: "video", duration: 16, content: "", isFree: false, order: 4 },
+          { id: "les-const-44", title: "Module Quiz", type: "quiz", duration: 15, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-const-10",
+        title: "India & International Relations",
+        order: 10,
+        lessons: [
+          { id: "les-const-45", title: "India's Foreign Policy", type: "video", duration: 22, content: "", isFree: false, order: 1 },
+          { id: "les-const-46", title: "India & United Nations", type: "video", duration: 20, content: "", isFree: false, order: 2 },
+          { id: "les-const-47", title: "Neighborhood Relations", type: "video", duration: 18, content: "", isFree: false, order: 3 },
+          { id: "les-const-48", title: "Trade & Economic Diplomacy", type: "video", duration: 16, content: "", isFree: false, order: 4 },
+          { id: "les-const-49", title: "Final Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
       }
     ],
     
