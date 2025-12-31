@@ -899,3 +899,67 @@ enum AttendanceStatus {
   LEFT_EARLY
   ABSENT
 }
+
+// Platform Settings for Admin Configuration
+model PlatformSettings {
+  id                  String   @id @default(cuid())
+  // General Settings
+  siteName            String   @default("INR99 Academy")
+  siteDescription     String   @default("Online Learning Platform")
+  siteUrl             String   @default("https://inr99.com")
+  logoUrl             String?
+  faviconUrl          String?
+  
+  // Feature Flags
+  maintenanceMode     Boolean  @default(false)
+  allowRegistration   Boolean  @default(true)
+  allowGuestCheckout  Boolean  @default(false)
+  emailNotifications  Boolean  @default(true)
+  pushNotifications   Boolean  @default(false)
+  
+  // Business Settings
+  defaultCurrency     String   @default("INR")
+  platformFee         Float    @default(10)
+  taxRate             Float    @default(0)
+  maxUploadSize       Int      @default(100) // in MB
+  allowedFileTypes    String   @default("jpg,jpeg,png,gif,pdf,mp4,webm")
+  
+  // Course Settings
+  defaultCourseDuration Int    @default(60) // days
+  certificateExpiry   Int      @default(365) // days
+  maxStudentsPerCourse Int     @default(1000)
+  
+  // Security Settings
+  passwordMinLength   Int      @default(8)
+  sessionTimeout      Int      @default(24) // hours
+  twoFactorRequired   Boolean  @default(false)
+  
+  // SEO Settings
+  metaKeywords        String?
+  metaDescription     String?
+  
+  // Social Links
+  facebookUrl         String?
+  twitterUrl          String?
+  instagramUrl        String?
+  youtubeUrl          String?
+  linkedinUrl         String?
+  
+  // Contact Information
+  supportEmail        String   @default("support@inr99.com")
+  contactPhone        String?
+  address             String?
+  
+  // Analytics
+  googleAnalyticsId   String?
+  facebookPixelId     String?
+  
+  // Branding Colors
+  primaryColor        String   @default("#dc2626")
+  secondaryColor      String   @default("#3b82f6")
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("platform_settings")
+}

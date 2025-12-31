@@ -4,65 +4,6 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-// Platform settings with all configuration options
-const defaultSettings = {
-  // General Settings
-  siteName: "INR99 Academy",
-  siteDescription: "Online Learning Platform",
-  siteUrl: "https://inr99.com",
-  logoUrl: "",
-  faviconUrl: "",
-  
-  // Feature Flags
-  maintenanceMode: false,
-  allowRegistration: true,
-  allowGuestCheckout: false,
-  emailNotifications: true,
-  pushNotifications: false,
-  
-  // Business Settings
-  defaultCurrency: "INR",
-  platformFee: 10,
-  taxRate: 0,
-  
-  // Upload Settings
-  maxUploadSize: 100, // MB
-  allowedFileTypes: ["jpg", "jpeg", "png", "gif", "pdf", "mp4", "webm"],
-  
-  // Course Settings
-  defaultCourseDuration: 60, // days
-  certificateExpiry: 365, // days
-  maxStudentsPerCourse: 1000,
-  
-  // Security Settings
-  passwordMinLength: 8,
-  sessionTimeout: 24, // hours
-  twoFactorRequired: false,
-  
-  // SEO Settings
-  metaKeywords: "online learning, courses, education",
-  metaDescription: "Learn new skills with expert-led courses",
-  
-  // Social Links
-  facebookUrl: "",
-  twitterUrl: "",
-  instagramUrl: "",
-  youtubeUrl: "",
-  linkedinUrl: "",
-  
-  // Contact Information
-  supportEmail: "support@inr99.com",
-  contactPhone: "+91 98765 43210",
-  address: "",
-  
-  // Analytics
-  googleAnalyticsId: "",
-  facebookPixelId: "",
-}
-
-// Store settings in memory (in production, use database)
-let platformSettings = { ...defaultSettings }
-
 export async function GET(request: NextRequest) {
   try {
     const session = await auth()
@@ -76,7 +17,28 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
-    return NextResponse.json({ settings: platformSettings })
+    // Try to get existing settings, or create default if none exist
+    let settings = await prisma.platformSettings.findFirst({
+      orderBy: { createdAt: 'desc' }
+    })
+
+    if (!settings) {
+      // Create default settings
+      settings = await prisma.platformSettings.create({
+        data: {
+          siteName: "INR99 Academy",
+          siteDescription: "Online Learning Platform",
+          siteUrl: "https://inr99.com",
+          defaultCurrency: "INR",
+          platformFee: 10,
+          taxRate: 0,
+          maxUploadSize: 100,
+          supportEmail: "support@inr99.com"
+        }
+      })
+    }
+
+    return NextResponse.json({ settings })
   } catch (error) {
     console.error("Error fetching settings:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
@@ -98,16 +60,32 @@ export async function PUT(request: NextRequest) {
 
     const body = await request.json()
     
-    // Update settings with only provided fields
-    platformSettings = {
-      ...platformSettings,
-      ...body,
+    // Get existing settings or create new one
+    const existingSettings = await prisma.platformSettings.findFirst({
+      orderBy: { createdAt: 'desc' }
+    })
+
+    let settings
+    if (existingSettings) {
+      // Update existing settings
+      settings = await prisma.platformSettings.update({
+        where: { id: existingSettings.id },
+        data: {
+          ...body,
+          updatedAt: new Date()
+        }
+      })
+    } else {
+      // Create new settings
+      settings = await prisma.platformSettings.create({
+        data: body
+      })
     }
 
     return NextResponse.json({ 
       success: true, 
       message: "Settings saved successfully",
-      settings: platformSettings 
+      settings 
     })
   } catch (error) {
     console.error("Error saving settings:", error)
@@ -131,22 +109,40 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { action } = body
 
-    // Handle different actions
     switch (action) {
       case "reset":
-        platformSettings = { ...defaultSettings }
+        // Delete all existing settings and create fresh defaults
+        await prisma.platformSettings.deleteMany()
+        
+        const newSettings = await prisma.platformSettings.create({
+          data: {
+            siteName: "INR99 Academy",
+            siteDescription: "Online Learning Platform",
+            siteUrl: "https://inr99.com",
+            defaultCurrency: "INR",
+            platformFee: 10,
+            taxRate: 0,
+            maxUploadSize: 100,
+            supportEmail: "support@inr99.com"
+          }
+        })
+        
         return NextResponse.json({ 
           success: true, 
           message: "Settings reset to defaults",
-          settings: platformSettings 
+          settings: newSettings 
         })
       
       case "backup":
-        // In production, create backup of settings
+        const allSettings = await prisma.platformSettings.findMany({
+          orderBy: { createdAt: 'desc' },
+          take: 1
+        })
+        
         return NextResponse.json({ 
           success: true, 
-          message: "Settings backup created",
-          backup: platformSettings 
+          message: "Settings backup retrieved",
+          backup: allSettings[0] || null
         })
       
       default:
