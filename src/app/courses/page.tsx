@@ -135,7 +135,6 @@ export default function CoursesPage() {
                 display: 'inline-flex'
               }}>
                 <button
-                  onClick={() => {}}
                   style={{
                     padding: '0.625rem 1.5rem',
                     borderRadius: '0.375rem',
@@ -271,149 +270,148 @@ export default function CoursesPage() {
               <p style={{ color: '#9ca3af', marginTop: '0.5rem' }}>Try adjusting your search or filters.</p>
             </div>
           ) : (
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-                gap: '1.5rem'
-              }}>
-                {filteredCourses.map((course) => {
-                  const diffColors = getDifficultyColor(course.difficulty)
-                  const categoryInfo = categories.find(c => c.id === course.category)
-                  
-                  return (
-                    <div
-                      key={course.id}
-                      style={{
-                        background: 'white',
-                        borderRadius: '0.75rem',
-                        overflow: 'hidden',
-                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                        transition: 'transform 0.2s, box-shadow 0.2s'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-4px)'
-                        e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)'
-                        e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)'
-                      }}
-                    >
-                      {/* Thumbnail */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gap: '1.5rem'
+            }}>
+              {filteredCourses.map((course) => {
+                const diffColors = getDifficultyColor(course.difficulty)
+                const categoryInfo = categories.find(c => c.id === course.category)
+                
+                return (
+                  <div
+                    key={course.id}
+                    style={{
+                      background: 'white',
+                      borderRadius: '0.75rem',
+                      overflow: 'hidden',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                      transition: 'transform 0.2s, box-shadow 0.2s'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-4px)'
+                      e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)'
+                    }}
+                  >
+                    {/* Thumbnail */}
+                    <div style={{
+                      aspectRatio: '16/9',
+                      background: '#dbeafe',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '3rem',
+                      position: 'relative'
+                    }}>
+                      {course.thumbnail ? (
+                        <img src={course.thumbnail} alt={course.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        <span style={{ fontSize: '4rem' }}>📚</span>
+                      )}
+                      {/* Price Badge */}
                       <div style={{
-                        aspectRatio: '16/9',
-                        background: '#dbeafe',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '3rem',
-                        position: 'relative'
+                        position: 'absolute',
+                        top: '0.75rem',
+                        right: '0.75rem',
+                        background: course.price === 0 ? '#16a34a' : '#ea580c',
+                        color: 'white',
+                        padding: '0.25rem 0.75rem',
+                        borderRadius: '9999px',
+                        fontSize: '0.875rem',
+                        fontWeight: '600'
                       }}>
-                        {course.thumbnail ? (
-                          <img src={course.thumbnail} alt={course.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        ) : (
-                          <span style={{ fontSize: '4rem' }}>📚</span>
-                        )}
-                        {/* Price Badge */}
-                        <div style={{
-                          position: 'absolute',
-                          top: '0.75rem',
-                          right: '0.75rem',
-                          background: course.price === 0 ? '#16a34a' : '#ea580c',
-                          color: 'white',
-                          padding: '0.25rem 0.75rem',
-                          borderRadius: '9999px',
-                          fontSize: '0.875rem',
-                          fontWeight: '600'
-                        }}>
-                          {course.price === 0 ? 'FREE' : `₹${course.price}`}
-                        </div>
+                        {course.price === 0 ? 'FREE' : `₹${course.price}`}
                       </div>
-                      
-                      {/* Content */}
-                      <div style={{ padding: '1.25rem' }}>
-                        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
-                          {categoryInfo && (
-                            <span style={{
-                              background: '#e0e7ff',
-                              color: '#4f46e5',
-                              padding: '0.25rem 0.5rem',
-                              borderRadius: '9999px',
-                              fontSize: '0.75rem',
-                              fontWeight: '500'
-                            }}>
-                              {categoryInfo.icon} {categoryInfo.name}
-                            </span>
-                          )}
+                    </div>
+                    
+                    {/* Content */}
+                    <div style={{ padding: '1.25rem' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                        {categoryInfo && (
                           <span style={{
-                            background: diffColors.bg,
-                            color: diffColors.text,
+                            background: '#e0e7ff',
+                            color: '#4f46e5',
                             padding: '0.25rem 0.5rem',
                             borderRadius: '9999px',
                             fontSize: '0.75rem',
                             fontWeight: '500'
                           }}>
-                            {course.difficulty.charAt(0).toUpperCase() + course.difficulty.slice(1)}
+                            {categoryInfo.icon} {categoryInfo.name}
                           </span>
+                        )}
+                        <span style={{
+                          background: diffColors.bg,
+                          color: diffColors.text,
+                          padding: '0.25rem 0.5rem',
+                          borderRadius: '9999px',
+                          fontSize: '0.75rem',
+                          fontWeight: '500'
+                        }}>
+                          {course.difficulty.charAt(0).toUpperCase() + course.difficulty.slice(1)}
+                        </span>
+                      </div>
+                      
+                      <h3 style={{
+                        fontSize: '1.125rem',
+                        fontWeight: '600',
+                        color: '#111827',
+                        marginBottom: '0.5rem'
+                      }}>
+                        {course.title}
+                      </h3>
+                      
+                      <p style={{
+                        color: '#6b7280',
+                        fontSize: '0.875rem',
+                        marginBottom: '1rem',
+                        lineHeight: '1.5',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical'
+                      }}>
+                        {course.description}
+                      </p>
+                      
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        paddingTop: '1rem',
+                        borderTop: '1px solid #f3f4f6'
+                      }}>
+                        <div>
+                          <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                            By {course.instructor.name}
+                          </p>
+                          <p style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
+                            {formatDuration(course.totalDuration)} • {course.lessonCount} lessons
+                          </p>
                         </div>
-                        
-                        <h3 style={{
-                          fontSize: '1.125rem',
+                        <Link href={`/courses/${course.id}`} style={{
+                          display: 'inline-block',
+                          background: '#ea580c',
+                          color: 'white',
+                          padding: '0.5rem 1rem',
+                          borderRadius: '0.375rem',
+                          textDecoration: 'none',
                           fontWeight: '600',
-                          color: '#111827',
-                          marginBottom: '0.5rem'
+                          fontSize: '0.875rem'
                         }}>
-                          {course.title}
-                        </h3>
-                        
-                        <p style={{
-                          color: '#6b7280',
-                          fontSize: '0.875rem',
-                          marginBottom: '1rem',
-                          lineHeight: '1.5',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical'
-                        }}>
-                          {course.description}
-                        </p>
-                        
-                        <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          paddingTop: '1rem',
-                          borderTop: '1px solid #f3f4f6'
-                        }}>
-                          <div>
-                            <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                              By {course.instructor.name}
-                            </p>
-                            <p style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
-                              {formatDuration(course.totalDuration)} • {course.lessonCount} lessons
-                            </p>
-                          </div>
-                          <Link href={`/courses/${course.id}`} style={{
-                            display: 'inline-block',
-                            background: '#ea580c',
-                            color: 'white',
-                            padding: '0.5rem 1rem',
-                            borderRadius: '0.375rem',
-                            textDecoration: 'none',
-                            fontWeight: '600',
-                            fontSize: '0.875rem'
-                          }}>
-                            View Course
-                          </Link>
-                        </div>
+                          View Course
+                        </Link>
                       </div>
                     </div>
-                  )
-                })}
-              </div>
-            )
+                  </div>
+                )
+              })}
+            </div>
           )}
         </div>
 
