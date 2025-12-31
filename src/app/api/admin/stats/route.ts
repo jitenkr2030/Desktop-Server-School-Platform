@@ -1,13 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { getAuthenticatedUser } from '@/lib/auth'
+import { NextRequest, NextResponse } from "next/server"
+import { auth } from "@/auth"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export async function GET(request: NextRequest) {
   try {
-    const user = getAuthenticatedUser(request)
+    const session = await auth()
     
-    if (!user || user.id !== 'admin') {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    const userRole = (session.user as any).role
+    if (userRole !== "ADMIN" && userRole !== "SUPER_ADMIN") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
     // Get basic counts
@@ -21,19 +28,19 @@ export async function GET(request: NextRequest) {
       totalCertificates,
       totalPayments
     ] = await Promise.all([
-      db.user.count(),
-      db.user.count({ where: { isActive: true } }),
-      db.course.count({ where: { isActive: true } }),
-      db.discussion.count({ where: { isActive: true } }),
-      db.subscription.count(),
-      db.subscription.count({ where: { status: 'ACTIVE' } }),
-      db.certificate.count(),
-      db.paymentRecord.count({ where: { status: 'COMPLETED' } })
+      prisma.user.count(),
+      prisma.user.count({ where: { isActive: true } }),
+      prisma.course.count({ where: { isActive: true } }),
+      prisma.discussion.count({ where: { isActive: true } }),
+      prisma.subscription.count(),
+      prisma.subscription.count({ where: { status: "ACTIVE" } }),
+      prisma.certificate.count(),
+      prisma.paymentRecord.count({ where: { status: "COMPLETED" } })
     ])
 
     // Get revenue data
-    const payments = await db.paymentRecord.findMany({
-      where: { status: 'COMPLETED' },
+    const payments = await prisma.paymentRecord.findMany({
+      where: { status: "COMPLETED" },
       select: {
         amount: true,
         createdAt: true
@@ -55,8 +62,8 @@ export async function GET(request: NextRequest) {
     const sixMonthsAgo = new Date()
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
     
-    const userGrowth = await db.user.groupBy({
-      by: ['createdAt'],
+    const userGrowth = await prisma.user.groupBy({
+      by: ["createdAt"],
       where: {
         createdAt: {
           gte: sixMonthsAgo
@@ -66,19 +73,19 @@ export async function GET(request: NextRequest) {
         id: true
       },
       orderBy: {
-        createdAt: 'asc'
+        createdAt: "asc"
       }
     })
 
     // Get course popularity
-    const coursePopularity = await db.courseProgress.groupBy({
-      by: ['courseId'],
+    const coursePopularity = await prisma.courseProgress.groupBy({
+      by: ["courseId"],
       _count: {
         id: true
       },
       orderBy: {
         _count: {
-          id: 'desc'
+          id: "desc"
         }
       },
       take: 10
@@ -86,7 +93,7 @@ export async function GET(request: NextRequest) {
 
     // Get course details for popularity
     const courseIds = coursePopularity.map(cp => cp.courseId)
-    const courses = await db.course.findMany({
+    const courses = await prisma.course.findMany({
       where: {
         id: {
           in: courseIds
@@ -102,7 +109,7 @@ export async function GET(request: NextRequest) {
       const course = courses.find(c => c.id === cp.courseId)
       return {
         courseId: cp.courseId,
-        title: course?.title || 'Unknown Course',
+        title: course?.title || "Unknown Course",
         enrollments: cp._count.id
       }
     })
@@ -124,7 +131,7 @@ export async function GET(request: NextRequest) {
       courseStats
     })
   } catch (error) {
-    console.error('Error fetching admin stats:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error("Error fetching admin stats:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

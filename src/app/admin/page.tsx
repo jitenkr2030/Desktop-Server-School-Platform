@@ -314,7 +314,8 @@ export default function AdminDashboard() {
       const statsResponse = await fetch('/api/admin/stats')
       
       if (!statsResponse.ok) {
-        throw new Error('Failed to fetch stats')
+        const errorData = await statsResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP ${statsResponse.status}: Failed to fetch stats`)
       }
 
       const data: DashboardData = await statsResponse.json()
@@ -331,9 +332,9 @@ export default function AdminDashboard() {
           })
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error fetching dashboard data:', err)
-      setError('Failed to load dashboard data. Please try again.')
+      setError(err.message || 'Failed to load dashboard data. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -345,14 +346,15 @@ export default function AdminDashboard() {
       const response = await fetch(`/api/admin/analytics?days=${selectedPeriod}`)
       
       if (!response.ok) {
-        throw new Error('Failed to fetch analytics')
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP ${response.status}: Failed to fetch analytics`)
       }
 
       const data: AnalyticsData = await response.json()
       setAnalytics(data)
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error fetching analytics:', err)
-      setError('Failed to load analytics')
+      setError(err.message || 'Failed to load analytics')
     } finally {
       setAnalyticsLoading(false)
     }
@@ -364,15 +366,16 @@ export default function AdminDashboard() {
       const response = await fetch(`/api/admin/users?page=${page}&limit=10&search=${encodeURIComponent(search)}`)
       
       if (!response.ok) {
-        throw new Error('Failed to fetch users')
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP ${response.status}: Failed to fetch users`)
       }
 
       const data: UsersResponse = await response.json()
       setUsers(data.users)
       setUsersPagination(data.pagination)
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error fetching users:', err)
-      setError('Failed to load users')
+      setError(err.message || 'Failed to load users')
     } finally {
       setUsersLoading(false)
     }
@@ -384,15 +387,16 @@ export default function AdminDashboard() {
       const response = await fetch(`/api/admin/courses?page=${page}&limit=10&search=${encodeURIComponent(search)}`)
       
       if (!response.ok) {
-        throw new Error('Failed to fetch courses')
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP ${response.status}: Failed to fetch courses`)
       }
 
       const data: CoursesResponse = await response.json()
       setCourses(data.courses)
       setCoursesPagination(data.pagination)
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error fetching courses:', err)
-      setError('Failed to load courses')
+      setError(err.message || 'Failed to load courses')
     } finally {
       setCoursesLoading(false)
     }
@@ -1181,7 +1185,12 @@ export default function AdminDashboard() {
           <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '0.75rem', padding: '2rem', textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#991b1b', marginBottom: '0.5rem' }}>Error Loading Data</h2>
-            <p style={{ color: '#7f1d1d', marginBottom: '1rem' }}>{error}</p>
+            <p style={{ color: '#7f1d1d', marginBottom: '0.5rem', fontSize: '1rem' }}>{error}</p>
+            {error && (error.includes('Unauthorized') || error.includes('Forbidden') || error.includes('401') || error.includes('403')) && (
+              <p style={{ color: '#b91c1c', marginBottom: '1rem', fontSize: '0.875rem' }}>
+                Please ensure you are logged in with an admin account and have the necessary permissions.
+              </p>
+            )}
             <button
               onClick={fetchDashboardData}
               style={{
@@ -1191,7 +1200,8 @@ export default function AdminDashboard() {
                 borderRadius: '0.5rem',
                 border: 'none',
                 fontWeight: '600',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                marginTop: '0.5rem'
               }}
             >
               Retry

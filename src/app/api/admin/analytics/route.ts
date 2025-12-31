@@ -1,18 +1,25 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { getAuthenticatedUser } from '@/lib/auth'
+import { NextRequest, NextResponse } from "next/server"
+import { auth } from "@/auth"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export async function GET(request: NextRequest) {
   try {
-    const user = getAuthenticatedUser(request)
+    const session = await auth()
     
-    if (!user || user.id !== 'admin') {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    const userRole = (session.user as any).role
+    if (userRole !== "ADMIN" && userRole !== "SUPER_ADMIN") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
     // Get time period from query params (default: last 30 days)
     const { searchParams } = new URL(request.url)
-    const days = parseInt(searchParams.get('days') || '30')
+    const days = parseInt(searchParams.get("days") || "30")
 
     const startDate = new Date()
     startDate.setDate(startDate.getDate() - days)
@@ -29,21 +36,21 @@ export async function GET(request: NextRequest) {
       totalCertificates,
       totalPayments
     ] = await Promise.all([
-      db.user.count(),
-      db.user.count({ where: { isActive: true } }),
-      db.course.count(),
-      db.course.count({ where: { isActive: true } }),
-      db.discussion.count(),
-      db.subscription.count(),
-      db.subscription.count({ where: { status: 'ACTIVE' } }),
-      db.certificate.count(),
-      db.paymentRecord.count({ where: { status: 'COMPLETED' } })
+      prisma.user.count(),
+      prisma.user.count({ where: { isActive: true } }),
+      prisma.course.count(),
+      prisma.course.count({ where: { isActive: true } }),
+      prisma.discussion.count(),
+      prisma.subscription.count(),
+      prisma.subscription.count({ where: { status: "ACTIVE" } }),
+      prisma.certificate.count(),
+      prisma.paymentRecord.count({ where: { status: "COMPLETED" } })
     ])
 
     // Revenue data
-    const payments = await db.paymentRecord.findMany({
+    const payments = await prisma.paymentRecord.findMany({
       where: { 
-        status: 'COMPLETED',
+        status: "COMPLETED",
         createdAt: { gte: startDate }
       },
       select: {
@@ -51,93 +58,90 @@ export async function GET(request: NextRequest) {
         createdAt: true,
         type: true
       },
-      orderBy: { createdAt: 'asc' }
+      orderBy: { createdAt: "asc" }
     })
 
     const totalRevenue = payments.reduce((sum, p) => sum + p.amount, 0)
     
     // Group revenue by date for chart
-    const revenueByDate = payments.reduce((acc, payment) => {
-      const date = new Date(payment.createdAt).toISOString().split('T')[0]
-      if (!acc[date]) {
-        acc[date] = { date, revenue: 0, subscriptions: 0, certificates: 0 }
+    const revenueByDate: Record<string, { date: string; revenue: number; subscriptions: number; certificates: number }> = {}
+    payments.forEach(payment => {
+      const date = new Date(payment.createdAt).toISOString().split("T")[0]
+      if (!revenueByDate[date]) {
+        revenueByDate[date] = { date, revenue: 0, subscriptions: 0, certificates: 0 }
       }
-      acc[date].revenue += payment.amount
-      if (payment.type === 'SUBSCRIPTION') {
-        acc[date].subscriptions += 1
+      revenueByDate[date].revenue += payment.amount
+      if (payment.type === "SUBSCRIPTION") {
+        revenueByDate[date].subscriptions += 1
       } else {
-        acc[date].certificates += 1
+        revenueByDate[date].certificates += 1
       }
-      return acc
-    }, {} as Record<string, { date: string; revenue: number; subscriptions: number; certificates: number }>)
+    })
 
     // User growth by month
     const sixMonthsAgo = new Date()
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
 
-    const userGrowth = await db.user.groupBy({
-      by: ['createdAt'],
+    const userGrowth = await prisma.user.groupBy({
+      by: ["createdAt"],
       where: { createdAt: { gte: sixMonthsAgo } },
       _count: { id: true },
-      orderBy: { createdAt: 'asc' }
+      orderBy: { createdAt: "asc" }
     })
 
     // Group user growth by month
-    const usersByMonth = userGrowth.reduce((acc, record) => {
+    const usersByMonth: Record<string, number> = {}
+    userGrowth.forEach(record => {
       const month = new Date(record.createdAt).toISOString().slice(0, 7) // YYYY-MM
-      if (!acc[month]) {
-        acc[month] = 0
-      }
-      acc[month] += record._count.id
-      return acc
-    }, {} as Record<string, number>)
+      usersByMonth[month] = (usersByMonth[month] || 0) + record._count.id
+    })
 
     // Course distribution by difficulty
-    const coursesByDifficulty = await db.course.groupBy({
-      by: ['difficulty'],
+    const coursesByDifficulty = await prisma.course.groupBy({
+      by: ["difficulty"],
       _count: { id: true }
     })
 
     // Course distribution by category
-    const coursesByCategory = await db.category.findMany({
+    const coursesByCategory = await prisma.category.findMany({
       include: {
         courses: {
           where: { isActive: true },
           select: { id: true }
         }
       },
-      orderBy: { name: 'asc' }
+      orderBy: { name: "asc" }
     })
 
     // Top courses by enrollment
-    const topCourses = await db.courseProgress.groupBy({
-      by: ['courseId'],
+    const topCourses = await prisma.courseProgress.groupBy({
+      by: ["courseId"],
       _count: { id: true },
-      orderBy: { _count: { id: 'desc' } },
+      orderBy: { _count: { id: "desc" } },
       take: 10
     })
 
     const courseIds = topCourses.map(c => c.courseId)
-    const courseDetails = await db.course.findMany({
+    const courseDetails = await prisma.course.findMany({
       where: { id: { in: courseIds } },
       select: { id: true, title: true }
     })
 
     const topCoursesData = topCourses.map(tc => ({
       courseId: tc.courseId,
-      title: courseDetails.find(c => c.id === tc.courseId)?.title || 'Unknown',
+      title: courseDetails.find(c => c.id === tc.courseId)?.title || "Unknown",
       enrollments: tc._count.id
     }))
 
     // Top instructors by courses
-    const instructorStats = await db.instructor.findMany({
+    const instructorStats = await prisma.instructor.findMany({
       include: {
         courses: {
           where: { isActive: true },
           select: { id: true }
         }
       },
-      orderBy: { name: 'asc' }
+      orderBy: { name: "asc" }
     })
 
     const instructorData = instructorStats.map(inst => ({
@@ -147,27 +151,27 @@ export async function GET(request: NextRequest) {
     }))
 
     // Subscription stats
-    const subscriptionStats = await db.subscription.groupBy({
-      by: ['status'],
+    const subscriptionStats = await prisma.subscription.groupBy({
+      by: ["status"],
       _count: { id: true }
     })
 
     // Recent activity (last 10 discussions)
-    const recentDiscussions = await db.discussion.findMany({
+    const recentDiscussions = await prisma.discussion.findMany({
       include: {
         user: { select: { name: true, email: true } },
         course: { select: { title: true } },
         _count: { select: { replies: true } }
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       take: 10
     })
 
     // Daily active users (approximation based on last login)
-    const dailyActiveUsers = await db.user.findMany({
+    const dailyActiveUsers = await prisma.user.findMany({
       where: { lastLogin: { gte: startDate } },
       select: { lastLogin: true, name: true, email: true },
-      orderBy: { lastLogin: 'desc' },
+      orderBy: { lastLogin: "desc" },
       take: 50
     })
 
@@ -198,7 +202,7 @@ export async function GET(request: NextRequest) {
       dailyActiveUsers: dailyActiveUsers.slice(0, 20)
     })
   } catch (error) {
-    console.error('Error fetching analytics:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error("Error fetching analytics:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
