@@ -165,6 +165,68 @@ interface AnalyticsData {
   dailyActiveUsers: { lastLogin: Date; name: string | null; email: string }[]
 }
 
+interface PlatformSettings {
+  siteName: string
+  siteDescription: string
+  siteUrl: string
+  logoUrl: string
+  faviconUrl: string
+  maintenanceMode: boolean
+  allowRegistration: boolean
+  allowGuestCheckout: boolean
+  emailNotifications: boolean
+  pushNotifications: boolean
+  defaultCurrency: string
+  platformFee: number
+  taxRate: number
+  maxUploadSize: number
+  allowedFileTypes: string[]
+  defaultCourseDuration: number
+  certificateExpiry: number
+  maxStudentsPerCourse: number
+  passwordMinLength: number
+  sessionTimeout: number
+  twoFactorRequired: boolean
+  metaKeywords: string
+  metaDescription: string
+  facebookUrl: string
+  twitterUrl: string
+  instagramUrl: string
+  youtubeUrl: string
+  linkedinUrl: string
+  supportEmail: string
+  contactPhone: string
+  address: string
+  googleAnalyticsId: string
+  facebookPixelId: string
+}
+
+interface FinancialOverview {
+  totalRevenue: number
+  totalPayments: number
+  averageOrderValue: number
+  refundAmount: number
+  netRevenue: number
+}
+
+interface FinancialData {
+  overview: FinancialOverview
+  revenueChart: { date: string; revenue: number; orders: number; refunds: number }[]
+  paymentMethods: { method: string; count: number; amount: number; percentage: number }[]
+  topCourses: { courseId: string; title: string; revenue: number; sales: number }[]
+  recentTransactions: {
+    id: string
+    amount: number
+    currency: string
+    status: string
+    paymentMethod: string
+    createdAt: Date
+    user: { name: string | null; email: string }
+    course: { title: string } | null
+  }[]
+  period: number
+}
+
 export default function AdminDashboard() {
   const [tab, setTab] = useState('admin')
   const [mounted, setMounted] = useState(false)
@@ -226,6 +288,18 @@ export default function AdminDashboard() {
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null)
   const [analyticsLoading, setAnalyticsLoading] = useState(false)
   const [selectedPeriod, setSelectedPeriod] = useState('30')
+
+  // Settings state
+  const [settings, setSettings] = useState<PlatformSettings | null>(null)
+  const [settingsLoading, setSettingsLoading] = useState(false)
+  const [settingsSaving, setSettingsSaving] = useState(false)
+  const [settingsMessage, setSettingsMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+  const [editedSettings, setEditedSettings] = useState<PlatformSettings | null>(null)
+
+  // Financial state
+  const [financial, setFinancial] = useState<FinancialData | null>(null)
+  const [financialLoading, setFinancialLoading] = useState(false)
+  const [financialPeriod, setFinancialPeriod] = useState('30')
 
   useEffect(() => {
     setMounted(true)
@@ -405,6 +479,144 @@ export default function AdminDashboard() {
       fetchAnalytics()
     }
   }, [tab, selectedPeriod])
+
+  useEffect(() => {
+    if (tab === 'settings') {
+      fetchSettings()
+    }
+  }, [tab])
+
+  useEffect(() => {
+    if (tab === 'financial') {
+      fetchFinancial()
+    }
+  }, [tab, financialPeriod])
+
+  const fetchSettings = async () => {
+    try {
+      setSettingsLoading(true)
+      const response = await fetch('/api/admin/settings')
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch settings')
+      }
+
+      const data = await response.json()
+      setSettings(data.settings)
+      setEditedSettings(data.settings)
+    } catch (err) {
+      console.error('Error fetching settings:', err)
+      setError('Failed to load settings')
+    } finally {
+      setSettingsLoading(false)
+    }
+  }
+
+  const fetchFinancial = async () => {
+    try {
+      setFinancialLoading(true)
+      const response = await fetch(`/api/admin/financial?period=${financialPeriod}`)
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch financial data')
+      }
+
+      const data: FinancialData = await response.json()
+      setFinancial(data)
+    } catch (err) {
+      console.error('Error fetching financial data:', err)
+      setError('Failed to load financial data')
+    } finally {
+      setFinancialLoading(false)
+    }
+  }
+
+  const handleSaveSettings = async () => {
+    if (!editedSettings) return
+    
+    try {
+      setSettingsSaving(true)
+      setSettingsMessage(null)
+      
+      const response = await fetch('/api/admin/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editedSettings)
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save settings')
+      }
+
+      const data = await response.json()
+      setSettings(data.settings)
+      setSettingsMessage({ type: 'success', text: 'Settings saved successfully!' })
+      
+      setTimeout(() => setSettingsMessage(null), 3000)
+    } catch (err) {
+      console.error('Error saving settings:', err)
+      setSettingsMessage({ type: 'error', text: 'Failed to save settings' })
+    } finally {
+      setSettingsSaving(false)
+    }
+  }
+
+  const handleResetSettings = async () => {
+    if (!confirm('Are you sure you want to reset all settings to defaults? This cannot be undone.')) {
+      return
+    }
+    
+    try {
+      const response = await fetch('/api/admin/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'reset' })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to reset settings')
+      }
+
+      const data = await response.json()
+      setSettings(data.settings)
+      setEditedSettings(data.settings)
+      setSettingsMessage({ type: 'success', text: 'Settings reset to defaults!' })
+      
+      setTimeout(() => setSettingsMessage(null), 3000)
+    } catch (err) {
+      console.error('Error resetting settings:', err)
+      setSettingsMessage({ type: 'error', text: 'Failed to reset settings' })
+    }
+  }
+
+  const handleExportFinancial = async (format: 'csv') => {
+    try {
+      const response = await fetch(`/api/admin/financial?period=${financialPeriod}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'export', exportFormat: format })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to export financial data')
+      }
+
+      if (format === 'csv') {
+        const blob = await response.blob()
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `financial-report-${Date.now()}.csv`
+        document.body.appendChild(a)
+        a.click()
+        window.URL.revokeObjectURL(url)
+        document.body.removeChild(a)
+      }
+    } catch (err) {
+      console.error('Error exporting financial data:', err)
+      alert('Failed to export financial data')
+    }
+  }
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -843,11 +1055,12 @@ export default function AdminDashboard() {
   const tabs = [
     { id: 'dashboard', label: '📊 Dashboard' },
     { id: 'analytics', label: '📈 Analytics' },
+    { id: 'financial', label: '💰 Financial' },
     { id: 'courses', label: '📚 Courses' },
     { id: 'categories', label: '📁 Categories' },
     { id: 'discussions', label: '💬 Discussions' },
     { id: 'users', label: '👥 Users' },
-    { id: 'admin', label: '⚙️ Settings' }
+    { id: 'settings', label: '⚙️ Settings' }
   ]
 
   const formatCurrency = (amount: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount)
@@ -865,7 +1078,7 @@ export default function AdminDashboard() {
   }
 
   // Loading state
-  if (loading && (tab === 'dashboard' || tab === 'admin')) {
+  if (loading && (tab === 'dashboard' || tab === 'settings')) {
     return (
       <div style={{ minHeight: '100vh', background: '#f9fafb', fontFamily: 'system-ui, sans-serif' }}>
         <div style={{ background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
@@ -922,7 +1135,7 @@ export default function AdminDashboard() {
   }
 
   // Error state
-  if (error && (tab === 'dashboard' || tab === 'admin')) {
+  if (error && (tab === 'dashboard' || tab === 'settings')) {
     return (
       <div style={{ minHeight: '100vh', background: '#f9fafb', fontFamily: 'system-ui, sans-serif' }}>
         <div style={{ background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
@@ -1195,6 +1408,157 @@ export default function AdminDashboard() {
               </>
             ) : (
               <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>No analytics data available</div>
+            )}
+          </div>
+        )}
+
+        {tab === 'financial' && (
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937' }}>💰 Financial Reports</h2>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <select
+                  value={financialPeriod}
+                  onChange={(e) => setFinancialPeriod(e.target.value)}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.5rem',
+                    border: '1px solid #d1d5db',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  <option value="7">Last 7 days</option>
+                  <option value="30">Last 30 days</option>
+                  <option value="90">Last 90 days</option>
+                </select>
+                <button
+                  onClick={() => handleExportFinancial('csv')}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    background: '#10b981',
+                    color: 'white',
+                    borderRadius: '0.5rem',
+                    border: 'none',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  📥 Export CSV
+                </button>
+              </div>
+            </div>
+
+            {financialLoading ? (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>Loading financial data...</div>
+            ) : financial ? (
+              <>
+                {/* Financial Overview */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                  {[
+                    { label: 'Total Revenue', value: formatCurrency(financial.overview.totalRevenue), icon: '💰', color: '#10b981' },
+                    { label: 'Total Orders', value: financial.overview.totalPayments.toLocaleString(), icon: '📦', color: '#3b82f6' },
+                    { label: 'Avg Order Value', value: formatCurrency(financial.overview.averageOrderValue), icon: '📊', color: '#8b5cf6' },
+                    { label: 'Net Revenue', value: formatCurrency(financial.overview.netRevenue), icon: '✅', color: '#059669' }
+                  ].map(stat => (
+                    <div key={stat.label} style={{ background: 'white', borderRadius: '0.5rem', padding: '1.25rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                      <span style={{ fontSize: '1.5rem' }}>{stat.icon}</span>
+                      <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.5rem' }}>{stat.label}</p>
+                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: stat.color, marginTop: '0.25rem' }}>{stat.value}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Charts Row */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                  {/* Revenue Chart */}
+                  <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>Revenue Over Time</h3>
+                    {financial.revenueChart.length > 0 ? (
+                      <LineChart
+                        data={financial.revenueChart.slice(-14).map(d => ({ label: d.date.slice(5), value: d.revenue }))}
+                        color="#10b981"
+                      />
+                    ) : (
+                      <div style={{ height: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6b7280' }}>No revenue data</div>
+                    )}
+                  </div>
+
+                  {/* Payment Methods */}
+                  <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>Payment Methods</h3>
+                    {financial.paymentMethods.length > 0 ? (
+                      <div style={{ display: 'grid', gap: '0.75rem' }}>
+                        {financial.paymentMethods.map((method, index) => (
+                          <div key={method.method}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
+                              <span style={{ fontSize: '0.875rem', color: '#374151', textTransform: 'capitalize' }}>{method.method}</span>
+                              <span style={{ fontSize: '0.875rem', fontWeight: '600', color: '#1f2937' }}>{formatCurrency(method.amount)}</span>
+                            </div>
+                            <div style={{ height: '8px', background: '#e5e7eb', borderRadius: '4px' }}>
+                              <div style={{ height: '100%', width: `${method.percentage}%`, background: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'][index % 5], borderRadius: '4px' }}></div>
+                            </div>
+                            <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.125rem' }}>{method.count} transactions • {method.percentage.toFixed(1)}%</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div style={{ color: '#6b7280', textAlign: 'center', padding: '1rem' }}>No payment data</div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Top Courses & Transactions */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                  {/* Top Courses by Revenue */}
+                  <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>Top Courses by Revenue</h3>
+                    {financial.topCourses.length > 0 ? (
+                      <div style={{ display: 'grid', gap: '0.5rem' }}>
+                        {financial.topCourses.slice(0, 5).map((course, index) => (
+                          <div key={course.courseId} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#dc2626', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: '600' }}>
+                              {index + 1}
+                            </span>
+                            <div style={{ flex: 1 }}>
+                              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#1f2937' }}>{course.title}</p>
+                              <p style={{ fontSize: '0.75rem', color: '#6b7280' }}>{course.sales} sales</p>
+                            </div>
+                            <span style={{ fontSize: '0.875rem', fontWeight: '600', color: '#10b981' }}>{formatCurrency(course.revenue)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div style={{ color: '#6b7280', textAlign: 'center', padding: '1rem' }}>No course revenue data</div>
+                    )}
+                  </div>
+
+                  {/* Recent Transactions */}
+                  <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>Recent Transactions</h3>
+                    {financial.recentTransactions.length > 0 ? (
+                      <div style={{ display: 'grid', gap: '0.5rem', maxHeight: '250px', overflowY: 'auto' }}>
+                        {financial.recentTransactions.map((transaction) => (
+                          <div key={transaction.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem', background: '#f9fafb', borderRadius: '0.5rem' }}>
+                            <div>
+                              <p style={{ fontWeight: '500', color: '#1f2937', fontSize: '0.875rem' }}>{transaction.user.name || transaction.user.email}</p>
+                              <p style={{ fontSize: '0.75rem', color: '#6b7280' }}>{transaction.course?.title || 'N/A'}</p>
+                            </div>
+                            <div style={{ textAlign: 'right' }}>
+                              <p style={{ fontWeight: '600', color: '#10b981', fontSize: '0.875rem' }}>{formatCurrency(transaction.amount)}</p>
+                              <p style={{ fontSize: '0.75rem', color: '#6b7280' }}>{formatDate(transaction.createdAt)}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div style={{ color: '#6b7280', textAlign: 'center', padding: '1rem' }}>No recent transactions</div>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>No financial data available</div>
             )}
           </div>
         )}
@@ -1484,48 +1848,314 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {tab === 'admin' && stats && (
+        {tab === 'settings' && (
           <div>
             <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', marginBottom: '2rem' }}>
-              <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937' }}>⚙️ Admin Settings</h1>
-              <p style={{ color: '#6b7280', marginTop: '0.25rem' }}>Platform overview and configuration</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937' }}>⚙️ Platform Settings</h1>
+                  <p style={{ color: '#6b7280', marginTop: '0.25rem' }}>Configure your platform settings and preferences</p>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <button
+                    onClick={handleResetSettings}
+                    style={{
+                      padding: '0.75rem 1rem',
+                      background: 'white',
+                      color: '#6b7280',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '0.5rem',
+                      fontWeight: '500',
+                      cursor: 'pointer',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    🔄 Reset Defaults
+                  </button>
+                  <button
+                    onClick={handleSaveSettings}
+                    disabled={settingsSaving || !editedSettings}
+                    style={{
+                      padding: '0.75rem 1.5rem',
+                      background: settingsSaving ? '#9ca3af' : '#dc2626',
+                      color: 'white',
+                      borderRadius: '0.5rem',
+                      border: 'none',
+                      fontWeight: '600',
+                      cursor: settingsSaving ? 'not-allowed' : 'pointer',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    {settingsSaving ? 'Saving...' : '💾 Save Changes'}
+                  </button>
+                </div>
+              </div>
+              
+              {settingsMessage && (
+                <div style={{ 
+                  marginTop: '1rem', 
+                  padding: '0.75rem 1rem', 
+                  borderRadius: '0.5rem',
+                  background: settingsMessage.type === 'success' ? '#dcfce7' : '#fee2e2',
+                  color: settingsMessage.type === 'success' ? '#166534' : '#991b1b',
+                  fontSize: '0.875rem'
+                }}>
+                  {settingsMessage.text}
+                </div>
+              )}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-              {[
-                { label: 'Total Users', value: stats.totalUsers.toLocaleString(), icon: '👥' },
-                { label: 'Active Users', value: stats.activeUsers.toLocaleString(), icon: '✅' },
-                { label: 'Total Courses', value: stats.totalCourses.toLocaleString(), icon: '📚' },
-                { label: 'Total Revenue', value: formatCurrency(stats.totalRevenue), icon: '💰' }
-              ].map(stat => (
-                <div key={stat.label} style={{ background: 'white', borderRadius: '0.5rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            {settingsLoading ? (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>Loading settings...</div>
+            ) : editedSettings ? (
+              <div style={{ display: 'grid', gap: '1.5rem' }}>
+                {/* General Settings */}
+                <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>🏢 General Settings</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
                     <div>
-                      <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>{stat.label}</p>
-                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937', marginTop: '0.25rem' }}>{stat.value}</p>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Site Name</label>
+                      <input 
+                        type="text" 
+                        value={editedSettings.siteName} 
+                        onChange={(e) => setEditedSettings({ ...editedSettings, siteName: e.target.value })}
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
                     </div>
-                    <span style={{ fontSize: '1.5rem' }}>{stat.icon}</span>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Site URL</label>
+                      <input 
+                        type="url" 
+                        value={editedSettings.siteUrl} 
+                        onChange={(e) => setEditedSettings({ ...editedSettings, siteUrl: e.target.value })}
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div style={{ gridColumn: '1 / -1' }}>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Site Description</label>
+                      <textarea 
+                        value={editedSettings.siteDescription} 
+                        onChange={(e) => setEditedSettings({ ...editedSettings, siteDescription: e.target.value })}
+                        rows={2}
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem', resize: 'vertical' }}
+                      />
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>System Health</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                {[
-                  { label: 'Database', value: 'Healthy', status: 'green' },
-                  { label: 'API Status', value: 'Operational', status: 'green' },
-                  { label: 'Storage', value: '45% Used', status: 'yellow' },
-                  { label: 'Last Backup', value: '2 hours ago', status: 'green' }
-                ].map(item => (
-                  <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: '#f9fafb', borderRadius: '0.5rem' }}>
-                    <span style={{ color: '#6b7280' }}>{item.label}</span>
-                    <span style={{ padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.875rem', fontWeight: '600', background: item.status === 'green' ? '#dcfce7' : item.status === 'yellow' ? '#fef3c7' : '#fee2e2', color: item.status === 'green' ? '#166534' : item.status === 'yellow' ? '#854d0e' : '#991b1b' }}>{item.value}</span>
+                {/* Feature Flags */}
+                <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>🔧 Feature Flags</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    {[
+                      { key: 'maintenanceMode', label: 'Maintenance Mode', description: 'Site under maintenance' },
+                      { key: 'allowRegistration', label: 'Allow Registration', description: 'New users can register' },
+                      { key: 'emailNotifications', label: 'Email Notifications', description: 'Send email notifications' },
+                      { key: 'pushNotifications', label: 'Push Notifications', description: 'Enable push notifications' }
+                    ].map(item => (
+                      <label key={item.key} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '1rem', background: '#f9fafb', borderRadius: '0.5rem', cursor: 'pointer' }}>
+                        <input 
+                          type="checkbox" 
+                          checked={editedSettings[item.key as keyof PlatformSettings] as boolean}
+                          onChange={(e) => setEditedSettings({ ...editedSettings, [item.key]: e.target.checked })}
+                          style={{ marginTop: '0.125rem' }}
+                        />
+                        <div>
+                          <span style={{ fontWeight: '500', color: '#1f2937', display: 'block' }}>{item.label}</span>
+                          <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>{item.description}</span>
+                        </div>
+                      </label>
+                    ))}
                   </div>
-                ))}
+                </div>
+
+                {/* Business Settings */}
+                <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>💰 Business Settings</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Default Currency</label>
+                      <select 
+                        value={editedSettings.defaultCurrency}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, defaultCurrency: e.target.value })}
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      >
+                        <option value="INR">INR (Indian Rupee)</option>
+                        <option value="USD">USD (US Dollar)</option>
+                        <option value="EUR">EUR (Euro)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Platform Fee (%)</label>
+                      <input 
+                        type="number" 
+                        value={editedSettings.platformFee}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, platformFee: parseFloat(e.target.value) })}
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Tax Rate (%)</label>
+                      <input 
+                        type="number" 
+                        value={editedSettings.taxRate}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, taxRate: parseFloat(e.target.value) })}
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Max Upload Size (MB)</label>
+                      <input 
+                        type="number" 
+                        value={editedSettings.maxUploadSize}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, maxUploadSize: parseInt(e.target.value) })}
+                        min="1"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Security Settings */}
+                <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>🔒 Security Settings</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Min Password Length</label>
+                      <input 
+                        type="number" 
+                        value={editedSettings.passwordMinLength}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, passwordMinLength: parseInt(e.target.value) })}
+                        min="6"
+                        max="32"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Session Timeout (hours)</label>
+                      <input 
+                        type="number" 
+                        value={editedSettings.sessionTimeout}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, sessionTimeout: parseInt(e.target.value) })}
+                        min="1"
+                        max="168"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input 
+                          type="checkbox" 
+                          checked={editedSettings.twoFactorRequired}
+                          onChange={(e) => setEditedSettings({ ...editedSettings, twoFactorRequired: e.target.checked })}
+                        />
+                        <span style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151' }}>Require 2FA</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact & Social */}
+                <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>📞 Contact & Social</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Support Email</label>
+                      <input 
+                        type="email" 
+                        value={editedSettings.supportEmail}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, supportEmail: e.target.value })}
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Contact Phone</label>
+                      <input 
+                        type="text" 
+                        value={editedSettings.contactPhone}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, contactPhone: e.target.value })}
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Facebook URL</label>
+                      <input 
+                        type="url" 
+                        value={editedSettings.facebookUrl}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, facebookUrl: e.target.value })}
+                        placeholder="https://facebook.com/..."
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Twitter URL</label>
+                      <input 
+                        type="url" 
+                        value={editedSettings.twitterUrl}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, twitterUrl: e.target.value })}
+                        placeholder="https://twitter.com/..."
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>YouTube URL</label>
+                      <input 
+                        type="url" 
+                        value={editedSettings.youtubeUrl}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, youtubeUrl: e.target.value })}
+                        placeholder="https://youtube.com/..."
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>LinkedIn URL</label>
+                      <input 
+                        type="url" 
+                        value={editedSettings.linkedinUrl}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, linkedinUrl: e.target.value })}
+                        placeholder="https://linkedin.com/..."
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Analytics */}
+                <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', marginBottom: '1rem' }}>📊 Analytics</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Google Analytics ID</label>
+                      <input 
+                        type="text" 
+                        value={editedSettings.googleAnalyticsId}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, googleAnalyticsId: e.target.value })}
+                        placeholder="G-XXXXXXXXXX"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.25rem' }}>Facebook Pixel ID</label>
+                      <input 
+                        type="text" 
+                        value={editedSettings.facebookPixelId}
+                        onChange={(e) => setEditedSettings({ ...editedSettings, facebookPixelId: e.target.value })}
+                        placeholder="XXXXXXXXXXXXXX"
+                        style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontSize: '0.875rem' }}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>Failed to load settings</div>
+            )}
           </div>
         )}
 
