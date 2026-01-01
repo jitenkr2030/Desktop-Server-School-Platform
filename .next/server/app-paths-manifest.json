@@ -1,4 +1,5 @@
 {
+  "/api/learning-paths/route": "app/api/learning-paths/route.js",
   "/api/courses/route": "app/api/courses/route.js",
-  "/learning-paths/page": "app/learning-paths/page.js"
+  "/courses/page": "app/courses/page.js"
 }

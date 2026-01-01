@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/lib/db'
 
 // Sample learning paths data for demo/fallback
 const sampleLearningPaths = [
@@ -325,93 +326,24 @@ export async function GET(request: NextRequest) {
     const pathId = searchParams.get('id')
     const useDemo = searchParams.get('demo') === 'true'
 
-    // Try to import database, fallback to sample data if not available
+    // Use sample data if demo mode is requested
+    if (useDemo) {
+      return NextResponse.json({
+        success: true,
+        learningPaths: sampleLearningPaths
+      })
+    }
+
     let learningPathsData: any[] = []
 
-    try {
-      const { db } = await import('@/lib/db')
-      
-      if (pathId && !useDemo) {
-        // Get a specific learning path with its courses
-        const learningPath = await db.learningPath.findUnique({
-          where: { id: pathId },
-          include: {
-            courses: {
-              where: { isActive: true },
-              orderBy: { order: 'asc' },
-              include: {
-                instructor: {
-                  select: {
-                    id: true,
-                    name: true,
-                    avatar: true
-                  }
-                },
-                _count: {
-                  select: {
-                    lessons: true
-                  }
-                }
-              }
-            },
-            _count: {
-              select: {
-                courses: true
-              }
-            }
-          }
-        })
-
-        if (!learningPath) {
-          // Fallback to sample data
-          const samplePath = sampleLearningPaths.find(p => p.id === pathId)
-          if (samplePath) {
-            // Transform sample path to match expected format
-            const fullPath = {
-              ...samplePath,
-              isActive: true,
-              sortOrder: 0,
-              courses: samplePath.previewCourses.map(course => ({
-                ...course,
-                isActive: true,
-                thumbnail: null,
-                _count: { lessons: course.lessonCount || 0 }
-              }))
-            }
-            return NextResponse.json({
-              success: true,
-              learningPath: fullPath
-            })
-          }
-          return NextResponse.json(
-            { success: false, message: 'Learning path not found' },
-            { status: 404 }
-          )
-        }
-
-        return NextResponse.json({
-          success: true,
-          learningPath: {
-            ...learningPath,
-            courseCount: learningPath.courses.length
-          }
-        })
-      }
-
-      // Get all learning paths with preview courses
-      const learningPaths = await db.learningPath.findMany({
-        where: { isActive: true },
-        orderBy: { sortOrder: 'asc' },
+    if (pathId) {
+      // Get a specific learning path with its courses
+      const learningPath = await db.learningPath.findUnique({
+        where: { id: pathId },
         include: {
-          _count: {
-            select: {
-              courses: true
-            }
-          },
           courses: {
             where: { isActive: true },
-            orderBy: { order: 'asc' },
-            take: 3,
+            orderBy: { createdAt: 'asc' },
             include: {
               instructor: {
                 select: {
@@ -426,90 +358,136 @@ export async function GET(request: NextRequest) {
                 }
               }
             }
+          },
+          _count: {
+            select: {
+              courses: true
+            }
           }
         }
       })
 
-      // Transform the response
-      learningPathsData = learningPaths.map(path => {
-        const totalDuration = path.courses.reduce((sum: number, course: any) => sum + course.duration, 0)
-        const totalLessons = path.courses.reduce((sum: number, course: any) => sum + course._count.lessons, 0)
+      if (!learningPath) {
+        // Fallback to sample data
+        const samplePath = sampleLearningPaths.find(p => p.id === pathId)
+        if (samplePath) {
+          // Transform sample path to match expected format
+          const fullPath = {
+            ...samplePath,
+            isActive: true,
+            sortOrder: 0,
+            courses: samplePath.previewCourses.map(course => ({
+              ...course,
+              isActive: true,
+              thumbnail: null,
+              _count: { lessons: course.lessonCount || 0 }
+            }))
+          }
+          return NextResponse.json({
+            success: true,
+            learningPath: fullPath
+          })
+        }
+        return NextResponse.json(
+          { success: false, message: 'Learning path not found' },
+          { status: 404 }
+        )
+      }
 
-        return {
-          id: path.id,
-          title: path.title,
-          description: path.description,
-          icon: path.icon,
-          color: path.color,
-          sortOrder: path.sortOrder,
-          isActive: path.isActive,
-          courseCount: path._count.courses,
-          totalDuration,
-          totalLessons,
-          previewCourses: path.courses.map((course: any) => ({
-            id: course.id,
-            title: course.title,
-            description: course.description,
-            difficulty: course.difficulty,
-            duration: course.duration,
-            thumbnail: course.thumbnail,
-            lessonCount: course._count.lessons,
-            instructor: course.instructor
+      return NextResponse.json({
+        success: true,
+        learningPath: {
+          ...learningPath,
+          courseCount: learningPath.courses.length
+        }
+      })
+    }
+
+    // Get all learning paths with preview courses
+    const learningPaths = await db.learningPath.findMany({
+      where: { isActive: true },
+      orderBy: { sortOrder: 'asc' },
+      include: {
+        _count: {
+          select: {
+            courses: true
+          }
+        },
+        courses: {
+          where: { isActive: true },
+          orderBy: { createdAt: 'asc' },
+          take: 3,
+          include: {
+            instructor: {
+              select: {
+                id: true,
+                name: true,
+                avatar: true
+              }
+            },
+            _count: {
+              select: {
+                lessons: true
+              }
+            }
+          }
+        }
+      }
+    })
+
+    // Transform the response
+    learningPathsData = learningPaths.map(path => {
+      const totalDuration = path.courses.reduce((sum: number, course: any) => sum + course.duration, 0)
+      const totalLessons = path.courses.reduce((sum: number, course: any) => sum + course._count.lessons, 0)
+
+      return {
+        id: path.id,
+        title: path.title,
+        description: path.description,
+        icon: path.icon,
+        color: path.color,
+        sortOrder: path.sortOrder,
+        isActive: path.isActive,
+        courseCount: path._count.courses,
+        totalDuration,
+        totalLessons,
+        previewCourses: path.courses.map((course: any) => ({
+          id: course.id,
+          title: course.title,
+          description: course.description,
+          difficulty: course.difficulty,
+          duration: course.duration,
+          thumbnail: course.thumbnail,
+          lessonCount: course._count.lessons,
+          instructor: course.instructor
+        }))
+      }
+    })
+
+    // If no data found in database, use sample data
+    if (learningPathsData.length === 0) {
+      learningPathsData = sampleLearningPaths
+    }
+
+    // If specific pathId was requested but not found in DB, try sample data
+    if (pathId && learningPathsData.length === 1 && !learningPathsData[0].courses) {
+      const samplePath = sampleLearningPaths.find(p => p.id === pathId)
+      if (samplePath) {
+        const fullPath = {
+          ...samplePath,
+          isActive: true,
+          sortOrder: 0,
+          courses: samplePath.previewCourses.map(course => ({
+            ...course,
+            isActive: true,
+            thumbnail: null,
+            _count: { lessons: course.lessonCount || 0 }
           }))
         }
-      })
-
-      // If no data found in database, use sample data
-      if (learningPathsData.length === 0 || useDemo) {
-        learningPathsData = sampleLearningPaths
-      }
-
-      // If specific pathId was requested but not found in DB, try sample data
-      if (pathId && learningPathsData.length === 1 && !learningPathsData[0].courses) {
-        const samplePath = sampleLearningPaths.find(p => p.id === pathId)
-        if (samplePath) {
-          const fullPath = {
-            ...samplePath,
-            isActive: true,
-            sortOrder: 0,
-            courses: samplePath.previewCourses.map(course => ({
-              ...course,
-              isActive: true,
-              thumbnail: null,
-              _count: { lessons: course.lessonCount || 0 }
-            }))
-          }
-          return NextResponse.json({
-            success: true,
-            learningPath: fullPath
-          })
-        }
-      }
-    } catch (dbError) {
-      // If database import or query fails, use sample data
-      console.log('Database not available, using sample learning paths')
-      learningPathsData = sampleLearningPaths
-
-      // If specific pathId was requested, return just that path
-      if (pathId) {
-        const samplePath = sampleLearningPaths.find(p => p.id === pathId)
-        if (samplePath) {
-          const fullPath = {
-            ...samplePath,
-            isActive: true,
-            sortOrder: 0,
-            courses: samplePath.previewCourses.map(course => ({
-              ...course,
-              isActive: true,
-              thumbnail: null,
-              _count: { lessons: course.lessonCount || 0 }
-            }))
-          }
-          return NextResponse.json({
-            success: true,
-            learningPath: fullPath
-          })
-        }
+        return NextResponse.json({
+          success: true,
+          learningPath: fullPath
+        })
       }
     }
 
@@ -521,7 +499,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Get learning paths error:', error)
     return NextResponse.json(
-      { success: false, message: 'Internal server error' },
+      { success: false, message: 'Internal server error', error: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
