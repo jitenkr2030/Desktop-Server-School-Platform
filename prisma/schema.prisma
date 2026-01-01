@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,196 +7,168 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// User model with role-based access control
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  password     String   // Hashed password for email/password authentication
-  name         String?
-  avatar       String?
-  bio          String?  // Brief description about the user
-  location     String?  // User's location
-  website      String?  // User's website or social links
-  mobileNumber String?  // Made optional - email is now primary
-  role         UserRole @default(STUDENT)
-  isActive     Boolean  @default(true)
-  isVerified   Boolean  @default(false) // Email verification status
-  emailVerified DateTime?
-  lastLogin    DateTime?
-  preferences  String?  // JSON string for user preferences
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  // Relations
-  subscriptions     Subscription[]
-  progress          CourseProgress[]
-  assessments       UserAssessment[]
-  certificates      Certificate[]
-  discussions       Discussion[]
-  replies           DiscussionReply[]
-  paymentRecords    PaymentRecord[]
-  badges            UserBadge[]
-  profileSettings   ProfileSettings?
-  instructorProfile InstructorProfile?
-  activityLogs      UserActivityLog[]
-  // Live Learning Relations
-  hostedSessions    LiveSession[]     @relation("SessionHost")
+  id                String             @id @default(cuid())
+  email             String             @unique
+  password          String
+  name              String?
+  avatar            String?
+  bio               String?
+  location          String?
+  website           String?
+  mobileNumber      String?
+  role              UserRole           @default(STUDENT)
+  isActive          Boolean            @default(true)
+  isVerified        Boolean            @default(false)
+  emailVerified     DateTime?
+  lastLogin         DateTime?
+  preferences       String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   attendances       Attendance[]
-  
+  certificates      Certificate[]
+  progress          CourseProgress[]
+  replies           DiscussionReply[]
+  discussions       Discussion[]
+  instructorProfile InstructorProfile?
+  hostedSessions    LiveSession[]      @relation("SessionHost")
+  paymentRecords    PaymentRecord[]
+  profileSettings   ProfileSettings?
+  subscriptions     Subscription[]
+  activityLogs      UserActivityLog[]
+  assessments       UserAssessment[]
+  badges            UserBadge[]
+
   @@map("users")
 }
 
-// Subscription model for ₹99/month pricing
 model Subscription {
-  id              String      @id @default(cuid())
-  userId          String
-  type            SubscriptionType
-  status          SubscriptionStatus
-  startDate       DateTime
-  endDate         DateTime?
-  autoRenew       Boolean     @default(true)
-  paymentId       String?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-
-  // Relations
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String             @id @default(cuid())
+  userId    String
+  type      SubscriptionType
+  status    SubscriptionStatus
+  startDate DateTime
+  endDate   DateTime?
+  autoRenew Boolean            @default(true)
+  paymentId String?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("subscriptions")
 }
 
-// Learning Path Categories for the 18 main learning categories
 model LearningPathCategory {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  slug        String   @unique
-  description String?
-  icon        String?  // Lucide icon name
-  color       String?  // Tailwind color class
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  isFeatured  Boolean  @default(false)
-  metadata    String?  // JSON string for additional data
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
+  id            String                     @id @default(cuid())
+  name          String                     @unique
+  slug          String                     @unique
+  description   String?
+  icon          String?
+  color         String?
+  sortOrder     Int                        @default(0)
+  isActive      Boolean                    @default(true)
+  isFeatured    Boolean                    @default(false)
+  metadata      String?
+  createdAt     DateTime                   @default(now())
+  updatedAt     DateTime                   @updatedAt
+  categoryStats LearningPathCategoryStats?
   learningPaths LearningPath[]
-  categoryStats LearningPathCategoryStats[]
 
   @@map("learning_path_categories")
 }
 
-// Learning paths now belong to learning path categories
 model LearningPath {
-  id          String   @id @default(cuid())
+  id          String                @id @default(cuid())
   title       String
   description String
   icon        String?
   color       String?
-  isActive    Boolean  @default(true)
-  sortOrder   Int      @default(0)
-  categoryId  String?  // Link to LearningPathCategory
-  pathType    PathType @default(GENERAL) // SCHOOL, COLLEGE, CAREER, etc.
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  category    LearningPathCategory? @relation(fields: [categoryId], references: [id])
+  isActive    Boolean               @default(true)
+  sortOrder   Int                   @default(0)
+  categoryId  String?
+  pathType    PathType              @default(GENERAL)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
   courses     Course[]
+  category    LearningPathCategory? @relation(fields: [categoryId], references: [id])
 
   @@map("learning_paths")
 }
 
-// School classes (Class 1-12)
 model SchoolClass {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  level       SchoolLevel
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  subjects    SchoolSubject[]
-  courses     Course[]
+  id        String          @id @default(cuid())
+  name      String          @unique
+  level     SchoolLevel
+  sortOrder Int             @default(0)
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  courses   Course[]
+  subjects  SchoolSubject[]
 
   @@map("school_classes")
 }
 
-// Curriculum boards (CBSE, ICSE, State Boards)
 model CurriculumBoard {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  shortCode   String   @unique
+  id          String          @id @default(cuid())
+  name        String          @unique
+  shortCode   String          @unique
   description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  subjects    SchoolSubject[]
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
   courses     Course[]
+  subjects    SchoolSubject[]
 
   @@map("curriculum_boards")
 }
 
-// School subjects with board alignment
 model SchoolSubject {
-  id          String   @id @default(cuid())
+  id          String           @id @default(cuid())
   name        String
   code        String?
   description String?
   classId     String
   boardId     String?
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  class       SchoolClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
-  board       CurriculumBoard? @relation(fields: [boardId], references: [id])
+  sortOrder   Int              @default(0)
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   courses     Course[]
+  board       CurriculumBoard? @relation(fields: [boardId], references: [id])
+  class       SchoolClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   @@unique([classId, name])
   @@map("school_subjects")
 }
 
-// College degrees
 model CollegeDegree {
-  id          String      @id @default(cuid())
-  name        String      @unique
-  shortCode   String      @unique
+  id          String           @id @default(cuid())
+  name        String           @unique
+  shortCode   String           @unique
   level       DegreeLevel
-  duration    Int         // in years
+  duration    Int
   description String?
-  isActive    Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-
-  // Relations
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   subjects    CollegeSubject[]
   courses     Course[]
 
   @@map("college_degrees")
 }
 
-// College subjects
 model CollegeSubject {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
   name        String
   code        String?
   description String?
   degreeId    String
-  semester    Int?     // Semester number
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
+  semester    Int?
+  sortOrder   Int           @default(0)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   degree      CollegeDegree @relation(fields: [degreeId], references: [id], onDelete: Cascade)
   courses     Course[]
 
@@ -210,517 +176,485 @@ model CollegeSubject {
   @@map("college_subjects")
 }
 
-// Course categories and learning paths (legacy - will be phased out)
 model Category {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  slug        String   @unique
-  description String?
-  icon        String?  // Lucide icon name
-  color       String?  // Tailwind color class
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  isFeatured  Boolean  @default(false)
-  metadata    String?  // JSON string for additional data
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  subcategories SubCategory[]
+  id            String         @id @default(cuid())
+  name          String         @unique
+  slug          String         @unique
+  description   String?
+  icon          String?
+  color         String?
+  sortOrder     Int            @default(0)
+  isActive      Boolean        @default(true)
+  isFeatured    Boolean        @default(false)
+  metadata      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  categoryStats CategoryStats?
   courses       Course[]
-  categoryStats CategoryStats[]
+  subcategories SubCategory[]
 
   @@map("categories")
 }
 
 model SubCategory {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String
-  description String?
-  icon        String?  // Lucide icon name
-  color       String?  // Tailwind color class
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  categoryId  String
-  metadata    String?  // JSON string for additional data
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  category    Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  courses     Course[]
-  subCategoryStats SubCategoryStats[]
+  id               String            @id @default(cuid())
+  name             String
+  slug             String
+  description      String?
+  icon             String?
+  color            String?
+  sortOrder        Int               @default(0)
+  isActive         Boolean           @default(true)
+  categoryId       String
+  metadata         String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  courses          Course[]
+  category         Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  subCategoryStats SubCategoryStats?
 
   @@unique([categoryId, slug])
   @@map("sub_categories")
 }
 
-// Course model with enhanced architecture for school and college learning
 model Course {
-  id            String      @id @default(cuid())
-  title         String
-  description   String
-  thumbnail     String?
-  difficulty    Difficulty  @default(BEGINNER)
-  duration      Int         // in minutes
-  isActive      Boolean     @default(true)
-  instructorId  String
-  categoryId    String?
-  subCategoryId String?
-  learningPathId String?
-  // New fields for school and college structure
-  courseType    CourseType @default(GENERAL)
-  classId       String?     // For school courses
-  schoolSubjectId String?   // For school subjects
-  collegeSubjectId String? // For college subjects
-  degreeId      String?     // For college courses
-  boardId       String?     // For curriculum board alignment
-  semester      Int?        // For college semester
-  chapter       String?     // Chapter name for school courses
-  conceptFocus  String?     // Focus on concepts, not exams
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-
-  // Relations
-  category      Category?           @relation(fields: [categoryId], references: [id])
-  subCategory  SubCategory?        @relation(fields: [subCategoryId], references: [id])
-  learningPath  LearningPath?       @relation(fields: [learningPathId], references: [id])
-  instructor    Instructor          @relation(fields: [instructorId], references: [id])
-  // New relations for school and college structure
-  class         SchoolClass?        @relation(fields: [classId], references: [id])
-  schoolSubject SchoolSubject?      @relation(fields: [schoolSubjectId], references: [id])
-  collegeSubject CollegeSubject?    @relation(fields: [collegeSubjectId], references: [id])
-  degree        CollegeDegree?      @relation(fields: [degreeId], references: [id])
-  board         CurriculumBoard?    @relation(fields: [boardId], references: [id])
-  lessons       Lesson[]
-  progress      CourseProgress[]
-  assessments   Assessment[]
-  discussions   Discussion[]
-  liveSessions  LiveSession[]
+  id               String           @id @default(cuid())
+  title            String
+  description      String
+  thumbnail        String?
+  difficulty       Difficulty       @default(BEGINNER)
+  duration         Int
+  isActive         Boolean          @default(true)
+  instructorId     String
+  categoryId       String?
+  subCategoryId    String?
+  learningPathId   String?
+  courseType       CourseType       @default(GENERAL)
+  classId          String?
+  schoolSubjectId  String?
+  collegeSubjectId String?
+  degreeId         String?
+  boardId          String?
+  semester         Int?
+  chapter          String?
+  conceptFocus     String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  assessments      Assessment[]
+  progress         CourseProgress[]
+  board            CurriculumBoard? @relation(fields: [boardId], references: [id])
+  category         Category?        @relation(fields: [categoryId], references: [id])
+  class            SchoolClass?     @relation(fields: [classId], references: [id])
+  collegeSubject   CollegeSubject?  @relation(fields: [collegeSubjectId], references: [id])
+  degree           CollegeDegree?   @relation(fields: [degreeId], references: [id])
+  instructor       Instructor       @relation(fields: [instructorId], references: [id])
+  learningPath     LearningPath?    @relation(fields: [learningPathId], references: [id])
+  schoolSubject    SchoolSubject?   @relation(fields: [schoolSubjectId], references: [id])
+  subCategory      SubCategory?     @relation(fields: [subCategoryId], references: [id])
+  discussions      Discussion[]
+  lessons          Lesson[]
+  liveSessions     LiveSession[]
 
   @@map("courses")
 }
 
-// Instructor model for content creators
 model Instructor {
-  id          String   @id @default(cuid())
-  name        String
-  bio         String?
-  avatar      String?
-  expertise   String?  // JSON string of expertise areas
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  courses     Course[]
+  id        String   @id @default(cuid())
+  name      String
+  bio       String?
+  avatar    String?
+  expertise String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courses   Course[]
 
   @@map("instructors")
 }
 
-// Modular micro-lessons
 model Lesson {
-  id          String      @id @default(cuid())
+  id          String           @id @default(cuid())
   courseId    String
   title       String
-  content     String      // Rich text content
+  content     String
   videoUrl    String?
   audioUrl    String?
   pdfUrl      String?
-  duration    Int         // in minutes
-  order       Int         @default(0)
-  isActive    Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-
-  // Relations
-  course      Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  progress    CourseProgress[]
+  duration    Int
+  order       Int              @default(0)
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   assessments Assessment[]
+  progress    CourseProgress[]
+  course      Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@map("lessons")
 }
 
-// User progress tracking
 model CourseProgress {
-  id          String   @id @default(cuid())
-  userId      String
-  courseId    String
-  lessonId    String?
-  completed   Boolean  @default(false)
-  progress    Float    @default(0) // 0-100 percentage
-  timeSpent   Int      @default(0) // in minutes
-  lastAccess  DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  lesson      Lesson?  @relation(fields: [lessonId], references: [id])
+  id         String    @id @default(cuid())
+  userId     String
+  courseId   String
+  lessonId   String?
+  completed  Boolean   @default(false)
+  progress   Float     @default(0)
+  timeSpent  Int       @default(0)
+  lastAccess DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  course     Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lesson     Lesson?   @relation(fields: [lessonId], references: [id])
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
   @@map("course_progress")
 }
 
-// Lightweight assessments
 model Assessment {
-  id          String       @id @default(cuid())
+  id          String               @id @default(cuid())
   courseId    String
   lessonId    String?
   title       String
   type        AssessmentType
+  isActive    Boolean              @default(true)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
   questions   AssessmentQuestion[]
-  isActive    Boolean      @default(true)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-
-  // Relations
-  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  lesson      Lesson?      @relation(fields: [lessonId], references: [id])
+  course      Course               @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lesson      Lesson?              @relation(fields: [lessonId], references: [id])
   userResults UserAssessment[]
 
   @@map("assessments")
 }
 
 model AssessmentQuestion {
-  id           String   @id @default(cuid())
-  assessmentId String
-  question     String
-  type         QuestionType
-  options      String?  // JSON string of options
+  id            String       @id @default(cuid())
+  assessmentId  String
+  question      String
+  type          QuestionType
+  options       String?
   correctAnswer String
-  explanation  String?
-  order        Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  // Relations
-  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  explanation   String?
+  order         Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  assessment    Assessment   @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
 
   @@map("assessment_questions")
 }
 
 model UserAssessment {
-  id           String   @id @default(cuid())
+  id           String     @id @default(cuid())
   userId       String
   assessmentId String
-  score        Float    // 0-100 percentage
-  answers      String   // JSON string of user answers
+  score        Float
+  answers      String
   completedAt  DateTime
-  createdAt    DateTime @default(now())
-
-  // Relations
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
   assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, assessmentId])
   @@map("user_assessments")
 }
 
-// Skill badges system
 model SkillBadge {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   name        String
   description String
   icon        String?
   color       String?
-  criteria    String   // JSON string of criteria
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
+  criteria    String
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   userBadges  UserBadge[]
 
   @@map("skill_badges")
 }
 
 model UserBadge {
-  id          String   @id @default(cuid())
-  userId      String
-  badgeId     String
-  earnedAt    DateTime @default(now())
-  createdAt   DateTime @default(now())
-
-  // Relations
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  badge       SkillBadge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  id        String     @id @default(cuid())
+  userId    String
+  badgeId   String
+  earnedAt  DateTime   @default(now())
+  createdAt DateTime   @default(now())
+  badge     SkillBadge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, badgeId])
   @@map("user_badges")
 }
 
-// Optional certification system
 model Certificate {
-  id          String   @id @default(cuid())
-  userId      String
-  courseId    String
-  certificateNumber String @unique
-  issuedAt    DateTime @default(now())
-  verified    Boolean  @default(false)
-  verificationUrl String?
-  createdAt   DateTime @default(now())
-
-  // Relations
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String   @id @default(cuid())
+  userId            String
+  courseId          String
+  certificateNumber String   @unique
+  issuedAt          DateTime @default(now())
+  verified          Boolean  @default(false)
+  verificationUrl   String?
+  createdAt         DateTime @default(now())
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
   @@map("certificates")
 }
 
-// Community features
 model Discussion {
-  id          String   @id @default(cuid())
-  courseId    String
-  userId      String
-  title       String
-  content     String
-  isPinned    Boolean  @default(false)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  replies     DiscussionReply[]
+  id        String            @id @default(cuid())
+  courseId  String
+  userId    String
+  title     String
+  content   String
+  isPinned  Boolean           @default(false)
+  isActive  Boolean           @default(true)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  replies   DiscussionReply[]
+  course    Course            @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("discussions")
 }
 
 model DiscussionReply {
-  id          String   @id @default(cuid())
+  id           String     @id @default(cuid())
   discussionId String
-  userId      String
-  content     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  discussion  Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  content      String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("discussion_replies")
 }
 
-// Payment records for subscription and certificates
 model PaymentRecord {
-  id          String        @id @default(cuid())
-  userId      String
-  type        PaymentType
-  amount      Float
-  currency    String        @default("INR")
-  status      PaymentStatus
-  paymentId   String?       // External payment gateway ID
-  metadata    String?       // JSON string for additional data
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  // Relations
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String        @id @default(cuid())
+  userId    String
+  type      PaymentType
+  amount    Float
+  currency  String        @default("INR")
+  status    PaymentStatus
+  paymentId String?
+  metadata  String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("payment_records")
 }
 
-// Category statistics for performance tracking
 model CategoryStats {
-  id          String   @id @default(cuid())
-  categoryId  String
-  courseCount Int      @default(0)
-  studentCount Int      @default(0)
-  totalDuration Int    @default(0) // in minutes
-  avgRating   Float?   @default(0)
-  revenue     Float    @default(0)
-  metadata    String?  // JSON string for additional stats
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  categoryId    String   @unique
+  courseCount   Int      @default(0)
+  studentCount  Int      @default(0)
+  totalDuration Int      @default(0)
+  avgRating     Float?   @default(0)
+  revenue       Float    @default(0)
+  metadata      String?
+  updatedAt     DateTime @updatedAt
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
-  // Relations
-  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@unique([categoryId])
   @@map("category_stats")
 }
 
-// SubCategory statistics for performance tracking
 model SubCategoryStats {
-  id            String   @id @default(cuid())
-  subCategoryId String
-  courseCount   Int      @default(0)
-  studentCount  Int      @default(0)
-  totalDuration Int      @default(0) // in minutes
-  avgRating     Float?   @default(0)
-  revenue       Float    @default(0)
-  metadata      String?  // JSON string for additional stats
-  updatedAt     DateTime @updatedAt
+  id            String      @id @default(cuid())
+  subCategoryId String      @unique
+  courseCount   Int         @default(0)
+  studentCount  Int         @default(0)
+  totalDuration Int         @default(0)
+  avgRating     Float?      @default(0)
+  revenue       Float       @default(0)
+  metadata      String?
+  updatedAt     DateTime    @updatedAt
+  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
 
-  // Relations
-  subCategory  SubCategory @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
-
-  @@unique([subCategoryId])
   @@map("sub_category_stats")
 }
 
-// Learning Path Category statistics
 model LearningPathCategoryStats {
-  id          String   @id @default(cuid())
-  categoryId  String
-  pathCount   Int      @default(0)
-  courseCount Int      @default(0)
-  studentCount Int     @default(0)
-  totalDuration Int    @default(0) // in minutes
-  avgRating   Float?   @default(0)
-  revenue     Float    @default(0)
-  metadata    String?  // JSON string for additional stats
-  updatedAt   DateTime @updatedAt
+  id            String               @id @default(cuid())
+  categoryId    String               @unique
+  pathCount     Int                  @default(0)
+  courseCount   Int                  @default(0)
+  studentCount  Int                  @default(0)
+  totalDuration Int                  @default(0)
+  avgRating     Float?               @default(0)
+  revenue       Float                @default(0)
+  metadata      String?
+  updatedAt     DateTime             @updatedAt
+  category      LearningPathCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
-  // Relations
-  category    LearningPathCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@unique([categoryId])
   @@map("learning_path_category_stats")
 }
 
-// Profile Management Models
 model ProfileSettings {
-  id              String  @id @default(cuid())
-  userId          String  @unique
-  // Notification Settings
-  emailNotifications  Boolean @default(true)
-  smsNotifications    Boolean @default(false)
-  pushNotifications   Boolean @default(true)
-  courseUpdates       Boolean @default(true)
-  communityUpdates    Boolean @default(true)
-  
-  // Privacy Settings
-  profileVisibility   ProfileVisibility @default(PUBLIC)
-  showProgress        Boolean @default(true)
-  showCertificates    Boolean @default(true)
-  showInLeaderboard   Boolean @default(true)
-  
-  // Learning Preferences
-  preferredLanguage   String  @default("en")
-  learningMode        LearningMode @default(BALANCED)
-  reminderFrequency   ReminderFrequency @default(DAILY)
-  
-  // Accessibility
-  fontSize            FontSize @default(MEDIUM)
-  highContrast        Boolean  @default(false)
-  reducedMotion       Boolean  @default(false)
-  
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id                 String            @id @default(cuid())
+  userId             String            @unique
+  emailNotifications Boolean           @default(true)
+  smsNotifications   Boolean           @default(false)
+  pushNotifications  Boolean           @default(true)
+  courseUpdates      Boolean           @default(true)
+  communityUpdates   Boolean           @default(true)
+  profileVisibility  ProfileVisibility @default(PUBLIC)
+  showProgress       Boolean           @default(true)
+  showCertificates   Boolean           @default(true)
+  showInLeaderboard  Boolean           @default(true)
+  preferredLanguage  String            @default("en")
+  learningMode       LearningMode      @default(BALANCED)
+  reminderFrequency  ReminderFrequency @default(DAILY)
+  fontSize           FontSize          @default(MEDIUM)
+  highContrast       Boolean           @default(false)
+  reducedMotion      Boolean           @default(false)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("profile_settings")
 }
 
 model InstructorProfile {
-  id              String  @id @default(cuid())
-  userId          String  @unique
-  bio             String  // Detailed bio
-  expertise       String  // JSON array of expertise areas
-  experience      String? // Years of experience
-  qualifications  String? // Educational qualifications
-  achievements    String? // JSON array of achievements
-  socialLinks     String? // JSON object with social media links
-  teachingStyle   String? // Description of teaching approach
-  isApproved      Boolean @default(false)
-  rating          Float   @default(0)
-  totalStudents   Int     @default(0)
-  totalCourses    Int     @default(0)
-  totalEarnings   Float   @default(0)
-  payoutInfo      String? // JSON object with payout details
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  bio            String
+  expertise      String
+  experience     String?
+  qualifications String?
+  achievements   String?
+  socialLinks    String?
+  teachingStyle  String?
+  isApproved     Boolean  @default(false)
+  rating         Float    @default(0)
+  totalStudents  Int      @default(0)
+  totalCourses   Int      @default(0)
+  totalEarnings  Float    @default(0)
+  payoutInfo     String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("instructor_profiles")
 }
 
-// User Activity Logging
 model UserActivityLog {
-  id          String       @id @default(cuid())
-  userId      String
-  action      ActivityAction
-  resourceType String      // course, lesson, discussion, etc.
-  resourceId  String?
-  details     String?      // JSON string with additional details
-  ipAddress   String?
-  userAgent   String?
-  timestamp   DateTime     @default(now())
-  
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id           String         @id @default(cuid())
+  userId       String
+  action       ActivityAction
+  resourceType String
+  resourceId   String?
+  details      String?
+  ipAddress    String?
+  userAgent    String?
+  timestamp    DateTime       @default(now())
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("user_activity_logs")
 }
 
-// Live Learning Models
 model LiveSession {
-  id            String        @id @default(cuid())
-  title         String
-  description   String?
-  scheduledAt   DateTime
-  duration      Int           // Duration in minutes
-  status        SessionStatus @default(SCHEDULED)
-  hostId        String
-  courseId      String?
-  roomId        String?       // Unique room identifier for WebRTC
-  roomUrl       String?       // Join URL for participants
-  maxParticipants Int?        // Maximum number of participants
-  isRecorded    Boolean       @default(false)
-  recordingUrl  String?
-  startedAt     DateTime?
-  endedAt       DateTime?
-  metadata      String?       // JSON string for additional configuration
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-
-  // Relations
-  host          User          @relation("SessionHost", fields: [hostId], references: [id], onDelete: Cascade)
-  course        Course?       @relation(fields: [courseId], references: [id])
-  attendances   Attendance[]
+  id              String        @id @default(cuid())
+  title           String
+  description     String?
+  scheduledAt     DateTime
+  duration        Int
+  status          SessionStatus @default(SCHEDULED)
+  hostId          String
+  courseId        String?
+  roomId          String?
+  roomUrl         String?
+  maxParticipants Int?
+  isRecorded      Boolean       @default(false)
+  recordingUrl    String?
+  startedAt       DateTime?
+  endedAt         DateTime?
+  metadata        String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  attendances     Attendance[]
+  course          Course?       @relation(fields: [courseId], references: [id])
+  host            User          @relation("SessionHost", fields: [hostId], references: [id], onDelete: Cascade)
 
   @@map("live_sessions")
 }
 
 model Attendance {
-  id            String     @id @default(cuid())
-  userId        String
-  sessionId     String
-  joinedAt      DateTime   @default(now())
-  leftAt        DateTime?
-  duration      Int?       // Actual time spent in minutes
-  status        AttendanceStatus @default(PRESENT)
-  deviceInfo    String?    // JSON string with device/browser info
-  ipAddress     String?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-
-  // Relations
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  session       LiveSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  id         String           @id @default(cuid())
+  userId     String
+  sessionId  String
+  joinedAt   DateTime         @default(now())
+  leftAt     DateTime?
+  duration   Int?
+  status     AttendanceStatus @default(PRESENT)
+  deviceInfo String?
+  ipAddress  String?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  session    LiveSession      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, sessionId])
   @@map("attendances")
 }
 
-// Role Permissions (for future enhancement)
 model RolePermission {
-  id           String       @id @default(cuid())
-  role         UserRole
-  permission   Permission
-  createdAt    DateTime     @default(now())
-  
+  id         String     @id @default(cuid())
+  role       UserRole
+  permission Permission
+  createdAt  DateTime   @default(now())
+
   @@unique([role, permission])
   @@map("role_permissions")
 }
 
-// User Role Management
+model PlatformSettings {
+  id                    String   @id @default(cuid())
+  siteName              String   @default("INR99 Academy")
+  siteDescription       String   @default("Online Learning Platform")
+  siteUrl               String   @default("https://inr99.com")
+  logoUrl               String?
+  faviconUrl            String?
+  maintenanceMode       Boolean  @default(false)
+  allowRegistration     Boolean  @default(true)
+  allowGuestCheckout    Boolean  @default(false)
+  emailNotifications    Boolean  @default(true)
+  pushNotifications     Boolean  @default(false)
+  defaultCurrency       String   @default("INR")
+  platformFee           Float    @default(10)
+  taxRate               Float    @default(0)
+  maxUploadSize         Int      @default(100)
+  allowedFileTypes      String   @default("jpg,jpeg,png,gif,pdf,mp4,webm")
+  defaultCourseDuration Int      @default(60)
+  certificateExpiry     Int      @default(365)
+  maxStudentsPerCourse  Int      @default(1000)
+  passwordMinLength     Int      @default(8)
+  sessionTimeout        Int      @default(24)
+  twoFactorRequired     Boolean  @default(false)
+  metaKeywords          String?
+  metaDescription       String?
+  facebookUrl           String?
+  twitterUrl            String?
+  instagramUrl          String?
+  youtubeUrl            String?
+  linkedinUrl           String?
+  supportEmail          String   @default("support@inr99.com")
+  contactPhone          String?
+  address               String?
+  googleAnalyticsId     String?
+  facebookPixelId       String?
+  primaryColor          String   @default("#dc2626")
+  secondaryColor        String   @default("#3b82f6")
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("platform_settings")
+}
+
 enum UserRole {
   STUDENT
   INSTRUCTOR
@@ -729,31 +663,23 @@ enum UserRole {
 }
 
 enum Permission {
-  // User Management
   VIEW_USERS
   EDIT_USERS
   DELETE_USERS
   MANAGE_ROLES
-  
-  // Course Management
   CREATE_COURSES
   EDIT_COURSES
   DELETE_COURSES
   PUBLISH_COURSES
-  
-  // Content Management
   MANAGE_CONTENT
   MODERATE_DISCUSSIONS
-  
-  // Financial
   VIEW_ANALYTICS
   MANAGE_PAYMENTS
   VIEW_EARNINGS
-  
-  // System
   SYSTEM_SETTINGS
   MANAGE_PLATFORM
 }
+
 enum SubscriptionType {
   MONTHLY
   QUARTERLY
@@ -797,12 +723,11 @@ enum PaymentStatus {
   REFUNDED
 }
 
-// New enums for school and college learning
 enum SchoolLevel {
-  PRIMARY      // Class 1-5
-  MIDDLE       // Class 6-8
-  SECONDARY    // Class 9-10
-  SENIOR_SECONDARY // Class 11-12
+  PRIMARY
+  MIDDLE
+  SECONDARY
+  SENIOR_SECONDARY
 }
 
 enum DegreeLevel {
@@ -842,7 +767,6 @@ enum CourseType {
   EXAM_SUPPORT
 }
 
-// Profile Management Enums
 enum ProfileVisibility {
   PUBLIC
   PRIVATE
@@ -885,7 +809,6 @@ enum ActivityAction {
   LEAVE_LIVE_SESSION
 }
 
-// Live Learning Enums
 enum SessionStatus {
   SCHEDULED
   LIVE
@@ -898,68 +821,4 @@ enum AttendanceStatus {
   LATE
   LEFT_EARLY
   ABSENT
-}
-
-// Platform Settings for Admin Configuration
-model PlatformSettings {
-  id                  String   @id @default(cuid())
-  // General Settings
-  siteName            String   @default("INR99 Academy")
-  siteDescription     String   @default("Online Learning Platform")
-  siteUrl             String   @default("https://inr99.com")
-  logoUrl             String?
-  faviconUrl          String?
-  
-  // Feature Flags
-  maintenanceMode     Boolean  @default(false)
-  allowRegistration   Boolean  @default(true)
-  allowGuestCheckout  Boolean  @default(false)
-  emailNotifications  Boolean  @default(true)
-  pushNotifications   Boolean  @default(false)
-  
-  // Business Settings
-  defaultCurrency     String   @default("INR")
-  platformFee         Float    @default(10)
-  taxRate             Float    @default(0)
-  maxUploadSize       Int      @default(100) // in MB
-  allowedFileTypes    String   @default("jpg,jpeg,png,gif,pdf,mp4,webm")
-  
-  // Course Settings
-  defaultCourseDuration Int    @default(60) // days
-  certificateExpiry   Int      @default(365) // days
-  maxStudentsPerCourse Int     @default(1000)
-  
-  // Security Settings
-  passwordMinLength   Int      @default(8)
-  sessionTimeout      Int      @default(24) // hours
-  twoFactorRequired   Boolean  @default(false)
-  
-  // SEO Settings
-  metaKeywords        String?
-  metaDescription     String?
-  
-  // Social Links
-  facebookUrl         String?
-  twitterUrl          String?
-  instagramUrl        String?
-  youtubeUrl          String?
-  linkedinUrl         String?
-  
-  // Contact Information
-  supportEmail        String   @default("support@inr99.com")
-  contactPhone        String?
-  address             String?
-  
-  // Analytics
-  googleAnalyticsId   String?
-  facebookPixelId     String?
-  
-  // Branding Colors
-  primaryColor        String   @default("#dc2626")
-  secondaryColor      String   @default("#3b82f6")
-  
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-
-  @@map("platform_settings")
 }
