@@ -21,5 +21,14 @@ prisma:query SELECT "public"."learning_paths"."id", "public"."learning_paths"."t
  ✓ Compiled /courses in 1254ms (895 modules)
 [33m[auth][warn][debug-enabled][0m Read more: https://warnings.authjs.dev
  GET /courses 200 in 1804ms
-m[auth][warn][debug-enabled][0m Read more: https://warnings.authjs.dev
- GET /courses 200 in 1804ms
+prisma:query SELECT "public"."courses"."id", "public"."courses"."title", "public"."courses"."description", "public"."courses"."thumbnail", "public"."courses"."difficulty"::text, "public"."courses"."duration", "public"."courses"."isActive", "public"."courses"."instructorId", "public"."courses"."categoryId", "public"."courses"."subCategoryId", "public"."courses"."learningPathId", "public"."courses"."courseType"::text, "public"."courses"."classId", "public"."courses"."schoolSubjectId", "public"."courses"."collegeSubjectId", "public"."courses"."degreeId", "public"."courses"."boardId", "public"."courses"."semester", "public"."courses"."chapter", "public"."courses"."conceptFocus", "public"."courses"."createdAt", "public"."courses"."updatedAt", COALESCE("aggr_selection_0_Lesson"."_aggr_count_lessons", 0) AS "_aggr_count_lessons", COALESCE("aggr_selection_1_Assessment"."_aggr_count_assessments", 0) AS "_aggr_count_assessments" FROM "public"."courses" LEFT JOIN (SELECT "public"."lessons"."courseId", COUNT(*) AS "_aggr_count_lessons" FROM "public"."lessons" WHERE 1=1 GROUP BY "public"."lessons"."courseId") AS "aggr_selection_0_Lesson" ON ("public"."courses"."id" = "aggr_selection_0_Lesson"."courseId") LEFT JOIN (SELECT "public"."assessments"."courseId", COUNT(*) AS "_aggr_count_assessments" FROM "public"."assessments" WHERE 1=1 GROUP BY "public"."assessments"."courseId") AS "aggr_selection_1_Assessment" ON ("public"."courses"."id" = "aggr_selection_1_Assessment"."courseId") WHERE "public"."courses"."isActive" = $1 ORDER BY "public"."courses"."createdAt" DESC LIMIT $2 OFFSET $3
+prisma:query SELECT COUNT(*) AS "_count$_all" FROM (SELECT "public"."courses"."id" FROM "public"."courses" WHERE "public"."courses"."isActive" = $1 OFFSET $2) AS "sub"
+prisma:query SELECT "public"."instructors"."id", "public"."instructors"."name", "public"."instructors"."title", "public"."instructors"."avatar", "public"."instructors"."expertise" FROM "public"."instructors" WHERE "public"."instructors"."id" IN ($1,$2,$3,$4,$5) OFFSET $6
+prisma:query SELECT "public"."learning_paths"."id", "public"."learning_paths"."title", "public"."learning_paths"."color", "public"."learning_paths"."icon" FROM "public"."learning_paths" WHERE "public"."learning_paths"."id" IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) OFFSET $12
+ GET /api/courses 200 in 3273ms
+ ○ Compiling /learning-paths ...
+ ✓ Compiled /learning-paths in 1232ms (939 modules)
+[33m[auth][warn][debug-enabled][0m Read more: https://warnings.authjs.dev
+ GET /learning-paths 200 in 1590ms
+[warn][debug-enabled][0m Read more: https://warnings.authjs.dev
+ GET /learning-paths 200 in 1590ms
