@@ -66,11 +66,12 @@ export async function GET(
       )
     }
 
-    // Group lessons into modules based on lesson ID prefix
-    // Lesson IDs follow pattern: cr_ecm_XXX where first digit(s) = module number
-    // e.g., cr_ecm_101 -> module 1; cr_ecm_201 -> module 2; cr_ecm_1001 -> module 10
+    // Group lessons into modules based on course type and lesson structure
     
-    const moduleNames: Record<string, string> = {
+    const isEnglishCourse = course.id === 'cr_english_mastery'
+    const isConstitutionCourse = course.id === 'cr_indian_constitution'
+    
+    const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
       '2': 'Grammar Mastery',
       '3': 'Speaking Confidence',
@@ -83,38 +84,70 @@ export async function GET(
       '10': 'Advanced Communication',
     }
 
+    const constitutionModuleNames: Record<string, string> = {
+      '1': 'Introduction to Indian Constitution',
+      '2': 'Parts and Schedules',
+      '3': 'Fundamental Rights',
+      '4': 'Directive Principles & Fundamental Duties',
+      '5': 'Union Government',
+      '6': 'State Government',
+      '7': 'Local Governance',
+      '8': 'Elections & Voting',
+      '9': 'Citizenship & Identity',
+      '10': 'Rights, Duties & Civic Engagement',
+    }
+
     const moduleLessons: Record<string, typeof course.lessons> = {}
     
     for (const lesson of course.lessons) {
-      // Extract module number from lesson ID
-      // cr_ecm_101 -> module 1 (lesson 1); cr_ecm_201 -> module 2 (lesson 1); cr_ecm_1001 -> module 10 (lesson 1)
-      let moduleNum = '1' // Default to module 1 for ECM lessons
-      if (lesson.id.startsWith('cr_ecm_')) {
-        const numericPart = lesson.id.replace('cr_ecm_', '')
-        // Extract the first digit(s) before the last digit(s) to determine module
-        // For 101-170: first digit is module (1); for 1001-1070: first two digits are module (10)
-        if (numericPart.length >= 4 && numericPart.startsWith('10')) {
-          // Module 10: cr_ecm_1001, cr_ecm_1002, etc.
-          moduleNum = '10'
-        } else if (numericPart.length >= 3 && numericPart.length < 4) {
-          // Modules 1-9: cr_ecm_101, cr_ecm_102, etc. (3-digit numeric part)
-          const firstDigit = numericPart.charAt(0)
-          if (firstDigit !== '0') {
-            moduleNum = firstDigit
-          }
-          // If firstDigit is '0', keep moduleNum as '1' (lessons 065-070 are extra Module 1 lessons)
-        } else {
-          // Fallback: extract all leading digits
-          const match = numericPart.match(/^(\d+)/)
-          if (match) {
-            const num = parseInt(match[1])
-            if (num >= 1000) {
-              moduleNum = '10'
-            } else if (num >= 100) {
-              moduleNum = Math.floor(num / 100).toString()
+      let moduleNum = '1'
+      
+      if (isEnglishCourse) {
+        // English Communication Mastery: use lesson ID pattern cr_ecm_XXX
+        if (lesson.id.startsWith('cr_ecm_')) {
+          const numericPart = lesson.id.replace('cr_ecm_', '')
+          if (numericPart.length >= 4 && numericPart.startsWith('10')) {
+            moduleNum = '10'
+          } else if (numericPart.length >= 3 && numericPart.length < 4) {
+            const firstDigit = numericPart.charAt(0)
+            if (firstDigit !== '0') {
+              moduleNum = firstDigit
             }
-            // If num < 100 (like 065 = 65), keep as module 1
+          } else {
+            const match = numericPart.match(/^(\d+)/)
+            if (match) {
+              const num = parseInt(match[1])
+              if (num >= 1000) {
+                moduleNum = '10'
+              } else if (num >= 100) {
+                moduleNum = Math.floor(num / 100).toString()
+              }
+            }
           }
+        }
+      } else if (isConstitutionCourse) {
+        // Indian Constitution course: use lesson order ranges
+        // Module 1: orders 1-5, Module 2: orders 6-10, etc.
+        if (lesson.order >= 1 && lesson.order <= 5) {
+          moduleNum = '1'
+        } else if (lesson.order >= 6 && lesson.order <= 10) {
+          moduleNum = '2'
+        } else if (lesson.order >= 11 && lesson.order <= 16) {
+          moduleNum = '3'
+        } else if (lesson.order >= 17 && lesson.order <= 22) {
+          moduleNum = '4'
+        } else if (lesson.order >= 23 && lesson.order <= 28) {
+          moduleNum = '5'
+        } else if (lesson.order >= 29 && lesson.order <= 34) {
+          moduleNum = '6'
+        } else if (lesson.order >= 35 && lesson.order <= 39) {
+          moduleNum = '7'
+        } else if (lesson.order >= 40 && lesson.order <= 44) {
+          moduleNum = '8'
+        } else if (lesson.order >= 45 && lesson.order <= 50) {
+          moduleNum = '9'
+        } else if (lesson.order >= 51) {
+          moduleNum = '10'
         }
       }
       
@@ -127,7 +160,7 @@ export async function GET(
     // Build modules array
     const modules = Object.entries(moduleLessons).map(([moduleNum, lessons]) => ({
       id: `module-${moduleNum}`,
-      title: `Module ${moduleNum}: ${moduleNames[moduleNum] || 'Module ' + moduleNum}`,
+      title: `Module ${moduleNum}: ${isEnglishCourse ? englishModuleNames[moduleNum] : constitutionModuleNames[moduleNum] || 'Module ' + moduleNum}`,
       order: parseInt(moduleNum),
       lessons: lessons.map(lesson => ({
         id: lesson.id,
