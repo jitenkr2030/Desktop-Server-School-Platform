@@ -1,14 +1,9 @@
 {
   "pages": {
-    "/api/user/subscription/route": [
+    "/api/courses/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/user/subscription/route.js"
-    ],
-    "/api/courses/[id]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/courses/[id]/route.js"
+      "static/chunks/app/api/courses/route.js"
     ]
   }
 }
