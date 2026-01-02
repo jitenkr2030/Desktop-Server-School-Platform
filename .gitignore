@@ -18,6 +18,7 @@
 **/downloads/
 **/eggs/
 **/.eggs/
+**/lib/
 **/lib64/
 **/parts/
 **/sdist/
@@ -25,12 +26,9 @@
 **/wheels/
 **/share/python-wheels/
 **/*.egg-info/
-**/.installed.cfg/
+**/.installed.cfg
 **/*.egg
 **/MANIFEST
-
-# Exception for src/lib which contains our code
-!src/lib/
 
 # PyInstaller
 **/*.manifest
