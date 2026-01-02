@@ -192,6 +192,56 @@ export default function CourseDetailPage() {
     return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`
   }
 
+  // Get thumbnail path - maps course ID to thumbnail file
+  const getThumbnailPath = (courseId: string, currentThumbnail: string | null) => {
+    if (currentThumbnail && (currentThumbnail.startsWith('/assets/') || currentThumbnail.startsWith('/images/'))) {
+      return currentThumbnail
+    }
+    
+    const thumbnailMap: Record<string, string> = {
+      'cr_english_mastery': '/assets/courses/english-communication.svg',
+      'cr_indian_constitution': '/assets/courses/indian-constitution.svg',
+      'cr_upi': '/assets/courses/cr_upi.svg',
+      'cr_digital': '/assets/courses/cr_digital.svg',
+      'cr_fraud': '/assets/courses/cr_fraud.svg',
+      'cr_bulk': '/assets/courses/cr_bulk.svg',
+      'cr_community': '/assets/courses/cr_community.svg',
+      'cr_foodwork': '/assets/courses/cr_foodwork.svg',
+      'cr_money': '/assets/courses/cr_money.svg',
+      'cr_gov': '/assets/courses/cr_gov.svg',
+      'cr_english': '/assets/courses/cr_english.svg',
+      'python-masterclass': '/assets/courses/python-masterclass.svg',
+      'data-science-python': '/assets/courses/data-science-python.svg',
+      'web-development-bootcamp': '/assets/courses/web-development-bootcamp.svg',
+      'ui-ux-design-masterclass': '/assets/courses/ui-ux-design-masterclass.svg',
+      'digital-marketing-complete': '/assets/courses/digital-marketing-complete.svg',
+      'personal-finance-mastery': '/assets/courses/personal-finance-mastery.svg',
+      'stock-market-fundamentals': '/assets/courses/stock-market-fundamentals.svg',
+      'indian-constitution-citizenship': '/assets/courses/indian-constitution-citizenship.svg',
+      'excel-mastery': '/assets/courses/excel-mastery.svg',
+      'cyber-safety-awareness': '/assets/courses/cyber-safety-awareness.svg',
+      'job-prep-complete': '/assets/courses/job-prep-complete.svg',
+      'startup-foundation': '/assets/courses/startup-foundation.svg',
+      'meditation-mindfulness': '/assets/courses/meditation-mindfulness.svg',
+      'bcom-financial-accounting': '/assets/courses/bcom-financial-accounting.svg',
+      'class10-mathematics': '/assets/courses/class10-mathematics.svg',
+    }
+    
+    if (thumbnailMap[courseId]) {
+      return thumbnailMap[courseId]
+    }
+    
+    const availableThumbnails = Object.values(thumbnailMap)
+    for (const thumb of availableThumbnails) {
+      const thumbName = thumb.split('/').pop()?.replace('.svg', '')
+      if (thumbName && courseId.includes(thumbName)) {
+        return thumb
+      }
+    }
+    
+    return currentThumbnail
+  }
+
   const getAllLessons = useMemo(() => {
     if (!course) return []
     const lessons: Array<{
@@ -288,40 +338,46 @@ export default function CourseDetailPage() {
             {/* Course Thumbnail */}
             <div className="lg:w-1/3">
               <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative">
-                {course.thumbnail && course.thumbnail !== '/courses/python-masterclass/thumbnail.jpg' ? (
-                  <img 
-                    src={course.thumbnail} 
-                    alt={course.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100">
-                    <BookOpen className="h-16 w-16 text-orange-500" />
-                  </div>
-                )}
+                {(() => {
+                  const thumbnailPath = getThumbnailPath(course.id, course.thumbnail)
+                  if (thumbnailPath) {
+                    return (
+                      <img 
+                        src={thumbnailPath} 
+                        alt={course.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none'
+                          e.currentTarget.parentElement!.innerHTML = `
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100">
+                              <svg class="h-16 w-16 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                              </svg>
+                            </div>
+                          `
+                        }}
+                      />
+                    )
+                  }
+                  return (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-green-100">
+                      <BookOpen className="h-16 w-16 text-orange-500" />
+                    </div>
+                  )
+                })()}
                 {/* Price Badge */}
                 <div style={{
                   position: 'absolute',
                   bottom: '1rem',
                   right: '1rem',
-                  background: course.price === 0 ? '#16a34a' : '#ea580c',
+                  background: '#ea580c',
                   color: 'white',
                   padding: '0.5rem 1rem',
                   borderRadius: '0.5rem',
                   fontWeight: 'bold',
                   fontSize: '1.125rem'
                 }}>
-                  {course.price === 0 ? 'FREE' : `₹${course.price}`}
-                  {course.originalPrice > course.price && (
-                    <span style={{
-                      textDecoration: 'line-through',
-                      fontSize: '0.875rem',
-                      marginLeft: '0.5rem',
-                      opacity: 0.8
-                    }}>
-                      ₹{course.originalPrice}
-                    </span>
-                  )}
+                  INR 99/month
                 </div>
               </div>
             </div>
@@ -370,7 +426,7 @@ export default function CourseDetailPage() {
                 </Avatar>
                 <div>
                   <p className="font-medium text-gray-900">{course.instructor.name}</p>
-                  <p className="text-sm text-gray-600">{course.instructor.title}</p>
+                  <p className="text-sm text-gray-600">{course.instructor.title || 'Instructor'}</p>
                 </div>
               </div>
 
@@ -418,14 +474,6 @@ export default function CourseDetailPage() {
                   >
                     {completedLessons.size > 0 ? 'Continue Learning' : 'Start Learning'}
                   </Button>
-                ) : course.price === 0 ? (
-                  <Button 
-                    size="lg" 
-                    className="bg-green-500 hover:bg-green-600"
-                    onClick={() => setIsEnrolled(true)}
-                  >
-                    Enroll for Free
-                  </Button>
                 ) : (
                   <Button 
                     size="lg" 
@@ -439,7 +487,7 @@ export default function CourseDetailPage() {
                       setPaymentStatus('idle')
                     }}
                   >
-                    Enroll Now - ₹{course.price}
+                    Enroll Now - INR 99/month
                   </Button>
                 )}
                 <Button size="lg" variant="outline">
@@ -915,7 +963,7 @@ export default function CourseDetailPage() {
                   </div>
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-gray-600">Amount</span>
-                    <span className="text-xl font-bold text-orange-600">₹{course.price}</span>
+                    <span className="text-xl font-bold text-orange-600">INR 99/month</span>
                   </div>
                   <div className="flex justify-between items-center pt-3 border-t">
                     <span className="text-gray-600">UPI ID</span>
