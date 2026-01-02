@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
             select: {
               id: true,
               name: true,
-              title: true,
+              // title field removed - not available in current Prisma schema
               avatar: true,
               expertise: true,
             },
