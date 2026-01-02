@@ -823,3 +823,27 @@ enum AttendanceStatus {
   LEFT_EARLY
   ABSENT
 }
+
+enum MessageStatus {
+  PENDING
+  REPLIED
+  CLOSED
+}
+
+model ContactMessage {
+  id           String        @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String
+  subject      String
+  message      String        @db.Text
+  status       MessageStatus @default(PENDING)
+  replyMessage String?       @db.Text
+  repliedAt    DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("contact_messages")
+}
