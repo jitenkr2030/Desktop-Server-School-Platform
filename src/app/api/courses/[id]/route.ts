@@ -71,7 +71,7 @@ export async function GET(
     
     const isEnglishCourse = course.id === 'cr_english_mastery'
     const isConstitutionCourse = course.id === 'cr_indian_constitution'
-    const isPublicSpeakingCourse = course.id === 'course_public_speaking'
+    const isPublicSpeakingCourse = course.id === 'course_public_speaking' || course.id === 'career14'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
