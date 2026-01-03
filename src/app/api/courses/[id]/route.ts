@@ -73,6 +73,7 @@ export async function GET(
     const isConstitutionCourse = course.id === 'cr_indian_constitution'
     const isPublicSpeakingIntermediate = course.id === 'career14'
     const isPublicSpeakingAdvanced = course.id === 'course_public_speaking'
+    const isWebDevBootcamp = course.id === 'career1'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -120,6 +121,25 @@ export async function GET(
       '4': 'Body Language',
       '5': 'Audience Connection',
       '6': 'Practical Application',
+    }
+
+    const webDevBootcampModuleNames: Record<string, string> = {
+      '1': 'HTML Fundamentals',
+      '2': 'CSS Styling',
+      '3': 'JavaScript Basics',
+      '4': 'DOM Manipulation',
+      '5': 'Responsive Web Design',
+      '6': 'CSS Frameworks',
+      '7': 'Version Control with Git',
+      '8': 'React.js Introduction',
+      '9': 'React Components & Hooks',
+      '10': 'State Management',
+      '11': 'Backend Integration',
+      '12': 'API Development',
+      '13': 'Database Fundamentals',
+      '14': 'Authentication & Security',
+      '15': 'Deployment & DevOps',
+      '16': 'Full Stack Project',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -214,6 +234,42 @@ export async function GET(
         } else if (lesson.order >= 1001 && lesson.order <= 1005) {
           moduleNum = '10'
         }
+      } else if (isWebDevBootcamp) {
+        // Web Development Bootcamp: use order ranges (1-20, 21-40, etc.)
+        // 16 modules: Module 1: orders 1-20, Module 2: orders 21-40, etc.
+        if (lesson.order >= 1 && lesson.order <= 20) {
+          moduleNum = '1'
+        } else if (lesson.order >= 21 && lesson.order <= 40) {
+          moduleNum = '2'
+        } else if (lesson.order >= 41 && lesson.order <= 60) {
+          moduleNum = '3'
+        } else if (lesson.order >= 61 && lesson.order <= 80) {
+          moduleNum = '4'
+        } else if (lesson.order >= 81 && lesson.order <= 100) {
+          moduleNum = '5'
+        } else if (lesson.order >= 101 && lesson.order <= 120) {
+          moduleNum = '6'
+        } else if (lesson.order >= 121 && lesson.order <= 140) {
+          moduleNum = '7'
+        } else if (lesson.order >= 141 && lesson.order <= 160) {
+          moduleNum = '8'
+        } else if (lesson.order >= 161 && lesson.order <= 180) {
+          moduleNum = '9'
+        } else if (lesson.order >= 181 && lesson.order <= 200) {
+          moduleNum = '10'
+        } else if (lesson.order >= 201 && lesson.order <= 220) {
+          moduleNum = '11'
+        } else if (lesson.order >= 221 && lesson.order <= 240) {
+          moduleNum = '12'
+        } else if (lesson.order >= 241 && lesson.order <= 260) {
+          moduleNum = '13'
+        } else if (lesson.order >= 261 && lesson.order <= 280) {
+          moduleNum = '14'
+        } else if (lesson.order >= 281 && lesson.order <= 300) {
+          moduleNum = '15'
+        } else if (lesson.order >= 301 && lesson.order <= 320) {
+          moduleNum = '16'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -230,6 +286,7 @@ export async function GET(
         isConstitutionCourse ? constitutionModuleNames[moduleNum] : 
         isPublicSpeakingIntermediate ? publicSpeakingIntermediateModuleNames[moduleNum] :
         isPublicSpeakingAdvanced ? publicSpeakingAdvancedModuleNames[moduleNum] :
+        isWebDevBootcamp ? webDevBootcampModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
