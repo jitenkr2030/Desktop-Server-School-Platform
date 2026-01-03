@@ -71,6 +71,7 @@ export async function GET(
     
     const isEnglishCourse = course.id === 'cr_english_mastery'
     const isConstitutionCourse = course.id === 'cr_indian_constitution'
+    const isPublicSpeakingCourse = course.id === 'course_public_speaking'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -96,6 +97,19 @@ export async function GET(
       '8': 'Elections & Voting',
       '9': 'Citizenship & Identity',
       '10': 'Rights, Duties & Civic Engagement',
+    }
+
+    const publicSpeakingModuleNames: Record<string, string> = {
+      '1': 'The Psychology of Performance',
+      '2': 'Advanced Presentation Structure',
+      '3': 'Visual Rhetoric and Slide Design',
+      '4': 'Vocal Mastery and Delivery',
+      '5': 'Body Language and Presence',
+      '6': 'Audience Engagement and Dynamics',
+      '7': 'The Art of Persuasion',
+      '8': 'Handling the Unexpected',
+      '9': 'Virtual and Hybrid Presentations',
+      '10': 'Professional Application and Capstone',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -150,6 +164,30 @@ export async function GET(
         } else if (lesson.order >= 51) {
           moduleNum = '10'
         }
+      } else if (isPublicSpeakingCourse) {
+        // Public Speaking course: use order ranges (101-105, 201-205, etc.)
+        // Module 1: orders 101-105, Module 2: orders 201-205, etc.
+        if (lesson.order >= 101 && lesson.order <= 105) {
+          moduleNum = '1'
+        } else if (lesson.order >= 201 && lesson.order <= 205) {
+          moduleNum = '2'
+        } else if (lesson.order >= 301 && lesson.order <= 305) {
+          moduleNum = '3'
+        } else if (lesson.order >= 401 && lesson.order <= 405) {
+          moduleNum = '4'
+        } else if (lesson.order >= 501 && lesson.order <= 505) {
+          moduleNum = '5'
+        } else if (lesson.order >= 601 && lesson.order <= 605) {
+          moduleNum = '6'
+        } else if (lesson.order >= 701 && lesson.order <= 705) {
+          moduleNum = '7'
+        } else if (lesson.order >= 801 && lesson.order <= 805) {
+          moduleNum = '8'
+        } else if (lesson.order >= 901 && lesson.order <= 905) {
+          moduleNum = '9'
+        } else if (lesson.order >= 1001 && lesson.order <= 1005) {
+          moduleNum = '10'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -161,7 +199,7 @@ export async function GET(
     // Build modules array
     const modules = Object.entries(moduleLessons).map(([moduleNum, lessons]) => ({
       id: `module-${moduleNum}`,
-      title: `Module ${moduleNum}: ${isEnglishCourse ? englishModuleNames[moduleNum] : constitutionModuleNames[moduleNum] || 'Module ' + moduleNum}`,
+      title: `Module ${moduleNum}: ${isEnglishCourse ? englishModuleNames[moduleNum] : isConstitutionCourse ? constitutionModuleNames[moduleNum] : isPublicSpeakingCourse ? publicSpeakingModuleNames[moduleNum] : 'Module ' + moduleNum}`,
       order: parseInt(moduleNum),
       lessons: lessons.map(lesson => ({
         id: lesson.id,

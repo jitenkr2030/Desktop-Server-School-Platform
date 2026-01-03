@@ -225,6 +225,7 @@ export default function CourseDetailPage() {
       'meditation-mindfulness': '/assets/courses/meditation-mindfulness.svg',
       'bcom-financial-accounting': '/assets/courses/bcom-financial-accounting.svg',
       'class10-mathematics': '/assets/courses/class10-mathematics.svg',
+      'course_public_speaking': '/assets/courses/public-speaking.svg',
     }
     
     if (thumbnailMap[courseId]) {
