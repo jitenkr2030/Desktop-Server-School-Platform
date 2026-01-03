@@ -114,6 +114,21 @@ export async function GET(
     const isPhysicsG11 = course.id === 'school20'
     const isChemistryG11 = course.id === 'school21'
     const isBiologyG12 = course.id === 'school22'
+    const isProgrammingFundamentals = course.id === 'college2'
+    const isEngineeringPhysics = course.id === 'college3'
+    const isDigitalElectronics = course.id === 'college4'
+    const isHumanAnatomy = course.id === 'college5'
+    const isBiochemistry = course.id === 'college6'
+    const isPhysiology = course.id === 'college7'
+    const isMedicalResearch = course.id === 'college8'
+    const isBusinessEconomics = course.id === 'college9'
+    const isAccountingPrinciples = course.id === 'college10'
+    const isBusinessStatistics = course.id === 'college11'
+    const isMarketingFundamentals = course.id === 'college12'
+    const isWorldLiterature = course.id === 'college13'
+    const isPhilosophyBasics = course.id === 'college14'
+    const isHistoryOfArt = course.id === 'college15'
+    const isCommunicationSkills = course.id === 'college16'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -457,6 +472,106 @@ export async function GET(
       '2': 'Human Physiology & Reproduction',
       '3': 'Ecology & Environment',
       '4': 'Biology in Medicine & Research',
+    }
+
+    const programmingFundamentalsModuleNames: Record<string, string> = {
+      '1': 'Introduction to Programming',
+      '2': 'Control Structures & Functions',
+      '3': 'Data Structures & Algorithms',
+    }
+
+    const engineeringPhysicsModuleNames: Record<string, string> = {
+      '1': 'Mechanics & Motion',
+      '2': 'Waves, Optics & Thermodynamics',
+      '3': 'Electromagnetism & Modern Physics',
+    }
+
+    const digitalElectronicsModuleNames: Record<string, string> = {
+      '1': 'Digital Logic Fundamentals',
+      '2': 'Combinational & Sequential Circuits',
+      '3': 'Microprocessors & Digital Systems',
+    }
+
+    const humanAnatomyModuleNames: Record<string, string> = {
+      '1': 'Cell Biology & Tissues',
+      '2': 'Skeletal & Muscular Systems',
+      '3': 'Organ Systems & Integration',
+    }
+
+    const biochemistryModuleNames: Record<string, string> = {
+      '1': 'Biomolecules & Enzymes',
+      '2': 'Metabolic Pathways',
+      '3': 'Molecular Biology & Genetics',
+    }
+
+    const physiologyModuleNames: Record<string, string> = {
+      '1': 'Cellular & General Physiology',
+      '2': 'Nerve & Muscle Physiology',
+      '3': 'Cardiovascular & Respiratory Physiology',
+      '4': 'Renal & Endocrine Physiology',
+    }
+
+    const medicalResearchModuleNames: Record<string, string> = {
+      '1': 'Research Design & Methodology',
+      '2': 'Biostatistics & Data Analysis',
+      '3': 'Clinical Trials & Epidemiology',
+      '4': 'Evidence-Based Medicine & Ethics',
+    }
+
+    const businessEconomicsModuleNames: Record<string, string> = {
+      '1': 'Microeconomic Foundations',
+      '2': 'Macroeconomic Environment',
+      '3': 'Market Structures & Strategy',
+      '4': 'Managerial Economics Applications',
+    }
+
+    const accountingPrinciplesModuleNames: Record<string, string> = {
+      '1': 'Accounting Fundamentals & Concepts',
+      '2': 'Financial Statement Preparation',
+      '3': 'Asset Accounting & Depreciation',
+      '4': 'Liabilities, Equity & Financial Analysis',
+    }
+
+    const businessStatisticsModuleNames: Record<string, string> = {
+      '1': 'Descriptive Statistics & Data Visualization',
+      '2': 'Probability & Probability Distributions',
+      '3': 'Statistical Inference & Hypothesis Testing',
+      '4': 'Regression Analysis & Business Forecasting',
+    }
+
+    const marketingFundamentalsModuleNames: Record<string, string> = {
+      '1': 'Marketing Strategy & Planning',
+      '2': 'Consumer Behavior & Research',
+      '3': 'Product, Price & Distribution Strategy',
+      '4': 'Promotion, Digital Marketing & Integrated Communications',
+    }
+
+    const worldLiteratureModuleNames: Record<string, string> = {
+      '1': 'Classical Literature & Ancient Epics',
+      '2': 'Medieval & Renaissance Literature',
+      '3': 'Enlightenment, Romanticism & Realism',
+      '4': 'Modern & Contemporary World Literature',
+    }
+
+    const philosophyBasicsModuleNames: Record<string, string> = {
+      '1': 'Ancient Greek Philosophy',
+      '2': 'Medieval & Early Modern Philosophy',
+      '3': 'Epistemology & Metaphysics',
+      '4': 'Ethics, Political Philosophy & Contemporary Thought',
+    }
+
+    const historyOfArtModuleNames: Record<string, string> = {
+      '1': 'Ancient & Classical Art',
+      '2': 'Medieval & Renaissance Art',
+      '3': 'Baroque to Modern Art Movements',
+      '4': 'Contemporary Art, Global Perspectives & Art Analysis',
+    }
+
+    const communicationSkillsModuleNames: Record<string, string> = {
+      '1': 'Foundations of Communication',
+      '2': 'Written Communication Skills',
+      '3': 'Oral Presentation & Public Speaking',
+      '4': 'Interpersonal, Group & Professional Communication',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -1048,6 +1163,161 @@ export async function GET(
         } else if (lesson.order >= 300 && lesson.order <= 329) {
           moduleNum = '4'
         }
+      } else if (isProgrammingFundamentals) {
+        // Programming Fundamentals: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 349) {
+          moduleNum = '3'
+        }
+      } else if (isEngineeringPhysics) {
+        // Engineering Physics: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 359) {
+          moduleNum = '3'
+        }
+      } else if (isDigitalElectronics) {
+        // Digital Electronics: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 369) {
+          moduleNum = '3'
+        }
+      } else if (isHumanAnatomy) {
+        // Human Anatomy: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 379) {
+          moduleNum = '3'
+        }
+      } else if (isBiochemistry) {
+        // Biochemistry: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 389) {
+          moduleNum = '3'
+        }
+      } else if (isPhysiology) {
+        // Physiology: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        }
+      } else if (isMedicalResearch) {
+        // Medical Research Methods: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 409) {
+          moduleNum = '4'
+        }
+      } else if (isBusinessEconomics) {
+        // Business Economics: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 419) {
+          moduleNum = '4'
+        }
+      } else if (isAccountingPrinciples) {
+        // Accounting Principles: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 429) {
+          moduleNum = '4'
+        }
+      } else if (isBusinessStatistics) {
+        // Business Statistics: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 439) {
+          moduleNum = '4'
+        }
+      } else if (isMarketingFundamentals) {
+        // Marketing Fundamentals: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 449) {
+          moduleNum = '4'
+        }
+      } else if (isWorldLiterature) {
+        // World Literature: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 459) {
+          moduleNum = '4'
+        }
+      } else if (isPhilosophyBasics) {
+        // Philosophy Basics: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 469) {
+          moduleNum = '4'
+        }
+      } else if (isHistoryOfArt) {
+        // History of Art: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 479) {
+          moduleNum = '4'
+        }
+      } else if (isCommunicationSkills) {
+        // Communication Skills: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 489) {
+          moduleNum = '4'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -1105,6 +1375,21 @@ export async function GET(
         isPhysicsG11 ? physicsG11ModuleNames[moduleNum] :
         isChemistryG11 ? chemistryG11ModuleNames[moduleNum] :
         isBiologyG12 ? biologyG12ModuleNames[moduleNum] :
+        isProgrammingFundamentals ? programmingFundamentalsModuleNames[moduleNum] :
+        isEngineeringPhysics ? engineeringPhysicsModuleNames[moduleNum] :
+        isDigitalElectronics ? digitalElectronicsModuleNames[moduleNum] :
+        isHumanAnatomy ? humanAnatomyModuleNames[moduleNum] :
+        isBiochemistry ? biochemistryModuleNames[moduleNum] :
+        isPhysiology ? physiologyModuleNames[moduleNum] :
+        isMedicalResearch ? medicalResearchModuleNames[moduleNum] :
+        isBusinessEconomics ? businessEconomicsModuleNames[moduleNum] :
+        isAccountingPrinciples ? accountingPrinciplesModuleNames[moduleNum] :
+        isBusinessStatistics ? businessStatisticsModuleNames[moduleNum] :
+        isMarketingFundamentals ? marketingFundamentalsModuleNames[moduleNum] :
+        isWorldLiterature ? worldLiteratureModuleNames[moduleNum] :
+        isPhilosophyBasics ? philosophyBasicsModuleNames[moduleNum] :
+        isHistoryOfArt ? historyOfArtModuleNames[moduleNum] :
+        isCommunicationSkills ? communicationSkillsModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
