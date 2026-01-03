@@ -74,6 +74,20 @@ export async function GET(
     const isPublicSpeakingIntermediate = course.id === 'career14'
     const isPublicSpeakingAdvanced = course.id === 'course_public_speaking'
     const isWebDevBootcamp = course.id === 'career1'
+    const isPythonMastery = course.id === 'career2'
+    const isDataScience = course.id === 'career3'
+    const isMobileApp = course.id === 'career4'
+    const isBusinessStrategy = course.id === 'career5'
+    const isEntrepreneurship = course.id === 'career6'
+    const isFinancialManagement = course.id === 'career7'
+    const isProjectManagement = course.id === 'career8'
+    const isUIUXDesign = course.id === 'career9'
+    const isGraphicDesign = course.id === 'career10'
+    const isContentCreation = course.id === 'career11'
+    const isPhotography = course.id === 'career12'
+    const isDigitalMarketing = course.id === 'career13'
+    const isSocialMedia = course.id === 'career15'
+    const isBrandStrategy = course.id === 'career16'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -140,6 +154,139 @@ export async function GET(
       '14': 'Performance Optimization',
       '15': 'Deployment & DevOps',
       '16': 'Capstone Project',
+    }
+
+    const pythonMasteryModuleNames: Record<string, string> = {
+      '1': 'Python Basics & Setup',
+      '2': 'Data Types & Variables',
+      '3': 'Control Flow & Functions',
+    }
+
+    const dataScienceModuleNames: Record<string, string> = {
+      '1': 'Introduction to Data Science',
+      '2': 'Python for Data Science',
+      '3': 'Statistics & Probability',
+      '4': 'Data Wrangling & Cleaning',
+      '5': 'Data Visualization',
+      '6': 'Machine Learning Basics',
+      '7': 'Supervised Learning',
+      '8': 'Unsupervised Learning',
+      '9': 'Deep Learning',
+      '10': 'Natural Language Processing',
+      '11': 'Data Science Projects',
+    }
+
+    const mobileAppModuleNames: Record<string, string> = {
+      '1': 'Mobile Development Fundamentals',
+      '2': 'React Native Basics',
+      '3': 'Components & Navigation',
+      '4': 'State Management',
+      '5': 'Native Features',
+      '6': 'Data Storage & APIs',
+      '7': 'Performance & Optimization',
+      '8': 'Testing & Deployment',
+    }
+
+    const businessStrategyModuleNames: Record<string, string> = {
+      '1': 'Strategic Thinking',
+      '2': 'Market Analysis',
+      '3': 'Competitive Strategy',
+      '4': 'Business Models',
+      '5': 'Strategic Planning',
+      '6': 'Execution & Implementation',
+    }
+
+    const entrepreneurshipModuleNames: Record<string, string> = {
+      '1': 'Entrepreneurial Mindset & Opportunity Recognition',
+      '2': 'Business Model Development & Validation',
+      '3': 'Financial Planning & Resource Management',
+      '4': 'Team Building & Leadership',
+      '5': 'Growth Strategies & Scaling',
+      '6': 'Exit Strategies & Long-term Success',
+    }
+
+    const financialManagementModuleNames: Record<string, string> = {
+      '1': 'Financial Analysis & Statement Analysis',
+      '2': 'Corporate Finance & Capital Structure',
+      '3': 'Investment Analysis & Portfolio Management',
+      '4': 'Risk Management & Hedging Strategies',
+      '5': 'Financial Planning & Forecasting',
+      '6': 'Advanced Topics in Finance',
+    }
+
+    const projectManagementModuleNames: Record<string, string> = {
+      '1': 'Project Management Fundamentals',
+      '2': 'Project Planning & Scheduling',
+      '3': 'Risk & Quality Management',
+      '4': 'Agile & Scrum Methodologies',
+      '5': 'Team Leadership & Communication',
+      '6': 'Project Execution & Closure',
+    }
+
+    const uiuxDesignModuleNames: Record<string, string> = {
+      '1': 'Design Thinking',
+      '2': 'User Research',
+      '3': 'Wireframing & Prototyping',
+      '4': 'Visual Design',
+      '5': 'Usability Testing',
+    }
+
+    const graphicDesignModuleNames: Record<string, string> = {
+      '1': 'Design Principles & Theory',
+      '2': 'Color & Typography',
+      '3': 'Layout & Composition',
+      '4': 'Digital Illustration',
+      '5': 'Photo Editing',
+      '6': 'Brand Identity Design',
+    }
+
+    const contentCreationModuleNames: Record<string, string> = {
+      '1': 'Content Strategy',
+      '2': 'Video Production',
+      '3': 'Video Editing',
+      '4': 'Audio Production',
+      '5': 'Scripting & Storytelling',
+      '6': 'Platform Optimization',
+    }
+
+    const photographyModuleNames: Record<string, string> = {
+      '1': 'Photography Basics & Camera Operation',
+      '2': 'Composition & Visual Storytelling',
+      '3': 'Lighting Techniques',
+      '4': 'Post-Processing & Editing',
+      '5': 'Digital Art & Illustration',
+      '6': 'Advanced Creative Techniques',
+    }
+
+    const digitalMarketingModuleNames: Record<string, string> = {
+      '1': 'Digital Marketing Fundamentals',
+      '2': 'Search Engine Optimization (SEO)',
+      '3': 'Social Media Marketing',
+      '4': 'Content Marketing & Strategy',
+      '5': 'Pay-Per-Click Advertising',
+      '6': 'Email Marketing & Automation',
+      '7': 'Analytics & Performance Optimization',
+    }
+
+    const socialMediaModuleNames: Record<string, string> = {
+      '1': 'Social Media Landscape Overview',
+      '2': 'Content Creation for Social Media',
+      '3': 'Community Management & Engagement',
+      '4': 'Platform-Specific Strategies',
+      '5': 'Social Media Advertising',
+      '6': 'Influencer Marketing',
+      '7': 'Analytics & Reporting',
+    }
+
+    const brandStrategyModuleNames: Record<string, string> = {
+      '1': 'Brand Foundation & Identity',
+      '2': 'Brand Positioning & Messaging',
+      '3': 'Visual Identity Systems',
+      '4': 'Brand Architecture',
+      '5': 'Brand Experience Design',
+      '6': 'Digital Brand Management',
+      '7': 'Brand Equity & Valuation',
+      '8': 'Crisis Management & Brand Protection',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -285,6 +432,231 @@ export async function GET(
         } else if (lesson.order >= 1500 && lesson.order <= 1599) {
           moduleNum = '16'
         }
+      } else if (isPythonMastery) {
+        // Python Programming Mastery: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        }
+      } else if (isDataScience) {
+        // Data Science Fundamentals: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        } else if (lesson.order >= 800 && lesson.order <= 899) {
+          moduleNum = '9'
+        } else if (lesson.order >= 900 && lesson.order <= 999) {
+          moduleNum = '10'
+        } else if (lesson.order >= 1000 && lesson.order <= 1099) {
+          moduleNum = '11'
+        }
+      } else if (isMobileApp) {
+        // Mobile App Development: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        }
+      } else if (isBusinessStrategy) {
+        // Business Strategy Mastery: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isEntrepreneurship) {
+        // Entrepreneurship Essentials: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isFinancialManagement) {
+        // Financial Management: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isProjectManagement) {
+        // Project Management: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isUIUXDesign) {
+        // UI/UX Design Mastery: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        }
+      } else if (isGraphicDesign) {
+        // Graphic Design Fundamentals: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isContentCreation) {
+        // Content Creation & Video Editing: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isPhotography) {
+        // Photography & Digital Art: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        }
+      } else if (isDigitalMarketing) {
+        // Digital Marketing Mastery: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        }
+      } else if (isSocialMedia) {
+        // Social Media Management: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        }
+      } else if (isBrandStrategy) {
+        // Brand Strategy & Management: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        }
+      }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -302,6 +674,20 @@ export async function GET(
         isPublicSpeakingIntermediate ? publicSpeakingIntermediateModuleNames[moduleNum] :
         isPublicSpeakingAdvanced ? publicSpeakingAdvancedModuleNames[moduleNum] :
         isWebDevBootcamp ? webDevBootcampModuleNames[moduleNum] :
+        isPythonMastery ? pythonMasteryModuleNames[moduleNum] :
+        isDataScience ? dataScienceModuleNames[moduleNum] :
+        isMobileApp ? mobileAppModuleNames[moduleNum] :
+        isBusinessStrategy ? businessStrategyModuleNames[moduleNum] :
+        isEntrepreneurship ? entrepreneurshipModuleNames[moduleNum] :
+        isFinancialManagement ? financialManagementModuleNames[moduleNum] :
+        isProjectManagement ? projectManagementModuleNames[moduleNum] :
+        isUIUXDesign ? uiuxDesignModuleNames[moduleNum] :
+        isGraphicDesign ? graphicDesignModuleNames[moduleNum] :
+        isContentCreation ? contentCreationModuleNames[moduleNum] :
+        isPhotography ? photographyModuleNames[moduleNum] :
+        isDigitalMarketing ? digitalMarketingModuleNames[moduleNum] :
+        isSocialMedia ? socialMediaModuleNames[moduleNum] :
+        isBrandStrategy ? brandStrategyModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
