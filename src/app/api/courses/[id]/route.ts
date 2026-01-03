@@ -93,6 +93,27 @@ export async function GET(
     const isNutritionHealth = course.id === 'life4'
     const isFitnessExercise = course.id === 'life5'
     const isMentalHealth = course.id === 'life6'
+    const isEnglishG1 = course.id === 'school2'
+    const isMathG2 = course.id === 'school3'
+    const isScienceG3 = course.id === 'school4'
+    const isMathG3 = course.id === 'school5'
+    const isEnglishLitG4 = course.id === 'school6'
+    const isMathG4 = course.id === 'school7'
+    const isScienceG5 = course.id === 'school8'
+    const isMathG6 = course.id === 'school9'
+    const isScienceG6 = course.id === 'school10'
+    const isEnglishLitG7 = course.id === 'school11'
+    const isMathG7 = course.id === 'school12'
+    const isScienceG8 = course.id === 'school13'
+    const isMathG9 = course.id === 'school14'
+    const isPhysicsG9 = course.id === 'school15'
+    const isChemistryG10 = course.id === 'school16'
+    const isBiologyG10 = course.id === 'school17'
+    const isMathG10 = course.id === 'school18'
+    const isMathG11 = course.id === 'school19'
+    const isPhysicsG11 = course.id === 'school20'
+    const isChemistryG11 = course.id === 'school21'
+    const isBiologyG12 = course.id === 'school22'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -316,6 +337,126 @@ export async function GET(
 
     const mentalHealthModuleNames: Record<string, string> = {
       '1': 'Mental Health & Mindfulness Basics',
+    }
+
+    const englishG1ModuleNames: Record<string, string> = {
+      '1': 'English Grammar Basics',
+    }
+
+    const mathG2ModuleNames: Record<string, string> = {
+      '1': 'Number Sense & Operations',
+      '2': 'Geometry & Measurement',
+    }
+
+    const scienceG3ModuleNames: Record<string, string> = {
+      '1': 'Living Things & Nature',
+      '2': 'Earth & Space Science',
+    }
+
+    const mathG3ModuleNames: Record<string, string> = {
+      '1': 'Multiplication & Division',
+      '2': 'Fractions & Data Handling',
+    }
+
+    const englishLitG4ModuleNames: Record<string, string> = {
+      '1': 'Reading Comprehension',
+      '2': 'Literature Analysis',
+    }
+
+    const mathG4ModuleNames: Record<string, string> = {
+      '1': 'Advanced Operations',
+      '2': 'Decimals & Advanced Geometry',
+    }
+
+    const scienceG5ModuleNames: Record<string, string> = {
+      '1': 'Matter & Energy',
+      '2': 'Life Science & Ecosystems',
+    }
+
+    const mathG6ModuleNames: Record<string, string> = {
+      '1': 'Number Theory & Fractions',
+      '2': 'Ratios & Proportional Reasoning',
+    }
+
+    const scienceG6ModuleNames: Record<string, string> = {
+      '1': 'Scientific Method & Inquiry',
+      '2': 'Earth Systems Science',
+      '3': 'Scientific Applications',
+    }
+
+    const englishLitG7ModuleNames: Record<string, string> = {
+      '1': 'Classic Literature',
+      '2': 'Writing & Composition',
+      '3': 'Speech & Presentation',
+    }
+
+    const mathG7ModuleNames: Record<string, string> = {
+      '1': 'Algebraic Expressions',
+      '2': 'Equations & Inequalities',
+      '3': 'Probability & Statistics',
+    }
+
+    const scienceG8ModuleNames: Record<string, string> = {
+      '1': 'Chemistry Fundamentals',
+      '2': 'Physics: Forces & Motion',
+      '3': 'Scientific Integration',
+    }
+
+    const mathG9ModuleNames: Record<string, string> = {
+      '1': 'Linear Equations & Functions',
+      '2': 'Polynomials & Factoring',
+      '3': 'Quadratic Functions',
+    }
+
+    const physicsG9ModuleNames: Record<string, string> = {
+      '1': 'Mechanics & Motion',
+      '2': 'Energy & Work',
+      '3': 'Waves & Optics',
+    }
+
+    const chemistryG10ModuleNames: Record<string, string> = {
+      '1': 'Atomic Structure & Periodicity',
+      '2': 'Chemical Reactions & Stoichiometry',
+      '3': 'Acids, Bases & Equilibrium',
+    }
+
+    const biologyG10ModuleNames: Record<string, string> = {
+      '1': 'Cell Biology & Genetics',
+      '2': 'Evolution & Ecology',
+      '3': 'Human Body Systems',
+    }
+
+    const mathG10ModuleNames: Record<string, string> = {
+      '1': 'Geometry & Trigonometry',
+      '2': 'Advanced Functions',
+      '3': 'Coordinate Geometry',
+    }
+
+    const mathG11ModuleNames: Record<string, string> = {
+      '1': 'Calculus: Limits & Derivatives',
+      '2': 'Trigonometry & Complex Numbers',
+      '3': 'Sequences, Series & Probability',
+    }
+
+    const physicsG11ModuleNames: Record<string, string> = {
+      '1': 'Mechanics & Gravitation',
+      '2': 'Thermodynamics & Kinetic Theory',
+      '3': 'Oscillations & Waves',
+      '4': 'Modern Physics Introduction',
+    }
+
+    const chemistryG11ModuleNames: Record<string, string> = {
+      '1': 'Atomic Structure & Quantum Mechanics',
+      '2': 'Chemical Bonding & Molecular Structure',
+      '3': 'Thermodynamics & Chemical Equilibrium',
+      '4': 'Organic Chemistry Fundamentals',
+    }
+
+    const biologyG12ModuleNames: Record<string, string> = {
+      '1': 'Genetics & Molecular Biology',
+      '2': 'Human Physiology & Reproduction',
+      '3': 'Ecology & Environment',
+      '4': 'Biology in Medicine & Research',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -728,6 +869,185 @@ export async function GET(
         } else if (lesson.order >= 100 && lesson.order <= 199) {
           moduleNum = '1'
         }
+      } else if (isEnglishG1) {
+        // English Grammar Grade 1: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '1'
+        }
+      } else if (isMathG2) {
+        // Mathematics Grade 2: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 139) {
+          moduleNum = '2'
+        }
+      } else if (isScienceG3) {
+        // Science Fundamentals Grade 3: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 149) {
+          moduleNum = '2'
+        }
+      } else if (isMathG3) {
+        // Mathematics Grade 3: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 159) {
+          moduleNum = '2'
+        }
+      } else if (isEnglishLitG4) {
+        // English Literature Grade 4: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 179) {
+          moduleNum = '2'
+        }
+      } else if (isMathG4) {
+        // Mathematics Grade 4: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 169) {
+          moduleNum = '2'
+        }
+      } else if (isScienceG5) {
+        // Science Grade 5: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 189) {
+          moduleNum = '2'
+        }
+      } else if (isMathG6) {
+        // Mathematics Grade 6: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        }
+      } else if (isScienceG6) {
+        // Science Grade 6: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 209) {
+          moduleNum = '3'
+        }
+      } else if (isEnglishLitG7) {
+        // English Literature Grade 7: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 219) {
+          moduleNum = '3'
+        }
+      } else if (isMathG7) {
+        // Mathematics Grade 7: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 229) {
+          moduleNum = '3'
+        }
+      } else if (isScienceG8) {
+        // Science Grade 8: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 239) {
+          moduleNum = '3'
+        }
+      } else if (isMathG9) {
+        // Mathematics Grade 9: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 249) {
+          moduleNum = '3'
+        }
+      } else if (isPhysicsG9) {
+        // Physics Grade 9: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 259) {
+          moduleNum = '3'
+        }
+      } else if (isChemistryG10) {
+        // Chemistry Grade 10: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 269) {
+          moduleNum = '3'
+        }
+      } else if (isBiologyG10) {
+        // Biology Grade 10: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 279) {
+          moduleNum = '3'
+        }
+      } else if (isMathG10) {
+        // Mathematics Grade 10: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 289) {
+          moduleNum = '3'
+        }
+      } else if (isMathG11) {
+        // Advanced Mathematics Class 11: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        }
+      } else if (isPhysicsG11) {
+        // Physics Class 11: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 309) {
+          moduleNum = '4'
+        }
+      } else if (isChemistryG11) {
+        // Chemistry Class 11: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 319) {
+          moduleNum = '4'
+        }
+      } else if (isBiologyG12) {
+        // Biology Class 12: use order ranges
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 329) {
+          moduleNum = '4'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -764,6 +1084,27 @@ export async function GET(
         isNutritionHealth ? nutritionHealthModuleNames[moduleNum] :
         isFitnessExercise ? fitnessExerciseModuleNames[moduleNum] :
         isMentalHealth ? mentalHealthModuleNames[moduleNum] :
+        isEnglishG1 ? englishG1ModuleNames[moduleNum] :
+        isMathG2 ? mathG2ModuleNames[moduleNum] :
+        isScienceG3 ? scienceG3ModuleNames[moduleNum] :
+        isMathG3 ? mathG3ModuleNames[moduleNum] :
+        isEnglishLitG4 ? englishLitG4ModuleNames[moduleNum] :
+        isMathG4 ? mathG4ModuleNames[moduleNum] :
+        isScienceG5 ? scienceG5ModuleNames[moduleNum] :
+        isMathG6 ? mathG6ModuleNames[moduleNum] :
+        isScienceG6 ? scienceG6ModuleNames[moduleNum] :
+        isEnglishLitG7 ? englishLitG7ModuleNames[moduleNum] :
+        isMathG7 ? mathG7ModuleNames[moduleNum] :
+        isScienceG8 ? scienceG8ModuleNames[moduleNum] :
+        isMathG9 ? mathG9ModuleNames[moduleNum] :
+        isPhysicsG9 ? physicsG9ModuleNames[moduleNum] :
+        isChemistryG10 ? chemistryG10ModuleNames[moduleNum] :
+        isBiologyG10 ? biologyG10ModuleNames[moduleNum] :
+        isMathG10 ? mathG10ModuleNames[moduleNum] :
+        isMathG11 ? mathG11ModuleNames[moduleNum] :
+        isPhysicsG11 ? physicsG11ModuleNames[moduleNum] :
+        isChemistryG11 ? chemistryG11ModuleNames[moduleNum] :
+        isBiologyG12 ? biologyG12ModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
