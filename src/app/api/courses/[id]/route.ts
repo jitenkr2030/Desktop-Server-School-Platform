@@ -124,22 +124,22 @@ export async function GET(
     }
 
     const webDevBootcampModuleNames: Record<string, string> = {
-      '1': 'HTML Fundamentals',
-      '2': 'CSS Styling',
-      '3': 'JavaScript Basics',
-      '4': 'DOM Manipulation',
-      '5': 'Responsive Web Design',
-      '6': 'CSS Frameworks',
-      '7': 'Version Control with Git',
-      '8': 'React.js Introduction',
-      '9': 'React Components & Hooks',
-      '10': 'State Management',
-      '11': 'Backend Integration',
+      '1': 'Web Development Introduction',
+      '2': 'HTML Fundamentals',
+      '3': 'CSS Styling',
+      '4': 'JavaScript Basics',
+      '5': 'JavaScript Advanced',
+      '6': 'Version Control with Git',
+      '7': 'UI/UX Design Principles',
+      '8': 'React.js Fundamentals',
+      '9': 'Backend Development',
+      '10': 'Database Management',
+      '11': 'Authentication & Security',
       '12': 'API Development',
-      '13': 'Database Fundamentals',
-      '14': 'Authentication & Security',
+      '13': 'Testing & Best Practices',
+      '14': 'Performance Optimization',
       '15': 'Deployment & DevOps',
-      '16': 'Full Stack Project',
+      '16': 'Capstone Project',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -235,39 +235,54 @@ export async function GET(
           moduleNum = '10'
         }
       } else if (isWebDevBootcamp) {
-        // Web Development Bootcamp: use order ranges (1-20, 21-40, etc.)
-        // 16 modules: Module 1: orders 1-20, Module 2: orders 21-40, etc.
-        if (lesson.order >= 1 && lesson.order <= 20) {
+        // Web Development Bootcamp: use order ranges based on hundreds
+        // Module 1: orders 1-99 (Intro)
+        // Module 2: orders 100-199 (HTML)
+        // Module 3: orders 200-299 (CSS)
+        // Module 4: orders 300-399 (JavaScript)
+        // Module 5: orders 400-499 (JavaScript Advanced)
+        // Module 6: orders 500-599 (Git)
+        // Module 7: orders 600-699 (UI/UX)
+        // Module 8: orders 700-799 (React)
+        // Module 9: orders 800-899 (Backend)
+        // Module 10: orders 900-999 (Database)
+        // Module 11: orders 1000-1099 (Authentication)
+        // Module 12: orders 1100-1199 (API Development)
+        // Module 13: orders 1200-1299 (Testing)
+        // Module 14: orders 1300-1399 (Performance)
+        // Module 15: orders 1400-1499 (Deployment)
+        // Module 16: orders 1500-1599 (Capstone)
+        if (lesson.order >= 1 && lesson.order <= 99) {
           moduleNum = '1'
-        } else if (lesson.order >= 21 && lesson.order <= 40) {
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
           moduleNum = '2'
-        } else if (lesson.order >= 41 && lesson.order <= 60) {
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
           moduleNum = '3'
-        } else if (lesson.order >= 61 && lesson.order <= 80) {
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
           moduleNum = '4'
-        } else if (lesson.order >= 81 && lesson.order <= 100) {
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
           moduleNum = '5'
-        } else if (lesson.order >= 101 && lesson.order <= 120) {
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
           moduleNum = '6'
-        } else if (lesson.order >= 121 && lesson.order <= 140) {
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
           moduleNum = '7'
-        } else if (lesson.order >= 141 && lesson.order <= 160) {
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
           moduleNum = '8'
-        } else if (lesson.order >= 161 && lesson.order <= 180) {
+        } else if (lesson.order >= 800 && lesson.order <= 899) {
           moduleNum = '9'
-        } else if (lesson.order >= 181 && lesson.order <= 200) {
+        } else if (lesson.order >= 900 && lesson.order <= 999) {
           moduleNum = '10'
-        } else if (lesson.order >= 201 && lesson.order <= 220) {
+        } else if (lesson.order >= 1000 && lesson.order <= 1099) {
           moduleNum = '11'
-        } else if (lesson.order >= 221 && lesson.order <= 240) {
+        } else if (lesson.order >= 1100 && lesson.order <= 1199) {
           moduleNum = '12'
-        } else if (lesson.order >= 241 && lesson.order <= 260) {
+        } else if (lesson.order >= 1200 && lesson.order <= 1299) {
           moduleNum = '13'
-        } else if (lesson.order >= 261 && lesson.order <= 280) {
+        } else if (lesson.order >= 1300 && lesson.order <= 1399) {
           moduleNum = '14'
-        } else if (lesson.order >= 281 && lesson.order <= 300) {
+        } else if (lesson.order >= 1400 && lesson.order <= 1499) {
           moduleNum = '15'
-        } else if (lesson.order >= 301 && lesson.order <= 320) {
+        } else if (lesson.order >= 1500 && lesson.order <= 1599) {
           moduleNum = '16'
         }
       }
