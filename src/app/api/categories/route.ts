@@ -1,92 +1,122 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { PrismaClient } from '@prisma/client'
 
-// Simple static data for categories - no file system dependencies
+const prisma = new PrismaClient()
+
+// GET /api/categories - Fetch all categories with their subcategories and course counts
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const featured = searchParams.get('featured') === 'true'
     const includeSubcategories = searchParams.get('includeSubcategories') !== 'false'
 
-    // Static fallback data that works in any environment
-    const categoriesData = [
-      {
-        id: '1',
-        name: 'School Learning',
-        slug: 'school-learning',
-        description: 'Class 1-12 with all boards',
-        icon: '🧒',
-        color: 'bg-blue-100',
-        isFeatured: true,
-        subcategories: includeSubcategories ? [
-          { id: '1a', name: 'Primary (1-5)', slug: 'primary' },
-          { id: '1b', name: 'Middle School (6-8)', slug: 'middle' },
-          { id: '1c', name: 'Secondary (9-10)', slug: 'secondary' },
-          { id: '1d', name: 'Senior Secondary (11-12)', slug: 'senior' }
-        ] : []
+    // Fetch categories from database
+    const categories = await prisma.category.findMany({
+      where: {
+        isActive: true,
+        ...(featured && { isFeatured: true }),
       },
-      {
-        id: '2',
-        name: 'College Foundation',
-        slug: 'college-foundation',
-        description: 'UG degrees and subjects',
-        icon: '🎓',
-        color: 'bg-green-100',
-        isFeatured: true,
-        subcategories: includeSubcategories ? [
-          { id: '2a', name: 'Commerce', slug: 'commerce' },
-          { id: '2b', name: 'Computer Science', slug: 'cs' },
-          { id: '2c', name: 'Science', slug: 'science' },
-          { id: '2d', name: 'Engineering', slug: 'engineering' }
-        ] : []
+      orderBy: {
+        sortOrder: 'asc',
       },
-      {
-        id: '3',
-        name: 'Career Skills',
-        slug: 'career-skills',
-        description: 'Professional development',
-        icon: '🧑‍💼',
-        color: 'bg-purple-100',
-        isFeatured: true,
-        subcategories: includeSubcategories ? [
-          { id: '3a', name: 'Professional Skills', slug: 'professional' },
-          { id: '3b', name: 'Technical Skills', slug: 'technical' },
-          { id: '3c', name: 'Soft Skills', slug: 'soft' },
-          { id: '3d', name: 'Digital Skills', slug: 'digital' }
-        ] : []
+      include: {
+        subcategories: includeSubcategories
+          ? {
+              where: { isActive: true },
+              orderBy: { sortOrder: 'asc' },
+            }
+          : false,
+        categoryStats: true,
+        _count: {
+          select: { courses: { where: { isActive: true } } },
+        },
       },
-      {
-        id: '4',
-        name: 'Money & Business',
-        slug: 'money-business',
-        description: 'Financial literacy',
-        icon: '💰',
-        color: 'bg-orange-100',
-        isFeatured: true,
-        subcategories: includeSubcategories ? [
-          { id: '4a', name: 'Financial Literacy', slug: 'financial' },
-          { id: '4b', name: 'Business Fundamentals', slug: 'business' },
-          { id: '4c', name: 'Investment & Trading', slug: 'investment' },
-          { id: '4d', name: 'E-commerce', slug: 'ecommerce' }
-        ] : []
-      }
-    ]
+    })
 
-    // Filter categories based on featured parameter
-    const filteredCategories = featured 
-      ? categoriesData.filter(cat => cat.isFeatured)
-      : categoriesData
+    // Format the response to match the expected frontend structure
+    const formattedCategories = categories.map((category) => ({
+      id: category.id,
+      name: category.name,
+      slug: category.slug,
+      description: category.description,
+      icon: category.icon,
+      color: category.color || getColorForCategory(category.slug),
+      isFeatured: category.isFeatured,
+      isActive: category.isActive,
+      sortOrder: category.sortOrder,
+      subcategories: includeSubcategories
+        ? category.subcategories.map((sub) => ({
+            id: sub.id,
+            name: sub.name,
+            slug: sub.slug,
+            description: sub.description,
+            icon: sub.icon,
+            color: sub.color || getColorForSubCategory(sub.slug),
+          }))
+        : [],
+      courseCount: category._count.courses,
+      ...(category.categoryStats && {
+        stats: {
+          studentCount: category.categoryStats.studentCount,
+          avgRating: category.categoryStats.avgRating,
+          totalDuration: category.categoryStats.totalDuration,
+        },
+      }),
+    }))
 
-    return NextResponse.json(filteredCategories)
-
+    return NextResponse.json(formattedCategories)
   } catch (error) {
     console.error('Get categories error:', error)
     return NextResponse.json(
-      { 
-        success: false, 
-        message: 'Internal server error', 
-        error: error.message 
+      {
+        success: false,
+        message: 'Failed to fetch categories',
+        error: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     )
   }
+}
+
+// Helper function to get color based on category slug
+function getColorForCategory(slug: string): string {
+  const colors: Record<string, string> = {
+    'school-learning': 'bg-blue-100',
+    'college-foundation': 'bg-green-100',
+    'career-skills': 'bg-purple-100',
+    'money-business': 'bg-orange-100',
+    'competitive-exams': 'bg-red-100',
+    'professional-courses': 'bg-indigo-100',
+    'life-skills': 'bg-pink-100',
+  }
+  return colors[slug] || 'bg-gray-100'
+}
+
+// Helper function to get color based on subcategory slug
+function getColorForSubCategory(slug: string): string {
+  const colors: Record<string, string> = {
+    primary: 'bg-blue-200',
+    middle: 'bg-blue-300',
+    secondary: 'bg-blue-400',
+    senior: 'bg-blue-500',
+    commerce: 'bg-green-200',
+    cs: 'bg-green-300',
+    science: 'bg-green-400',
+    engineering: 'bg-green-500',
+    professional: 'bg-purple-200',
+    technical: 'bg-purple-300',
+    soft: 'bg-purple-400',
+    digital: 'bg-purple-500',
+    financial: 'bg-orange-200',
+    business: 'bg-orange-300',
+    investment: 'bg-orange-400',
+    ecommerce: 'bg-orange-500',
+    upsc: 'bg-red-200',
+    ssc: 'bg-red-300',
+    banking: 'bg-red-400',
+    railway: 'bg-red-500',
+    defense: 'bg-indigo-200',
+    'state-government': 'bg-indigo-300',
+  }
+  return colors[slug] || 'bg-gray-200'
 }
