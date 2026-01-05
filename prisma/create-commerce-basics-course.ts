@@ -8,6 +8,58 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// Module definitions for organizing lessons
+const modules = [
+  {
+    id: 'mod-commerce-1',
+    title: 'Module 1: Introduction to Commerce',
+    description: 'Build clarity about what commerce is and why it matters.',
+    purpose: 'Build clarity about what commerce is and why it matters.',
+    sortOrder: 1,
+    totalDuration: 150, // 2.5 hours
+  },
+  {
+    id: 'mod-commerce-2',
+    title: 'Module 2: Fundamentals of Accountancy',
+    description: 'Remove fear of accounts and build logical understanding.',
+    purpose: 'Remove fear of accounts and build logical understanding.',
+    sortOrder: 2,
+    totalDuration: 180, // 3 hours
+  },
+  {
+    id: 'mod-commerce-3',
+    title: 'Module 3: Business Studies – Business Organization',
+    description: 'Understand how businesses are formed and run.',
+    purpose: 'Understand how businesses are formed and run.',
+    sortOrder: 3,
+    totalDuration: 150, // 2.5 hours
+  },
+  {
+    id: 'mod-commerce-4',
+    title: 'Module 4: Business Environment & Management Basics',
+    description: 'Learn how external factors affect business decisions.',
+    purpose: 'Learn how external factors affect business decisions.',
+    sortOrder: 4,
+    totalDuration: 150, // 2.5 hours
+  },
+  {
+    id: 'mod-commerce-5',
+    title: 'Module 5: Fundamentals of Economics',
+    description: 'Build economic thinking for real-world decision making.',
+    purpose: 'Build economic thinking for real-world decision making.',
+    sortOrder: 5,
+    totalDuration: 150, // 2.5 hours
+  },
+  {
+    id: 'mod-commerce-6',
+    title: 'Module 6: Commerce in Real Life & Career Pathways',
+    description: 'Connect theory with practical applications & careers.',
+    purpose: 'Connect theory with practical applications & careers.',
+    sortOrder: 6,
+    totalDuration: 120, // 2 hours
+  },
+]
+
 async function main() {
   console.log('🌱 Starting Commerce Basics course creation...')
 
@@ -138,55 +190,270 @@ async function main() {
   console.log(`✅ Course created: ${course.title}`)
 
   // ============================================================================
-  // 5. CREATE LESSONS (Directly linked to course, no modules)
+  // 5. CREATE LESSONS BY MODULE
   // ============================================================================
 
   const lessons = [
-    // Module 1: Introduction to Commerce (2.5 Hours = 150 min)
-    { title: 'Meaning & Scope of Commerce', duration: 30, order: 1 },
-    { title: 'Trade, Industry & Aids to Trade', duration: 30, order: 2 },
-    { title: 'Commerce vs Business vs Economics', duration: 20, order: 3 },
-    { title: 'Evolution of Commerce in India', duration: 20, order: 4 },
-    { title: 'Role of Commerce in Economic Development', duration: 20, order: 5 },
+    // 🧩 Module 1: Introduction to Commerce (2.5 Hours = 150 min)
+    // Purpose: Build clarity about what commerce is and why it matters.
+    {
+      moduleTitle: 'Module 1: Introduction to Commerce',
+      modulePurpose: 'Purpose: Build clarity about what commerce is and why it matters.',
+      title: 'Meaning & Scope of Commerce',
+      duration: 30,
+      order: 1,
+      moduleOrder: 1,
+    },
+    {
+      moduleTitle: 'Module 1: Introduction to Commerce',
+      modulePurpose: 'Purpose: Build clarity about what commerce is and why it matters.',
+      title: 'Trade, Industry & Aids to Trade',
+      duration: 30,
+      order: 2,
+      moduleOrder: 1,
+    },
+    {
+      moduleTitle: 'Module 1: Introduction to Commerce',
+      modulePurpose: 'Purpose: Build clarity about what commerce is and why it matters.',
+      title: 'Commerce vs Business vs Economics',
+      duration: 20,
+      order: 3,
+      moduleOrder: 1,
+    },
+    {
+      moduleTitle: 'Module 1: Introduction to Commerce',
+      modulePurpose: 'Purpose: Build clarity about what commerce is and why it matters.',
+      title: 'Evolution of Commerce in India',
+      duration: 20,
+      order: 4,
+      moduleOrder: 1,
+    },
+    {
+      moduleTitle: 'Module 1: Introduction to Commerce',
+      modulePurpose: 'Purpose: Build clarity about what commerce is and why it matters.',
+      title: 'Role of Commerce in Economic Development',
+      duration: 20,
+      order: 5,
+      moduleOrder: 1,
+    },
     
-    // Module 2: Fundamentals of Accountancy (3 Hours = 180 min)
-    { title: 'What is Accounting? Objectives & Users', duration: 25, order: 6 },
-    { title: 'Basic Accounting Terms & Concepts', duration: 30, order: 7 },
-    { title: 'Accounting Principles & Conventions', duration: 25, order: 8 },
-    { title: 'Types of Accounts & Golden Rules', duration: 30, order: 9 },
-    { title: 'Introduction to Journal Entries', duration: 35, order: 10 },
-    { title: 'Trial Balance – Meaning & Purpose', duration: 35, order: 11 },
+    // 🧮 Module 2: Fundamentals of Accountancy (3 Hours = 180 min)
+    // Purpose: Remove fear of accounts and build logical understanding.
+    {
+      moduleTitle: 'Module 2: Fundamentals of Accountancy',
+      modulePurpose: 'Purpose: Remove fear of accounts and build logical understanding.',
+      title: 'What is Accounting? Objectives & Users',
+      duration: 25,
+      order: 6,
+      moduleOrder: 2,
+    },
+    {
+      moduleTitle: 'Module 2: Fundamentals of Accountancy',
+      modulePurpose: 'Purpose: Remove fear of accounts and build logical understanding.',
+      title: 'Basic Accounting Terms & Concepts',
+      duration: 30,
+      order: 7,
+      moduleOrder: 2,
+    },
+    {
+      moduleTitle: 'Module 2: Fundamentals of Accountancy',
+      modulePurpose: 'Purpose: Remove fear of accounts and build logical understanding.',
+      title: 'Accounting Principles & Conventions',
+      duration: 25,
+      order: 8,
+      moduleOrder: 2,
+    },
+    {
+      moduleTitle: 'Module 2: Fundamentals of Accountancy',
+      modulePurpose: 'Purpose: Remove fear of accounts and build logical understanding.',
+      title: 'Types of Accounts & Golden Rules',
+      duration: 30,
+      order: 9,
+      moduleOrder: 2,
+    },
+    {
+      moduleTitle: 'Module 2: Fundamentals of Accountancy',
+      modulePurpose: 'Purpose: Remove fear of accounts and build logical understanding.',
+      title: 'Introduction to Journal Entries',
+      duration: 35,
+      order: 10,
+      moduleOrder: 2,
+    },
     
-    // Module 3: Business Studies – Business Organization (2.5 Hours = 150 min)
-    { title: 'Meaning, Nature & Objectives of Business', duration: 25, order: 12 },
-    { title: 'Forms of Business Organization (Sole, Partnership, Company)', duration: 40, order: 13 },
-    { title: 'Public vs Private Sector Enterprises', duration: 20, order: 14 },
-    { title: 'Business Risk & Risk Management', duration: 20, order: 15 },
-    { title: 'Startup & MSME Ecosystem in India', duration: 25, order: 16 },
+    // 🏢 Module 3: Business Studies – Business Organization (2.5 Hours = 150 min)
+    // Purpose: Understand how businesses are formed and run.
+    {
+      moduleTitle: 'Module 3: Business Studies – Business Organization',
+      modulePurpose: 'Purpose: Understand how businesses are formed and run.',
+      title: 'Meaning, Nature & Objectives of Business',
+      duration: 25,
+      order: 11,
+      moduleOrder: 3,
+    },
+    {
+      moduleTitle: 'Module 3: Business Studies – Business Organization',
+      modulePurpose: 'Purpose: Understand how businesses are formed and run.',
+      title: 'Forms of Business Organization',
+      duration: 40,
+      order: 12,
+      moduleOrder: 3,
+    },
+    {
+      moduleTitle: 'Module 3: Business Studies – Business Organization',
+      modulePurpose: 'Purpose: Understand how businesses are formed and run.',
+      title: 'Public vs Private Sector Enterprises',
+      duration: 20,
+      order: 13,
+      moduleOrder: 3,
+    },
+    {
+      moduleTitle: 'Module 3: Business Studies – Business Organization',
+      modulePurpose: 'Purpose: Understand how businesses are formed and run.',
+      title: 'Business Risk & Risk Management',
+      duration: 20,
+      order: 14,
+      moduleOrder: 3,
+    },
+    {
+      moduleTitle: 'Module 3: Business Studies – Business Organization',
+      modulePurpose: 'Purpose: Understand how businesses are formed and run.',
+      title: 'Startup & MSME Ecosystem in India',
+      duration: 25,
+      order: 15,
+      moduleOrder: 3,
+    },
     
-    // Module 4: Business Environment & Management Basics (2.5 Hours = 150 min)
-    { title: 'Business Environment – Meaning & Importance', duration: 25, order: 17 },
-    { title: 'Economic, Social & Legal Environment', duration: 30, order: 18 },
-    { title: 'Introduction to Management & Its Functions', duration: 30, order: 19 },
-    { title: 'Planning, Organising & Staffing', duration: 30, order: 20 },
-    { title: 'Leadership, Motivation & Control', duration: 25, order: 21 },
+    // 📊 Module 4: Business Environment & Management Basics (2.5 Hours = 150 min)
+    // Purpose: Learn how external factors affect business decisions.
+    {
+      moduleTitle: 'Module 4: Business Environment & Management Basics',
+      modulePurpose: 'Purpose: Learn how external factors affect business decisions.',
+      title: 'Business Environment – Meaning & Importance',
+      duration: 25,
+      order: 16,
+      moduleOrder: 4,
+    },
+    {
+      moduleTitle: 'Module 4: Business Environment & Management Basics',
+      modulePurpose: 'Purpose: Learn how external factors affect business decisions.',
+      title: 'Economic, Social & Legal Environment',
+      duration: 30,
+      order: 17,
+      moduleOrder: 4,
+    },
+    {
+      moduleTitle: 'Module 4: Business Environment & Management Basics',
+      modulePurpose: 'Purpose: Learn how external factors affect business decisions.',
+      title: 'Introduction to Management & Its Functions',
+      duration: 30,
+      order: 18,
+      moduleOrder: 4,
+    },
+    {
+      moduleTitle: 'Module 4: Business Environment & Management Basics',
+      modulePurpose: 'Purpose: Learn how external factors affect business decisions.',
+      title: 'Planning, Organising & Staffing',
+      duration: 30,
+      order: 19,
+      moduleOrder: 4,
+    },
+    {
+      moduleTitle: 'Module 4: Business Environment & Management Basics',
+      modulePurpose: 'Purpose: Learn how external factors affect business decisions.',
+      title: 'Leadership, Motivation & Control',
+      duration: 25,
+      order: 20,
+      moduleOrder: 4,
+    },
     
-    // Module 5: Fundamentals of Economics (2.5 Hours = 150 min)
-    { title: 'What is Economics? Micro vs Macro', duration: 25, order: 22 },
-    { title: 'Basic Economic Problems & Opportunity Cost', duration: 25, order: 23 },
-    { title: 'Demand – Meaning, Law & Factors', duration: 30, order: 24 },
-    { title: 'Supply – Meaning & Market Equilibrium', duration: 30, order: 25 },
-    { title: 'Inflation, GDP & National Income Basics', duration: 30, order: 26 },
+    // 🌍 Module 5: Fundamentals of Economics (2.5 Hours = 150 min)
+    // Purpose: Build economic thinking for real-world decision making.
+    {
+      moduleTitle: 'Module 5: Fundamentals of Economics',
+      modulePurpose: 'Purpose: Build economic thinking for real-world decision making.',
+      title: 'What is Economics? Micro vs Macro',
+      duration: 25,
+      order: 21,
+      moduleOrder: 5,
+    },
+    {
+      moduleTitle: 'Module 5: Fundamentals of Economics',
+      modulePurpose: 'Purpose: Build economic thinking for real-world decision making.',
+      title: 'Basic Economic Problems & Opportunity Cost',
+      duration: 25,
+      order: 22,
+      moduleOrder: 5,
+    },
+    {
+      moduleTitle: 'Module 5: Fundamentals of Economics',
+      modulePurpose: 'Purpose: Build economic thinking for real-world decision making.',
+      title: 'Demand – Meaning, Law & Factors',
+      duration: 30,
+      order: 23,
+      moduleOrder: 5,
+    },
+    {
+      moduleTitle: 'Module 5: Fundamentals of Economics',
+      modulePurpose: 'Purpose: Build economic thinking for real-world decision making.',
+      title: 'Supply – Meaning & Market Equilibrium',
+      duration: 30,
+      order: 24,
+      moduleOrder: 5,
+    },
+    {
+      moduleTitle: 'Module 5: Fundamentals of Economics',
+      modulePurpose: 'Purpose: Build economic thinking for real-world decision making.',
+      title: 'Inflation, GDP & National Income Basics',
+      duration: 30,
+      order: 25,
+      moduleOrder: 5,
+    },
     
-    // Module 6: Commerce in Real Life & Career Pathways (2 Hours = 120 min)
-    { title: 'Commerce in Daily Life', duration: 20, order: 27 },
-    { title: 'Banking, Insurance & Financial Markets Basics', duration: 30, order: 28 },
-    { title: 'Digital Commerce & E-Business', duration: 25, order: 29 },
-    { title: 'Career Options after Commerce (CA, CS, CMA, MBA, Govt Jobs)', duration: 25, order: 30 },
-    { title: 'How to Study Commerce Effectively', duration: 20, order: 31 },
+    // 💼 Module 6: Commerce in Real Life & Career Pathways (2 Hours = 120 min)
+    // Purpose: Connect theory with practical applications & careers.
+    {
+      moduleTitle: 'Module 6: Commerce in Real Life & Career Pathways',
+      modulePurpose: 'Purpose: Connect theory with practical applications & careers.',
+      title: 'Commerce in Daily Life',
+      duration: 20,
+      order: 26,
+      moduleOrder: 6,
+    },
+    {
+      moduleTitle: 'Module 6: Commerce in Real Life & Career Pathways',
+      modulePurpose: 'Purpose: Connect theory with practical applications & careers.',
+      title: 'Banking, Insurance & Financial Markets Basics',
+      duration: 30,
+      order: 27,
+      moduleOrder: 6,
+    },
+    {
+      moduleTitle: 'Module 6: Commerce in Real Life & Career Pathways',
+      modulePurpose: 'Purpose: Connect theory with practical applications & careers.',
+      title: 'Digital Commerce & E-Business',
+      duration: 25,
+      order: 28,
+      moduleOrder: 6,
+    },
+    {
+      moduleTitle: 'Module 6: Commerce in Real Life & Career Pathways',
+      modulePurpose: 'Purpose: Connect theory with practical applications & careers.',
+      title: 'Career Options after Commerce',
+      duration: 25,
+      order: 29,
+      moduleOrder: 6,
+    },
+    {
+      moduleTitle: 'Module 6: Commerce in Real Life & Career Pathways',
+      modulePurpose: 'Purpose: Connect theory with practical applications & careers.',
+      title: 'How to Study Commerce Effectively',
+      duration: 20,
+      order: 30,
+      moduleOrder: 6,
+    },
   ]
 
-  console.log('\n📚 Creating Lessons...')
+  console.log('\n📚 Creating Lessons by Module...')
 
   for (const lesson of lessons) {
     const lessonId = `lesson-commerce-${lesson.order}`
@@ -202,6 +469,14 @@ async function main() {
         courseId: course.id,
         content: `# ${lesson.title}
 
+---
+
+## 🧩 ${lesson.moduleTitle}
+
+${lesson.modulePurpose}
+
+---
+
 ## Overview
 This lesson covers **${lesson.title}**.
 
@@ -214,9 +489,9 @@ By the end of this lesson, you will be able to:
 ## Key Topics
 
 ### Main Concept
-- Topic 1 explanation
-- Topic 2 explanation
-- Topic 3 explanation
+- Core concept 1
+- Core concept 2
+- Core concept 3
 
 ### Practical Application
 - Real-world examples
@@ -262,11 +537,18 @@ This lesson has covered the key aspects of ${lesson.title}. Make sure to review 
   console.log(`   📖 Course: ${course.title}`)
   console.log(`   👨‍🏫 Instructor: ${instructor.name}`)
   console.log(`   📁 Category: ${category.name}`)
-  console.log(`   📚 Subcategories: ${subcategories.length} (Accountancy, Business Studies, Economics)`)
+  console.log(`   📚 Subcategories: 3 (Accountancy, Business Studies, Economics)`)
+  console.log(`   📚 Total Modules: ${modules.length}`)
   console.log(`   📝 Total Lessons: ${lessons.length}`)
   console.log(`   ⏱️ Total Duration: ${course.duration} minutes (${course.duration / 60} hours)`)
   console.log(`   📊 Difficulty: ${course.difficulty}`)
-  console.log(`   🎯 Assessment: Final Quiz (30 minutes)`)
+  console.log(`   🎯 Assessment: Final Quiz`)
+  console.log('\n📚 Modules Breakdown:')
+  for (const mod of modules) {
+    const modLessons = lessons.filter(l => l.moduleOrder === mod.sortOrder)
+    const totalDuration = modLessons.reduce((sum, l) => sum + l.duration, 0)
+    console.log(`   ${mod.sortOrder}. ${mod.title} - ${modLessons.length} lessons (${totalDuration} min)`)
+  }
   console.log('\n✅ Ready to publish!')
 }
 
