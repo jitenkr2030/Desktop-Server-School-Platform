@@ -129,7 +129,6 @@ async function main() {
       duration: 900, // 15 hours = 900 minutes
       difficulty: 'INTERMEDIATE',
       isActive: true,
-      isFeatured: true,
       instructorId: instructor.id,
       categoryId: category.id,
       subCategoryId: 'sub-commerce-accountancy',
@@ -139,154 +138,101 @@ async function main() {
   console.log(`✅ Course created: ${course.title}`)
 
   // ============================================================================
-  // 5. CREATE MODULES
+  // 5. CREATE LESSONS (Directly linked to course, no modules)
   // ============================================================================
 
-  const modules = [
-    {
-      id: 'mod-commerce-intro',
-      title: 'Introduction to Commerce',
-      description: 'Build clarity about what commerce is and why it matters.',
-      sortOrder: 1,
-      duration: 150, // 2.5 hours
-      lessons: [
-        { title: 'Meaning & Scope of Commerce', duration: 30, sortOrder: 1 },
-        { title: 'Trade, Industry & Aids to Trade', duration: 30, sortOrder: 2 },
-        { title: 'Commerce vs Business vs Economics', duration: 20, sortOrder: 3 },
-        { title: 'Evolution of Commerce in India', duration: 20, sortOrder: 4 },
-        { title: 'Role of Commerce in Economic Development', duration: 20, sortOrder: 5 },
-      ],
-    },
-    {
-      id: 'mod-commerce-accountancy',
-      title: 'Fundamentals of Accountancy',
-      description: 'Remove fear of accounts and build logical understanding.',
-      sortOrder: 2,
-      duration: 180, // 3 hours
-      lessons: [
-        { title: 'What is Accounting? Objectives & Users', duration: 25, sortOrder: 1 },
-        { title: 'Basic Accounting Terms & Concepts', duration: 30, sortOrder: 2 },
-        { title: 'Accounting Principles & Conventions', duration: 25, sortOrder: 3 },
-        { title: 'Types of Accounts & Golden Rules', duration: 30, sortOrder: 4 },
-        { title: 'Introduction to Journal Entries', duration: 35, sortOrder: 5 },
-        { title: 'Trial Balance – Meaning & Purpose', duration: 35, sortOrder: 6 },
-      ],
-    },
-    {
-      id: 'mod-commerce-business-org',
-      title: 'Business Studies – Business Organization',
-      description: 'Understand how businesses are formed and run.',
-      sortOrder: 3,
-      duration: 150, // 2.5 hours
-      lessons: [
-        { title: 'Meaning, Nature & Objectives of Business', duration: 25, sortOrder: 1 },
-        { title: 'Forms of Business Organization (Sole, Partnership, Company)', duration: 40, sortOrder: 2 },
-        { title: 'Public vs Private Sector Enterprises', duration: 20, sortOrder: 3 },
-        { title: 'Business Risk & Risk Management', duration: 20, sortOrder: 4 },
-        { title: 'Startup & MSME Ecosystem in India', duration: 25, sortOrder: 5 },
-      ],
-    },
-    {
-      id: 'mod-commerce-env',
-      title: 'Business Environment & Management Basics',
-      description: 'Learn how external factors affect business decisions.',
-      sortOrder: 4,
-      duration: 150, // 2.5 hours
-      lessons: [
-        { title: 'Business Environment – Meaning & Importance', duration: 25, sortOrder: 1 },
-        { title: 'Economic, Social & Legal Environment', duration: 30, sortOrder: 2 },
-        { title: 'Introduction to Management & Its Functions', duration: 30, sortOrder: 3 },
-        { title: 'Planning, Organising & Staffing', duration: 30, sortOrder: 4 },
-        { title: 'Leadership, Motivation & Control', duration: 25, sortOrder: 5 },
-      ],
-    },
-    {
-      id: 'mod-commerce-economics',
-      title: 'Fundamentals of Economics',
-      description: 'Build economic thinking for real-world decision making.',
-      sortOrder: 5,
-      duration: 150, // 2.5 hours
-      lessons: [
-        { title: 'What is Economics? Micro vs Macro', duration: 25, sortOrder: 1 },
-        { title: 'Basic Economic Problems & Opportunity Cost', duration: 25, sortOrder: 2 },
-        { title: 'Demand – Meaning, Law & Factors', duration: 30, sortOrder: 3 },
-        { title: 'Supply – Meaning & Market Equilibrium', duration: 30, sortOrder: 4 },
-        { title: 'Inflation, GDP & National Income Basics', duration: 30, sortOrder: 5 },
-      ],
-    },
-    {
-      id: 'mod-commerce-real-life',
-      title: 'Commerce in Real Life & Career Pathways',
-      description: 'Connect theory with practical applications & careers.',
-      sortOrder: 6,
-      duration: 120, // 2 hours
-      lessons: [
-        { title: 'Commerce in Daily Life', duration: 20, sortOrder: 1 },
-        { title: 'Banking, Insurance & Financial Markets Basics', duration: 30, sortOrder: 2 },
-        { title: 'Digital Commerce & E-Business', duration: 25, sortOrder: 3 },
-        { title: 'Career Options after Commerce (CA, CS, CMA, MBA, Govt Jobs)', duration: 25, sortOrder: 4 },
-        { title: 'How to Study Commerce Effectively', duration: 20, sortOrder: 5 },
-      ],
-    },
+  const lessons = [
+    // Module 1: Introduction to Commerce (2.5 Hours = 150 min)
+    { title: 'Meaning & Scope of Commerce', duration: 30, order: 1 },
+    { title: 'Trade, Industry & Aids to Trade', duration: 30, order: 2 },
+    { title: 'Commerce vs Business vs Economics', duration: 20, order: 3 },
+    { title: 'Evolution of Commerce in India', duration: 20, order: 4 },
+    { title: 'Role of Commerce in Economic Development', duration: 20, order: 5 },
+    
+    // Module 2: Fundamentals of Accountancy (3 Hours = 180 min)
+    { title: 'What is Accounting? Objectives & Users', duration: 25, order: 6 },
+    { title: 'Basic Accounting Terms & Concepts', duration: 30, order: 7 },
+    { title: 'Accounting Principles & Conventions', duration: 25, order: 8 },
+    { title: 'Types of Accounts & Golden Rules', duration: 30, order: 9 },
+    { title: 'Introduction to Journal Entries', duration: 35, order: 10 },
+    { title: 'Trial Balance – Meaning & Purpose', duration: 35, order: 11 },
+    
+    // Module 3: Business Studies – Business Organization (2.5 Hours = 150 min)
+    { title: 'Meaning, Nature & Objectives of Business', duration: 25, order: 12 },
+    { title: 'Forms of Business Organization (Sole, Partnership, Company)', duration: 40, order: 13 },
+    { title: 'Public vs Private Sector Enterprises', duration: 20, order: 14 },
+    { title: 'Business Risk & Risk Management', duration: 20, order: 15 },
+    { title: 'Startup & MSME Ecosystem in India', duration: 25, order: 16 },
+    
+    // Module 4: Business Environment & Management Basics (2.5 Hours = 150 min)
+    { title: 'Business Environment – Meaning & Importance', duration: 25, order: 17 },
+    { title: 'Economic, Social & Legal Environment', duration: 30, order: 18 },
+    { title: 'Introduction to Management & Its Functions', duration: 30, order: 19 },
+    { title: 'Planning, Organising & Staffing', duration: 30, order: 20 },
+    { title: 'Leadership, Motivation & Control', duration: 25, order: 21 },
+    
+    // Module 5: Fundamentals of Economics (2.5 Hours = 150 min)
+    { title: 'What is Economics? Micro vs Macro', duration: 25, order: 22 },
+    { title: 'Basic Economic Problems & Opportunity Cost', duration: 25, order: 23 },
+    { title: 'Demand – Meaning, Law & Factors', duration: 30, order: 24 },
+    { title: 'Supply – Meaning & Market Equilibrium', duration: 30, order: 25 },
+    { title: 'Inflation, GDP & National Income Basics', duration: 30, order: 26 },
+    
+    // Module 6: Commerce in Real Life & Career Pathways (2 Hours = 120 min)
+    { title: 'Commerce in Daily Life', duration: 20, order: 27 },
+    { title: 'Banking, Insurance & Financial Markets Basics', duration: 30, order: 28 },
+    { title: 'Digital Commerce & E-Business', duration: 25, order: 29 },
+    { title: 'Career Options after Commerce (CA, CS, CMA, MBA, Govt Jobs)', duration: 25, order: 30 },
+    { title: 'How to Study Commerce Effectively', duration: 20, order: 31 },
   ]
 
-  console.log('\n📚 Creating Modules and Lessons...')
+  console.log('\n📚 Creating Lessons...')
 
-  for (const mod of modules) {
-    // Create module
-    const moduleRecord = await prisma.module.upsert({
-      where: { id: mod.id },
+  for (const lesson of lessons) {
+    const lessonId = `lesson-commerce-${lesson.order}`
+    await prisma.lesson.upsert({
+      where: { id: lessonId },
       update: {},
       create: {
-        id: mod.id,
-        title: mod.title,
-        description: mod.description,
-        sortOrder: mod.sortOrder,
-        duration: mod.duration,
+        id: lessonId,
+        title: lesson.title,
+        duration: lesson.duration,
+        order: lesson.order,
+        isActive: true,
         courseId: course.id,
-      },
-    })
-
-    console.log(`✅ Module created: ${mod.title}`)
-
-    // Create lessons for this module
-    for (const lesson of mod.lessons) {
-      await prisma.lesson.upsert({
-        where: { id: `${mod.id}-lesson-${lesson.sortOrder}` },
-        update: {},
-        create: {
-          id: `${mod.id}-lesson-${lesson.sortOrder}`,
-          title: lesson.title,
-          sortOrder: lesson.sortOrder,
-          duration: lesson.duration,
-          type: 'VIDEO',
-          isFree: lesson.sortOrder === 1, // First lesson of each module is free
-          moduleId: moduleRecord.id,
-          courseId: course.id,
-          content: `# ${lesson.title}
+        content: `# ${lesson.title}
 
 ## Overview
-This lesson covers ${lesson.title.toLowerCase()}.
-
-## Key Topics
-- Topic 1
-- Topic 2
-- Topic 3
+This lesson covers **${lesson.title}**.
 
 ## Learning Objectives
 By the end of this lesson, you will be able to:
-1. Understand the fundamentals
-2. Apply concepts to real scenarios
+1. Understand the fundamentals of ${lesson.title.toLowerCase()}
+2. Apply concepts to real-world scenarios
 3. Build a strong foundation for advanced topics
+
+## Key Topics
+
+### Main Concept
+- Topic 1 explanation
+- Topic 2 explanation
+- Topic 3 explanation
+
+### Practical Application
+- Real-world examples
+- Case studies
+- Practice exercises
+
+## Summary
+This lesson has covered the key aspects of ${lesson.title}. Make sure to review the practice questions and proceed to the next lesson.
 
 ## Resources
 - Downloadable PDF notes
 - Practice exercises
 - Summary sheet`,
-        },
-      })
-      console.log(`  ✅ Lesson: ${lesson.title}`)
-    }
+      },
+    })
+    console.log(`✅ Lesson ${lesson.order}: ${lesson.title}`)
   }
 
   // ============================================================================
@@ -299,34 +245,13 @@ By the end of this lesson, you will be able to:
     create: {
       id: 'assessment-commerce-basics',
       title: 'Commerce Basics Final Assessment',
-      description: 'Test your knowledge of commerce fundamentals',
       type: 'QUIZ',
-      duration: 30, // 30 minutes
-      passingScore: 60,
-      maxAttempts: 3,
       isActive: true,
       courseId: course.id,
     },
   })
 
   console.log('✅ Assessment created: Commerce Basics Final Assessment')
-
-  // ============================================================================
-  // 7. CREATE CERTIFICATE TEMPLATE
-  // ============================================================================
-
-  await prisma.certificateTemplate.upsert({
-    where: { id: 'cert-commerce-basics' },
-    update: {},
-    create: {
-      id: 'cert-commerce-basics',
-      name: 'Commerce Basics Certificate',
-      description: 'Certificate of Completion for Commerce Basics Course',
-      courseId: course.id,
-    },
-  })
-
-  console.log('✅ Certificate template created')
 
   // ============================================================================
   // SUMMARY
@@ -337,10 +262,11 @@ By the end of this lesson, you will be able to:
   console.log(`   📖 Course: ${course.title}`)
   console.log(`   👨‍🏫 Instructor: ${instructor.name}`)
   console.log(`   📁 Category: ${category.name}`)
-  console.log(`   📚 Modules: ${modules.length}`)
-  console.log(`   📝 Total Lessons: ${modules.reduce((sum, mod) => sum + mod.lessons.length, 0)}`)
+  console.log(`   📚 Subcategories: ${subcategories.length} (Accountancy, Business Studies, Economics)`)
+  console.log(`   📝 Total Lessons: ${lessons.length}`)
   console.log(`   ⏱️ Total Duration: ${course.duration} minutes (${course.duration / 60} hours)`)
   console.log(`   📊 Difficulty: ${course.difficulty}`)
+  console.log(`   🎯 Assessment: Final Quiz (30 minutes)`)
   console.log('\n✅ Ready to publish!')
 }
 
