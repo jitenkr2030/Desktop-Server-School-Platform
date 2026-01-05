@@ -135,6 +135,7 @@ export async function GET(
     const isCAFinal = course.id === 'course-ca-final'
     const isCSExecutive = course.id === 'cs_executive'
     const isCSFoundation = course.id === 'cs_foundation'
+    const isCSProfessional = course.id === 'cs_professional'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -634,6 +635,18 @@ export async function GET(
       '2': 'Business Management, Ethics & Entrepreneurship (Paper 2)',
       '3': 'Business Economics (Paper 3)',
       '4': 'Fundamentals of Accounting & Auditing (Paper 4)',
+    }
+
+    const csProfessionalModuleNames: Record<string, string> = {
+      '1': 'Governance, Risk Management, Compliance & Ethics (Module I – Paper 1)',
+      '2': 'Advanced Tax Laws & Practice (Module I – Paper 2)',
+      '3': 'Drafting, Pleadings & Appearances (Module I – Paper 3)',
+      '4': 'Secretarial Audit, Compliance Management & Due Diligence (Module II – Paper 4)',
+      '5': 'Corporate Restructuring, Insolvency & Resolution (Module II – Paper 5)',
+      '6': 'Capital Markets & Securities Laws (Module II – Paper 6)',
+      '7': 'Corporate Disputes & Arbitration (Module III – Paper 7)',
+      '8': 'Economic, Business & Commercial Laws (Advanced) (Module III – Paper 8)',
+      '9': 'Professional Readiness & Exam Mastery',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -1507,6 +1520,36 @@ export async function GET(
         } else if (lesson.order >= 300 && lesson.order <= 399) {
           moduleNum = '4'
         }
+      } else if (isCSProfessional) {
+        // CS Professional Complete Course: use order ranges (9 papers/modules)
+        // Module 1: orders 1-99 (Paper 1 - Governance, Risk Management)
+        // Module 2: orders 100-199 (Paper 2 - Advanced Tax Laws)
+        // Module 3: orders 200-299 (Paper 3 - Drafting & Appearances)
+        // Module 4: orders 300-399 (Paper 4 - Secretarial Audit)
+        // Module 5: orders 400-499 (Paper 5 - Restructuring & Insolvency)
+        // Module 6: orders 500-599 (Paper 6 - Capital Markets)
+        // Module 7: orders 600-699 (Paper 7 - Corporate Disputes)
+        // Module 8: orders 700-799 (Paper 8 - Advanced Commercial Laws)
+        // Module 9: orders 800-899 (Exam Mastery)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        } else if (lesson.order >= 800 && lesson.order <= 899) {
+          moduleNum = '9'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -1585,6 +1628,7 @@ export async function GET(
         isCAFinal ? caFinalModuleNames[moduleNum] :
         isCSExecutive ? csExecutiveModuleNames[moduleNum] :
         isCSFoundation ? csFoundationModuleNames[moduleNum] :
+        isCSProfessional ? csProfessionalModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
