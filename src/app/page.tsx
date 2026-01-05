@@ -34,10 +34,22 @@ export default function NewLandingPage() {
       color: '#f3e8ff'
     },
     {
+      icon: '🏆',
+      title: 'Competitive Exams',
+      description: 'UPSC, SSC, Banking, Railways, and entrance exams',
+      color: '#fee2e2'
+    },
+    {
       icon: '💼',
-      title: 'Career Skills',
-      description: 'Professional development - Communication, Leadership',
+      title: 'Professional Courses',
+      description: 'SAP, Excel, Tally, Python, and career skills',
       color: '#dcfce7'
+    },
+    {
+      icon: '🌱',
+      title: 'Life Skills',
+      description: 'Financial literacy, communication, and personal growth',
+      color: '#fef3c7'
     },
     {
       icon: '💰',
@@ -168,7 +180,7 @@ export default function NewLandingPage() {
               <div style={{ fontSize: '0.875rem', color: '#bfdbfe' }}>School Classes</div>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#facc15' }}>14+</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#facc15' }}>18+</div>
               <div style={{ fontSize: '0.875rem', color: '#bfdbfe' }}>Learning Paths</div>
             </div>
             <div style={{ textAlign: 'center' }}>
@@ -193,7 +205,7 @@ export default function NewLandingPage() {
               color: '#1f2937',
               marginBottom: '0.75rem'
             }}>
-              Four Main Learning Paths
+              Six Learning Paths
             </h2>
             <p style={{
               color: '#6b7280',
@@ -201,7 +213,7 @@ export default function NewLandingPage() {
               maxWidth: '600px',
               margin: '0 auto'
             }}>
-              Comprehensive learning structure for every stage of your educational journey
+              Comprehensive learning structure for every stage of your educational and professional journey
             </p>
           </div>
 

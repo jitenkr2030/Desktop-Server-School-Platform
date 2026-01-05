@@ -104,10 +104,10 @@ export const LearningPathCategories: React.FC = () => {
         sortOrder: 1,
         isFeatured: true,
         learningPaths: [
-          { id: '1', title: 'Primary (1-5)', description: 'Math, EVS, English', icon: '📚', color: 'bg-blue-100', courseCount: 15 },
-          { id: '2', title: 'Middle School (6-8)', description: 'Math, Science, Social', icon: '📖', color: 'bg-blue-100', courseCount: 20 },
-          { id: '3', title: 'Secondary (9-10)', description: 'Math, Science, English', icon: '📝', color: 'bg-blue-100', courseCount: 25 },
-          { id: '4', title: 'Senior Secondary (11-12)', description: 'Science, Commerce, Arts', icon: '🎓', color: 'bg-blue-100', courseCount: 30 }
+          { id: '1a', title: 'Primary (1-5)', description: 'Math, EVS, English', icon: '📚', color: 'bg-blue-100', courseCount: 15 },
+          { id: '1b', title: 'Middle School (6-8)', description: 'Math, Science, Social', icon: '📖', color: 'bg-blue-100', courseCount: 20 },
+          { id: '1c', title: 'Secondary (9-10)', description: 'Math, Science, English', icon: '📝', color: 'bg-blue-100', courseCount: 25 },
+          { id: '1d', title: 'Senior Secondary (11-12)', description: 'Science, Commerce, Arts', icon: '🎓', color: 'bg-blue-100', courseCount: 30 }
         ]
       },
       {
@@ -120,42 +120,92 @@ export const LearningPathCategories: React.FC = () => {
         sortOrder: 2,
         isFeatured: true,
         learningPaths: [
-          { id: '5', title: 'Commerce', description: 'Accounting, Business', icon: '💼', color: 'bg-green-100', courseCount: 18 },
-          { id: '6', title: 'Computer Science', description: 'Programming, CS fundamentals', icon: '💻', color: 'bg-green-100', courseCount: 22 },
-          { id: '7', title: 'Science', description: 'Physics, Chemistry, Biology', icon: '🔬', color: 'bg-green-100', courseCount: 16 },
-          { id: '8', title: 'Engineering', description: 'Math, Physics basics', icon: '⚙️', color: 'bg-green-100', courseCount: 14 }
+          { id: '2a', title: 'Commerce', description: 'Accounting, Business', icon: '💼', color: 'bg-green-100', courseCount: 18 },
+          { id: '2b', title: 'Computer Science', description: 'Programming, CS fundamentals', icon: '💻', color: 'bg-green-100', courseCount: 22 },
+          { id: '2c', title: 'Science', description: 'Physics, Chemistry, Biology', icon: '🔬', color: 'bg-green-100', courseCount: 16 },
+          { id: '2d', title: 'Engineering', description: 'Math, Physics basics', icon: '⚙️', color: 'bg-green-100', courseCount: 14 }
         ]
       },
       {
         id: '3',
-        name: 'Career Skills',
-        slug: 'career-skills',
-        description: 'Professional development',
-        icon: '🧑‍💼',
-        color: 'bg-purple-500',
+        name: 'Competitive Exams',
+        slug: 'competitive-exams',
+        description: 'Government jobs and competitive exam preparation',
+        icon: '🏛️',
+        color: 'bg-red-500',
         sortOrder: 3,
         isFeatured: true,
         learningPaths: [
-          { id: '9', title: 'Professional Skills', description: 'Communication, Leadership', icon: '💪', color: 'bg-purple-100', courseCount: 12 },
-          { id: '10', title: 'Technical Skills', description: 'Web dev, Data analysis', icon: '⚡', color: 'bg-purple-100', courseCount: 20 },
-          { id: '11', title: 'Soft Skills', description: 'Emotional intelligence, Problem solving', icon: '🧠', color: 'bg-purple-100', courseCount: 10 },
-          { id: '12', title: 'Digital Skills', description: 'AI, Automation basics', icon: '🤖', color: 'bg-purple-100', courseCount: 15 }
+          { id: '3a', title: 'UPSC', description: 'Civil Services, NDA, CDS', icon: '📋', color: 'bg-red-100', courseCount: 3 },
+          { id: '3b', title: 'SSC', description: 'CGL, CHSL, MTS, GD', icon: '📊', color: 'bg-red-100', courseCount: 4 },
+          { id: '3c', title: 'Banking', description: 'SBI, IBPS, RRB', icon: '🏦', color: 'bg-red-100', courseCount: 3 },
+          { id: '3d', title: 'Railway & Defense', description: 'RRB, NDA, CDS, AFCAT', icon: '🚂', color: 'bg-red-100', courseCount: 4 },
+          { id: '3e', title: 'State Government', description: 'PSC, Police, Patwari, TET', icon: '🏢', color: 'bg-red-100', courseCount: 4 }
         ]
       },
       {
         id: '4',
+        name: 'Professional Courses',
+        slug: 'professional-courses',
+        description: 'CA, CS, CMA, CFA, FRM, Actuarial',
+        icon: '📊',
+        color: 'bg-purple-500',
+        sortOrder: 4,
+        isFeatured: true,
+        learningPaths: [
+          { id: '4a', title: 'Chartered Accountant', description: 'CA Foundation, Intermediate, Final', icon: '📈', color: 'bg-purple-100', courseCount: 3 },
+          { id: '4b', title: 'Company Secretary', description: 'CS Executive, Professional', icon: '📋', color: 'bg-purple-100', courseCount: 2 },
+          { id: '4c', title: 'CMA', description: 'Cost and Management Accounting', icon: '💰', color: 'bg-purple-100', courseCount: 3 },
+          { id: '4d', title: 'CFA', description: 'Chartered Financial Analyst', icon: '📉', color: 'bg-purple-100', courseCount: 3 },
+          { id: '4e', title: 'FRM & Actuarial', description: 'Risk Management, Actuarial Science', icon: '🎯', color: 'bg-purple-100', courseCount: 3 }
+        ]
+      },
+      {
+        id: '5',
+        name: 'Career Skills',
+        slug: 'career-skills',
+        description: 'Professional development',
+        icon: '🧑‍💼',
+        color: 'bg-indigo-500',
+        sortOrder: 5,
+        isFeatured: true,
+        learningPaths: [
+          { id: '5a', title: 'Professional Skills', description: 'Communication, Leadership', icon: '💪', color: 'bg-indigo-100', courseCount: 12 },
+          { id: '5b', title: 'Technical Skills', description: 'Web dev, Data analysis', icon: '⚡', color: 'bg-indigo-100', courseCount: 20 },
+          { id: '5c', title: 'Soft Skills', description: 'Emotional intelligence, Problem solving', icon: '🧠', color: 'bg-indigo-100', courseCount: 10 },
+          { id: '5d', title: 'Digital Skills', description: 'AI, Automation basics', icon: '🤖', color: 'bg-indigo-100', courseCount: 15 }
+        ]
+      },
+      {
+        id: '6',
         name: 'Money & Business',
         slug: 'money-business',
         description: 'Financial literacy',
         icon: '💰',
         color: 'bg-orange-500',
-        sortOrder: 4,
+        sortOrder: 6,
         isFeatured: true,
         learningPaths: [
-          { id: '13', title: 'Financial Literacy', description: 'Personal finance, Investment', icon: '📊', color: 'bg-orange-100', courseCount: 14 },
-          { id: '14', title: 'Business Fundamentals', description: 'Planning, Entrepreneurship', icon: '🚀', color: 'bg-orange-100', courseCount: 16 },
-          { id: '15', title: 'Investment & Trading', description: 'Stock market, Crypto', icon: '📈', color: 'bg-orange-100', courseCount: 12 },
-          { id: '16', title: 'E-commerce', description: 'Online business, Digital marketing', icon: '🛒', color: 'bg-orange-100', courseCount: 18 }
+          { id: '6a', title: 'Financial Literacy', description: 'Personal finance, Investment', icon: '📊', color: 'bg-orange-100', courseCount: 14 },
+          { id: '6b', title: 'Business Fundamentals', description: 'Planning, Entrepreneurship', icon: '🚀', color: 'bg-orange-100', courseCount: 16 },
+          { id: '6c', title: 'Investment & Trading', description: 'Stock market, Crypto', icon: '📈', color: 'bg-orange-100', courseCount: 12 },
+          { id: '6d', title: 'E-commerce', description: 'Online business, Digital marketing', icon: '🛒', color: 'bg-orange-100', courseCount: 18 }
+        ]
+      },
+      {
+        id: '7',
+        name: 'Life Skills',
+        slug: 'life-skills',
+        description: 'Personal development and well-being',
+        icon: '🧠',
+        color: 'bg-pink-500',
+        sortOrder: 7,
+        isFeatured: true,
+        learningPaths: [
+          { id: '7a', title: 'Productivity', description: 'Time Management, Focus', icon: '⏰', color: 'bg-pink-100', courseCount: 2 },
+          { id: '7b', title: 'Wellness', description: 'Stress Management, Mental Health', icon: '🧘', color: 'bg-pink-100', courseCount: 1 },
+          { id: '7c', title: 'Communication', description: 'Confidence, Public Speaking', icon: '🎤', color: 'bg-pink-100', courseCount: 2 },
+          { id: '7d', title: 'Personal Growth', description: 'Decision Making, Critical Thinking', icon: '🌟', color: 'bg-pink-100', courseCount: 5 }
         ]
       }
     ]
@@ -195,13 +245,13 @@ export const LearningPathCategories: React.FC = () => {
     <div className="container mx-auto px-4 py-16">
       <div className="text-center space-y-4 mb-12">
         <Badge variant="secondary" className="text-sm md:text-base px-4 py-2">
-          🎯 Four Main Learning Paths
+          🎯 Seven Main Learning Paths
         </Badge>
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
           Comprehensive Learning Structure
         </h2>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          From Class 1 to Career — Our four main learning paths cover every stage of your educational journey
+          From Class 1 to Career — Our seven main learning paths cover every stage of your educational journey
         </p>
       </div>
 
@@ -318,22 +368,82 @@ export const LearningPathCategories: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-          {/* Career & Skills */}
+          {/* Competitive Exams */}
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold text-red-600 flex items-center gap-2">
+              🏛️ Competitive Exams:
+            </h4>
+            <div className="space-y-2 text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span>UPSC: Civil Services Prelims, Mains, Interview, NDA, CDS</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span>SSC: CGL, CHSL, MTS, GD Constable examinations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span>Banking: SBI PO/Clerk, IBPS PO/Clerk, RRB exams</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span>Railway & Defense: RRB NTPC/ALP/Group D, NDA, CDS, AFCAT</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span>State Government: PSC, Police Constable/SI, Patwari, TET</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Professional Courses */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-purple-600 flex items-center gap-2">
-              🧑‍💼 Career & Skills:
+              📊 Professional Courses:
             </h4>
             <div className="space-y-2 text-sm text-gray-700">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>Chartered Accountant: CA Foundation, Intermediate, Final</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>Company Secretary: CS Executive, Professional programs</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>CMA: Cost and Management Accounting levels</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>CFA: Chartered Financial Analyst Levels I, II, III</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>FRM & Actuarial: Financial Risk Management, Actuarial Science</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+          {/* Career & Skills */}
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold text-indigo-600 flex items-center gap-2">
+              🧑‍💼 Career & Skills:
+            </h4>
+            <div className="space-y-2 text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
                 <span>Professional Development: Resume building, communication skills, time management</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
                 <span>Technical Skills: Web development, data analysis, digital marketing</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
                 <span>Soft Skills: Leadership, emotional intelligence, problem-solving</span>
               </div>
             </div>
@@ -361,31 +471,45 @@ export const LearningPathCategories: React.FC = () => {
           </div>
         </div>
 
+        {/* Life Skills */}
+        <div className="mt-8">
+          <h4 className="text-lg font-semibold text-pink-600 flex items-center gap-2">
+            🧠 Life Skills:
+          </h4>
+          <div className="space-y-2 text-sm text-gray-700 mt-2">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+              <span>Productivity: Time Management Mastery, Productivity Systems & Habits</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+              <span>Wellness: Stress Management & Resilience, Mental Clarity & Focus</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+              <span>Communication: Confidence Building & Public Speaking, Communication Skills Masterclass</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+              <span>Personal Growth: Decision Making & Problem Solving, Emotional Intelligence, Goal Setting, Critical Thinking</span>
+            </div>
+          </div>
+        </div>
+
         {/* 18 Categories Overview */}
         <div className="mt-8">
           <h4 className="text-lg font-semibold text-purple-600 mb-4">
-            📚 18 Comprehensive Learning Categories (Detailed Subjects):
+            📚 21 Comprehensive Learning Categories (Detailed Subjects):
           </h4>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-sm">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-2 text-sm">
             {[
-              'Foundational Learning',
-              'Money, Finance & Economics',
-              'Business, Commerce & Entrepreneurship',
-              'Technology & Computer Science',
-              'Design, Creative & Media',
-              'Marketing, Sales & Growth',
-              'Career & Professional Development',
-              'Science, Engineering & Research',
-              'Health, Fitness & Well-being',
-              'Language & Communication',
-              'Government, Civics & Awareness',
-              'E-commerce & Online Business',
-              'Gaming & New-age Careers',
-              'Life Skills & Practical Knowledge',
-              'DIY, Tools & Productivity',
-              'Philosophy, Thinking & Decision-making',
-              'Safety, Law & Awareness',
-              'Community-led Learning'
+              'School Learning',
+              'College Foundation',
+              'Competitive Exams',
+              'Professional Courses',
+              'Career Skills',
+              'Money & Business',
+              'Life Skills'
             ].map((category, index) => (
               <div key={index} className="flex items-center gap-1 text-gray-700">
                 <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
