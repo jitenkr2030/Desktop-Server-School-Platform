@@ -173,6 +173,7 @@ export async function GET(
     const isCollegeSemesterSupport = course.id === 'college_semester_support'
     const isCollegeExamPrep = course.id === 'college_exam_prep'
     const isCollegeCareerSkills = course.id === 'college_career_skills'
+    const isActuarialScience = course.id === 'course-actuarial-science'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1036,6 +1037,17 @@ export async function GET(
       '4': 'Internship Readiness',
       '5': 'Project Guidance',
       '6': 'Corporate Etiquette',
+    }
+
+    const actuarialScienceModuleNames: Record<string, string> = {
+      '1': 'Mathematical Foundations for Actuaries',
+      '2': 'Probability Theory',
+      '3': 'Statistics for Actuarial Science',
+      '4': 'Financial Mathematics',
+      '5': 'Insurance & Risk Management',
+      '6': 'Survival Models & Life Contingencies',
+      '7': 'Stochastic Models',
+      '8': 'Exam Preparation & Actuarial Practice',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -2713,6 +2725,33 @@ export async function GET(
         } else if (lesson.order >= 251) {
           moduleNum = '6'
         }
+      } else if (isActuarialScience) {
+        // Actuarial Science Complete Course: use order ranges (8 modules)
+        // Module 1: orders 1-99 (Mathematical Foundations)
+        // Module 2: orders 100-199 (Probability Theory)
+        // Module 3: orders 200-299 (Statistics)
+        // Module 4: orders 300-399 (Financial Mathematics)
+        // Module 5: orders 400-499 (Insurance & Risk Management)
+        // Module 6: orders 500-599 (Survival Models & Life Contingencies)
+        // Module 7: orders 600-699 (Stochastic Models)
+        // Module 8: orders 700-799 (Exam Preparation)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700) {
+          moduleNum = '8'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -2829,6 +2868,7 @@ export async function GET(
         isCollegeSemesterSupport ? collegeSemesterSupportModuleNames[moduleNum] :
         isCollegeExamPrep ? collegeExamPrepModuleNames[moduleNum] :
         isCollegeCareerSkills ? collegeCareerSkillsModuleNames[moduleNum] :
+        isActuarialScience ? actuarialScienceModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
