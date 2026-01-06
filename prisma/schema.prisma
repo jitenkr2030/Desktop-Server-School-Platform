@@ -837,6 +837,8 @@ model ContactMessage {
   email        String
   subject      String
   message      String        @db.Text
+  attachment   String?
+  attachmentName String?
   status       MessageStatus @default(PENDING)
   replyMessage String?       @db.Text
   repliedAt    DateTime?

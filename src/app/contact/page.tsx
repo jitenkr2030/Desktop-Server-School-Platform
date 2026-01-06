@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { NewNavigation } from "@/components/new-navigation"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Loader2, CheckCircle, AlertCircle } from "lucide-react"
+import { Loader2, CheckCircle, AlertCircle, Upload, X, FileText } from "lucide-react"
 
 interface FormData {
   firstName: string
@@ -20,6 +20,7 @@ interface FormErrors {
   email?: string[]
   subject?: string[]
   message?: string[]
+  file?: string[]
 }
 
 export default function ContactPage() {
@@ -30,10 +31,13 @@ export default function ContactPage() {
     subject: '',
     message: '',
   })
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  const [fileError, setFileError] = useState<string | null>(null)
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const subjects = [
     'General Inquiry',
@@ -41,9 +45,22 @@ export default function ContactPage() {
     'Payment Issue',
     'Technical Problem',
     'Partnership Opportunity',
+    'Instructor Application',
     'Feedback & Suggestions',
     'Other',
   ]
+
+  // Allowed file types for upload
+  const allowedFileTypes = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'image/jpeg',
+    'image/png',
+    'image/jpg',
+  ]
+
+  const maxFileSize = 10 * 1024 * 1024 // 10MB
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
@@ -79,6 +96,68 @@ export default function ContactPage() {
     return isValid
   }
 
+  const validateFile = (file: File): string | null => {
+    if (!allowedFileTypes.includes(file.type)) {
+      return 'Invalid file type. Please upload PDF, DOC, DOCX, JPEG, or PNG files.'
+    }
+    if (file.size > maxFileSize) {
+      return 'File size exceeds 10MB limit. Please choose a smaller file.'
+    }
+    return null
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    setFileError(null)
+
+    if (file) {
+      const error = validateFile(file)
+      if (error) {
+        setFileError(error)
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ''
+        }
+        return
+      }
+      setUploadedFile(file)
+    }
+  }
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setFileError(null)
+
+    const file = e.dataTransfer.files?.[0]
+    if (file) {
+      const error = validateFile(file)
+      if (error) {
+        setFileError(error)
+        return
+      }
+      setUploadedFile(file)
+    }
+  }
+
+  const removeFile = () => {
+    setUploadedFile(null)
+    setFileError(null)
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return bytes + ' B'
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB'
+  }
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -103,12 +182,21 @@ export default function ContactPage() {
     setIsSubmitting(true)
 
     try {
+      // Create FormData for file upload
+      const formDataToSend = new FormData()
+      formDataToSend.append('firstName', formData.firstName)
+      formDataToSend.append('lastName', formData.lastName)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('subject', formData.subject)
+      formDataToSend.append('message', formData.message)
+      
+      if (uploadedFile) {
+        formDataToSend.append('file', uploadedFile)
+      }
+
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       })
 
       const data = await response.json()
@@ -122,6 +210,11 @@ export default function ContactPage() {
           subject: '',
           message: '',
         })
+        setUploadedFile(null)
+        setFileError(null)
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ''
+        }
         
         // Scroll to top to show success message
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -294,6 +387,84 @@ export default function ContactPage() {
                   </span>
                 </div>
               </div>
+
+              {/* File Upload Section */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Attach Document (Optional)
+                </label>
+                <p className="text-sm text-gray-500 mb-3">
+                  Upload your resume, CV, or other documents (PDF, DOC, DOCX, JPEG, PNG - Max 10MB)
+                </p>
+                
+                {/* File Upload Area */}
+                {!uploadedFile ? (
+                  <div 
+                    className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
+                      fileError 
+                        ? 'border-red-300 bg-red-50 hover:bg-red-100' 
+                        : 'border-gray-300 hover:border-orange-500 hover:bg-orange-50'
+                    }`}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                      onChange={handleFileChange}
+                      className="hidden"
+                      disabled={isSubmitting}
+                    />
+                    <div className="flex flex-col items-center">
+                      <Upload className={`h-12 w-12 mb-4 ${fileError ? 'text-red-400' : 'text-gray-400'}`} />
+                      <p className="text-gray-600 font-medium mb-1">
+                        Drag and drop your file here, or click to browse
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        Supports: PDF, DOC, DOCX, JPEG, PNG (Max 10MB)
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  // Uploaded File Display
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                          <FileText className="h-6 w-6 text-orange-600" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900 truncate max-w-xs">
+                            {uploadedFile.name}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            {formatFileSize(uploadedFile.size)}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={removeFile}
+                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                        disabled={isSubmitting}
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* File Error Message */}
+                {fileError && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="h-4 w-4" />
+                    {fileError}
+                  </p>
+                )}
+              </div>
+
               <Button 
                 type="submit"
                 className="w-full bg-orange-500 hover:bg-orange-600 text-lg py-3"
