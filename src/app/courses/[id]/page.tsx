@@ -248,7 +248,14 @@ export default function CourseDetailPage() {
       'acca_level1': '/assets/courses/acca-level1.svg',
       'acca_level2': '/assets/courses/acca-level2.svg',
       'acca_level3': '/assets/courses/acca-level3.svg',
-      'school_education': '/assets/courses/school-education.svg',
+      'school_primary_1_5': '/assets/courses/school-primary-1-5.svg',
+      'school_primary_6_8': '/assets/courses/school-primary-6-8.svg',
+      'school_secondary_9_10': '/assets/courses/school-secondary-9-10.svg',
+      'school_senior_science': '/assets/courses/school-senior-science.svg',
+      'school_senior_commerce': '/assets/courses/school-senior-commerce.svg',
+      'school_senior_arts': '/assets/courses/school-senior-arts.svg',
+      'school_exam_prep': '/assets/courses/school-exam-prep.svg',
+      'school_skills': '/assets/courses/school-skills.svg',
     }
     
     if (thumbnailMap[courseId]) {

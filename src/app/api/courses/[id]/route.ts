@@ -150,7 +150,14 @@ export async function GET(
     const isACCALevel1 = course.id === 'acca_level1'
     const isACCALevel2 = course.id === 'acca_level2'
     const isACCALevel3 = course.id === 'acca_level3'
-    const isSchoolEducation = course.id === 'school_education'
+    const isSchoolPrimary1_5 = course.id === 'school_primary_1_5'
+    const isSchoolPrimary6_8 = course.id === 'school_primary_6_8'
+    const isSchoolSecondary9_10 = course.id === 'school_secondary_9_10'
+    const isSchoolSeniorScience = course.id === 'school_senior_science'
+    const isSchoolSeniorCommerce = course.id === 'school_senior_commerce'
+    const isSchoolSeniorArts = course.id === 'school_senior_arts'
+    const isSchoolExamPrep = course.id === 'school_exam_prep'
+    const isSchoolSkills = course.id === 'school_skills'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -806,16 +813,69 @@ export async function GET(
       '6': 'ATX - Advanced Taxation (Optional)',
     }
 
-    const schoolEducationModuleNames: Record<string, string> = {
-      '1': 'Primary & Middle School (Class 1-5)',
-      '2': 'Primary & Middle School (Class 6-8)',
-      '3': 'Secondary School (Class 9-10)',
-      '4': 'Senior Secondary - Science Stream (Class 11-12)',
-      '5': 'Senior Secondary - Commerce Stream (Class 11-12)',
-      '6': 'Senior Secondary - Arts/Humanities (Class 11-12)',
-      '7': 'Board Exam Crash Prep',
-      '8': 'Concept Clarity & Doubt Solving',
-      '9': 'Skill Add-ons for School Students',
+    const schoolPrimary1_5ModuleNames: Record<string, string> = {
+      '1': 'Basics of Math',
+      '2': 'English Reading & Writing',
+      '3': 'EVS (Environmental Studies)',
+      '4': 'Hindi / Regional Language',
+      '5': 'Concept Building (Foundations)',
+    }
+
+    const schoolPrimary6_8ModuleNames: Record<string, string> = {
+      '1': 'Mathematics',
+      '2': 'Science',
+      '3': 'Social Science',
+      '4': 'English Grammar',
+      '5': 'Hindi / Regional Language',
+    }
+
+    const schoolSecondary9_10ModuleNames: Record<string, string> = {
+      '1': 'Mathematics',
+      '2': 'Science',
+      '3': 'Social Science',
+      '4': 'English',
+      '5': 'Hindi / Regional Language',
+      '6': 'Board-Oriented Practice (CBSE / ICSE / State Boards)',
+    }
+
+    const schoolSeniorScienceModuleNames: Record<string, string> = {
+      '1': 'Physics',
+      '2': 'Chemistry',
+      '3': 'Mathematics',
+      '4': 'Biology',
+    }
+
+    const schoolSeniorCommerceModuleNames: Record<string, string> = {
+      '1': 'Accountancy',
+      '2': 'Business Studies',
+      '3': 'Economics',
+      '4': 'Mathematics',
+    }
+
+    const schoolSeniorArtsModuleNames: Record<string, string> = {
+      '1': 'History',
+      '2': 'Political Science',
+      '3': 'Geography',
+      '4': 'Economics',
+      '5': 'Sociology',
+      '6': 'Psychology',
+    }
+
+    const schoolExamPrepModuleNames: Record<string, string> = {
+      '1': '30-60 Day Board Strategy',
+      '2': 'Important Questions & PYQs',
+      '3': 'Revision Notes',
+      '4': 'Sample Papers & Mock Tests',
+      '5': 'Time Management in Exams',
+    }
+
+    const schoolSkillsModuleNames: Record<string, string> = {
+      '1': 'English Speaking (School Level)',
+      '2': 'Handwriting Improvement',
+      '3': 'Mental Math',
+      '4': 'Study Techniques',
+      '5': 'Memory & Focus Training',
+      '6': 'Exam Fear Reduction',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -2034,35 +2094,152 @@ export async function GET(
         } else if (lesson.order >= 285) {
           moduleNum = '6'
         }
-      } else if (isSchoolEducation) {
-        // School Education Complete Course: use order ranges
-        // Module 1: orders 1-50 (Primary & Middle School Class 1-5)
-        // Module 2: orders 51-110 (Primary & Middle School Class 6-8)
-        // Module 3: orders 111-175 (Secondary School Class 9-10)
-        // Module 4: orders 176-270 (Senior Secondary Science Stream)
-        // Module 5: orders 271-315 (Senior Secondary Commerce Stream)
-        // Module 6: orders 316-360 (Senior Secondary Arts/Humanities)
-        // Module 7: orders 361-380 (Board Exam Crash Prep)
-        // Module 8: orders 381-400 (Concept Clarity & Doubt Solving)
-        // Module 9: orders 401+ (Skill Add-ons)
-        if (lesson.order >= 1 && lesson.order <= 50) {
+      } else if (isSchoolPrimary1_5) {
+        // Primary & Middle School Class 1-5: use order ranges
+        // Module 1: orders 1-9 (Basics of Math)
+        // Module 2: orders 10-19 (English Reading & Writing)
+        // Module 3: orders 20-29 (EVS)
+        // Module 4: orders 30-39 (Hindi / Regional Language)
+        // Module 5: orders 40-49 (Concept Building)
+        if (lesson.order >= 1 && lesson.order <= 9) {
           moduleNum = '1'
-        } else if (lesson.order >= 51 && lesson.order <= 110) {
+        } else if (lesson.order >= 10 && lesson.order <= 19) {
           moduleNum = '2'
-        } else if (lesson.order >= 111 && lesson.order <= 175) {
+        } else if (lesson.order >= 20 && lesson.order <= 29) {
           moduleNum = '3'
-        } else if (lesson.order >= 176 && lesson.order <= 270) {
+        } else if (lesson.order >= 30 && lesson.order <= 39) {
           moduleNum = '4'
-        } else if (lesson.order >= 271 && lesson.order <= 315) {
+        } else if (lesson.order >= 40) {
           moduleNum = '5'
-        } else if (lesson.order >= 316 && lesson.order <= 360) {
+        }
+      } else if (isSchoolPrimary6_8) {
+        // Primary & Middle School Class 6-8: use order ranges
+        // Module 1: orders 1-20 (Mathematics)
+        // Module 2: orders 21-40 (Science)
+        // Module 3: orders 41-60 (Social Science)
+        // Module 4: orders 61-80 (English Grammar)
+        // Module 5: orders 81-100 (Hindi / Regional Language)
+        if (lesson.order >= 1 && lesson.order <= 20) {
+          moduleNum = '1'
+        } else if (lesson.order >= 21 && lesson.order <= 40) {
+          moduleNum = '2'
+        } else if (lesson.order >= 41 && lesson.order <= 60) {
+          moduleNum = '3'
+        } else if (lesson.order >= 61 && lesson.order <= 80) {
+          moduleNum = '4'
+        } else if (lesson.order >= 81) {
+          moduleNum = '5'
+        }
+      } else if (isSchoolSecondary9_10) {
+        // Secondary School Class 9-10: use order ranges
+        // Module 1: orders 1-20 (Mathematics)
+        // Module 2: orders 21-50 (Science)
+        // Module 3: orders 51-70 (Social Science)
+        // Module 4: orders 71-85 (English)
+        // Module 5: orders 86-100 (Hindi / Regional Language)
+        // Module 6: orders 101-120 (Board-Oriented Practice)
+        if (lesson.order >= 1 && lesson.order <= 20) {
+          moduleNum = '1'
+        } else if (lesson.order >= 21 && lesson.order <= 50) {
+          moduleNum = '2'
+        } else if (lesson.order >= 51 && lesson.order <= 70) {
+          moduleNum = '3'
+        } else if (lesson.order >= 71 && lesson.order <= 85) {
+          moduleNum = '4'
+        } else if (lesson.order >= 86 && lesson.order <= 100) {
+          moduleNum = '5'
+        } else if (lesson.order >= 101) {
           moduleNum = '6'
-        } else if (lesson.order >= 361 && lesson.order <= 380) {
-          moduleNum = '7'
-        } else if (lesson.order >= 381 && lesson.order <= 400) {
-          moduleNum = '8'
-        } else if (lesson.order >= 401) {
-          moduleNum = '9'
+        }
+      } else if (isSchoolSeniorScience) {
+        // Senior Secondary Science Stream Class 11-12: use order ranges
+        // Module 1: orders 1-30 (Physics)
+        // Module 2: orders 31-60 (Chemistry)
+        // Module 3: orders 61-90 (Mathematics)
+        // Module 4: orders 91-120 (Biology)
+        if (lesson.order >= 1 && lesson.order <= 30) {
+          moduleNum = '1'
+        } else if (lesson.order >= 31 && lesson.order <= 60) {
+          moduleNum = '2'
+        } else if (lesson.order >= 61 && lesson.order <= 90) {
+          moduleNum = '3'
+        } else if (lesson.order >= 91) {
+          moduleNum = '4'
+        }
+      } else if (isSchoolSeniorCommerce) {
+        // Senior Secondary Commerce Stream Class 11-12: use order ranges
+        // Module 1: orders 1-30 (Accountancy)
+        // Module 2: orders 31-60 (Business Studies)
+        // Module 3: orders 61-90 (Economics)
+        // Module 4: orders 91-120 (Mathematics)
+        if (lesson.order >= 1 && lesson.order <= 30) {
+          moduleNum = '1'
+        } else if (lesson.order >= 31 && lesson.order <= 60) {
+          moduleNum = '2'
+        } else if (lesson.order >= 61 && lesson.order <= 90) {
+          moduleNum = '3'
+        } else if (lesson.order >= 91) {
+          moduleNum = '4'
+        }
+      } else if (isSchoolSeniorArts) {
+        // Senior Secondary Arts/Humanities Class 11-12: use order ranges
+        // Module 1: orders 1-20 (History)
+        // Module 2: orders 21-40 (Political Science)
+        // Module 3: orders 41-60 (Geography)
+        // Module 4: orders 61-80 (Economics)
+        // Module 5: orders 81-100 (Sociology)
+        // Module 6: orders 101-120 (Psychology)
+        if (lesson.order >= 1 && lesson.order <= 20) {
+          moduleNum = '1'
+        } else if (lesson.order >= 21 && lesson.order <= 40) {
+          moduleNum = '2'
+        } else if (lesson.order >= 41 && lesson.order <= 60) {
+          moduleNum = '3'
+        } else if (lesson.order >= 61 && lesson.order <= 80) {
+          moduleNum = '4'
+        } else if (lesson.order >= 81 && lesson.order <= 100) {
+          moduleNum = '5'
+        } else if (lesson.order >= 101) {
+          moduleNum = '6'
+        }
+      } else if (isSchoolExamPrep) {
+        // Board Exam Crash Prep: use order ranges
+        // Module 1: orders 1-10 (30-60 Day Board Strategy)
+        // Module 2: orders 11-30 (Important Questions & PYQs)
+        // Module 3: orders 31-45 (Revision Notes)
+        // Module 4: orders 46-60 (Sample Papers & Mock Tests)
+        // Module 5: orders 61-70 (Time Management in Exams)
+        if (lesson.order >= 1 && lesson.order <= 10) {
+          moduleNum = '1'
+        } else if (lesson.order >= 11 && lesson.order <= 30) {
+          moduleNum = '2'
+        } else if (lesson.order >= 31 && lesson.order <= 45) {
+          moduleNum = '3'
+        } else if (lesson.order >= 46 && lesson.order <= 60) {
+          moduleNum = '4'
+        } else if (lesson.order >= 61) {
+          moduleNum = '5'
+        }
+      } else if (isSchoolSkills) {
+        // Skill Add-ons for School Students: use order ranges
+        // Module 1: orders 1-10 (English Speaking)
+        // Module 2: orders 11-20 (Handwriting Improvement)
+        // Module 3: orders 21-30 (Mental Math)
+        // Module 4: orders 31-40 (Study Techniques)
+        // Module 5: orders 41-50 (Memory & Focus Training)
+        // Module 6: orders 51-60 (Exam Fear Reduction)
+        if (lesson.order >= 1 && lesson.order <= 10) {
+          moduleNum = '1'
+        } else if (lesson.order >= 11 && lesson.order <= 20) {
+          moduleNum = '2'
+        } else if (lesson.order >= 21 && lesson.order <= 30) {
+          moduleNum = '3'
+        } else if (lesson.order >= 31 && lesson.order <= 40) {
+          moduleNum = '4'
+        } else if (lesson.order >= 41 && lesson.order <= 50) {
+          moduleNum = '5'
+        } else if (lesson.order >= 51) {
+          moduleNum = '6'
         }
       }
       
@@ -2157,7 +2334,14 @@ export async function GET(
         isACCALevel1 ? accaLevel1ModuleNames[moduleNum] :
         isACCALevel2 ? accaLevel2ModuleNames[moduleNum] :
         isACCALevel3 ? accaLevel3ModuleNames[moduleNum] :
-        isSchoolEducation ? schoolEducationModuleNames[moduleNum] :
+        isSchoolPrimary1_5 ? schoolPrimary1_5ModuleNames[moduleNum] :
+        isSchoolPrimary6_8 ? schoolPrimary6_8ModuleNames[moduleNum] :
+        isSchoolSecondary9_10 ? schoolSecondary9_10ModuleNames[moduleNum] :
+        isSchoolSeniorScience ? schoolSeniorScienceModuleNames[moduleNum] :
+        isSchoolSeniorCommerce ? schoolSeniorCommerceModuleNames[moduleNum] :
+        isSchoolSeniorArts ? schoolSeniorArtsModuleNames[moduleNum] :
+        isSchoolExamPrep ? schoolExamPrepModuleNames[moduleNum] :
+        isSchoolSkills ? schoolSkillsModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
