@@ -149,6 +149,7 @@ export async function GET(
     const isUSCPA = course.id === 'us_cpa'
     const isACCALevel1 = course.id === 'acca_level1'
     const isACCALevel2 = course.id === 'acca_level2'
+    const isACCALevel3 = course.id === 'acca_level3'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -793,6 +794,15 @@ export async function GET(
       '4': 'FR - Financial Reporting',
       '5': 'AA - Audit & Assurance',
       '6': 'FM - Financial Management',
+    }
+
+    const accaLevel3ModuleNames: Record<string, string> = {
+      '1': 'SBL - Strategic Business Leader (Core)',
+      '2': 'SBR - Strategic Business Reporting (Core)',
+      '3': 'AFM - Advanced Financial Management (Optional)',
+      '4': 'AAA - Advanced Audit & Assurance (Optional)',
+      '5': 'APM - Advanced Performance Management (Optional)',
+      '6': 'ATX - Advanced Taxation (Optional)',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -1990,6 +2000,27 @@ export async function GET(
         } else if (lesson.order >= 246) {
           moduleNum = '6'
         }
+      } else if (isACCALevel3) {
+        // ACCA Level 3 Complete Course: use order ranges (6 papers)
+        // Module 1: orders 1-90 (SBL - Strategic Business Leader)
+        // Module 2: orders 91-170 (SBR - Strategic Business Reporting)
+        // Module 3: orders 171-208 (AFM - Advanced Financial Management)
+        // Module 4: orders 209-246 (AAA - Advanced Audit & Assurance)
+        // Module 5: orders 247-284 (APM - Advanced Performance Management)
+        // Module 6: orders 285-322 (ATX - Advanced Taxation)
+        if (lesson.order >= 1 && lesson.order <= 90) {
+          moduleNum = '1'
+        } else if (lesson.order >= 91 && lesson.order <= 170) {
+          moduleNum = '2'
+        } else if (lesson.order >= 171 && lesson.order <= 208) {
+          moduleNum = '3'
+        } else if (lesson.order >= 209 && lesson.order <= 246) {
+          moduleNum = '4'
+        } else if (lesson.order >= 247 && lesson.order <= 284) {
+          moduleNum = '5'
+        } else if (lesson.order >= 285) {
+          moduleNum = '6'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -2082,6 +2113,7 @@ export async function GET(
         isUSCPA ? usCPAModuleNames[moduleNum] :
         isACCALevel1 ? accaLevel1ModuleNames[moduleNum] :
         isACCALevel2 ? accaLevel2ModuleNames[moduleNum] :
+        isACCALevel3 ? accaLevel3ModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),

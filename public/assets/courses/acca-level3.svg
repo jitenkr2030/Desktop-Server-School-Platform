@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F4D03F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C0392B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E74C3C;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGradient)" />
+  
+  <!-- Decorative Elements -->
+  <g opacity="0.1">
+    <circle cx="100" cy="100" r="150" fill="#D4AF37" />
+    <circle cx="700" cy="350" r="120" fill="#C0392B" />
+    <rect x="0" y="400" width="800" height="50" fill="#D4AF37" />
+  </g>
+  
+  <!-- Grid Pattern -->
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.05">
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="350" x2="800" y2="350" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    <line x1="100" y1="0" x2="100" y2="450" />
+    <line x1="200" y1="0" x2="200" y2="450" />
+    <line x1="300" y1="0" x2="300" y2="450" />
+    <line x1="400" y1="0" x2="400" y2="450" />
+    <line x1="500" y1="0" x2="500" y2="450" />
+    <line x1="600" y1="0" x2="600" y2="450" />
+    <line x1="700" y1="0" x2="700" y2="450" />
+  </g>
+  
+  <!-- Background Watermark -->
+  <text x="400" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="180" font-weight="bold" fill="#D4AF37" opacity="0.08">ACCA</text>
+  
+  <!-- Main Content Group -->
+  <g filter="url(#shadow)">
+    <!-- Level Badge -->
+    <rect x="50" y="40" width="140" height="45" rx="8" fill="url(#accentGradient)" />
+    <text x="120" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">LEVEL 3</text>
+    
+    <!-- Main Title -->
+    <text x="400" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white">
+      Strategic
+    </text>
+    <text x="400" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="url(#goldGradient)" filter="url(#glow)">
+      Professional
+    </text>
+    
+    <!-- Subtitle -->
+    <text x="400" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#B0B0B0">
+      Complete Course
+    </text>
+    
+    <!-- ACCA Logo Text -->
+    <text x="400" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="url(#goldGradient)">
+      ACCA
+    </text>
+    
+    <!-- Papers List -->
+    <g transform="translate(150, 320)">
+      <!-- Row 1: Core Papers -->
+      <rect x="0" y="0" width="230" height="35" rx="5" fill="rgba(212,175,55,0.2)" stroke="#D4AF37" stroke-width="1" />
+      <text x="115" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">SBL - Strategic Business Leader</text>
+      
+      <rect x="240" y="0" width="260" height="35" rx="5" fill="rgba(212,175,55,0.2)" stroke="#D4AF37" stroke-width="1" />
+      <text x="370" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">SBR - Strategic Business Reporting</text>
+      
+      <!-- Row 2: Optional Papers -->
+      <rect x="0" y="45" width="120" height="35" rx="5" fill="rgba(192,57,43,0.2)" stroke="#C0392B" stroke-width="1" />
+      <text x="60" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">AFM</text>
+      
+      <rect x="130" y="45" width="120" height="35" rx="5" fill="rgba(192,57,43,0.2)" stroke="#C0392B" stroke-width="1" />
+      <text x="190" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">AAA</text>
+      
+      <rect x="260" y="45" width="120" height="35" rx="5" fill="rgba(192,57,43,0.2)" stroke="#C0392B" stroke-width="1" />
+      <text x="320" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">APM</text>
+      
+      <rect x="390" y="45" width="110" height="35" rx="5" fill="rgba(192,57,43,0.2)" stroke="#C0392B" stroke-width="1" />
+      <text x="445" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">ATX</text>
+      
+      <text x="520" y="68" font-family="Arial, sans-serif" font-size="11" fill="#888">Choose 2</text>
+    </g>
+    
+    <!-- Duration and Level -->
+    <g transform="translate(400, 420)">
+      <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#D4AF37">320 Hours</text>
+      <text x="180" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white">|</text>
+      <text x="250" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#D4AF37">Advanced Level</text>
+    </g>
+  </g>
+  
+  <!-- Decorative Line -->
+  <line x1="100" y1="270" x2="700" y2="270" stroke="url(#goldGradient)" stroke-width="2" opacity="0.5" />
+  
+  <!-- Small decorative circles -->
+  <circle cx="85" cy="270" r="6" fill="#D4AF37" />
+  <circle cx="715" cy="270" r="6" fill="#D4AF37" />
+</svg>
