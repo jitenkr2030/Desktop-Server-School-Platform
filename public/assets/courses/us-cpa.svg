@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f1f5f9"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+
+  <!-- Decorative Elements -->
+  <circle cx="360" cy="40" r="100" fill="url(#accentGradient)" opacity="0.08"/>
+  <circle cx="40" cy="260" r="70" fill="#ef4444" opacity="0.06"/>
+  <rect x="330" y="200" width="70" height="70" fill="url(#accentGradient)" opacity="0.05" transform="rotate(15 365 235)"/>
+
+  <!-- Main Card -->
+  <rect x="30" y="40" width="340" height="220" rx="16" fill="url(#cardGradient)" filter="url(#shadow)"/>
+
+  <!-- Left Accent Bar -->
+  <rect x="30" y="40" width="8" height="220" rx="4" fill="#ef4444"/>
+  <rect x="38" y="40" width="4" height="220" rx="2" fill="#1e40af" opacity="0.3"/>
+
+  <!-- Shield Icon/Illustration - CPA Symbol -->
+  <g transform="translate(70, 75)">
+    <!-- Shield Background -->
+    <rect x="0" y="0" width="100" height="70" rx="8" fill="#1e40af" opacity="0.1"/>
+    <!-- Shield Shape -->
+    <path d="M50 5 L90 15 V35 C90 50 75 60 50 65 C25 60 10 50 10 35 V15 L50 5Z" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+    <!-- CPA Text in Shield -->
+    <text x="50" y="38" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">CPA</text>
+    <!-- Checkmark -->
+    <path d="M42 40 L48 46 L60 34" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Title Section -->
+  <text x="70" y="175" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ef4444">US CPA CERTIFICATION</text>
+
+  <!-- Course Title -->
+  <text x="70" y="200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0f172a">Complete</text>
+  <text x="130" y="200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e40af">Course</text>
+
+  <!-- Subtitle - Course Modules -->
+  <text x="70" y="225" font-family="Arial, sans-serif" font-size="11" fill="#64748b">FAR • AUD • REG • Discipline</text>
+
+  <!-- Course Stats -->
+  <g transform="translate(70, 245)">
+    <!-- Duration -->
+    <rect x="0" y="0" width="60" height="22" rx="11" fill="#1e40af" opacity="0.1"/>
+    <text x="30" y="14" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#1e40af" text-anchor="middle">500h</text>
+    <!-- Lessons -->
+    <rect x="70" y="0" width="60" height="22" rx="11" fill="#ef4444" opacity="0.1"/>
+    <text x="100" y="14" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ef4444" text-anchor="middle">475 L</text>
+    <!-- Level -->
+    <rect x="140" y="0" width="65" height="22" rx="11" fill="#0f172a" opacity="0.1"/>
+    <text x="173" y="14" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">ADVANCED</text>
+  </g>
+
+  <!-- Right Side - Module List -->
+  <g transform="translate(230, 80)">
+    <!-- Section 1 -->
+    <rect x="0" y="0" width="110" height="20" rx="4" fill="#1e40af" opacity="0.08"/>
+    <circle cx="12" cy="10" r="5" fill="#1e40af"/>
+    <text x="24" y="14" font-family="Arial, sans-serif" font-size="8" fill="#0f172a">FAR - Financial</text>
+
+    <!-- Section 2 -->
+    <rect x="0" y="26" width="110" height="20" rx="4" fill="#1e40af" opacity="0.08"/>
+    <circle cx="12" cy="36" r="5" fill="#1e40af"/>
+    <text x="24" y="40" font-family="Arial, sans-serif" font-size="8" fill="#0f172a">AUD - Auditing</text>
+
+    <!-- Section 3 -->
+    <rect x="0" y="52" width="110" height="20" rx="4" fill="#1e40af" opacity="0.08"/>
+    <circle cx="12" cy="62" r="5" fill="#1e40af"/>
+    <text x="24" y="66" font-family="Arial, sans-serif" font-size="8" fill="#0f172a">REG - Regulation</text>
+
+    <!-- Section 4 -->
+    <rect x="0" y="78" width="110" height="20" rx="4" fill="#ef4444" opacity="0.15"/>
+    <circle cx="12" cy="88" r="5" fill="#ef4444"/>
+    <text x="24" y="92" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#ef4444">Discipline Track</text>
+
+    <!-- Section 5 -->
+    <rect x="0" y="104" width="110" height="20" rx="4" fill="#22c55e" opacity="0.1"/>
+    <circle cx="12" cy="114" r="5" fill="#22c55e"/>
+    <text x="24" y="118" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#22c55e">Mock Exams</text>
+  </g>
+
+  <!-- Bottom Tag -->
+  <rect x="30" y="278" width="80" height="14" rx="7" fill="#0f172a"/>
+  <text x="70" y="288" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">ALL 4 PAPERS</text>
+
+  <!-- Certification Badge -->
+  <g transform="translate(330, 268)">
+    <circle cx="25" cy="7" r="10" fill="#ef4444"/>
+    <path d="M25 2 L27 5 L25 5 L25 2 Z" fill="#ffffff" transform="translate(0, 2)"/>
+    <path d="M25 2 L27 5 L25 5 L25 2 Z" fill="#ffffff" transform="rotate(120 25 7)"/>
+    <path d="M25 2 L27 5 L25 5 L25 2 Z" fill="#ffffff" transform="rotate(240 25 7)"/>
+    <text x="25" y="11" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">CPA</text>
+  </g>
+</svg>

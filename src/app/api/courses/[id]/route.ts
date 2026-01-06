@@ -146,6 +146,7 @@ export async function GET(
     const isFRMPart2 = course.id === 'frm_part2'
     const isUSCMAPart1 = course.id === 'us_cma_part1'
     const isUSCMAPart2 = course.id === 'us_cma_part2'
+    const isUSCPA = course.id === 'us_cpa'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -768,6 +769,13 @@ export async function GET(
       '4': 'Investment & Portfolio Decisions',
       '5': 'Professional Ethics & Governance',
       '6': 'Strategic Decision-Making & Exam Practice',
+    }
+
+    const usCPAModuleNames: Record<string, string> = {
+      '1': 'FAR - Financial Accounting & Reporting',
+      '2': 'AUD - Auditing & Attestation',
+      '3': 'REG - Regulation',
+      '4': 'Discipline Section (BAR/ISC/TCP)',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -1917,6 +1925,21 @@ export async function GET(
         } else if (lesson.order >= 113 && lesson.order <= 125) {
           moduleNum = '6'
         }
+      } else if (isUSCPA) {
+        // US CPA Complete Course: use order ranges (4 sections)
+        // Section 1: orders 1-200 (FAR - Financial Accounting & Reporting)
+        // Section 2: orders 201-320 (AUD - Auditing & Attestation)
+        // Section 3: orders 321-440 (REG - Regulation)
+        // Section 4: orders 441-475 (Discipline Section)
+        if (lesson.order >= 1 && lesson.order <= 200) {
+          moduleNum = '1'
+        } else if (lesson.order >= 201 && lesson.order <= 320) {
+          moduleNum = '2'
+        } else if (lesson.order >= 321 && lesson.order <= 440) {
+          moduleNum = '3'
+        } else if (lesson.order >= 441) {
+          moduleNum = '4'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -2006,6 +2029,7 @@ export async function GET(
         isFRMPart2 ? frmPart2ModuleNames[moduleNum] :
         isUSCMAPart1 ? usCMAPart1ModuleNames[moduleNum] :
         isUSCMAPart2 ? usCMAPart2ModuleNames[moduleNum] :
+        isUSCPA ? usCPAModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
