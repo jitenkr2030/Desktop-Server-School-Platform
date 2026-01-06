@@ -68,10 +68,41 @@ interface CoursesResponse {
   }
 }
 
+// List of major Indian universities for filtering
+const INDIAN_UNIVERSITIES = [
+  { id: 'du', name: 'Delhi University (DU)', state: 'Delhi' },
+  { id: 'mdu', name: 'Mumbai University (MU)', state: 'Maharashtra' },
+  { id: 'jnu', name: 'Jawaharlal Nehru University (JNU)', state: 'Delhi' },
+  { id: 'cu', name: 'Calcutta University (CU)', state: 'West Bengal' },
+  { id: 'pu', name: 'Punjab University (PU)', state: 'Punjab' },
+  { id: 'osmania', name: 'Osmania University', state: 'Telangana' },
+  { id: 'bangalore', name: 'Bangalore University', state: 'Karnataka' },
+  { id: 'anna', name: 'Anna University', state: 'Tamil Nadu' },
+  { id: 'gu', name: 'Gujarat University', state: 'Gujarat' },
+  { id: 'rajasthan', name: 'Rajasthan University', state: 'Rajasthan' },
+  { id: 'lucknow', name: 'Lucknow University', state: 'Uttar Pradesh' },
+  { id: 'bhu', name: 'Banaras Hindu University (BHU)', state: 'Uttar Pradesh' },
+  { id: 'hydrabad', name: 'Hyderabad University', state: 'Telangana' },
+  { id: 'aligarh', name: 'Aligarh Muslim University (AMU)', state: 'Uttar Pradesh' },
+  { id: 'srm', name: 'SRM University', state: 'Tamil Nadu' },
+  { id: 'vit', name: 'VIT University', state: 'Tamil Nadu' },
+  { id: 'manipal', name: 'Manipal University', state: 'Karnataka' },
+  { id: 'other', name: 'Other University', state: 'Other' },
+]
+
+// College course IDs for identification
+const COLLEGE_COURSE_IDS = [
+  'college_bsc_pcm', 'college_bsc_pcb', 'college_bsc_cs', 'college_bsc_bio', 'college_bsc_stats',
+  'college_bcom', 'college_bba', 'college_ba_history', 'college_ba_polsc', 'college_ba_psychology',
+  'college_btech_cs', 'college_llb', 'college_semester_support', 'college_exam_prep', 'college_career_skills'
+]
+
 export default function CoursesPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedDifficulty, setSelectedDifficulty] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedUniversity, setSelectedUniversity] = useState('')
+  const [showCollegeOnly, setShowCollegeOnly] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
@@ -124,6 +155,18 @@ export default function CoursesPage() {
   const filteredCourses = useMemo(() => {
     let result = courses
 
+    // Filter by college courses only
+    if (showCollegeOnly) {
+      result = result.filter(course => COLLEGE_COURSE_IDS.includes(course.id))
+    }
+
+    // Filter by university (for college courses)
+    if (selectedUniversity) {
+      // When a university is selected, highlight/show college courses
+      // that are most relevant for that university
+      result = result.filter(course => COLLEGE_COURSE_IDS.includes(course.id))
+    }
+
     // Filter by search term (client-side search)
     if (searchTerm) {
       const term = searchTerm.toLowerCase()
@@ -135,7 +178,7 @@ export default function CoursesPage() {
     }
 
     return result
-  }, [courses, searchTerm])
+  }, [courses, searchTerm, selectedUniversity, showCollegeOnly])
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty.toUpperCase()) {
@@ -193,6 +236,33 @@ export default function CoursesPage() {
       'class10-mathematics': '/assets/courses/class10-mathematics.svg',
       'course_public_speaking': '/assets/courses/public-speaking.svg',
       'career14': '/assets/courses/public-speaking.svg',
+      
+      // School Education courses
+      'school_primary_1_5': '/assets/courses/school-primary-1-5.svg',
+      'school_primary_6_8': '/assets/courses/school-primary-6-8.svg',
+      'school_secondary_9_10': '/assets/courses/school-secondary-9-10.svg',
+      'school_senior_science': '/assets/courses/school-senior-science.svg',
+      'school_senior_commerce': '/assets/courses/school-senior-commerce.svg',
+      'school_senior_arts': '/assets/courses/school-senior-arts.svg',
+      'school_exam_prep': '/assets/courses/school-exam-prep.svg',
+      'school_skills': '/assets/courses/school-skills.svg',
+      
+      // College Education courses
+      'college_bsc_pcm': '/assets/courses/college-bsc-pcm.svg',
+      'college_bsc_pcb': '/assets/courses/college-bsc-pcb.svg',
+      'college_bsc_cs': '/assets/courses/college-bsc-cs.svg',
+      'college_bsc_bio': '/assets/courses/college-bsc-biotech.svg',
+      'college_bsc_stats': '/assets/courses/college-bsc-stats.svg',
+      'college_bcom': '/assets/courses/college-bcom.svg',
+      'college_bba': '/assets/courses/college-bba.svg',
+      'college_ba_history': '/assets/courses/college-ba-history.svg',
+      'college_ba_polsc': '/assets/courses/college-ba-polsc.svg',
+      'college_ba_psychology': '/assets/courses/college-ba-psychology.svg',
+      'college_btech_cs': '/assets/courses/college-btech-cs.svg',
+      'college_llb': '/assets/courses/college-llb.svg',
+      'college_semester_support': '/assets/courses/college-semester-support.svg',
+      'college_exam_prep': '/assets/courses/college-exam-prep.svg',
+      'college_career_skills': '/assets/courses/college-career-skills.svg',
     }
     
     // Check if we have a direct mapping
@@ -233,6 +303,17 @@ export default function CoursesPage() {
               <p style={{ fontSize: '1.125rem', color: '#6b7280', maxWidth: '600px', margin: '0 auto' }}>
                 Discover courses designed for Indian learners with practical skills and real-world applications.
               </p>
+              <div style={{ 
+                marginTop: '1rem', 
+                padding: '0.75rem 1.5rem', 
+                background: '#fef3c7', 
+                borderRadius: '0.5rem',
+                display: 'inline-block'
+              }}>
+                <p style={{ color: '#92400e', fontSize: '0.9rem' }}>
+                  🎓 <strong>New:</strong> College Education courses with University-specific curriculum support!
+                </p>
+              </div>
             </div>
 
             {/* Search Bar */}
@@ -265,57 +346,179 @@ export default function CoursesPage() {
             </div>
 
             {/* Tabs */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div style={{
-                background: '#f3f4f6',
-                padding: '0.25rem',
-                borderRadius: '0.5rem',
-                display: 'inline-flex'
-              }}>
-                <button
-                  style={{
-                    padding: '0.625rem 1.5rem',
-                    borderRadius: '0.375rem',
-                    fontSize: '0.875rem',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    border: 'none',
-                    background: 'white',
-                    color: '#111827',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  All Courses
-                </button>
-                <Link
-                  href="/learning-paths"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.625rem 1.5rem',
-                    borderRadius: '0.375rem',
-                    fontSize: '0.875rem',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    border: 'none',
-                    background: 'transparent',
-                    color: '#6b7280',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  Learning Paths
-                </Link>
-              </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
+              <button
+                style={{
+                  padding: '0.625rem 1.5rem',
+                  borderRadius: '0.375rem',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: 'white',
+                  color: '#111827',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                  transition: 'all 0.2s'
+                }}
+              >
+                All Courses
+              </button>
+              <Link
+                href="/courses/college"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.625rem 1.5rem',
+                  borderRadius: '0.375rem',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: '#fef3c7',
+                  color: '#92400e',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s'
+                }}
+              >
+                🎓 College Education
+              </Link>
+              <Link
+                href="/learning-paths"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.625rem 1.5rem',
+                  borderRadius: '0.375rem',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#6b7280',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s'
+                }}
+              >
+                Learning Paths
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Filters & Content */}
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1rem' }}>
-          {/* Filters */}
+          {/* College Education University Filter */}
+          <div style={{
+            background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+            borderRadius: '0.75rem',
+            padding: '1.5rem',
+            marginBottom: '2rem',
+            border: '1px solid #f59e0b'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>🎓</span>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#92400e' }}>
+                College Education - Find Your University Courses
+              </h3>
+            </div>
+            
+            <p style={{ color: '#a16207', fontSize: '0.875rem', marginBottom: '1rem' }}>
+              Select your university to see degree-specific courses tailored to your curriculum
+            </p>
+            
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <select
+                value={selectedUniversity}
+                onChange={(e) => {
+                  setSelectedUniversity(e.target.value)
+                  if (e.target.value) {
+                    setShowCollegeOnly(true)
+                  }
+                }}
+                style={{
+                  padding: '0.75rem 1rem',
+                  fontSize: '0.875rem',
+                  border: '1px solid #d97706',
+                  borderRadius: '0.5rem',
+                  background: 'white',
+                  cursor: 'pointer',
+                  minWidth: '280px',
+                  maxWidth: '400px'
+                }}
+              >
+                <option value="">Select Your University...</option>
+                {INDIAN_UNIVERSITIES.map(uni => (
+                  <option key={uni.id} value={uni.id}>
+                    {uni.name} ({uni.state})
+                  </option>
+                ))}
+              </select>
+
+              <label style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                cursor: 'pointer',
+                padding: '0.5rem 1rem',
+                background: showCollegeOnly ? '#ea580c' : 'white',
+                color: showCollegeOnly ? 'white' : '#92400e',
+                borderRadius: '0.5rem',
+                border: showCollegeOnly ? 'none' : '1px solid #d97706',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                transition: 'all 0.2s'
+              }}>
+                <input
+                  type="checkbox"
+                  checked={showCollegeOnly}
+                  onChange={(e) => setShowCollegeOnly(e.target.checked)}
+                  style={{ width: '18px', height: '18px', accentColor: '#ea580c' }}
+                />
+                Show College Courses Only
+              </label>
+
+              {(selectedUniversity || showCollegeOnly) && (
+                <button
+                  onClick={() => {
+                    setSelectedUniversity('')
+                    setShowCollegeOnly(false)
+                  }}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.875rem',
+                    border: '1px solid #d97706',
+                    borderRadius: '0.5rem',
+                    background: 'white',
+                    color: '#92400e',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Clear Selection
+                </button>
+              )}
+            </div>
+
+            {selectedUniversity && (
+              <div style={{ 
+                marginTop: '1rem', 
+                padding: '0.75rem', 
+                background: 'rgba(255,255,255,0.7)', 
+                borderRadius: '0.5rem',
+                fontSize: '0.875rem',
+                color: '#92400e'
+              }}>
+                <strong>Showing courses for:</strong> {INDIAN_UNIVERSITIES.find(u => u.id === selectedUniversity)?.name}
+                <p style={{ marginTop: '0.25rem', fontSize: '0.8rem', color: '#a16207' }}>
+                  These degree courses are designed to align with common university curricula across India.
+                  Check your specific university syllabus for any variations.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* General Filters */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -366,12 +569,14 @@ export default function CoursesPage() {
               <option value="ADVANCED">Advanced</option>
             </select>
 
-            {(selectedDifficulty || searchTerm || selectedCategory) && (
+            {(selectedDifficulty || searchTerm || selectedCategory || showCollegeOnly) && (
               <button
                 onClick={() => {
                   setSelectedDifficulty('')
                   setSearchTerm('')
                   setSelectedCategory('')
+                  setSelectedUniversity('')
+                  setShowCollegeOnly(false)
                 }}
                 style={{
                   padding: '0.5rem 1rem',
@@ -437,7 +642,8 @@ export default function CoursesPage() {
                       borderRadius: '0.75rem',
                       overflow: 'hidden',
                       boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                      transition: 'transform 0.2s, box-shadow 0.2s'
+                      transition: 'transform 0.2s, box-shadow 0.2s',
+                      position: 'relative'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translateY(-4px)'
@@ -448,6 +654,25 @@ export default function CoursesPage() {
                       e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)'
                     }}
                   >
+                    {/* College Badge */}
+                    {COLLEGE_COURSE_IDS.includes(course.id) && (
+                      <div style={{
+                        position: 'absolute',
+                        top: '0.75rem',
+                        right: '0.75rem',
+                        background: '#f59e0b',
+                        color: 'white',
+                        padding: '0.25rem 0.75rem',
+                        borderRadius: '9999px',
+                        fontSize: '0.75rem',
+                        fontWeight: '600',
+                        zIndex: 10,
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                      }}>
+                        🎓 College
+                      </div>
+                    )}
+
                     {/* Thumbnail */}
                     <div style={{
                       aspectRatio: '16/9',
