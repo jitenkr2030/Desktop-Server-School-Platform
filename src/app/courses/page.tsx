@@ -97,12 +97,25 @@ const COLLEGE_COURSE_IDS = [
   'college_btech_cs', 'college_llb', 'college_semester_support', 'college_exam_prep', 'college_career_skills'
 ]
 
+// School course IDs for identification
+const SCHOOL_COURSE_IDS = [
+  'school_primary_1_5',
+  'school_primary_6_8',
+  'school_secondary_9_10',
+  'school_senior_science',
+  'school_senior_commerce',
+  'school_senior_arts',
+  'school_exam_prep',
+  'school_skills'
+]
+
 export default function CoursesPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedDifficulty, setSelectedDifficulty] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedUniversity, setSelectedUniversity] = useState('')
   const [showCollegeOnly, setShowCollegeOnly] = useState(false)
+  const [showSchoolOnly, setShowSchoolOnly] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
