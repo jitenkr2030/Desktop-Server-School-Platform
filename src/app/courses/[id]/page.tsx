@@ -256,6 +256,21 @@ export default function CourseDetailPage() {
       'school_senior_arts': '/assets/courses/school-senior-arts.svg',
       'school_exam_prep': '/assets/courses/school-exam-prep.svg',
       'school_skills': '/assets/courses/school-skills.svg',
+      'college_bsc_pcm': '/assets/courses/college-bsc-pcm.svg',
+      'college_bsc_pcb': '/assets/courses/college-bsc-pcb.svg',
+      'college_bsc_cs': '/assets/courses/college-bsc-cs.svg',
+      'college_bsc_bio': '/assets/courses/college-bsc-biotech.svg',
+      'college_bsc_stats': '/assets/courses/college-bsc-stats.svg',
+      'college_bcom': '/assets/courses/college-bcom.svg',
+      'college_bba': '/assets/courses/college-bba.svg',
+      'college_ba_history': '/assets/courses/college-ba-history.svg',
+      'college_ba_polsc': '/assets/courses/college-ba-polsc.svg',
+      'college_ba_psychology': '/assets/courses/college-ba-psychology.svg',
+      'college_btech_cs': '/assets/courses/college-btech-cs.svg',
+      'college_llb': '/assets/courses/college-llb.svg',
+      'college_semester_support': '/assets/courses/college-semester-support.svg',
+      'college_exam_prep': '/assets/courses/college-exam-prep.svg',
+      'college_career_skills': '/assets/courses/college-career-skills.svg',
     }
     
     if (thumbnailMap[courseId]) {

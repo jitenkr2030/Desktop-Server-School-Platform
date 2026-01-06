@@ -158,6 +158,21 @@ export async function GET(
     const isSchoolSeniorArts = course.id === 'school_senior_arts'
     const isSchoolExamPrep = course.id === 'school_exam_prep'
     const isSchoolSkills = course.id === 'school_skills'
+    const isCollegeBscPcm = course.id === 'college_bsc_pcm'
+    const isCollegeBscPcb = course.id === 'college_bsc_pcb'
+    const isCollegeBscCs = course.id === 'college_bsc_cs'
+    const isCollegeBscBio = course.id === 'college_bsc_bio'
+    const isCollegeBscStats = course.id === 'college_bsc_stats'
+    const isCollegeBcom = course.id === 'college_bcom'
+    const isCollegeBba = course.id === 'college_bba'
+    const isCollegeBaHistory = course.id === 'college_ba_history'
+    const isCollegeBaPolsc = course.id === 'college_ba_polsc'
+    const isCollegeBaPsychology = course.id === 'college_ba_psychology'
+    const isCollegeBtechCs = course.id === 'college_btech_cs'
+    const isCollegeLlB = course.id === 'college_llb'
+    const isCollegeSemesterSupport = course.id === 'college_semester_support'
+    const isCollegeExamPrep = course.id === 'college_exam_prep'
+    const isCollegeCareerSkills = course.id === 'college_career_skills'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -876,6 +891,151 @@ export async function GET(
       '4': 'Study Techniques',
       '5': 'Memory & Focus Training',
       '6': 'Exam Fear Reduction',
+    }
+
+    // College Education Module Names
+    const collegeBscPcmModuleNames: Record<string, string> = {
+      '1': 'Physics - Semester 1-2',
+      '2': 'Physics - Semester 3-4',
+      '3': 'Physics - Semester 5-6',
+      '4': 'Chemistry - Semester 1-2',
+      '5': 'Chemistry - Semester 3-4',
+      '6': 'Chemistry - Semester 5-6',
+      '7': 'Mathematics - Semester 1-2',
+      '8': 'Mathematics - Semester 3-4',
+      '9': 'Mathematics - Semester 5-6',
+    }
+
+    const collegeBscPcbModuleNames: Record<string, string> = {
+      '1': 'Physics - Semester 1-2',
+      '2': 'Physics - Semester 3-4',
+      '3': 'Physics - Semester 5-6',
+      '4': 'Chemistry - Semester 1-2',
+      '5': 'Chemistry - Semester 3-4',
+      '6': 'Chemistry - Semester 5-6',
+      '7': 'Biology - Semester 1-2',
+      '8': 'Biology - Semester 3-4',
+      '9': 'Biology - Semester 5-6',
+    }
+
+    const collegeBscCsModuleNames: Record<string, string> = {
+      '1': 'Programming Fundamentals',
+      '2': 'Data Structures & Algorithms',
+      '3': 'Database Management Systems',
+      '4': 'Object-Oriented Programming',
+      '5': 'Web Development',
+      '6': 'Operating Systems',
+      '7': 'Computer Networks',
+      '8': 'Software Engineering',
+    }
+
+    const collegeBscBioModuleNames: Record<string, string> = {
+      '1': 'Cell Biology & Genetics',
+      '2': 'Molecular Biology',
+      '3': 'Biochemistry',
+      '4': 'Microbiology',
+      '5': 'Biotechnology',
+      '6': 'Bioinformatics',
+    }
+
+    const collegeBscStatsModuleNames: Record<string, string> = {
+      '1': 'Probability Theory',
+      '2': 'Statistical Inference',
+      '3': 'Regression Analysis',
+      '4': 'Sampling Techniques',
+      '5': 'Data Analysis',
+    }
+
+    const collegeBcomModuleNames: Record<string, string> = {
+      '1': 'Financial Accounting',
+      '2': 'Corporate Law',
+      '3': 'Income Tax',
+      '4': 'Business Economics',
+      '5': 'Cost Accounting',
+      '6': 'Auditing',
+    }
+
+    const collegeBbaModuleNames: Record<string, string> = {
+      '1': 'Principles of Management',
+      '2': 'Marketing Management',
+      '3': 'Financial Management',
+      '4': 'Human Resource Management',
+      '5': 'Operations Management',
+      '6': 'Business Law',
+      '7': 'Entrepreneurship',
+      '8': 'Strategic Management',
+    }
+
+    const collegeBaHistoryModuleNames: Record<string, string> = {
+      '1': 'Ancient India',
+      '2': 'Medieval India',
+      '3': 'Modern India',
+      '4': 'World History',
+      '5': 'Historiography',
+    }
+
+    const collegeBaPolscModuleNames: Record<string, string> = {
+      '1': 'Political Theory',
+      '2': 'Indian Polity',
+      '3': 'International Relations',
+      '4': 'Comparative Politics',
+      '5': 'Public Administration',
+    }
+
+    const collegeBaPsychologyModuleNames: Record<string, string> = {
+      '1': 'Developmental Psychology',
+      '2': 'Social Psychology',
+      '3': 'Cognitive Psychology',
+      '4': 'Clinical Psychology',
+      '5': 'Research Methods',
+    }
+
+    const collegeBtechCsModuleNames: Record<string, string> = {
+      '1': 'Programming & Data Structures',
+      '2': 'Algorithms & Complexity',
+      '3': 'Operating Systems',
+      '4': 'Database Systems',
+      '5': 'Computer Networks',
+      '6': 'Software Engineering',
+      '7': 'Web Technologies',
+      '8': 'Machine Learning',
+    }
+
+    const collegeLlBModuleNames: Record<string, string> = {
+      '1': 'Constitutional Law',
+      '2': 'Criminal Law',
+      '3': 'Civil Law',
+      '4': 'Corporate Law',
+      '5': 'International Law',
+      '6': 'Jurisprudence',
+      '7': 'Legal Drafting',
+      '8': 'Moot Court Practice',
+    }
+
+    const collegeSemesterSupportModuleNames: Record<string, string> = {
+      '1': '1st Semester Basics',
+      '2': '2nd Semester Core',
+      '3': '3rd Semester Advanced',
+      '4': '4th Semester Revision',
+      '5': '5th Semester Specialization',
+      '6': '6th Semester Project & Viva',
+    }
+
+    const collegeExamPrepModuleNames: Record<string, string> = {
+      '1': 'Important Questions',
+      '2': 'Previous Year Papers',
+      '3': 'Last-Minute Revision',
+      '4': 'Answer Writing',
+      '5': 'Passing Strategy',
+    }
+
+    const collegeCareerSkillsModuleNames: Record<string, string> = {
+      '1': 'Resume & CV Building',
+      '2': 'Interview Preparation',
+      '3': 'Group Discussion',
+      '4': 'Internship Readiness',
+      '5': 'Project Guidance',
+      '6': 'Corporate Etiquette',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -2241,6 +2401,318 @@ export async function GET(
         } else if (lesson.order >= 51) {
           moduleNum = '6'
         }
+      } else if (isCollegeBscPcb) {
+        // B.Sc PCB (Physics, Chemistry, Biology): use order ranges
+        // Module 1: orders 1-99 (Physics Sem 1-2)
+        // Module 2: orders 100-199 (Physics Sem 3-4)
+        // Module 3: orders 200-299 (Physics Sem 5-6)
+        // Module 4: orders 300-399 (Chemistry Sem 1-2)
+        // Module 5: orders 400-499 (Chemistry Sem 3-4)
+        // Module 6: orders 500-599 (Chemistry Sem 5-6)
+        // Module 7: orders 600-699 (Biology Sem 1-2)
+        // Module 8: orders 700-799 (Biology Sem 3-4)
+        // Module 9: orders 800-899 (Biology Sem 5-6)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        } else if (lesson.order >= 800) {
+          moduleNum = '9'
+        }
+      } else if (isCollegeBscCs) {
+        // B.Sc Computer Science: use order ranges
+        // Module 1: orders 1-99 (Programming Fundamentals)
+        // Module 2: orders 100-199 (Data Structures & Algorithms)
+        // Module 3: orders 200-299 (Database Management Systems)
+        // Module 4: orders 300-399 (Object-Oriented Programming)
+        // Module 5: orders 400-499 (Web Development)
+        // Module 6: orders 500-599 (Operating Systems)
+        // Module 7: orders 600-699 (Computer Networks)
+        // Module 8: orders 700-799 (Software Engineering)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700) {
+          moduleNum = '8'
+        }
+      } else if (isCollegeBscBio) {
+        // B.Sc Biology/Biological Sciences: use order ranges
+        // Module 1: orders 1-99 (Cell Biology & Genetics)
+        // Module 2: orders 100-199 (Molecular Biology)
+        // Module 3: orders 200-299 (Biochemistry)
+        // Module 4: orders 300-399 (Microbiology)
+        // Module 5: orders 400-499 (Biotechnology)
+        // Module 6: orders 500-599 (Bioinformatics)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500) {
+          moduleNum = '6'
+        }
+      } else if (isCollegeBscStats) {
+        // B.Sc Statistics: use order ranges
+        // Module 1: orders 1-99 (Probability Theory)
+        // Module 2: orders 100-199 (Statistical Inference)
+        // Module 3: orders 200-299 (Regression Analysis)
+        // Module 4: orders 300-399 (Sampling Techniques)
+        // Module 5: orders 400-499 (Data Analysis)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400) {
+          moduleNum = '5'
+        }
+      } else if (isCollegeBcom) {
+        // B.Com General: use order ranges
+        // Module 1: orders 1-99 (Financial Accounting)
+        // Module 2: orders 100-199 (Corporate Law)
+        // Module 3: orders 200-299 (Income Tax)
+        // Module 4: orders 300-399 (Business Economics)
+        // Module 5: orders 400-499 (Cost Accounting)
+        // Module 6: orders 500-599 (Auditing)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500) {
+          moduleNum = '6'
+        }
+      } else if (isCollegeBba) {
+        // B.B.A. (Business Administration): use order ranges
+        // Module 1: orders 1-50 (Principles of Management)
+        // Module 2: orders 51-100 (Marketing Management)
+        // Module 3: orders 101-150 (Financial Management)
+        // Module 4: orders 151-200 (Human Resource Management)
+        // Module 5: orders 201-250 (Operations Management)
+        // Module 6: orders 251-300 (Business Law)
+        // Module 7: orders 301-350 (Entrepreneurship)
+        // Module 8: orders 351-400 (Strategic Management)
+        if (lesson.order >= 1 && lesson.order <= 50) {
+          moduleNum = '1'
+        } else if (lesson.order >= 51 && lesson.order <= 100) {
+          moduleNum = '2'
+        } else if (lesson.order >= 101 && lesson.order <= 150) {
+          moduleNum = '3'
+        } else if (lesson.order >= 151 && lesson.order <= 200) {
+          moduleNum = '4'
+        } else if (lesson.order >= 201 && lesson.order <= 250) {
+          moduleNum = '5'
+        } else if (lesson.order >= 251 && lesson.order <= 300) {
+          moduleNum = '6'
+        } else if (lesson.order >= 301 && lesson.order <= 350) {
+          moduleNum = '7'
+        } else if (lesson.order >= 351) {
+          moduleNum = '8'
+        }
+      } else if (isCollegeBaHistory) {
+        // B.A. History: use order ranges
+        // Module 1: orders 1-99 (Ancient India)
+        // Module 2: orders 100-199 (Medieval India)
+        // Module 3: orders 200-299 (Modern India)
+        // Module 4: orders 300-399 (World History)
+        // Module 5: orders 400-499 (Historiography)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400) {
+          moduleNum = '5'
+        }
+      } else if (isCollegeBaPolsc) {
+        // B.A. Political Science: use order ranges
+        // Module 1: orders 1-99 (Political Theory)
+        // Module 2: orders 100-199 (Indian Polity)
+        // Module 3: orders 200-299 (International Relations)
+        // Module 4: orders 300-399 (Comparative Politics)
+        // Module 5: orders 400-499 (Public Administration)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400) {
+          moduleNum = '5'
+        }
+      } else if (isCollegeBaPsychology) {
+        // B.A. Psychology: use order ranges
+        // Module 1: orders 1-99 (Developmental Psychology)
+        // Module 2: orders 100-199 (Social Psychology)
+        // Module 3: orders 200-299 (Cognitive Psychology)
+        // Module 4: orders 300-399 (Clinical Psychology)
+        // Module 5: orders 400-499 (Research Methods)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400) {
+          moduleNum = '5'
+        }
+      } else if (isCollegeBtechCs) {
+        // B.Tech Computer Science: use order ranges
+        // Module 1: orders 1-50 (Programming & Data Structures)
+        // Module 2: orders 51-100 (Algorithms & Complexity)
+        // Module 3: orders 101-150 (Operating Systems)
+        // Module 4: orders 151-200 (Database Systems)
+        // Module 5: orders 201-250 (Computer Networks)
+        // Module 6: orders 251-300 (Software Engineering)
+        // Module 7: orders 301-350 (Web Technologies)
+        // Module 8: orders 351-400 (Machine Learning)
+        if (lesson.order >= 1 && lesson.order <= 50) {
+          moduleNum = '1'
+        } else if (lesson.order >= 51 && lesson.order <= 100) {
+          moduleNum = '2'
+        } else if (lesson.order >= 101 && lesson.order <= 150) {
+          moduleNum = '3'
+        } else if (lesson.order >= 151 && lesson.order <= 200) {
+          moduleNum = '4'
+        } else if (lesson.order >= 201 && lesson.order <= 250) {
+          moduleNum = '5'
+        } else if (lesson.order >= 251 && lesson.order <= 300) {
+          moduleNum = '6'
+        } else if (lesson.order >= 301 && lesson.order <= 350) {
+          moduleNum = '7'
+        } else if (lesson.order >= 351) {
+          moduleNum = '8'
+        }
+      } else if (isCollegeLlB) {
+        // LL.B. (Bachelor of Laws): use order ranges
+        // Module 1: orders 1-50 (Constitutional Law)
+        // Module 2: orders 51-100 (Criminal Law)
+        // Module 3: orders 101-150 (Civil Law)
+        // Module 4: orders 151-200 (Corporate Law)
+        // Module 5: orders 201-250 (International Law)
+        // Module 6: orders 251-300 (Jurisprudence)
+        // Module 7: orders 301-350 (Legal Drafting)
+        // Module 8: orders 351-400 (Moot Court Practice)
+        if (lesson.order >= 1 && lesson.order <= 50) {
+          moduleNum = '1'
+        } else if (lesson.order >= 51 && lesson.order <= 100) {
+          moduleNum = '2'
+        } else if (lesson.order >= 101 && lesson.order <= 150) {
+          moduleNum = '3'
+        } else if (lesson.order >= 151 && lesson.order <= 200) {
+          moduleNum = '4'
+        } else if (lesson.order >= 201 && lesson.order <= 250) {
+          moduleNum = '5'
+        } else if (lesson.order >= 251 && lesson.order <= 300) {
+          moduleNum = '6'
+        } else if (lesson.order >= 301 && lesson.order <= 350) {
+          moduleNum = '7'
+        } else if (lesson.order >= 351) {
+          moduleNum = '8'
+        }
+      } else if (isCollegeSemesterSupport) {
+        // College Semester Support: use order ranges
+        // Module 1: orders 1-99 (1st Semester Basics)
+        // Module 2: orders 100-199 (2nd Semester Core)
+        // Module 3: orders 200-299 (3rd Semester Advanced)
+        // Module 4: orders 300-399 (4th Semester Revision)
+        // Module 5: orders 400-499 (5th Semester Specialization)
+        // Module 6: orders 500-599 (6th Semester Project & Viva)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500) {
+          moduleNum = '6'
+        }
+      } else if (isCollegeExamPrep) {
+        // College Exam Preparation: use order ranges
+        // Module 1: orders 1-50 (Important Questions)
+        // Module 2: orders 51-100 (Previous Year Papers)
+        // Module 3: orders 101-150 (Last-Minute Revision)
+        // Module 4: orders 151-200 (Answer Writing)
+        // Module 5: orders 201-250 (Passing Strategy)
+        if (lesson.order >= 1 && lesson.order <= 50) {
+          moduleNum = '1'
+        } else if (lesson.order >= 51 && lesson.order <= 100) {
+          moduleNum = '2'
+        } else if (lesson.order >= 101 && lesson.order <= 150) {
+          moduleNum = '3'
+        } else if (lesson.order >= 151 && lesson.order <= 200) {
+          moduleNum = '4'
+        } else if (lesson.order >= 201) {
+          moduleNum = '5'
+        }
+      } else if (isCollegeCareerSkills) {
+        // College Career Skills: use order ranges
+        // Module 1: orders 1-50 (Resume & CV Building)
+        // Module 2: orders 51-100 (Interview Preparation)
+        // Module 3: orders 101-150 (Group Discussion)
+        // Module 4: orders 151-200 (Internship Readiness)
+        // Module 5: orders 201-250 (Project Guidance)
+        // Module 6: orders 251-300 (Corporate Etiquette)
+        if (lesson.order >= 1 && lesson.order <= 50) {
+          moduleNum = '1'
+        } else if (lesson.order >= 51 && lesson.order <= 100) {
+          moduleNum = '2'
+        } else if (lesson.order >= 101 && lesson.order <= 150) {
+          moduleNum = '3'
+        } else if (lesson.order >= 151 && lesson.order <= 200) {
+          moduleNum = '4'
+        } else if (lesson.order >= 201 && lesson.order <= 250) {
+          moduleNum = '5'
+        } else if (lesson.order >= 251) {
+          moduleNum = '6'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -2342,6 +2814,21 @@ export async function GET(
         isSchoolSeniorArts ? schoolSeniorArtsModuleNames[moduleNum] :
         isSchoolExamPrep ? schoolExamPrepModuleNames[moduleNum] :
         isSchoolSkills ? schoolSkillsModuleNames[moduleNum] :
+        isCollegeBscPcm ? collegeBscPcmModuleNames[moduleNum] :
+        isCollegeBscPcb ? collegeBscPcbModuleNames[moduleNum] :
+        isCollegeBscCs ? collegeBscCsModuleNames[moduleNum] :
+        isCollegeBscBio ? collegeBscBioModuleNames[moduleNum] :
+        isCollegeBscStats ? collegeBscStatsModuleNames[moduleNum] :
+        isCollegeBcom ? collegeBcomModuleNames[moduleNum] :
+        isCollegeBba ? collegeBbaModuleNames[moduleNum] :
+        isCollegeBaHistory ? collegeBaHistoryModuleNames[moduleNum] :
+        isCollegeBaPolsc ? collegeBaPolscModuleNames[moduleNum] :
+        isCollegeBaPsychology ? collegeBaPsychologyModuleNames[moduleNum] :
+        isCollegeBtechCs ? collegeBtechCsModuleNames[moduleNum] :
+        isCollegeLlB ? collegeLlBModuleNames[moduleNum] :
+        isCollegeSemesterSupport ? collegeSemesterSupportModuleNames[moduleNum] :
+        isCollegeExamPrep ? collegeExamPrepModuleNames[moduleNum] :
+        isCollegeCareerSkills ? collegeCareerSkillsModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
