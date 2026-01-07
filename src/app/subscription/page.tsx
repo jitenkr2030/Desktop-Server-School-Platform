@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { NewNavigation } from '@/components/new-navigation'
+import { PaymentProcessor } from '@/components/payment-processor'
 
 interface SubscriptionPlan {
   id: string
@@ -100,93 +101,13 @@ export default function SubscriptionPage() {
       <div style={{ margin: 0, padding: 0, fontFamily: 'system-ui, -apple-system, sans-serif' }}>
         <NewNavigation />
         <div style={{ minHeight: '100vh', background: '#f9fafb', paddingTop: '64px' }}>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '3rem 1rem' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#111827', marginBottom: '1rem' }}>
-                Complete Your Subscription
-              </h1>
-              <p style={{ fontSize: '1rem', color: '#6b7280' }}>
-                Choose your preferred payment method to activate your subscription
-              </p>
-            </div>
-            
-            {/* Payment Demo Card */}
-            <div style={{
-              background: 'white',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              maxWidth: '500px',
-              margin: '0 auto'
-            }}>
-              <div style={{
-                textAlign: 'center',
-                padding: '2rem',
-                border: '2px dashed #d1d5db',
-                borderRadius: '0.5rem',
-                marginBottom: '1.5rem'
-              }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💳</div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#111827', marginBottom: '0.5rem' }}>
-                  Payment Gateway
-                </h3>
-                <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-                  In production, integrate Razorpay/Stripe here
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#f9fafb',
-                padding: '1rem',
-                borderRadius: '0.5rem',
-                marginBottom: '1.5rem'
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#6b7280' }}>Plan</span>
-                  <span style={{ fontWeight: '600', color: '#111827' }}>
-                    {subscriptionPlans.find(p => p.id === selectedPlan)?.name}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#6b7280' }}>Amount</span>
-                  <span style={{ fontWeight: '600', color: '#111827', fontSize: '1.25rem' }}>
-                    {formatCurrency(subscriptionPlans.find(p => p.id === selectedPlan)?.price || 99)}
-                  </span>
-                </div>
-              </div>
-              
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button
-                  onClick={() => handlePaymentSuccess()}
-                  style={{
-                    flex: 1,
-                    padding: '0.875rem',
-                    background: '#16a34a',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '0.5rem',
-                    fontWeight: '600',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Pay Now
-                </button>
-                <button
-                  onClick={() => setShowPayment(false)}
-                  style={{
-                    padding: '0.875rem',
-                    background: 'white',
-                    color: '#374151',
-                    border: '1px solid #d1d5db',
-                    borderRadius: '0.5rem',
-                    fontWeight: '600',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+          <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem 1rem' }}>
+            <PaymentProcessor 
+              defaultAmount={subscriptionPlans.find(p => p.id === selectedPlan)?.price || 99}
+              planType={selectedPlan}
+              onSuccess={handlePaymentSuccess}
+              onCancel={() => setShowPayment(false)}
+            />
           </div>
         </div>
       </div>
