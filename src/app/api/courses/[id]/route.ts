@@ -183,6 +183,7 @@ export async function GET(
     const isNoCodeAlgoTrading = course.id === 'no-code-algo-trading'
     const isMutualFundsSipMastery = course.id === 'mutual-funds-sip-mastery'
     const isUPSCcivilServicesPrelims = course.id === 'upsc_prelims'
+    const isUPSCcivilServicesMains = course.id === 'upsc_mains'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1156,6 +1157,19 @@ export async function GET(
       '8': 'CSAT - Quantitative Aptitude',
       '9': 'CSAT - Reasoning & Comprehension',
       '10': 'Revision, Tests & Exam Readiness',
+    }
+
+    const upscCivilServicesMainsModuleNames: Record<string, string> = {
+      '1': 'Mains Exam Orientation & Strategy',
+      '2': 'General Studies Paper I – History, Culture & Society',
+      '3': 'General Studies Paper II – Governance, Polity & International Relations',
+      '4': 'General Studies Paper III – Economy, Environment & Technology',
+      '5': 'General Studies Paper IV – Ethics, Integrity & Aptitude',
+      '6': 'Essay Writing Mastery',
+      '7': 'Optional Subject Guidance',
+      '8': 'Answer Writing Techniques',
+      '9': 'Current Affairs Integration & Case Studies',
+      '10': 'Revision, Mock Tests & Pre-Exam Strategy',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -3136,6 +3150,39 @@ export async function GET(
         } else if (lesson.order >= 101 && lesson.order <= 110) {
           moduleNum = '10'
         }
+      } else if (isUPSCcivilServicesMains) {
+        // UPSC Civil Services Mains: use order ranges (10 modules)
+        // Module 1: orders 1-8 (Mains Exam Orientation & Strategy)
+        // Module 2: orders 9-24 (GS Paper I - History, Culture & Society)
+        // Module 3: orders 25-40 (GS Paper II - Governance, Polity & IR)
+        // Module 4: orders 41-56 (GS Paper III - Economy, Environment & Tech)
+        // Module 5: orders 57-68 (GS Paper IV - Ethics)
+        // Module 6: orders 69-80 (Essay Writing Mastery)
+        // Module 7: orders 81-105 (Optional Subject Guidance)
+        // Module 8: orders 106-117 (Answer Writing Techniques)
+        // Module 9: orders 118-127 (Current Affairs Integration)
+        // Module 10: orders 128-137 (Revision, Mock Tests & Pre-Exam Strategy)
+        if (lesson.order >= 1 && lesson.order <= 8) {
+          moduleNum = '1'
+        } else if (lesson.order >= 9 && lesson.order <= 24) {
+          moduleNum = '2'
+        } else if (lesson.order >= 25 && lesson.order <= 40) {
+          moduleNum = '3'
+        } else if (lesson.order >= 41 && lesson.order <= 56) {
+          moduleNum = '4'
+        } else if (lesson.order >= 57 && lesson.order <= 68) {
+          moduleNum = '5'
+        } else if (lesson.order >= 69 && lesson.order <= 80) {
+          moduleNum = '6'
+        } else if (lesson.order >= 81 && lesson.order <= 105) {
+          moduleNum = '7'
+        } else if (lesson.order >= 106 && lesson.order <= 117) {
+          moduleNum = '8'
+        } else if (lesson.order >= 118 && lesson.order <= 127) {
+          moduleNum = '9'
+        } else if (lesson.order >= 128 && lesson.order <= 137) {
+          moduleNum = '10'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -3263,6 +3310,7 @@ export async function GET(
         isNoCodeAlgoTrading ? noCodeAlgoTradingModuleNames[moduleNum] :
         isMutualFundsSipMastery ? mutualFundsSipMasteryModuleNames[moduleNum] :
         isUPSCcivilServicesPrelims ? upscCivilServicesPrelimsModuleNames[moduleNum] :
+        isUPSCcivilServicesMains ? upscCivilServicesMainsModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),

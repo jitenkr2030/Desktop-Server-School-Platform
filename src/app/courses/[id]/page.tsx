@@ -282,6 +282,7 @@ export default function CourseDetailPage() {
       'no-code-algo-trading': '/assets/courses/no-code-algo-trading.svg',
       'mutual-funds-sip-mastery': '/assets/courses/mutual-funds-sip-mastery.svg',
       'upsc_prelims': '/assets/courses/upsc_prelims.svg',
+      'upsc_mains': '/assets/courses/upsc_mains.svg',
     }
     
     if (thumbnailMap[courseId]) {
