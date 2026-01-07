@@ -2814,6 +2814,39 @@ export async function GET(
         } else if (lesson.order >= 500) {
           moduleNum = '6'
         }
+      } else if (isStockMarketAdvancedTrading) {
+        // Stock Market Advanced Trading: use order ranges (10 modules)
+        // Module 1: orders 1-99 (Advanced Technical Analysis)
+        // Module 2: orders 100-199 (Advanced Fundamental Analysis)
+        // Module 3: orders 200-299 (Derivatives Trading Strategies)
+        // Module 4: orders 300-399 (Options Trading Mastery)
+        // Module 5: orders 400-499 (Trading Psychology & Risk Management)
+        // Module 6: orders 500-599 (Algorithmic Trading Basics)
+        // Module 7: orders 600-699 (Portfolio Management & Asset Allocation)
+        // Module 8: orders 700-799 (Market Simulation & Practical Trading)
+        // Module 9: orders 800-899 (Live Market Analysis & Case Studies)
+        // Module 10: orders 900-999 (Capstone Project & Certification Preparation)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        } else if (lesson.order >= 800 && lesson.order <= 899) {
+          moduleNum = '9'
+        } else if (lesson.order >= 900) {
+          moduleNum = '10'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -2933,6 +2966,7 @@ export async function GET(
         isActuarialScience ? actuarialScienceModuleNames[moduleNum] :
         isAdvancedExcel ? advancedExcelModuleNames[moduleNum] :
         isStockMarketBasics ? stockMarketBasicsModuleNames[moduleNum] :
+        isStockMarketAdvancedTrading ? stockMarketAdvancedTradingModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),

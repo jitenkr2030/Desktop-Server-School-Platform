@@ -274,6 +274,7 @@ export default function CourseDetailPage() {
       'course-actuarial-science': '/assets/courses/actuarial-science.svg',
       'advanced-excel-pro': '/assets/courses/advanced-excel.svg',
       'stock-market-basics': '/assets/courses/stock-market-basics.svg',
+      'stock-market-advanced-trading': '/assets/courses/advanced-trading.svg',
     }
     
     if (thumbnailMap[courseId]) {
