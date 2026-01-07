@@ -176,6 +176,7 @@ export async function GET(
     const isActuarialScience = course.id === 'course-actuarial-science'
     const isAdvancedExcel = course.id === 'advanced-excel-pro'
     const isStockMarketBasics = course.id === 'stock-market-basics'
+    const isOptionsTradingMastery = course.id === 'options-trading-mastery'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1068,6 +1069,19 @@ export async function GET(
       '4': 'Basics of Technical Analysis',
       '5': 'Basics of Fundamental Analysis',
       '6': 'Risk Management & Beginner Strategies',
+    }
+
+    const optionsTradingMasteryModuleNames: Record<string, string> = {
+      '1': 'Foundations of Options Trading',
+      '2': 'Call and Put Options Deep Dive',
+      '3': 'Options Pricing Models & Greeks',
+      '4': 'Advanced Options Strategies',
+      '5': 'Options Trading Psychology & Risk Management',
+      '6': 'Technical Analysis for Options Traders',
+      '7': 'Options Trading in Different Market Conditions',
+      '8': 'Options Trading Tools, Platforms & Automation',
+      '9': 'Live Market Sessions & Practical Trading',
+      '10': 'Capstone Project & Career Preparation',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -2847,6 +2861,39 @@ export async function GET(
         } else if (lesson.order >= 900) {
           moduleNum = '10'
         }
+      } else if (isOptionsTradingMastery) {
+        // Options Trading Mastery: use order ranges (10 modules)
+        // Module 1: orders 1-99 (Foundations of Options Trading)
+        // Module 2: orders 100-199 (Call and Put Options Deep Dive)
+        // Module 3: orders 200-299 (Options Pricing Models & Greeks)
+        // Module 4: orders 300-399 (Advanced Options Strategies)
+        // Module 5: orders 400-499 (Options Trading Psychology & Risk Management)
+        // Module 6: orders 500-599 (Technical Analysis for Options Traders)
+        // Module 7: orders 600-699 (Options Trading in Different Market Conditions)
+        // Module 8: orders 700-799 (Options Trading Tools, Platforms & Automation)
+        // Module 9: orders 800-899 (Live Market Sessions & Practical Trading)
+        // Module 10: orders 900-999 (Capstone Project & Career Preparation)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        } else if (lesson.order >= 800 && lesson.order <= 899) {
+          moduleNum = '9'
+        } else if (lesson.order >= 900) {
+          moduleNum = '10'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -2967,6 +3014,7 @@ export async function GET(
         isAdvancedExcel ? advancedExcelModuleNames[moduleNum] :
         isStockMarketBasics ? stockMarketBasicsModuleNames[moduleNum] :
         isStockMarketAdvancedTrading ? stockMarketAdvancedTradingModuleNames[moduleNum] :
+        isOptionsTradingMastery ? optionsTradingMasteryModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
