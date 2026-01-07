@@ -77,7 +77,13 @@ export default function SubscriptionPage() {
   ]
 
   const handleSubscribe = (planId: string) => {
-    setSelectedPlan(planId)
+    // Only yearly subscription is available for purchase
+    if (planId !== 'yearly') {
+      // Switch to yearly plan
+      setSelectedPlan('yearly')
+    } else {
+      setSelectedPlan(planId)
+    }
     setShowPayment(true)
   }
 
