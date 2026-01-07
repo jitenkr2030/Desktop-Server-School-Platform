@@ -177,6 +177,7 @@ export async function GET(
     const isAdvancedExcel = course.id === 'advanced-excel-pro'
     const isStockMarketBasics = course.id === 'stock-market-basics'
     const isOptionsTradingMastery = course.id === 'options-trading-mastery'
+    const isTechnicalAnalysisMaster = course.id === 'technical-analysis-master'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1082,6 +1083,19 @@ export async function GET(
       '8': 'Options Trading Tools, Platforms & Automation',
       '9': 'Live Market Sessions & Practical Trading',
       '10': 'Capstone Project & Career Preparation',
+    }
+
+    const technicalAnalysisMasterModuleNames: Record<string, string> = {
+      '1': 'Foundations of Technical Analysis',
+      '2': 'Candlestick Analysis Deep Dive',
+      '3': 'Chart Patterns Mastery',
+      '4': 'Support, Resistance & Market Structure',
+      '5': 'Technical Indicators Advanced Usage',
+      '6': 'Volume & Price Relationship',
+      '7': 'Timeframes & Multi-Timeframe Analysis',
+      '8': 'Risk Management Using Technicals',
+      '9': 'Trading Psychology & Discipline',
+      '10': 'Build Your Technical Trading System',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -2894,6 +2908,39 @@ export async function GET(
         } else if (lesson.order >= 900) {
           moduleNum = '10'
         }
+      } else if (isTechnicalAnalysisMaster) {
+        // Technical Analysis Master Course: use order ranges (10 modules)
+        // Module 1: orders 1-99 (Foundations of Technical Analysis)
+        // Module 2: orders 100-199 (Candlestick Analysis Deep Dive)
+        // Module 3: orders 200-299 (Chart Patterns Mastery)
+        // Module 4: orders 300-399 (Support, Resistance & Market Structure)
+        // Module 5: orders 400-499 (Technical Indicators Advanced Usage)
+        // Module 6: orders 500-599 (Volume & Price Relationship)
+        // Module 7: orders 600-699 (Timeframes & Multi-Timeframe Analysis)
+        // Module 8: orders 700-799 (Risk Management Using Technicals)
+        // Module 9: orders 800-899 (Trading Psychology & Discipline)
+        // Module 10: orders 900-999 (Build Your Technical Trading System)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 600 && lesson.order <= 699) {
+          moduleNum = '7'
+        } else if (lesson.order >= 700 && lesson.order <= 799) {
+          moduleNum = '8'
+        } else if (lesson.order >= 800 && lesson.order <= 899) {
+          moduleNum = '9'
+        } else if (lesson.order >= 900) {
+          moduleNum = '10'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -3015,6 +3062,7 @@ export async function GET(
         isStockMarketBasics ? stockMarketBasicsModuleNames[moduleNum] :
         isStockMarketAdvancedTrading ? stockMarketAdvancedTradingModuleNames[moduleNum] :
         isOptionsTradingMastery ? optionsTradingMasteryModuleNames[moduleNum] :
+        isTechnicalAnalysisMaster ? technicalAnalysisMasterModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
