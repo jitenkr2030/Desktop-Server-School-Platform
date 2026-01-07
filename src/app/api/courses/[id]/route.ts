@@ -181,6 +181,7 @@ export async function GET(
     const isPriceActionTrading = course.id === 'price-action-trading'
     const isRiskManagementMasterclass = course.id === 'risk-management-masterclass'
     const isNoCodeAlgoTrading = course.id === 'no-code-algo-trading'
+    const isMutualFundsSipMastery = course.id === 'mutual-funds-sip-mastery'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1131,6 +1132,16 @@ export async function GET(
       '6': 'Live Deployment & Execution',
       '7': 'Algo Monitoring & Improvement',
       '8': 'Build Your No-Code Algo System',
+    }
+
+    const mutualFundsSipMasteryModuleNames: Record<string, string> = {
+      '1': 'Mutual Fund Basics',
+      '2': 'Mutual Fund Categories Explained',
+      '3': 'How to Select the Right Mutual Fund',
+      '4': 'SIP Mastery (Systematic Investing)',
+      '5': 'Risk Management & Asset Allocation',
+      '6': 'Taxation, Regulations & Compliance',
+      '7': 'Long-Term Wealth Creation Blueprint',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -3054,6 +3065,30 @@ export async function GET(
         } else if (lesson.order >= 57 && lesson.order <= 60) {
           moduleNum = '8'
         }
+      } else if (isMutualFundsSipMastery) {
+        // Mutual Funds & SIP Mastery: use order ranges (7 modules)
+        // Module 1: orders 1-7 (Mutual Fund Basics)
+        // Module 2: orders 8-13 (Mutual Fund Categories Explained)
+        // Module 3: orders 14-19 (How to Select the Right Mutual Fund)
+        // Module 4: orders 20-27 (SIP Mastery)
+        // Module 5: orders 28-33 (Risk Management & Asset Allocation)
+        // Module 6: orders 34-38 (Taxation, Regulations & Compliance)
+        // Module 7: orders 39-42 (Long-Term Wealth Creation Blueprint)
+        if (lesson.order >= 1 && lesson.order <= 7) {
+          moduleNum = '1'
+        } else if (lesson.order >= 8 && lesson.order <= 13) {
+          moduleNum = '2'
+        } else if (lesson.order >= 14 && lesson.order <= 19) {
+          moduleNum = '3'
+        } else if (lesson.order >= 20 && lesson.order <= 27) {
+          moduleNum = '4'
+        } else if (lesson.order >= 28 && lesson.order <= 33) {
+          moduleNum = '5'
+        } else if (lesson.order >= 34 && lesson.order <= 38) {
+          moduleNum = '6'
+        } else if (lesson.order >= 39 && lesson.order <= 42) {
+          moduleNum = '7'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -3179,6 +3214,7 @@ export async function GET(
         isPriceActionTrading ? priceActionTradingModuleNames[moduleNum] :
         isRiskManagementMasterclass ? riskManagementMasterclassModuleNames[moduleNum] :
         isNoCodeAlgoTrading ? noCodeAlgoTradingModuleNames[moduleNum] :
+        isMutualFundsSipMastery ? mutualFundsSipMasteryModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),

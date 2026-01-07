@@ -280,6 +280,7 @@ export default function CourseDetailPage() {
       'price-action-trading': '/assets/courses/price-action-trading.svg',
       'risk-management-masterclass': '/assets/courses/risk-management-masterclass.svg',
       'no-code-algo-trading': '/assets/courses/no-code-algo-trading.svg',
+      'mutual-funds-sip-mastery': '/assets/courses/mutual-funds-sip-mastery.svg',
     }
     
     if (thumbnailMap[courseId]) {
