@@ -131,13 +131,15 @@ export default function SubscriptionPage() {
             <div style={{ marginBottom: '1.5rem' }}>
               <span style={{
                 display: 'inline-block',
-                background: '#f3f4f6',
+                background: '#fef3c7',
                 borderRadius: '9999px',
                 padding: '0.5rem 1rem',
                 fontSize: '0.875rem',
-                marginBottom: '1rem'
+                marginBottom: '1rem',
+                color: '#92400e',
+                fontWeight: '600'
               }}>
-                🚀 India's Learning Utility - Just ₹99/month
+                🚀 India's Learning Utility - Just ₹999/year
               </span>
             </div>
             <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#111827', marginBottom: '1rem' }}>
@@ -169,6 +171,27 @@ export default function SubscriptionPage() {
                 </span>
               ))}
             </div>
+          </div>
+
+          {/* Notice - Only Yearly Available */}
+          <div style={{
+            background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+            borderRadius: '1rem',
+            padding: '1.5rem',
+            marginBottom: '2rem',
+            textAlign: 'center',
+            border: '1px solid #f59e0b'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>🎯</span>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: '#92400e' }}>
+                Limited Time Offer - Annual Subscription Only
+              </h3>
+            </div>
+            <p style={{ color: '#a16207', fontSize: '0.95rem' }}>
+              Get complete access to all 18 learning categories for just <strong>₹999/year</strong>. 
+              Click any plan below to upgrade to our best value yearly subscription!
+            </p>
           </div>
 
           {/* Subscription Plans */}
@@ -273,21 +296,36 @@ export default function SubscriptionPage() {
                       padding: '0.875rem',
                       border: 'none',
                       borderRadius: '0.5rem',
-                      fontSize: '1rem',
+                      fontSize: plan.id === 'yearly' ? '1rem' : '0.875rem',
                       fontWeight: '600',
                       cursor: 'pointer',
-                      background: plan.popular ? '#ea580c' : '#111827',
+                      background: plan.id === 'yearly' 
+                        ? '#ea580c' 
+                        : 'linear-gradient(135deg, #ea580c 0%, #c2410c 100%)',
                       color: 'white',
-                      transition: 'background 0.2s'
+                      transition: 'background 0.2s',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = plan.popular ? '#c2410c' : '#374151'
+                      e.currentTarget.style.background = plan.id === 'yearly' ? '#c2410c' : '#ea580c'
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = plan.popular ? '#ea580c' : '#111827'
+                      e.currentTarget.style.background = plan.id === 'yearly' 
+                        ? 'linear-gradient(135deg, #ea580c 0%, #c2410c 100%)'
+                        : '#ea580c'
                     }}
                   >
-                    Get Started
+                    {plan.id === 'yearly' ? (
+                      'Get Started'
+                    ) : (
+                      <>
+                        <span>🔄</span>
+                        <span>Switch to Yearly - Save More!</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
