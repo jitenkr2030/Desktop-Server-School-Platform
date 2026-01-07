@@ -179,6 +179,7 @@ export async function GET(
     const isOptionsTradingMastery = course.id === 'options-trading-mastery'
     const isTechnicalAnalysisMaster = course.id === 'technical-analysis-master'
     const isPriceActionTrading = course.id === 'price-action-trading'
+    const isRiskManagementMasterclass = course.id === 'risk-management-masterclass'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1108,6 +1109,16 @@ export async function GET(
       '6': 'Risk Management Using Price Action',
       '7': 'Multi-Timeframe Price Action',
       '8': 'Build Your Price Action Trading System',
+    }
+
+    const riskManagementMasterclassModuleNames: Record<string, string> = {
+      '1': 'Risk Management Philosophy',
+      '2': 'Position Sizing Mastery',
+      '3': 'Risk-Reward & Expectancy',
+      '4': 'Stop-Loss & Trade Invalidation',
+      '5': 'Drawdown & Capital Protection',
+      '6': 'Psychological Risk & Discipline',
+      '7': 'Build Your Risk Management Plan',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -2980,6 +2991,30 @@ export async function GET(
         } else if (lesson.order >= 800) {
           moduleNum = '8'
         }
+      } else if (isRiskManagementMasterclass) {
+        // Risk Management Masterclass: use order ranges (7 modules)
+        // Module 1: orders 1-99 (Risk Management Philosophy)
+        // Module 2: orders 100-199 (Position Sizing Mastery)
+        // Module 3: orders 200-299 (Risk-Reward & Expectancy)
+        // Module 4: orders 300-399 (Stop-Loss & Trade Invalidation)
+        // Module 5: orders 400-499 (Drawdown & Capital Protection)
+        // Module 6: orders 500-599 (Psychological Risk & Discipline)
+        // Module 7: orders 700-799 (Build Your Risk Management Plan)
+        if (lesson.order >= 1 && lesson.order <= 99) {
+          moduleNum = '1'
+        } else if (lesson.order >= 100 && lesson.order <= 199) {
+          moduleNum = '2'
+        } else if (lesson.order >= 200 && lesson.order <= 299) {
+          moduleNum = '3'
+        } else if (lesson.order >= 300 && lesson.order <= 399) {
+          moduleNum = '4'
+        } else if (lesson.order >= 400 && lesson.order <= 499) {
+          moduleNum = '5'
+        } else if (lesson.order >= 500 && lesson.order <= 599) {
+          moduleNum = '6'
+        } else if (lesson.order >= 700) {
+          moduleNum = '7'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -3103,6 +3138,7 @@ export async function GET(
         isOptionsTradingMastery ? optionsTradingMasteryModuleNames[moduleNum] :
         isTechnicalAnalysisMaster ? technicalAnalysisMasterModuleNames[moduleNum] :
         isPriceActionTrading ? priceActionTradingModuleNames[moduleNum] :
+        isRiskManagementMasterclass ? riskManagementMasterclassModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),

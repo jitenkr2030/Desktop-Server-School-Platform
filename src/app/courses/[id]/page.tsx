@@ -278,6 +278,7 @@ export default function CourseDetailPage() {
       'options-trading-mastery': '/assets/courses/options-trading-mastery.svg',
       'technical-analysis-master': '/assets/courses/technical-analysis-master.svg',
       'price-action-trading': '/assets/courses/price-action-trading.svg',
+      'risk-management-masterclass': '/assets/courses/risk-management-masterclass.svg',
     }
     
     if (thumbnailMap[courseId]) {
