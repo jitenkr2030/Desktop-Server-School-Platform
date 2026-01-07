@@ -285,6 +285,7 @@ export default function CourseDetailPage() {
       'upsc_mains': '/assets/courses/upsc_mains.svg',
       'upsc_interview': '/assets/courses/upsc_interview.svg',
       'advanced-answer-writing-mastery': '/assets/courses/advanced-answer-writing-mastery.svg',
+      'ssc_chsl': '/assets/courses/ssc_chsl.svg',
     }
     
     if (thumbnailMap[courseId]) {
