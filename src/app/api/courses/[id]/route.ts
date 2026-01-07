@@ -189,6 +189,7 @@ export async function GET(
     const isSSCCHSL = course.id === 'ssc_chsl'
     const isSSCCGL = course.id === 'ssc_cgl'
     const isSSCMTS = course.id === 'ssc_mts'
+    const isStatePolice = course.id === 'state_police'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1217,6 +1218,15 @@ export async function GET(
       '3': 'English Language & Comprehension',
       '4': 'General Awareness & Current Affairs',
       '5': 'Mock Tests, Exam Strategy & Tips',
+    }
+
+    const statePoliceModuleNames: Record<string, string> = {
+      '1': 'General Knowledge & Current Affairs',
+      '2': 'Mathematics & Numerical Ability',
+      '3': 'Reasoning & Logical Ability',
+      '4': 'General Science',
+      '5': 'Physical Efficiency & Measurement',
+      '6': 'Mock Tests & Previous Year Papers',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -3326,6 +3336,27 @@ export async function GET(
         } else if (lesson.order >= 67) {
           moduleNum = '5'
         }
+      } else if (isStatePolice) {
+        // State Police Constable & SI Preparation: use order ranges (6 modules)
+        // Module 1: orders 1-25 (General Knowledge & Current Affairs)
+        // Module 2: orders 26-55 (Mathematics & Numerical Ability)
+        // Module 3: orders 56-80 (Reasoning & Logical Ability)
+        // Module 4: orders 81-100 (General Science)
+        // Module 5: orders 101-110 (Physical Efficiency & Measurement)
+        // Module 6: orders 111-120 (Mock Tests & Previous Year Papers)
+        if (lesson.order >= 1 && lesson.order <= 25) {
+          moduleNum = '1'
+        } else if (lesson.order >= 26 && lesson.order <= 55) {
+          moduleNum = '2'
+        } else if (lesson.order >= 56 && lesson.order <= 80) {
+          moduleNum = '3'
+        } else if (lesson.order >= 81 && lesson.order <= 100) {
+          moduleNum = '4'
+        } else if (lesson.order >= 101 && lesson.order <= 110) {
+          moduleNum = '5'
+        } else if (lesson.order >= 111) {
+          moduleNum = '6'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -3459,6 +3490,7 @@ export async function GET(
         isSSCCHSL ? sscCHSLModuleNames[moduleNum] :
         isSSCCGL ? sscCGLModuleNames[moduleNum] :
         isSSCMTS ? sscMTSModuleNames[moduleNum] :
+        isStatePolice ? statePoliceModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),

@@ -288,6 +288,7 @@ export default function CourseDetailPage() {
       'ssc_chsl': '/assets/courses/ssc_chsl.svg',
       'ssc_cgl': '/assets/courses/ssc_cgl.svg',
       'ssc_mts': '/assets/courses/ssc_mts.svg',
+      'state_police': '/assets/courses/state_police.svg',
     }
     
     if (thumbnailMap[courseId]) {
