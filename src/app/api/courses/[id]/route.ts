@@ -185,6 +185,7 @@ export async function GET(
     const isUPSCcivilServicesPrelims = course.id === 'upsc_prelims'
     const isUPSCcivilServicesMains = course.id === 'upsc_mains'
     const isUPSCinterviewPersonality = course.id === 'upsc_interview'
+    const isAdvancedAnswerWriting = course.id === 'advanced-answer-writing-mastery'
     
     const englishModuleNames: Record<string, string> = {
       '1': 'Foundation Building',
@@ -1180,6 +1181,15 @@ export async function GET(
       '4': 'Communication & Personality Development',
       '5': 'Mock Interviews & Feedback',
       '6': 'Advanced Interview Strategies & Ethics',
+    }
+
+    const advancedAnswerWritingModuleNames: Record<string, string> = {
+      '1': 'Orientation & Answer Writing Strategy',
+      '2': 'Analytical & Multi-Dimensional Approach',
+      '3': 'Current Affairs Integration',
+      '4': 'Optional Subject Answer Writing',
+      '5': 'Essay & Ethics Answer Mastery',
+      '6': 'Mock Tests, Feedback & Improvement',
     }
 
     const moduleLessons: Record<string, typeof course.lessons> = {}
@@ -3214,6 +3224,27 @@ export async function GET(
         } else if (lesson.order >= 80 && lesson.order <= 97) {
           moduleNum = '6'
         }
+      } else if (isAdvancedAnswerWriting) {
+        // Advanced Answer Writing Mastery: use order ranges (6 modules)
+        // Module 1: orders 1-10 (Orientation & Strategy)
+        // Module 2: orders 11-24 (Analytical & Multi-Dimensional)
+        // Module 3: orders 25-36 (Current Affairs Integration)
+        // Module 4: orders 37-52 (Optional Subject Answer Writing)
+        // Module 5: orders 53-68 (Essay & Ethics Mastery)
+        // Module 6: orders 69-83 (Mock Tests & Improvement)
+        if (lesson.order >= 1 && lesson.order <= 10) {
+          moduleNum = '1'
+        } else if (lesson.order >= 11 && lesson.order <= 24) {
+          moduleNum = '2'
+        } else if (lesson.order >= 25 && lesson.order <= 36) {
+          moduleNum = '3'
+        } else if (lesson.order >= 37 && lesson.order <= 52) {
+          moduleNum = '4'
+        } else if (lesson.order >= 53 && lesson.order <= 68) {
+          moduleNum = '5'
+        } else if (lesson.order >= 69 && lesson.order <= 83) {
+          moduleNum = '6'
+        }
       }
       
       if (!moduleLessons[moduleNum]) {
@@ -3343,6 +3374,7 @@ export async function GET(
         isUPSCcivilServicesPrelims ? upscCivilServicesPrelimsModuleNames[moduleNum] :
         isUPSCcivilServicesMains ? upscCivilServicesMainsModuleNames[moduleNum] :
         isUPSCinterviewPersonality ? upscInterviewPersonalityModuleNames[moduleNum] :
+        isAdvancedAnswerWriting ? advancedAnswerWritingModuleNames[moduleNum] :
         'Module ' + moduleNum
       }`,
       order: parseInt(moduleNum),
