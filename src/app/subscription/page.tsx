@@ -77,10 +77,9 @@ export default function SubscriptionPage() {
   ]
 
   const handleSubscribe = (planId: string) => {
-    // Only yearly subscription is available for purchase
-    if (planId !== 'yearly') {
-      // Switch to yearly plan
-      setSelectedPlan('yearly')
+    // Monthly plan is not available for purchase - redirect to quarterly
+    if (planId === 'monthly') {
+      setSelectedPlan('quarterly')
     } else {
       setSelectedPlan(planId)
     }
@@ -185,12 +184,12 @@ export default function SubscriptionPage() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '1.5rem' }}>🎯</span>
               <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: '#92400e' }}>
-                Limited Time Offer - Annual Subscription Only
+                Available Plans - Quarterly & Yearly
               </h3>
             </div>
             <p style={{ color: '#a16207', fontSize: '0.95rem' }}>
-              Get complete access to all 18 learning categories for just <strong>₹999/year</strong>. 
-              Click any plan below to upgrade to our best value yearly subscription!
+              Choose <strong>₹249/quarter</strong> or <strong>₹999/year</strong> for complete access to all 18 learning categories! 
+              Monthly plan coming soon - switch to quarterly for now.
             </p>
           </div>
 
@@ -296,12 +295,14 @@ export default function SubscriptionPage() {
                       padding: '0.875rem',
                       border: 'none',
                       borderRadius: '0.5rem',
-                      fontSize: plan.id === 'yearly' ? '1rem' : '0.875rem',
+                      fontSize: '1rem',
                       fontWeight: '600',
                       cursor: 'pointer',
-                      background: plan.id === 'yearly' 
-                        ? '#ea580c' 
-                        : 'linear-gradient(135deg, #ea580c 0%, #c2410c 100%)',
+                      background: plan.id === 'monthly' 
+                        ? '#9ca3af' 
+                        : plan.id === 'yearly'
+                          ? '#ea580c'
+                          : '#16a34a',
                       color: 'white',
                       transition: 'background 0.2s',
                       display: 'flex',
@@ -310,20 +311,32 @@ export default function SubscriptionPage() {
                       gap: '0.5rem'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = plan.id === 'yearly' ? '#c2410c' : '#ea580c'
+                      if (plan.id === 'monthly') {
+                        e.currentTarget.style.background = '#6b7280'
+                      } else if (plan.id === 'yearly') {
+                        e.currentTarget.style.background = '#c2410c'
+                      } else {
+                        e.currentTarget.style.background = '#15803d'
+                      }
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = plan.id === 'yearly' 
-                        ? 'linear-gradient(135deg, #ea580c 0%, #c2410c 100%)'
-                        : '#ea580c'
+                      if (plan.id === 'monthly') {
+                        e.currentTarget.style.background = '#9ca3af'
+                      } else if (plan.id === 'yearly') {
+                        e.currentTarget.style.background = '#ea580c'
+                      } else {
+                        e.currentTarget.style.background = '#16a34a'
+                      }
                     }}
                   >
                     {plan.id === 'yearly' ? (
-                      'Get Started'
+                      '🔥 Get Started'
+                    ) : plan.id === 'quarterly' ? (
+                      '✅ Get Started'
                     ) : (
                       <>
                         <span>🔄</span>
-                        <span>Switch to Yearly - Save More!</span>
+                        <span>Switch to Quarterly</span>
                       </>
                     )}
                   </button>
