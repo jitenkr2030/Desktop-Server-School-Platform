@@ -535,6 +535,234 @@ export default function NewLandingPage() {
         </div>
       </section>
 
+      {/* Live Learning Section */}
+      <section style={{
+        background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #eff6ff 100%)',
+        padding: '5rem 1rem'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: '#bfdbfe',
+              color: '#1e40af',
+              borderRadius: '9999px',
+              padding: '0.5rem 1rem',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              marginBottom: '1rem'
+            }}>
+              🎥 Live Learning
+            </div>
+            <h2 style={{
+              fontSize: '2.25rem',
+              fontWeight: '700',
+              color: '#1f2937',
+              marginBottom: '0.75rem'
+            }}>
+              Learn Live with Expert Instructors
+            </h2>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1.125rem',
+              maxWidth: '700px',
+              margin: '0 auto',
+              lineHeight: '1.6'
+            }}>
+              Join live learning sessions, interact with instructors in real-time, 
+              and get your doubts cleared instantly. Learning is better together.
+            </p>
+          </div>
+
+          {/* Live Session Features */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#dbeafe',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                🎯
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Real-Time Interaction
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Ask questions, participate in discussions, and learn actively during live sessions
+              </p>
+            </div>
+
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#dcfce7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                👨‍🏫
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Expert Instructors
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Learn from qualified educators and industry experts in various subjects
+              </p>
+            </div>
+
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#fef3c7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                📹
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Session Recordings
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Missed a session? Watch recordings anytime and learn at your own pace
+              </p>
+            </div>
+
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#fce7f3',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                📅
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Scheduled Sessions
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Regular live sessions on various topics - check schedule and join live
+              </p>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '3rem'
+          }}>
+            <a href="/live-sessions" style={{
+              display: 'inline-block',
+              background: '#2563eb',
+              color: 'white',
+              padding: '0.875rem 2.5rem',
+              borderRadius: '0.5rem',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '1rem',
+              transition: 'background 0.2s, transform 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#1d4ed8'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#2563eb'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+            >
+              View Live Sessions Schedule
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Philosophy Section */}
       <section style={{
         background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
