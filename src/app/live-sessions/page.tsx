@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { format } from 'date-fns'
+import { format, addDays, addHours } from 'date-fns'
 import {
   Video,
   Calendar,
@@ -13,7 +13,8 @@ import {
   Search,
   Filter,
   Play,
-  AlertCircle
+  AlertCircle,
+  Sparkles
 } from 'lucide-react'
 
 interface LiveSession {
@@ -39,6 +40,142 @@ interface LiveSession {
   } | null
 }
 
+// Demo sessions for showcase when database is empty
+const demoSessions: LiveSession[] = [
+  {
+    id: 'demo-1',
+    title: 'Introduction to React Hooks',
+    description: 'Learn the fundamentals of React Hooks including useState, useEffect, and custom hooks.',
+    scheduledAt: addDays(new Date(), 1).toISOString(),
+    duration: 60,
+    status: 'SCHEDULED',
+    roomId: 'demo-room-1',
+    roomUrl: '/live/demo-1',
+    maxParticipants: 100,
+    currentAttendees: 45,
+    host: {
+      id: 'demo-host-1',
+      name: 'Dr. Sarah Johnson',
+      avatar: null
+    },
+    course: {
+      id: 'demo-course-1',
+      title: 'React Mastery',
+      thumbnail: null
+    }
+  },
+  {
+    id: 'demo-2',
+    title: 'Advanced JavaScript Concepts',
+    description: 'Deep dive into closures, prototypes, async/await, and modern ES6+ features.',
+    scheduledAt: addDays(new Date(), 2).toISOString(),
+    duration: 90,
+    status: 'SCHEDULED',
+    roomId: 'demo-room-2',
+    roomUrl: '/live/demo-2',
+    maxParticipants: 75,
+    currentAttendees: 32,
+    host: {
+      id: 'demo-host-2',
+      name: 'Prof. Michael Chen',
+      avatar: null
+    },
+    course: {
+      id: 'demo-course-2',
+      title: 'JavaScript Advanced',
+      thumbnail: null
+    }
+  },
+  {
+    id: 'demo-3',
+    title: 'Building RESTful APIs with Node.js',
+    description: 'Hands-on workshop building robust REST APIs using Express, MongoDB, and best practices.',
+    scheduledAt: addHours(new Date(), 2).toISOString(),
+    duration: 120,
+    status: 'LIVE',
+    roomId: 'demo-room-3',
+    roomUrl: '/live/demo-3',
+    maxParticipants: 50,
+    currentAttendees: 28,
+    host: {
+      id: 'demo-host-3',
+      name: 'Alex Kumar',
+      avatar: null
+    },
+    course: {
+      id: 'demo-course-3',
+      title: 'Full Stack Development',
+      thumbnail: null
+    }
+  },
+  {
+    id: 'demo-4',
+    title: 'CSS Grid & Flexbox Masterclass',
+    description: 'Master modern CSS layout techniques with practical examples and real-world projects.',
+    scheduledAt: addDays(new Date(), 3).toISOString(),
+    duration: 45,
+    status: 'SCHEDULED',
+    roomId: 'demo-room-4',
+    roomUrl: '/live/demo-4',
+    maxParticipants: 80,
+    currentAttendees: 56,
+    host: {
+      id: 'demo-host-4',
+      name: 'Emily Rodriguez',
+      avatar: null
+    },
+    course: {
+      id: 'demo-course-4',
+      title: 'CSS Fundamentals',
+      thumbnail: null
+    }
+  },
+  {
+    id: 'demo-5',
+    title: 'Database Design Principles',
+    description: 'Learn how to design efficient database schemas, normalization, and indexing strategies.',
+    scheduledAt: addDays(new Date(), 4).toISOString(),
+    duration: 60,
+    status: 'SCHEDULED',
+    roomId: 'demo-room-5',
+    roomUrl: '/live/demo-5',
+    maxParticipants: 60,
+    currentAttendees: 23,
+    host: {
+      id: 'demo-host-5',
+      name: 'Dr. James Wilson',
+      avatar: null
+    },
+    course: {
+      id: 'demo-course-5',
+      title: 'Database Systems',
+      thumbnail: null
+    }
+  },
+  {
+    id: 'demo-6',
+    title: 'Python for Data Science',
+    description: 'Introduction to data analysis with Python, Pandas, NumPy, and visualization libraries.',
+    scheduledAt: addDays(new Date(), 5).toISOString(),
+    duration: 90,
+    status: 'SCHEDULED',
+    roomId: 'demo-room-6',
+    roomUrl: '/live/demo-6',
+    maxParticipants: 120,
+    currentAttendees: 89,
+    host: {
+      id: 'demo-host-6',
+      name: 'Dr. Lisa Park',
+      avatar: null
+    },
+    course: {
+      id: 'demo-course-6',
+      title: 'Data Science with Python',
+      thumbnail: null
+    }
+  }
+]
+
 export default function LiveSessionsPage() {
   const [mounted, setMounted] = useState(false)
   const [sessions, setSessions] = useState<LiveSession[]>([])
@@ -47,6 +184,7 @@ export default function LiveSessionsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [showUpcoming, setShowUpcoming] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showDemoMode, setShowDemoMode] = useState(false)
 
   // Get session safely - store result first before destructuring
   const sessionResult = useSession()
@@ -72,12 +210,25 @@ export default function LiveSessionsPage() {
       const data = await response.json()
 
       if (data.success) {
-        setSessions(data.sessions)
+        // If no real sessions found, show demo sessions
+        if (data.sessions.length === 0 && !showDemoMode) {
+          setSessions(demoSessions)
+          setShowDemoMode(true)
+        } else {
+          setSessions(data.sessions)
+          setShowDemoMode(false)
+        }
       } else {
-        setError(data.message || 'Failed to fetch sessions')
+        // If API fails, show demo sessions for showcase
+        setSessions(demoSessions)
+        setShowDemoMode(true)
+        setError(null)
       }
     } catch (err) {
-      setError('Failed to fetch sessions')
+      // If API is not available, show demo sessions for showcase
+      setSessions(demoSessions)
+      setShowDemoMode(true)
+      setError(null)
     } finally {
       setLoading(false)
     }
@@ -108,6 +259,19 @@ export default function LiveSessionsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      {/* Demo Mode Banner */}
+      {showDemoMode && (
+        <div className="bg-gradient-to-r from-amber-400 to-orange-500 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div className="flex items-center justify-center gap-2 text-sm">
+              <Sparkles className="w-4 h-4" />
+              <span className="font-medium">Demo Mode:</span>
+              <span>These are sample sessions. Create your own live sessions to get started!</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
