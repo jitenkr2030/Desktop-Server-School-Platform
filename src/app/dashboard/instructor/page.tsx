@@ -59,6 +59,28 @@ const mockRecentActivity = [
   { id: '4', action: 'New enrollment', student: 'Sneha R.', course: 'Data Science with Python', time: '1 day ago' },
 ]
 
+// Quick Actions Configuration
+const quickActions = [
+  {
+    label: 'Create Course',
+    icon: Plus,
+    href: '/dashboard/instructor/courses/new',
+    bgColor: 'bg-indigo-600 hover:bg-indigo-700',
+  },
+  {
+    label: 'View Analytics',
+    icon: TrendingUp,
+    href: '/dashboard/instructor/courses',
+    bgColor: 'bg-green-600 hover:bg-green-700',
+  },
+  {
+    label: 'Student Messages',
+    icon: Users,
+    href: '/dashboard/instructor/students',
+    bgColor: 'bg-purple-600 hover:bg-purple-700',
+  },
+]
+
 export default function InstructorDashboard() {
   const [stats, setStats] = useState<InstructorStats | null>(null)
   const [loading, setLoading] = useState(true)
@@ -141,6 +163,23 @@ export default function InstructorDashboard() {
             color="bg-yellow-500"
             trend="Based on 234 reviews"
           />
+        </div>
+
+        {/* Quick Actions */}
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {quickActions.map((action, index) => (
+              <Link
+                key={index}
+                href={action.href}
+                className={`flex items-center justify-center gap-2 px-6 py-4 ${action.bgColor} text-white rounded-xl transition-all transform hover:scale-105 shadow-md hover:shadow-lg`}
+              >
+                <action.icon className="w-5 h-5" />
+                <span className="font-medium">{action.label}</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Earnings Card */}
