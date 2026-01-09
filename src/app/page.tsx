@@ -509,7 +509,7 @@ export default function NewLandingPage() {
               Share your knowledge with thousands of learners across India. 
               Create engaging courses with our powerful tools.
             </p>
-            <a href="/instructor" style={{
+            <a href="/instructor/signup" style={{
               display: 'inline-block',
               background: '#059669',
               color: 'white',
