@@ -447,3 +447,44 @@ export async function getInstructorCourses() {
 
   return courses
 }
+
+// ==================== Get Public Instructors ====================
+
+export async function getPublicInstructors() {
+  try {
+    const instructors = await db.instructorProfile.findMany({
+      where: {
+        isApproved: true
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        }
+      },
+      orderBy: [
+        { rating: 'desc' },
+        { totalStudents: 'desc' }
+      ]
+    })
+
+    return instructors.map(profile => ({
+      id: profile.id,
+      name: profile.user.name || 'Anonymous Instructor',
+      avatar: profile.user.avatar || profile.avatar,
+      bio: profile.bio,
+      expertise: profile.expertise,
+      experience: profile.experience,
+      qualifications: profile.qualifications,
+      rating: profile.rating,
+      totalStudents: profile.totalStudents,
+      totalCourses: profile.totalCourses
+    }))
+  } catch (error) {
+    console.error('Error fetching public instructors:', error)
+    return []
+  }
+}

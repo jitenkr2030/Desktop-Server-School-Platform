@@ -36,6 +36,20 @@ export interface Student {
   lastActive: string
 }
 
+// Public Instructor interface for listing on /instructors page
+export interface PublicInstructor {
+  id: string
+  name: string
+  avatar?: string
+  bio: string
+  expertise: string
+  experience?: string
+  qualifications?: string
+  rating: number
+  totalStudents: number
+  totalCourses: number
+}
+
 export interface Lesson {
   id: string
   title: string
@@ -176,4 +190,9 @@ export async function createInstructorAssessment(data: {
     method: 'POST',
     body: JSON.stringify(data),
   })
+}
+
+// Get Public Instructors (for /instructors page)
+export async function getPublicInstructors(): Promise<{ success: boolean; instructors: PublicInstructor[] }> {
+  return apiRequest<{ success: boolean; instructors: PublicInstructor[] }>('/public')
 }
