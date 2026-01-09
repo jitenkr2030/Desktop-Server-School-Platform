@@ -59,6 +59,7 @@ export default function NewLandingPage() {
     }
   ]
 
+  // Updated features with new Course Builder
   const features = [
     {
       icon: '🎯',
@@ -83,6 +84,37 @@ export default function NewLandingPage() {
       title: 'India-First Design',
       description: 'Built for Indian students with local context',
       bgColor: '#fffbeb'
+    }
+  ]
+
+  const instructorFeatures = [
+    {
+      icon: '📊',
+      title: 'PPTX to Video/Audio',
+      description: 'Upload your PowerPoint presentations and automatically convert them to professional video lessons and audio content',
+      bgColor: '#ecfdf5',
+      accentColor: '#059669'
+    },
+    {
+      icon: '📚',
+      title: 'Course Builder',
+      description: 'Create structured courses with modules and lessons. Organize content intuitively with drag-and-drop simplicity',
+      bgColor: '#f0f9ff',
+      accentColor: '#0284c7'
+    },
+    {
+      icon: '🎬',
+      title: 'Auto Video Generation',
+      description: 'Transform static presentations into engaging video content with animations and professional transitions',
+      bgColor: '#fef3c7',
+      accentColor: '#d97706'
+    },
+    {
+      icon: '🎵',
+      title: 'Audio Version',
+      description: 'Generate audio versions of your lessons for offline learning on-the-go',
+      bgColor: '#fdf2f8',
+      accentColor: '#db2777'
     }
   ]
 
@@ -116,7 +148,7 @@ export default function NewLandingPage() {
               padding: '0.375rem 1rem',
               fontSize: '0.875rem'
             }}>
-              🎥 New: Live Learning
+              ✨ New: PPTX to Video Converter
             </span>
           </div>
 
@@ -336,6 +368,160 @@ export default function NewLandingPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* New Course Builder Section */}
+      <section style={{
+        padding: '5rem 1rem',
+        background: 'linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdf4 100%)'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: '#dcfce7',
+              color: '#166534',
+              borderRadius: '9999px',
+              padding: '0.5rem 1rem',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              marginBottom: '1rem'
+            }}>
+              ✨ New Feature
+            </div>
+            <h2 style={{
+              fontSize: '2.25rem',
+              fontWeight: '700',
+              color: '#1f2937',
+              marginBottom: '0.75rem'
+            }}>
+              Create Courses in Minutes
+            </h2>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1.125rem',
+              maxWidth: '700px',
+              margin: '0 auto',
+              lineHeight: '1.6'
+            }}>
+              Transform your PowerPoint presentations into engaging video and audio lessons automatically. 
+              Our AI-powered Course Builder makes content creation effortless.
+            </p>
+          </div>
+
+          {/* Instructor Features Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {instructorFeatures.map((feature, index) => (
+              <div
+                key={index}
+                style={{
+                  background: 'white',
+                  padding: '2rem',
+                  borderRadius: '1rem',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  border: '1px solid #e5e7eb',
+                  transition: 'transform 0.2s, box-shadow 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}
+              >
+                <div style={{
+                  width: '64px',
+                  height: '64px',
+                  borderRadius: '1rem',
+                  background: feature.bgColor,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '2rem',
+                  marginBottom: '1.25rem'
+                }}>
+                  {feature.icon}
+                </div>
+                <h3 style={{
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  color: '#1f2937',
+                  marginBottom: '0.75rem'
+                }}>
+                  {feature.title}
+                </h3>
+                <p style={{
+                  color: '#6b7280',
+                  fontSize: '0.9375rem',
+                  lineHeight: '1.6'
+                }}>
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA for Instructors */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '3rem',
+            padding: '2rem',
+            background: 'white',
+            borderRadius: '1rem',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>🎓</div>
+            <h3 style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: '#1f2937',
+              marginBottom: '0.75rem'
+            }}>
+              Become an INR99 Instructor
+            </h3>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1rem',
+              maxWidth: '500px',
+              margin: '0 auto 1.5rem',
+              lineHeight: '1.6'
+            }}>
+              Share your knowledge with thousands of learners across India. 
+              Create engaging courses with our powerful tools.
+            </p>
+            <a href="/instructor" style={{
+              display: 'inline-block',
+              background: '#059669',
+              color: 'white',
+              padding: '0.875rem 2rem',
+              borderRadius: '0.5rem',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '1rem',
+              transition: 'background 0.2s, transform 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#047857'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#059669'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+            >
+              Start Teaching Today
+            </a>
           </div>
         </div>
       </section>
