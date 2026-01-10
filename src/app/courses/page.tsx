@@ -1028,9 +1028,9 @@ export default function CoursesPage() {
                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   borderRadius: '4px 8px 8px 4px',
                   boxShadow: '2px 2px 10px rgba(0,0,0,0.2)',
-                  animation: 'flipBook 1.5s ease-in-out infinite',
                   transformStyle: 'preserve-3d',
-                  transformOrigin: 'left center'
+                  transformOrigin: 'left center',
+                  animation: 'bookFlip 2s ease-in-out infinite'
                 }}>
                   {/* Book spine effect */}
                   <div style={{
@@ -1090,29 +1090,30 @@ export default function CoursesPage() {
                 gap: '8px', 
                 marginTop: '1.5rem' 
               }}>
-                {[0, 1, 2].map((i) => (
-                  <div key={i} style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    background: '#667eea',
-                    animation: `pulse 1.4s ease-in-out ${i * 0.2}s infinite`,
-                    animationFillMode: 'both'
-                  }} />
-                ))}
+                <div style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  background: '#667eea',
+                  animation: 'dotPulse 1.4s ease-in-out infinite'
+                }} />
+                <div style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  background: '#667eea',
+                  animation: 'dotPulse 1.4s ease-in-out 0.2s infinite',
+                  animationFillMode: 'both'
+                }} />
+                <div style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  background: '#667eea',
+                  animation: 'dotPulse 1.4s ease-in-out 0.4s infinite',
+                  animationFillMode: 'both'
+                }} />
               </div>
-              
-              {/* Keyframe Animations */}
-              <style>{`
-                @keyframes flipBook {
-                  0%, 100% { transform: rotateY(0deg); }
-                  50% { transform: rotateY(-30deg); }
-                }
-                @keyframes pulse {
-                  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
-                  40% { transform: scale(1); opacity: 1; }
-                }
-              `}</style>
             </div>
           ) : error ? (
             <div style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '0.75rem' }}>
