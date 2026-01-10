@@ -60,6 +60,124 @@ interface Lesson {
   createdAt: string
 }
 
+// ========== PHASE 4: INSTRUCTOR SUBSCRIPTION INTERFACES ==========
+
+// Instructor subscription plan types
+export type InstructorPlanType = 'FREE' | 'BASIC' | 'PRO'
+
+export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELLED' | 'EXPIRED'
+
+// Instructor subscription plan configuration
+interface InstructorPlan {
+  id: InstructorPlanType
+  name: string
+  monthlyPrice: number
+  yearlyPrice: number
+  features: string[]
+  limits: {
+    maxCourses: number
+    maxLiveSessions: number
+    maxStorageGB: number
+    hasAnalytics: boolean
+    hasCustomBranding: boolean
+    hasPrioritySupport: boolean
+  }
+}
+
+// Instructor subscription record
+interface InstructorSubscription {
+  id: string
+  userId: string
+  planId: InstructorPlanType
+  status: SubscriptionStatus
+  currentPeriodStart: string
+  currentPeriodEnd: string
+  razorpaySubscriptionId?: string
+  cancelAtPeriodEnd: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+// Instructor usage tracking
+interface InstructorUsage {
+  userId: string
+  courseCount: number
+  liveSessionCount: number
+  storageUsedGB: number
+  totalStudents: number
+  lastUpdated: string
+}
+
+// Plan configurations
+export const INSTRUCTOR_PLANS: InstructorPlan[] = [
+  {
+    id: 'FREE',
+    name: 'Free',
+    monthlyPrice: 0,
+    yearlyPrice: 0,
+    features: [
+      'Create up to 1 course',
+      'No live sessions',
+      'Basic analytics',
+      'Standard support'
+    ],
+    limits: {
+      maxCourses: 1,
+      maxLiveSessions: 0,
+      maxStorageGB: 1,
+      hasAnalytics: true,
+      hasCustomBranding: false,
+      hasPrioritySupport: false
+    }
+  },
+  {
+    id: 'BASIC',
+    name: 'Basic',
+    monthlyPrice: 499,
+    yearlyPrice: 4999,
+    features: [
+      'Create up to 5 courses',
+      'Up to 5 live sessions/month',
+      '10GB storage',
+      'Advanced analytics',
+      'Email support',
+      'Student management'
+    ],
+    limits: {
+      maxCourses: 5,
+      maxLiveSessions: 5,
+      maxStorageGB: 10,
+      hasAnalytics: true,
+      hasCustomBranding: false,
+      hasPrioritySupport: false
+    }
+  },
+  {
+    id: 'PRO',
+    name: 'Pro',
+    monthlyPrice: 1499,
+    yearlyPrice: 14999,
+    features: [
+      'Unlimited courses',
+      'Unlimited live sessions',
+      '100GB storage',
+      'Advanced analytics',
+      'Custom branding',
+      'Priority support',
+      'API access',
+      'White-label options'
+    ],
+    limits: {
+      maxCourses: -1,
+      maxLiveSessions: -1,
+      maxStorageGB: 100,
+      hasAnalytics: true,
+      hasCustomBranding: true,
+      hasPrioritySupport: true
+    }
+  }
+]
+
 // ========== PHASE 3: COMMUNITY FEATURES INTERFACES ==========
 
 // User confusion submissions
@@ -4019,4 +4137,151 @@ export function getLessonContentInLanguage(lessonId: string, languageCode: strin
     title: lesson.title,
     content: lesson.content
   }
+}
+
+// ========== PHASE 4: INSTRUCTOR SUBSCRIPTION DATA ACCESS FUNCTIONS ==========
+
+// Mock instructor subscription data
+const MOCK_INSTRUCTOR_SUBSCRIPTIONS: InstructorSubscription[] = [
+  {
+    id: 'sub_1',
+    userId: 'instructor1',
+    planId: 'PRO',
+    status: 'ACTIVE',
+    currentPeriodStart: '2025-01-01T00:00:00Z',
+    currentPeriodEnd: '2026-01-01T00:00:00Z',
+    razorpaySubscriptionId: 'sub_razorpay_123',
+    cancelAtPeriodEnd: false,
+    createdAt: '2025-01-01T00:00:00Z',
+    updatedAt: '2025-01-01T00:00:00Z'
+  },
+  {
+    id: 'sub_2',
+    userId: 'instructor2',
+    planId: 'BASIC',
+    status: 'ACTIVE',
+    currentPeriodStart: '2025-01-15T00:00:00Z',
+    currentPeriodEnd: '2025-02-15T00:00:00Z',
+    cancelAtPeriodEnd: false,
+    createdAt: '2025-01-15T00:00:00Z',
+    updatedAt: '2025-01-15T00:00:00Z'
+  }
+]
+
+const MOCK_INSTRUCTOR_USAGE: InstructorUsage[] = [
+  {
+    userId: 'instructor1',
+    courseCount: 3,
+    liveSessionCount: 8,
+    storageUsedGB: 25,
+    totalStudents: 150,
+    lastUpdated: '2025-01-20T00:00:00Z'
+  },
+  {
+    userId: 'instructor2',
+    courseCount: 2,
+    liveSessionCount: 2,
+    storageUsedGB: 3,
+    totalStudents: 45,
+    lastUpdated: '2025-01-20T00:00:00Z'
+  }
+]
+
+export function getInstructorPlanById(planId: InstructorPlanType): InstructorPlan | null {
+  return INSTRUCTOR_PLANS.find(plan => plan.id === planId) || null
+}
+
+export function getAllInstructorPlans(): InstructorPlan[] {
+  return INSTRUCTOR_PLANS
+}
+
+export function getInstructorSubscription(userId: string): InstructorSubscription | null {
+  return MOCK_INSTRUCTOR_SUBSCRIPTIONS.find(sub => sub.userId === userId && sub.status === 'ACTIVE') || null
+}
+
+export function getInstructorUsage(userId: string): InstructorUsage | null {
+  return MOCK_INSTRUCTOR_USAGE.find(usage => usage.userId === userId) || null
+}
+
+export function canCreateCourse(userId: string): { allowed: boolean; reason?: string; currentCount: number; maxAllowed: number } {
+  const subscription = getInstructorSubscription(userId)
+  const usage = getInstructorUsage(userId)
+
+  if (!subscription) {
+    // Default to free tier
+    const freePlan = INSTRUCTOR_PLANS.find(p => p.id === 'FREE')!
+    const currentCount = usage?.courseCount || 0
+    if (currentCount >= freePlan.limits.maxCourses) {
+      return {
+        allowed: false,
+        reason: 'You have reached your course limit. Please upgrade your plan to create more courses.',
+        currentCount,
+        maxAllowed: freePlan.limits.maxCourses
+      }
+    }
+    return { allowed: true, currentCount, maxAllowed: freePlan.limits.maxCourses }
+  }
+
+  const plan = INSTRUCTOR_PLANS.find(p => p.id === subscription.planId)!
+  const currentCount = usage?.courseCount || 0
+  const maxCourses = plan.limits.maxCourses
+
+  if (maxCourses !== -1 && currentCount >= maxCourses) {
+    return {
+      allowed: false,
+      reason: `You have reached your course limit (${maxCourses}). Please upgrade to create more courses.`,
+      currentCount,
+      maxAllowed: maxCourses
+    }
+  }
+
+  return { allowed: true, currentCount, maxAllowed: maxCourses }
+}
+
+export function canCreateLiveSession(userId: string): { allowed: boolean; reason?: string; currentCount: number; maxAllowed: number } {
+  const subscription = getInstructorSubscription(userId)
+  const usage = getInstructorUsage(userId)
+
+  if (!subscription) {
+    // Default to free tier - no live sessions allowed
+    const freePlan = INSTRUCTOR_PLANS.find(p => p.id === 'FREE')!
+    const currentCount = usage?.liveSessionCount || 0
+    return {
+      allowed: false,
+      reason: 'Live sessions are not available on the Free plan. Please upgrade to Basic or Pro to host live sessions.',
+      currentCount,
+      maxAllowed: freePlan.limits.maxLiveSessions
+    }
+  }
+
+  const plan = INSTRUCTOR_PLANS.find(p => p.id === subscription.planId)!
+  const currentCount = usage?.liveSessionCount || 0
+  const maxSessions = plan.limits.maxLiveSessions
+
+  if (maxSessions === -1) {
+    return { allowed: true, currentCount, maxAllowed: -1 }
+  }
+
+  if (currentCount >= maxSessions) {
+    return {
+      allowed: false,
+      reason: `You have reached your live session limit (${maxSessions}/month). Please upgrade or wait until next billing cycle.`,
+      currentCount,
+      maxAllowed: maxSessions
+    }
+  }
+
+  return { allowed: true, currentCount, maxAllowed: maxSessions }
+}
+
+export function getInstructorSubscriptionStatus(userId: string): {
+  plan: InstructorPlan | null
+  subscription: InstructorSubscription | null
+  usage: InstructorUsage | null
+} {
+  const subscription = getInstructorSubscription(userId)
+  const plan = subscription ? getInstructorPlanById(subscription.planId) : getInstructorPlanById('FREE')
+  const usage = getInstructorUsage(userId)
+
+  return { plan, subscription, usage }
 }

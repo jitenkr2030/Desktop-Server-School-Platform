@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { NewNavigation } from '@/components/new-navigation'
+import { Lock, CreditCard, Loader2, Crown, Check, ChevronRight } from 'lucide-react'
 
 interface Lesson {
   id: string
@@ -54,12 +56,38 @@ export default function CourseBuilderPage() {
   const [selectedLessonForPPTX, setSelectedLessonForPPTX] = useState<Lesson | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [converting, setConverting] = useState(false)
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+  const [subscriptionData, setSubscriptionData] = useState<any>(null)
+  const [courseLimit, setCourseLimit] = useState<{ allowed: boolean; reason?: string; currentCount: number; maxAllowed: number } | null>(null)
 
   useEffect(() => {
     setMounted(true)
-    // Load course data - for demo, create sample data
-    loadCourse()
+    checkSubscriptionAndLoad()
   }, [])
+
+  const checkSubscriptionAndLoad = async () => {
+    try {
+      // Check subscription status
+      const response = await fetch('/api/instructor/subscription/status?userId=instructor1')
+      const data = await response.json()
+
+      if (data.success) {
+        setSubscriptionData(data.data)
+        setCourseLimit(data.data.permissions.canCreateCourse)
+
+        if (!data.data.permissions.canCreateCourse.allowed) {
+          // Show upgrade modal if limit reached
+          setShowUpgradeModal(true)
+        }
+      }
+
+      // Load course data
+      loadCourse()
+    } catch (error) {
+      console.error('Failed to check subscription:', error)
+      loadCourse()
+    }
+  }
 
   const loadCourse = async () => {
     try {
@@ -114,6 +142,13 @@ export default function CourseBuilderPage() {
 
   const addModule = async () => {
     if (!course) return
+
+    // Check subscription limit
+    if (courseLimit && !courseLimit.allowed) {
+      setShowUpgradeModal(true)
+      return
+    }
+
     const title = prompt('Enter module title:')
     if (!title) return
 
@@ -326,7 +361,7 @@ export default function CourseBuilderPage() {
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <button 
+                <button
                   onClick={() => router.push('/instructor/courses')}
                   style={{ color: '#6b7280', fontSize: '0.875rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', cursor: 'pointer' }}
                 >
@@ -339,7 +374,46 @@ export default function CourseBuilderPage() {
                   {course?.modules.length || 0} Modules • {course?.modules.reduce((acc, m) => acc + m.lessons.length, 0) || 0} Lessons
                 </p>
               </div>
-              <div style={{ display: 'flex', gap: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                {subscriptionData?.currentPlan && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1rem',
+                    background: subscriptionData.currentPlan.id === 'PRO' ? '#fef3c7' : '#f3f4f6',
+                    borderRadius: '9999px',
+                    border: `1px solid ${subscriptionData.currentPlan.id === 'PRO' ? '#d97706' : '#e5e7eb'}`
+                  }}>
+                    <Crown size={16} color={subscriptionData.currentPlan.id === 'PRO' ? '#d97706' : '#6b7280'} />
+                    <span style={{
+                      fontSize: '0.875rem',
+                      fontWeight: '500',
+                      color: subscriptionData.currentPlan.id === 'PRO' ? '#92400e' : '#374151'
+                    }}>
+                      {subscriptionData.currentPlan.name} Plan
+                    </span>
+                  </div>
+                )}
+                <button
+                  onClick={() => router.push('/instructor/pricing')}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    background: 'white',
+                    color: '#4f46e5',
+                    border: '1px solid #4f46e5',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                >
+                  <CreditCard size={16} />
+                  Manage Subscription
+                </button>
                 <button
                   onClick={() => setActiveTab('structure')}
                   style={{
@@ -773,6 +847,165 @@ export default function CourseBuilderPage() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.6)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 50,
+          padding: '1rem'
+        }}>
+          <div style={{
+            background: 'white',
+            borderRadius: '1rem',
+            padding: '2rem',
+            width: '100%',
+            maxWidth: '450px',
+            textAlign: 'center'
+          }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '4rem',
+              height: '4rem',
+              borderRadius: '50%',
+              background: '#fef3c7',
+              marginBottom: '1.5rem'
+            }}>
+              <Lock size={32} color="#d97706" />
+            </div>
+
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#111827', marginBottom: '0.75rem' }}>
+              Course Limit Reached
+            </h2>
+
+            <p style={{ color: '#6b7280', fontSize: '0.9375rem', marginBottom: '1.5rem' }}>
+              {courseLimit?.reason || 'You have reached your course limit. Upgrade your plan to create more courses.'}
+            </p>
+
+            {subscriptionData?.usage && (
+              <div style={{
+                background: '#f9fafb',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+                marginBottom: '1.5rem'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                  <span style={{ color: '#6b7280', fontSize: '0.875rem' }}>Courses used</span>
+                  <span style={{ fontWeight: '600', color: '#111827' }}>
+                    {subscriptionData.usage.courseCount} / {courseLimit?.maxAllowed || 1}
+                  </span>
+                </div>
+                <div style={{
+                  height: '8px',
+                  background: '#e5e7eb',
+                  borderRadius: '4px',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{
+                    height: '100%',
+                    width: `${Math.min(100, ((subscriptionData.usage.courseCount || 0) / (courseLimit?.maxAllowed || 1)) * 100)}%`,
+                    background: '#ef4444',
+                    transition: 'width 0.3s'
+                  }}></div>
+                </div>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+              <button
+                onClick={() => setShowUpgradeModal(false)}
+                style={{
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.875rem',
+                  background: '#f3f4f6',
+                  color: '#374151',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                Maybe Later
+              </button>
+              <button
+                onClick={() => {
+                  setShowUpgradeModal(false)
+                  router.push('/instructor/pricing')
+                }}
+                style={{
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  background: '#4f46e5',
+                  color: 'white',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+              >
+                <CreditCard size={16} />
+                Upgrade Plan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Subscription Banner */}
+      {subscriptionData && subscriptionData.currentPlan && subscriptionData.currentPlan.id !== 'PRO' && (
+        <div style={{
+          position: 'fixed',
+          bottom: '1rem',
+          right: '1rem',
+          background: 'white',
+          borderRadius: '0.75rem',
+          padding: '1rem 1.25rem',
+          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.15)',
+          border: '1px solid #e5e7eb',
+          zIndex: 40,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '0.5rem',
+            background: '#fef3c7'
+          }}>
+            <Crown size={20} color="#d97706" />
+          </div>
+          <div>
+            <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>Current Plan</div>
+            <div style={{ fontWeight: '600', color: '#111827' }}>{subscriptionData.currentPlan.name}</div>
+          </div>
+          <button
+            onClick={() => router.push('/instructor/pricing')}
+            style={{
+              padding: '0.5rem',
+              borderRadius: '0.375rem',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: '#4f46e5'
+            }}
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       )}
     </div>

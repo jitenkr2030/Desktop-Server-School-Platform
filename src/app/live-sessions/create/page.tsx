@@ -15,7 +15,11 @@ import {
   CheckCircle,
   AlertCircle,
   Loader2,
-  BookOpen
+  BookOpen,
+  Lock,
+  CreditCard,
+  Crown,
+  ChevronRight
 } from 'lucide-react'
 
 interface Course {
@@ -32,6 +36,9 @@ export default function CreateSessionPage() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [coursesLoading, setCoursesLoading] = useState(true)
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+  const [subscriptionData, setSubscriptionData] = useState<any>(null)
+  const [sessionLimit, setSessionLimit] = useState<{ allowed: boolean; reason?: string; currentCount: number; maxAllowed: number } | null>(null)
 
   const router = useRouter()
   const sessionResult = useSession()
@@ -50,8 +57,34 @@ export default function CreateSessionPage() {
 
   useEffect(() => {
     setMounted(true)
-    fetchCourses()
+    checkSubscriptionAndFetchCourses()
   }, [])
+
+  const checkSubscriptionAndFetchCourses = async () => {
+    try {
+      // Check subscription status first
+      const subResponse = await fetch('/api/instructor/subscription/status?userId=instructor1')
+      const subData = await subResponse.json()
+
+      if (subData.success) {
+        setSubscriptionData(subData.data)
+        setSessionLimit(subData.data.permissions.canCreateLiveSession)
+
+        if (!subData.data.permissions.canCreateLiveSession.allowed) {
+          setShowUpgradeModal(true)
+          setCoursesLoading(false)
+          return
+        }
+      }
+
+      // Then fetch courses
+      fetchCourses()
+    } catch (err) {
+      console.error('Failed to check subscription:', err)
+      // Continue without subscription check
+      fetchCourses()
+    }
+  }
 
   const fetchCourses = async () => {
     try {
@@ -422,6 +455,82 @@ export default function CreateSessionPage() {
           </div>
         </form>
       </div>
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+            <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Lock className="w-8 h-8 text-amber-600" />
+            </div>
+
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+              Live Sessions Not Available
+            </h2>
+
+            <p className="text-gray-600 mb-6">
+              {sessionLimit?.reason || 'Live sessions require a Basic or Pro plan. Upgrade now to host unlimited live sessions!'}
+            </p>
+
+            {subscriptionData?.usage && (
+              <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm text-gray-600">Live sessions used</span>
+                  <span className="font-semibold text-gray-900">
+                    {subscriptionData.usage.liveSessionCount} / {sessionLimit?.maxAllowed || 0}
+                  </span>
+                </div>
+                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-red-500 transition-all duration-300"
+                    style={{
+                      width: `${Math.min(100, ((subscriptionData.usage.liveSessionCount || 0) / Math.max(1, sessionLimit?.maxAllowed || 1)) * 100)}%`
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => router.push('/live-sessions')}
+                className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              >
+                Maybe Later
+              </button>
+              <button
+                onClick={() => {
+                  setShowUpgradeModal(false)
+                  router.push('/instructor/pricing')
+                }}
+                className="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center gap-2"
+              >
+                <CreditCard className="w-4 h-4" />
+                Upgrade Plan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Subscription Banner */}
+      {subscriptionData && subscriptionData.currentPlan && subscriptionData.currentPlan.id !== 'PRO' && (
+        <div className="fixed bottom-6 right-6 bg-white rounded-xl shadow-lg border border-gray-200 p-4 z-40 flex items-center gap-4">
+          <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+            <Crown className="w-5 h-5 text-amber-600" />
+          </div>
+          <div>
+            <div className="text-xs text-gray-500">Current Plan</div>
+            <div className="font-semibold text-gray-900">{subscriptionData.currentPlan.name}</div>
+          </div>
+          <button
+            onClick={() => router.push('/instructor/pricing')}
+            className="p-2 hover:bg-gray-100 rounded-lg text-indigo-600"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
     </div>
   )
 }
