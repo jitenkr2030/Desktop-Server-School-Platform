@@ -137,6 +137,55 @@ export default function InstructorsPage() {
     return colors[index]
   }
 
+  // Pricing Plans Data
+  const pricingPlans = [
+    {
+      name: 'Free',
+      price: '₹0',
+      period: '/month',
+      description: 'Perfect for getting started',
+      features: [
+        'Create up to 1 course',
+        '0 live sessions',
+        'Basic analytics',
+        'Community support'
+      ],
+      cta: 'Current Plan',
+      popular: false
+    },
+    {
+      name: 'Basic',
+      price: '₹499',
+      period: '/month',
+      description: 'For growing instructors',
+      features: [
+        'Create up to 5 courses',
+        '5 live sessions/month',
+        'Advanced analytics',
+        'Email support',
+        'Custom branding'
+      ],
+      cta: 'Upgrade',
+      popular: false
+    },
+    {
+      name: 'Pro',
+      price: '₹999',
+      period: '/month',
+      description: 'For professional educators',
+      features: [
+        'Unlimited courses',
+        'Unlimited live sessions',
+        'Priority support',
+        'White-label options',
+        'API access',
+        'Dedicated manager'
+      ],
+      cta: 'Go Pro',
+      popular: true
+    }
+  ]
+
   return (
     <div className="min-h-screen bg-gray-50">
       <NewNavigation />
@@ -270,6 +319,61 @@ export default function InstructorsPage() {
             ))}
           </div>
         )}
+
+        {/* Pricing Plans Section */}
+        <div className="mt-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Instructor Pricing Plans</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Choose the perfect plan for your teaching journey. Upgrade anytime as you grow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <div
+                key={index}
+                className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 ${
+                  plan.popular ? 'ring-2 ring-orange-500 transform scale-105' : ''
+                }`}
+              >
+                {plan.popular && (
+                  <div className="bg-orange-500 text-white text-center py-2 text-sm font-semibold">
+                    Most Popular
+                  </div>
+                )}
+                <div className="p-8">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                    <span className="text-gray-500">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-sm text-gray-600">
+                        <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="/instructor/pricing"
+                    className={`block w-full text-center py-3 rounded-lg font-semibold transition-colors ${
+                      plan.popular
+                        ? 'bg-orange-500 text-white hover:bg-orange-600'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {plan.cta}
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* CTA Section */}
         {instructors.length === 0 && (
