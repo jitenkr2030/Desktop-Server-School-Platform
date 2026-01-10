@@ -119,62 +119,62 @@ const SCHOOL_VERTICALS = ['school']
 const COLLEGE_VERTICALS = ['college']
 const PG_VERTICALS = ['pg']
 const PROFESSIONAL_VERTICALS = ['professional']
-const COMPETITIVE_VERTICALS = ['competitive']
+const EXAMS_VERTICALS = ['exams']
+const CITIZEN_VERTICALS = ['citizen']
 
-// Sub-filters for each vertical
+// Sub-filters for each vertical - matches the new taxonomy structure
 const SUB_FILTERS = {
   school: [
     { id: 'all', name: 'All School', icon: '📚' },
-    { id: 'primary', name: 'Primary (1-5)', icon: '🧒' },
-    { id: 'middle', name: 'Middle (6-8)', icon: '📖' },
-    { id: 'secondary', name: 'Secondary (9-10)', icon: '📐' },
-    { id: 'senior', name: 'Senior Secondary (11-12)', icon: '🎯' }
+    { id: 'primary-school', name: 'Primary (1-5)', icon: '🧒' },
+    { id: 'middle-school', name: 'Middle (6-8)', icon: '📖' },
+    { id: 'secondary-school', name: 'Secondary (9-10)', icon: '📐' },
+    { id: 'senior-secondary', name: 'Senior Secondary (11-12)', icon: '🎯' }
   ],
   college: [
     { id: 'all', name: 'All College', icon: '🎓' },
-    { id: 'bsc', name: 'B.Sc', icon: '🔬' },
-    { id: 'bcom', name: 'B.Com', icon: '📊' },
-    { id: 'bba', name: 'BBA', icon: '💼' },
-    { id: 'btech', name: 'B.Tech', icon: '⚙️' },
-    { id: 'llb', name: 'LL.B', icon: '⚖️' }
+    { id: 'arts-humanities', name: 'Arts & Humanities', icon: '📚' },
+    { id: 'commerce-business', name: 'Commerce & Business', icon: '📊' },
+    { id: 'engineering-technology', name: 'Engineering & Technology', icon: '⚙️' },
+    { id: 'medical-sciences', name: 'Medical Sciences', icon: '🔬' }
   ],
   pg: [
     { id: 'all', name: 'All PG', icon: '🎓' },
-    { id: 'mba', name: 'MBA', icon: '💼' },
-    { id: 'mcom', name: 'M.Com', icon: '📈' },
-    { id: 'msc', name: 'M.Sc', icon: '🔬' },
-    { id: 'mca', name: 'MCA', icon: '💻' },
-    { id: 'ma', name: 'M.A.', icon: '📚' },
-    { id: 'llm', name: 'LL.M', icon: '⚖️' }
+    { id: 'mba', name: 'Management (MBA)', icon: '💼' },
+    { id: 'mcom', name: 'Commerce', icon: '📈' },
+    { id: 'msc-mca', name: 'Technology & Science', icon: '🔬' },
+    { id: 'ma-llm', name: 'Economics & Law', icon: '⚖️' }
   ],
   professional: [
     { id: 'all', name: 'All Professional', icon: '💼' },
-    { id: 'certification', name: 'Certifications', icon: '📜' },
-    { id: 'technology', name: 'Technology', icon: '💻' },
-    { id: 'design', name: 'Design', icon: '🎨' },
-    { id: 'business', name: 'Business', icon: '📊' },
-    { id: 'marketing', name: 'Marketing', icon: '📢' },
-    { id: 'data-science', name: 'Data Science', icon: '📉' },
-    { id: 'career', name: 'Career Skills', icon: '👔' }
+    { id: 'technology-programming', name: 'Technology & Programming', icon: '💻' },
+    { id: 'business-entrepreneurship', name: 'Business & Entrepreneurship', icon: '📊' },
+    { id: 'design-creative', name: 'Design & Creative', icon: '🎨' },
+    { id: 'marketing-communication', name: 'Marketing & Communication', icon: '📢' },
+    { id: 'workplace-life-skills', name: 'Workplace & Life Skills', icon: '👔' }
   ],
-  competitive: [
+  exams: [
     { id: 'all', name: 'All Exams', icon: '📋' },
-    { id: 'upsc', name: 'UPSC', icon: '🏛️' },
-    { id: 'ssc', name: 'SSC', icon: '📝' },
-    { id: 'banking', name: 'Banking', icon: '🏦' },
-    { id: 'defense', name: 'Defense', icon: '🛡️' },
-    { id: 'teaching', name: 'Teaching (TET)', icon: '👨‍🏫' }
+    { id: 'professional-certifications', name: 'Professional Certifications', icon: '📜' },
+    { id: 'government-exams', name: 'Government & Entrance Exams', icon: '🏛️' }
+  ],
+  citizen: [
+    { id: 'all', name: 'All Citizen', icon: '🧠' },
+    { id: 'personal-finance', name: 'Personal Finance Basics', icon: '💰' },
+    { id: 'digital-literacy', name: 'Digital Literacy', icon: '💻' },
+    { id: 'community-systems', name: 'Community Systems', icon: '👥' }
   ]
 }
 
-// Vertical display configuration
+// Vertical display configuration with icons
 const VERTICAL_CONFIG = {
   all: { name: 'All Courses', icon: '', color: '#111827', bg: 'white' },
-  school: { name: 'School', icon: '🏫', color: '#1e40af', bg: '#dbeafe' },
-  college: { name: 'College (UG)', icon: '🎓', color: '#92400e', bg: '#fef3c7' },
-  pg: { name: 'Post-Graduate (PG)', icon: '🎓', color: '#5b21b6', bg: '#ede9fe' },
-  professional: { name: 'Professional', icon: '💼', color: '#15803d', bg: '#dcfce7' },
-  competitive: { name: 'Competitive Exams', icon: '📋', color: '#b91c1c', bg: '#fee2e2' }
+  school: { name: '🏫 School Education (Class 1-12)', icon: '🏫', color: '#1e40af', bg: '#dbeafe' },
+  college: { name: '🎓 College (UG)', icon: '🎓', color: '#92400e', bg: '#fef3c7' },
+  pg: { name: '🎓 Post-Graduate (PG)', icon: '🎓', color: '#5b21b6', bg: '#ede9fe' },
+  professional: { name: '💼 Professional / Career Skills', icon: '💼', color: '#15803d', bg: '#dcfce7' },
+  exams: { name: '📋 Competitive Exams & Certifications', icon: '📋', color: '#b91c1c', bg: '#fee2e2' },
+  citizen: { name: '🧠 Citizen & Life Systems', icon: '🧠', color: '#0891b2', bg: '#cffafe' }
 }
 
 export default function CoursesPage() {
@@ -193,7 +193,7 @@ export default function CoursesPage() {
   // Check URL params for initial filter state
   useEffect(() => {
     const filter = searchParams.get('filter')
-    if (['school', 'college', 'pg', 'professional', 'competitive'].includes(filter || '')) {
+    if (['school', 'college', 'pg', 'professional', 'exams', 'citizen'].includes(filter || '')) {
       setActiveVertical(filter || 'all')
     }
   }, [searchParams])
@@ -264,38 +264,34 @@ export default function CoursesPage() {
         // This is what the UI uses to display badges like "Star Senior Secondary", "Award High School", etc.
         if (course.learningPath && course.learningPath.id) {
           const learningPathMapping: Record<string, string[]> = {
-            // School sub-filters (using actual button IDs as keys)
-            'primary': ['primary', 'primary-school'],
-            'middle': ['middle', 'middle-school'],
-            'secondary': ['secondary', 'secondary-school', 'high-school'],
-            'senior': ['senior', 'senior-secondary'],
-            // College sub-filters
-            bsc: ['bsc', 'b.sc', 'bachelor-of-science'],
-            bcom: ['bcom', 'b.com', 'bachelor-of-commerce'],
-            bba: ['bba', 'b.ba', 'bachelor-of-business-administration'],
-            btech: ['btech', 'b.tech', 'b.tech-cs', 'engineering'],
-            llb: ['llb', 'l.l.b', 'law', 'bachelor-of-laws'],
-            // PG sub-filters
-            mba: ['mba', 'm.ba', 'master-of-business-administration', 'mba-finance', 'mba-marketing', 'mba-hr', 'mba-operations'],
-            mcom: ['mcom', 'm.com', 'master-of-commerce', 'mcom-accounting', 'mcom-finance', 'mcom-business'],
-            msc: ['msc', 'm.sc', 'master-of-science', 'pg-msc', 'pg_msc'],
-            mca: ['mca', 'm.c.a', 'master-of-computer-applications'],
-            ma: ['ma', 'm.a', 'master-of-arts', 'pg-ma', 'pg_ma', 'ma-economics', 'ma-history', 'ma-psychology', 'ma-english'],
-            llm: ['llm', 'l.l.m', 'master-of-laws', 'pg-llm', 'pg_llm', 'llm-corporate', 'llm-criminal', 'llm-constitutional'],
-            // Professional sub-filters
-            certification: ['certification', 'professional-certifications', 'ca', 'chartered-accountancy', 'ca-foundation', 'ca-intermediate', 'ca-final', 'cs', 'company-secretary', 'cs-foundation', 'cs-executive', 'cs-professional', 'cma', 'cost-management', 'cma-foundation', 'cma-intermediate', 'cma-final', 'cfa', 'chartered-financial-analyst', 'cfa-level1', 'cfa-level2', 'cfa-level3', 'frm', 'financial-risk-manager', 'frm-part1', 'frm-part2', 'acca', 'acca-level1', 'acca-level2', 'acca-level3', 'actuarial', 'actuarial-science'],
-            technology: ['technology', 'programming', 'web-development', 'python', 'javascript', 'react', 'nodejs', 'coding'],
-            design: ['design', 'ui', 'ux', 'figma', 'graphic-design', 'ui-ux'],
-            business: ['business', 'entrepreneurship', 'startup', 'strategy', 'management'],
-            marketing: ['marketing', 'digital-marketing', 'seo', 'social-media', 'advertising'],
-            'data-science': ['data-science', 'machine-learning', 'ai', 'analytics', 'data-science-python'],
-            career: ['career', 'resume', 'interview', 'job-prep', 'professional-development'],
-            // Competitive sub-filters
-            upsc: ['upsc', 'civil-services', 'ias', 'ips', 'prelims', 'mains', 'interview'],
-            ssc: ['ssc', 'chsl', 'cgl', 'mts', 'staff-selection-commission'],
-            banking: ['banking', 'bank-po', 'clerk', 'ibps', 'sbi', 'rrb'],
-            defense: ['defense', 'nda', 'cds', 'airforce', 'navy', 'army', 'ssb'],
-            teaching: ['teaching', 'tet', 'ctet', 'education', 'b-ed']
+            // School sub-filters (using new taxonomy IDs)
+            'primary-school': ['primary', 'primary-school', 'class1', 'class2', 'class3', 'class4', 'class5'],
+            'middle-school': ['middle', 'middle-school', 'class6', 'class7', 'class8'],
+            'secondary-school': ['secondary', 'secondary-school', 'high-school', 'class9', 'class10'],
+            'senior-secondary': ['senior', 'senior-secondary', 'class11', 'class12'],
+            // College sub-filters (new taxonomy)
+            'arts-humanities': ['arts', 'humanities', 'communication', 'philosophy', 'art', 'literature', 'history'],
+            'commerce-business': ['commerce', 'business', 'accounting', 'economics', 'statistics', 'marketing', 'bcom', 'bba'],
+            'engineering-technology': ['engineering', 'technology', 'programming', 'mathematics', 'physics', 'electronics', 'btech'],
+            'medical-sciences': ['medical', 'medicine', 'anatomy', 'physiology', 'biochemistry', 'research', 'bsc'],
+            // PG sub-filters (new taxonomy)
+            'mba': ['mba', 'master-of-business-administration', 'mba-finance', 'mba-marketing', 'mba-hr', 'mba-operations'],
+            'mcom': ['mcom', 'master-of-commerce', 'mcom-accounting', 'mcom-finance', 'mcom-business', 'mcom-taxation'],
+            'msc-mca': ['msc', 'm.sc', 'master-of-science', 'pg-msc', 'mca', 'master-of-computer-applications', 'pg-mca'],
+            'ma-llm': ['ma', 'm.a', 'master-of-arts', 'pg-ma', 'llm', 'l.l.m', 'master-of-laws', 'pg-llm'],
+            // Professional sub-filters (new taxonomy)
+            'technology-programming': ['technology', 'programming', 'web-development', 'python', 'javascript', 'react', 'nodejs', 'coding', 'mobile', 'fullstack'],
+            'business-entrepreneurship': ['business', 'entrepreneurship', 'startup', 'strategy', 'management', 'project-management', 'financial-management'],
+            'design-creative': ['design', 'ui', 'ux', 'figma', 'graphic-design', 'ui-ux', 'photography', 'video-editing', 'art'],
+            'marketing-communication': ['marketing', 'digital-marketing', 'seo', 'social-media', 'advertising', 'brand', 'public-speaking', 'communication'],
+            'workplace-life-skills': ['career', 'resume', 'interview', 'job-prep', 'professional-development', 'excel', 'english', 'cyber-safety', 'mental-health', 'fitness', 'nutrition'],
+            // Exams sub-filters (new taxonomy)
+            'professional-certifications': ['certification', 'ca', 'chartered-accountancy', 'ca-foundation', 'ca-intermediate', 'ca-final', 'cs', 'company-secretary', 'cma', 'cfa', 'frm', 'acca', 'actuarial'],
+            'government-exams': ['upsc', 'civil-services', 'ias', 'ssc', 'cgl', 'chsl', 'mts', 'police', 'state-police', 'tet', 'teaching', 'defense', 'nda', 'cds'],
+            // Citizen sub-filters (new taxonomy)
+            'personal-finance': ['personal-finance', 'finance', 'tax', 'insurance', 'investment', 'stock', 'mutual-fund', 'money'],
+            'digital-literacy': ['digital', 'upi', 'banking', 'government-portal', 'certificate', 'online-safety', 'fraud'],
+            'community-systems': ['community', 'food-work', 'bulk-buying', 'work-model']
           }
           
           const learningPathMappingValues = learningPathMapping[activeSubFilter] || []
@@ -308,38 +304,34 @@ export default function CoursesPage() {
         
         // Fallback: check tags for static courses
         const tagMapping: Record<string, string[]> = {
-          // School sub-filters (using actual button IDs as keys)
-          'primary': ['primary', 'primary-school', 'class1', 'class2', 'class3', 'class4', 'class5'],
-          'middle': ['middle', 'middle-school', 'class6', 'class7', 'class8'],
-          'secondary': ['secondary', 'secondary-school', 'high-school', 'class9', 'class10'],
-          'senior': ['senior', 'senior-secondary', 'class11', 'class12'],
-          // College sub-filters
-          bsc: ['bsc', 'b.sc', 'bachelor-of-science'],
-          bcom: ['bcom', 'b.com', 'bachelor-of-commerce'],
-          bba: ['bba', 'b.ba', 'bachelor-of-business-administration'],
-          btech: ['btech', 'b.tech', 'b.tech-cs', 'engineering'],
-          llb: ['llb', 'l.l.b', 'law', 'bachelor-of-laws'],
-          // PG sub-filters
-          mba: ['mba', 'm.ba', 'master-of-business-administration', 'mba-finance', 'mba-marketing', 'mba-hr', 'mba-operations'],
-          mcom: ['mcom', 'm.com', 'master-of-commerce', 'mcom-accounting', 'mcom-finance', 'mcom-business'],
-          msc: ['msc', 'm.sc', 'master-of-science', 'pg-msc', 'pg_msc', 'mca'],
-          mca: ['mca', 'm.c.a', 'master-of-computer-applications'],
-          ma: ['ma', 'm.a', 'master-of-arts', 'pg-ma', 'pg_ma', 'ma-economics', 'ma-history', 'ma-psychology', 'ma-english'],
-          llm: ['llm', 'l.l.m', 'master-of-laws', 'pg-llm', 'pg_llm', 'llm-corporate', 'llm-criminal', 'llm-constitutional'],
-          // Professional sub-filters
-          certification: ['certification', 'professional-certifications', 'ca', 'chartered-accountancy', 'ca-foundation', 'ca-intermediate', 'ca-final', 'cs', 'company-secretary', 'cs-foundation', 'cs-executive', 'cs-professional', 'cma', 'cost-management', 'cma-foundation', 'cma-intermediate', 'cma-final', 'cfa', 'chartered-financial-analyst', 'cfa-level1', 'cfa-level2', 'cfa-level3', 'frm', 'financial-risk-manager', 'frm-part1', 'frm-part2', 'acca', 'acca-level1', 'acca-level2', 'acca-level3', 'actuarial', 'actuarial-science'],
-          technology: ['technology', 'programming', 'web-development', 'python', 'javascript', 'react', 'nodejs', 'coding'],
-          design: ['design', 'ui', 'ux', 'figma', 'graphic-design', 'ui-ux'],
-          business: ['business', 'entrepreneurship', 'startup', 'strategy', 'management'],
-          marketing: ['marketing', 'digital-marketing', 'seo', 'social-media', 'advertising'],
-          'data-science': ['data-science', 'machine-learning', 'ai', 'analytics', 'data-science-python'],
-          career: ['career', 'resume', 'interview', 'job-prep', 'professional-development'],
-          // Competitive sub-filters
-          upsc: ['upsc', 'civil-services', 'ias', 'ips', 'prelims', 'mains', 'interview'],
-          ssc: ['ssc', 'chsl', 'cgl', 'mts', 'staff-selection-commission'],
-          banking: ['banking', 'bank-po', 'clerk', 'ibps', 'sbi', 'rrb'],
-          defense: ['defense', 'nda', 'cds', 'airforce', 'navy', 'army', 'ssb'],
-          teaching: ['teaching', 'tet', 'ctet', 'education', 'b-ed']
+          // School sub-filters (new taxonomy)
+          'primary-school': ['primary', 'primary-school', 'class1', 'class2', 'class3', 'class4', 'class5', 'english-grammar', 'mathematics-primary', 'science-fundamentals'],
+          'middle-school': ['middle', 'middle-school', 'class6', 'class7', 'class8', 'mathematics-middle', 'science-middle', 'english-literature'],
+          'secondary-school': ['secondary', 'secondary-school', 'class9', 'class10', 'mathematics-secondary', 'physics-secondary', 'chemistry-secondary', 'biology-secondary'],
+          'senior-secondary': ['senior', 'senior-secondary', 'class11', 'class12', 'physics-senior', 'chemistry-senior', 'biology-senior', 'advanced-mathematics'],
+          // College sub-filters (new taxonomy)
+          'arts-humanities': ['arts-humanities', 'communication-skills', 'philosophy-basics', 'history-of-art', 'world-literature'],
+          'commerce-business': ['commerce-business', 'accounting-principles', 'business-economics', 'business-statistics', 'marketing-fundamentals', 'bcom-financial-accounting'],
+          'engineering-technology': ['engineering-technology', 'programming-fundamentals', 'engineering-mathematics', 'engineering-physics', 'digital-electronics'],
+          'medical-sciences': ['medical-sciences', 'human-anatomy', 'physiology', 'biochemistry', 'medical-research'],
+          // PG sub-filters (new taxonomy)
+          'mba': ['mba', 'mba-finance', 'mba-marketing', 'mba-hr'],
+          'mcom': ['mcom', 'mcom-accounting', 'mcom-taxation'],
+          'msc-mca': ['msc', 'msc-data-science', 'msc-cyber-security', 'mca', 'mca-cloud'],
+          'ma-llm': ['ma', 'ma-economics', 'llm', 'llm-corporate', 'llm-ip'],
+          // Professional sub-filters (new taxonomy)
+          'technology-programming': ['technology-programming', 'python-programming', 'web-development', 'fullstack-development', 'mobile-development', 'data-science-fundamentals'],
+          'business-entrepreneurship': ['business-entrepreneurship', 'entrepreneurship-essentials', 'business-strategy', 'project-management', 'financial-management', 'startup-foundation'],
+          'design-creative': ['design-creative', 'ui-ux-design', 'graphic-design', 'photography', 'video-editing'],
+          'marketing-communication': ['marketing-communication', 'digital-marketing', 'social-media', 'brand-strategy', 'public-speaking'],
+          'workplace-life-skills': ['workplace-life-skills', 'advanced-excel', 'english-communication', 'job-preparation', 'cyber-safety', 'mental-health', 'fitness-nutrition'],
+          // Exams sub-filters (new taxonomy)
+          'professional-certifications': ['professional-certifications', 'ca', 'cs', 'cma', 'cfa', 'frm', 'acca', 'actuarial-science', 'ca-foundation', 'ca-intermediate', 'ca-final'],
+          'government-exams': ['government-exams', 'upsc', 'ssc', 'state-police', 'tet', 'upsc-prelims', 'upsc-mains', 'ssc-cgl', 'ssc-chsl'],
+          // Citizen sub-filters (new taxonomy)
+          'personal-finance': ['personal-finance', 'tax-planning', 'stock-market'],
+          'digital-literacy': ['digital-literacy', 'digital-money-banking', 'government-portals', 'online-safety'],
+          'community-systems': ['community-systems', 'food-work', 'community-buying']
         }
         
         const mapping = tagMapping[activeSubFilter] || []
@@ -397,9 +389,15 @@ export default function CoursesPage() {
     )
   }
 
-  const isCompetitiveCourse = (course: Course) => {
+  const isExamsCourse = (course: Course) => {
     return (
-      course.source === 'static' && course.vertical && COMPETITIVE_VERTICALS.includes(course.vertical)
+      course.source === 'static' && course.vertical && EXAMS_VERTICALS.includes(course.vertical)
+    )
+  }
+
+  const isCitizenCourse = (course: Course) => {
+    return (
+      course.source === 'static' && course.vertical && CITIZEN_VERTICALS.includes(course.vertical)
     )
   }
 
@@ -414,7 +412,8 @@ export default function CoursesPage() {
     if (isCollegeCourse(course)) return { text: '🎓 College', bg: '#f59e0b' }
     if (isSchoolCourse(course)) return { text: '🏫 School', bg: '#2563eb' }
     if (isProfessionalCourse(course)) return { text: '💼 Professional', bg: '#15803d' }
-    if (isCompetitiveCourse(course)) return { text: '📋 Competitive', bg: '#b91c1c' }
+    if (isExamsCourse(course)) return { text: '📋 Exams', bg: '#b91c1c' }
+    if (isCitizenCourse(course)) return { text: '🧠 Citizen', bg: '#0891b2' }
     return null
   }
 

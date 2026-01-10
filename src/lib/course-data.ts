@@ -180,8 +180,8 @@ export const VERTICALS = [
   { id: "school", name: "School Education (Class 1-12)", description: "Primary, Middle, Secondary, and Senior Secondary education" },
   { id: "college", name: "College (UG)", description: "Undergraduate degree programs - Arts, Commerce, Engineering, Medical Sciences" },
   { id: "pg", name: "Post-Graduate (PG)", description: "Master's degrees - MBA, M.Com, M.Sc, MCA, MA, LL.M" },
-  { id: "professional", name: "Professional Skills", description: "Career-focused skills - Technology, Business, Design, Marketing, Life Skills" },
-  { id: "competitive", name: "Competitive Exams", description: "Government exams and professional certifications" },
+  { id: "professional", name: "Professional / Career Skills", description: "Career-focused skills - Technology, Business, Design, Marketing, Life Skills" },
+  { id: "exams", name: "Competitive Exams & Certifications", description: "Professional certifications and government exams" },
   { id: "citizen", name: "Citizen & Life Systems", description: "Personal finance, digital literacy, and community systems" }
 ];
 
@@ -201,23 +201,23 @@ export const COURSE_TAXONOMY = {
     },
     subcategories: {
       // Primary School
-      "english-grammar": "English Grammar",
-      "mathematics": "Mathematics",
-      "science-fundamentals": "Science Fundamentals",
+      "english-grammar": "English Grammar (Class 1-4)",
+      "mathematics-primary": "Mathematics (Class 1-4)",
+      "science-fundamentals": "Science Fundamentals (Class 3-5)",
       // Middle School
-      "mathematics-middle": "Mathematics",
-      "science-middle": "Science",
-      "english-literature": "English Literature",
+      "mathematics-middle": "Mathematics (Class 6-7)",
+      "science-middle": "Science (Class 6-8)",
+      "english-literature": "English Literature (Class 7)",
       // Secondary School
-      "mathematics-secondary": "Mathematics",
-      "physics-secondary": "Physics",
-      "chemistry-secondary": "Chemistry",
-      "biology-secondary": "Biology",
+      "mathematics-secondary": "Mathematics (Class 9-10)",
+      "physics-secondary": "Physics (Class 9-10)",
+      "chemistry-secondary": "Chemistry (Class 9-10)",
+      "biology-secondary": "Biology (Class 9-10)",
       // Senior Secondary
-      "physics-senior": "Physics",
-      "chemistry-senior": "Chemistry",
-      "biology-senior": "Biology",
-      "advanced-mathematics": "Advanced Mathematics"
+      "physics-senior": "Physics (Class 11-12)",
+      "chemistry-senior": "Chemistry (Class 11-12)",
+      "biology-senior": "Biology (Class 11-12)",
+      "advanced-mathematics": "Advanced Mathematics (Class 11-12)"
     }
   },
   // Vertical: COLLEGE (UG)
@@ -280,9 +280,9 @@ export const COURSE_TAXONOMY = {
       "llm-ip": "LL.M Intellectual Property Rights"
     }
   },
-  // Vertical: PROFESSIONAL
+  // Vertical: PROFESSIONAL / CAREER SKILLS
   professional: {
-    name: "Professional Skills",
+    name: "Professional / Career Skills",
     categories: {
       "technology-programming": "Technology & Programming",
       "business-entrepreneurship": "Business & Entrepreneurship",
@@ -292,7 +292,7 @@ export const COURSE_TAXONOMY = {
     },
     subcategories: {
       // Technology & Programming
-      "python-programming": "Python Programming",
+      "python-programming": "Python Programming (Beginner → Advanced)",
       "web-development": "Web Development Bootcamp",
       "fullstack-development": "Full-Stack Development",
       "mobile-development": "Mobile App Development",
@@ -322,27 +322,27 @@ export const COURSE_TAXONOMY = {
       "fitness-nutrition": "Fitness & Nutrition"
     }
   },
-  // Vertical: COMPETITIVE EXAMS
-  competitive: {
-    name: "Competitive Exams",
+  // Vertical: COMPETITIVE EXAMS & CERTIFICATIONS
+  exams: {
+    name: "Competitive Exams & Certifications",
     categories: {
       "professional-certifications": "Professional Certifications",
       "government-exams": "Government & Entrance Exams"
     },
     subcategories: {
       // Professional Certifications
-      "ca": "CA (Chartered Accountancy)",
-      "cs": "CS (Company Secretary)",
-      "cma": "CMA (Cost Management)",
-      "cfa": "CFA (Chartered Financial Analyst)",
-      "frm": "FRM (Financial Risk Management)",
-      "acca": "ACCA",
+      "ca": "CA (Foundation, Inter, Final)",
+      "cs": "CS (Foundation, Executive, Professional)",
+      "cma": "CMA (Foundation, Inter, Final)",
+      "cfa": "CFA (Level 1, 2, 3)",
+      "frm": "FRM (Part 1, Part 2)",
+      "acca": "ACCA (All Levels)",
       "actuarial-science": "Actuarial Science",
       // Government & Entrance Exams
-      "upsc": "UPSC Civil Services",
-      "ssc": "SSC Exams",
-      "state-police": "State Police",
-      "tet": "TET (Teacher Eligibility)"
+      "upsc": "UPSC (Prelims, Mains, Interview)",
+      "ssc": "SSC (CGL, CHSL, MTS)",
+      "state-police": "State Police (Constable & SI)",
+      "tet": "TET (Teacher Eligibility Test)"
     }
   },
   // Vertical: CITIZEN & LIFE SYSTEMS
