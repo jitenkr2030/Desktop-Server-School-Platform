@@ -195,6 +195,9 @@ export default function CoursesPage() {
     const filter = searchParams.get('filter')
     if (['school', 'college', 'pg', 'professional', 'exams', 'citizen'].includes(filter || '')) {
       setActiveVertical(filter || 'all')
+    } else if (filter === 'competitive') {
+      // Map 'competitive' to 'exams' for backward compatibility
+      setActiveVertical('exams')
     }
   }, [searchParams])
 
@@ -771,7 +774,7 @@ export default function CoursesPage() {
               </button>
               <button
                 onClick={() => {
-                  setActiveVertical('competitive')
+                  setActiveVertical('exams')
                   setActiveSubFilter('all')
                 }}
                 style={{
@@ -784,8 +787,8 @@ export default function CoursesPage() {
                   fontWeight: '500',
                   cursor: 'pointer',
                   border: 'none',
-                  background: activeVertical === 'competitive' ? '#b91c1c' : 'white',
-                  color: activeVertical === 'competitive' ? 'white' : '#991b1b',
+                  background: activeVertical === 'exams' ? '#b91c1c' : 'white',
+                  color: activeVertical === 'exams' ? 'white' : '#991b1b',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
                   transition: 'all 0.2s'
                 }}
@@ -1225,7 +1228,7 @@ export default function CoursesPage() {
                             🏫 School
                           </span>
                         )}
-                        {isProfessionalCourse(course) && !isCompetitiveCourse(course) && (
+                        {isExamsCourse(course) && !isProfessionalCourse(course) && (
                           <span style={{
                             background: '#15803d',
                             color: 'white',
@@ -1238,7 +1241,7 @@ export default function CoursesPage() {
                             💼 Professional
                           </span>
                         )}
-                        {isCompetitiveCourse(course) && (
+                        {isExamsCourse(course) && (
                           <span style={{
                             background: '#b91c1c',
                             color: 'white',
