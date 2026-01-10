@@ -43,10 +43,10 @@ export interface Course {
   originalPrice: number;
   currency: string;
   
-  // Categorization
+  // Categorization - Updated taxonomy
+  vertical: 'school' | 'college' | 'pg' | 'professional' | 'competitive' | 'citizen';
   category: string;
   subcategory: string;
-  vertical: 'school' | 'college' | 'pg' | 'professional' | 'general';
   targetAudience: string[];
   tags: string[];
   
@@ -177,12 +177,196 @@ export const CATEGORIES = [
 ];
 
 export const VERTICALS = [
-  { id: "school", name: "School Learning (Class 1-12)", description: "CBSE, ICSE, and State Board curriculum coverage" },
-  { id: "college", name: "College Learning", description: "Degree programs and professional courses (UG)" },
-  { id: "pg", name: "Postgraduate Learning", description: "Master's degrees and professional PG programs (MBA, M.Com, M.Sc, MCA, MA, LL.M)" },
-  { id: "professional", name: "Professional Development", description: "Career skills and upskilling" },
-  { id: "general", name: "General Learning", description: "Skills for everyone" }
+  { id: "school", name: "School Education (Class 1-12)", description: "Primary, Middle, Secondary, and Senior Secondary education" },
+  { id: "college", name: "College (UG)", description: "Undergraduate degree programs - Arts, Commerce, Engineering, Medical Sciences" },
+  { id: "pg", name: "Post-Graduate (PG)", description: "Master's degrees - MBA, M.Com, M.Sc, MCA, MA, LL.M" },
+  { id: "professional", name: "Professional Skills", description: "Career-focused skills - Technology, Business, Design, Marketing, Life Skills" },
+  { id: "competitive", name: "Competitive Exams", description: "Government exams and professional certifications" },
+  { id: "citizen", name: "Citizen & Life Systems", description: "Personal finance, digital literacy, and community systems" }
 ];
+
+// ============================================
+// New Course Taxonomy Structure
+// ============================================
+
+export const COURSE_TAXONOMY = {
+  // Vertical: SCHOOL EDUCATION
+  school: {
+    name: "School Education (Class 1-12)",
+    categories: {
+      "primary-school": "Primary School (Class 1-5)",
+      "middle-school": "Middle School (Class 6-8)",
+      "secondary-school": "Secondary School (Class 9-10)",
+      "senior-secondary": "Senior Secondary (Class 11-12)"
+    },
+    subcategories: {
+      // Primary School
+      "english-grammar": "English Grammar",
+      "mathematics": "Mathematics",
+      "science-fundamentals": "Science Fundamentals",
+      // Middle School
+      "mathematics-middle": "Mathematics",
+      "science-middle": "Science",
+      "english-literature": "English Literature",
+      // Secondary School
+      "mathematics-secondary": "Mathematics",
+      "physics-secondary": "Physics",
+      "chemistry-secondary": "Chemistry",
+      "biology-secondary": "Biology",
+      // Senior Secondary
+      "physics-senior": "Physics",
+      "chemistry-senior": "Chemistry",
+      "biology-senior": "Biology",
+      "advanced-mathematics": "Advanced Mathematics"
+    }
+  },
+  // Vertical: COLLEGE (UG)
+  college: {
+    name: "College (UG)",
+    categories: {
+      "arts-humanities": "Arts & Humanities",
+      "commerce-business": "Commerce & Business",
+      "engineering-technology": "Engineering & Technology",
+      "medical-sciences": "Medical Sciences"
+    },
+    subcategories: {
+      // Arts & Humanities
+      "communication-skills": "Communication Skills",
+      "philosophy-basics": "Philosophy Basics",
+      "history-of-art": "History of Art",
+      "world-literature": "World Literature",
+      // Commerce & Business
+      "accounting-principles": "Accounting Principles",
+      "business-economics": "Business Economics",
+      "business-statistics": "Business Statistics",
+      "marketing-fundamentals": "Marketing Fundamentals",
+      "bcom-financial-accounting": "B.Com Financial Accounting",
+      // Engineering & Technology
+      "programming-fundamentals": "Programming Fundamentals",
+      "engineering-mathematics": "Engineering Mathematics",
+      "engineering-physics": "Engineering Physics",
+      "digital-electronics": "Digital Electronics",
+      // Medical Sciences
+      "human-anatomy": "Human Anatomy",
+      "physiology": "Physiology",
+      "biochemistry": "Biochemistry",
+      "medical-research": "Medical Research Methods"
+    }
+  },
+  // Vertical: POST-GRADUATE (PG)
+  pg: {
+    name: "Post-Graduate (PG)",
+    categories: {
+      "mba": "Management (MBA)",
+      "mcom": "Commerce",
+      "msc-mca": "Technology & Science",
+      "ma-llm": "Economics & Law"
+    },
+    subcategories: {
+      // MBA
+      "mba-finance": "MBA in Finance",
+      "mba-marketing": "MBA in Marketing Management",
+      "mba-hr": "MBA in Human Resources",
+      // M.Com
+      "mcom-accounting": "M.Com Advanced Accounting",
+      "mcom-taxation": "M.Com Taxation & Tax Planning",
+      // M.Sc & MCA
+      "msc-data-science": "M.Sc Data Science & Analytics",
+      "msc-cyber-security": "M.Sc Cyber Security & Digital Forensics",
+      "mca-cloud": "MCA Cloud Computing & DevOps",
+      // MA & LL.M
+      "ma-economics": "M.A. Economics & Data Analysis",
+      "llm-corporate": "LL.M Corporate Law & Governance",
+      "llm-ip": "LL.M Intellectual Property Rights"
+    }
+  },
+  // Vertical: PROFESSIONAL
+  professional: {
+    name: "Professional Skills",
+    categories: {
+      "technology-programming": "Technology & Programming",
+      "business-entrepreneurship": "Business & Entrepreneurship",
+      "design-creative": "Design & Creative",
+      "marketing-communication": "Marketing & Communication",
+      "workplace-life-skills": "Workplace & Life Skills"
+    },
+    subcategories: {
+      // Technology & Programming
+      "python-programming": "Python Programming",
+      "web-development": "Web Development Bootcamp",
+      "fullstack-development": "Full-Stack Development",
+      "mobile-development": "Mobile App Development",
+      "data-science-fundamentals": "Data Science Fundamentals",
+      // Business & Entrepreneurship
+      "entrepreneurship-essentials": "Entrepreneurship Essentials",
+      "business-strategy": "Business Strategy",
+      "project-management": "Project Management",
+      "financial-management": "Financial Management",
+      "startup-foundation": "Startup Foundation",
+      // Design & Creative
+      "ui-ux-design": "UI/UX Design",
+      "graphic-design": "Graphic Design",
+      "photography": "Photography & Digital Art",
+      "video-editing": "Content Creation & Video Editing",
+      // Marketing & Communication
+      "digital-marketing": "Digital Marketing",
+      "social-media": "Social Media Management",
+      "brand-strategy": "Brand Strategy",
+      "public-speaking": "Public Speaking",
+      // Workplace & Life Skills
+      "advanced-excel": "Advanced Excel",
+      "english-communication": "English Communication",
+      "job-preparation": "Job Preparation",
+      "cyber-safety": "Cyber Safety",
+      "mental-health": "Mental Health & Wellness",
+      "fitness-nutrition": "Fitness & Nutrition"
+    }
+  },
+  // Vertical: COMPETITIVE EXAMS
+  competitive: {
+    name: "Competitive Exams",
+    categories: {
+      "professional-certifications": "Professional Certifications",
+      "government-exams": "Government & Entrance Exams"
+    },
+    subcategories: {
+      // Professional Certifications
+      "ca": "CA (Chartered Accountancy)",
+      "cs": "CS (Company Secretary)",
+      "cma": "CMA (Cost Management)",
+      "cfa": "CFA (Chartered Financial Analyst)",
+      "frm": "FRM (Financial Risk Management)",
+      "acca": "ACCA",
+      "actuarial-science": "Actuarial Science",
+      // Government & Entrance Exams
+      "upsc": "UPSC Civil Services",
+      "ssc": "SSC Exams",
+      "state-police": "State Police",
+      "tet": "TET (Teacher Eligibility)"
+    }
+  },
+  // Vertical: CITIZEN & LIFE SYSTEMS
+  citizen: {
+    name: "Citizen & Life Systems",
+    categories: {
+      "personal-finance": "Personal Finance Basics",
+      "digital-literacy": "Digital Literacy",
+      "community-systems": "Community Systems"
+    },
+    subcategories: {
+      // Personal Finance
+      "tax-planning": "Tax Planning & Insurance",
+      "stock-market": "Stock Market & Mutual Funds",
+      // Digital Literacy
+      "digital-money-banking": "Digital Money & Banking (UPI)",
+      "government-portals": "Government Portals & Certificates",
+      "online-safety": "Online Safety & Fraud Awareness",
+      // Community Systems
+      "food-work": "Food-for-Work Model",
+      "community-buying": "Community Bulk Buying"
+    }
+  }
+};
 
 // ============================================
 // Courses Data
@@ -211,11 +395,11 @@ Perfect for:
     originalPrice: 1999,
     currency: "INR",
     
-    category: "technology",
-    subcategory: "Programming",
+    category: "technology-programming",
+    subcategory: "python-programming",
     vertical: "professional",
     targetAudience: ["students", "professionals", "career-changers"],
-    tags: ["python", "programming", "coding", "beginner-friendly", "automation"],
+    tags: ["python", "programming", "coding", "beginner-friendly", "automation", "Technology & Programming", "Python Programming", "Professional / Career Skills", "Technology & Programming"],
     
     difficulty: "beginner",
     language: "Hindi-English",
@@ -335,11 +519,11 @@ What you'll build:
     originalPrice: 4999,
     currency: "INR",
     
-    category: "technology",
-    subcategory: "Web Development",
+    category: "technology-programming",
+    subcategory: "web-development",
     vertical: "professional",
     targetAudience: ["students", "career-changers", "professionals"],
-    tags: ["html", "css", "javascript", "react", "nodejs", "fullstack"],
+    tags: ["html", "css", "javascript", "react", "nodejs", "fullstack", "Technology & Programming", "Web Development Bootcamp", "Professional / Career Skills", "Technology & Programming"],
     
     difficulty: "intermediate",
     language: "Hindi-English",
@@ -435,11 +619,11 @@ What you'll learn:
     originalPrice: 1499,
     currency: "INR",
     
-    category: "finance",
-    subcategory: "Personal Finance",
-    vertical: "general",
+    category: "Personal Finance",
+    subcategory: "Personal Finance Basics",
+    vertical: "citizen",
     targetAudience: ["working-professionals", "students", "families"],
-    tags: ["finance", "money-management", "investing", "tax", "budgeting"],
+    tags: ["finance", "money-management", "investing", "tax", "budgeting", "Citizen & Life Systems", "Personal Finance", "Personal Finance Basics"],
     
     difficulty: "beginner",
     language: "Hindi",
@@ -529,11 +713,11 @@ Course highlights:
     originalPrice: 2499,
     currency: "INR",
     
-    category: "finance",
-    subcategory: "Investing",
-    vertical: "general",
+    category: "Personal Finance",
+    subcategory: "Investment Planning",
+    vertical: "citizen",
     targetAudience: ["beginners", "working-professionals", "students"],
-    tags: ["stocks", "investing", "stock-market", "wealth", "trading"],
+    tags: ["stocks", "investing", "stock-market", "wealth", "trading", "Citizen & Life Systems", "Personal Finance", "Investment Planning"],,
     
     difficulty: "beginner",
     language: "Hindi-English",
@@ -602,11 +786,11 @@ What you'll master:
     originalPrice: 3999,
     currency: "INR",
     
-    category: "marketing",
-    subcategory: "Digital Marketing",
+    category: "marketing-communication",
+    subcategory: "digital-marketing",
     vertical: "professional",
     targetAudience: ["entrepreneurs", "marketing-professionals", "students"],
-    tags: ["digital-marketing", "seo", "social-media", "google-ads", "analytics"],
+    tags: ["digital-marketing", "seo", "social-media", "google-ads", "analytics", "Marketing & Communication", "Digital Marketing", "Professional / Career Skills", "Marketing & Communication"],
     
     difficulty: "intermediate",
     language: "Hindi",
@@ -674,11 +858,11 @@ Course projects:
     originalPrice: 3499,
     currency: "INR",
     
-    category: "design",
-    subcategory: "UI/UX Design",
+    category: "design-creative",
+    subcategory: "ui-ux-design",
     vertical: "professional",
     targetAudience: ["design-beginners", "developers", "entrepreneurs"],
-    tags: ["ui-design", "ux-design", "figma", "design-thinking", "prototyping"],
+    tags: ["ui-design", "ux-design", "figma", "design-thinking", "prototyping", "Design & Creative", "UI/UX Design", "Professional / Career Skills", "Design & Creative"],
     
     difficulty: "beginner",
     language: "Hindi-English",
@@ -746,11 +930,11 @@ Includes:
     originalPrice: 1999,
     currency: "INR",
     
-    category: "career",
-    subcategory: "Job Preparation",
+    category: "workplace-life-skills",
+    subcategory: "job-preparation",
     vertical: "professional",
     targetAudience: ["job-seekers", "freshers", "professionals"],
-    tags: ["resume", "interview", "linkedin", "job-search", "career"],
+    tags: ["resume", "interview", "linkedin", "job-search", "career", "Workplace & Life Skills", "Job Preparation"],
     
     difficulty: "beginner",
     language: "Hindi",
@@ -819,11 +1003,11 @@ What you'll learn:
     originalPrice: 3999,
     currency: "INR",
     
-    category: "business",
-    subcategory: "Entrepreneurship",
+    category: "business-entrepreneurship",
+    subcategory: "startup-foundation",
     vertical: "professional",
     targetAudience: ["aspiring-entrepreneurs", "working-professionals", "students"],
-    tags: ["startup", "entrepreneurship", "business-plan", "funding", "mvp"],
+    tags: ["startup", "entrepreneurship", "business-plan", "funding", "mvp", "Business & Entrepreneurship", "Startup Foundation"],
     
     difficulty: "intermediate",
     language: "Hindi-English",
@@ -891,11 +1075,11 @@ Tools you'll master:
     originalPrice: 4999,
     currency: "INR",
     
-    category: "science",
-    subcategory: "Data Science",
+    category: "technology-programming",
+    subcategory: "data-science-fundamentals",
     vertical: "professional",
     targetAudience: ["programmers", "analysts", "students"],
-    tags: ["data-science", "machine-learning", "python", "ai", "analytics"],
+    tags: ["data-science", "machine-learning", "python", "ai", "analytics", "Technology & Programming", "Data Science Fundamentals", "Professional / Career Skills", "Technology & Programming"],
     
     difficulty: "intermediate",
     language: "Hindi-English",
@@ -973,11 +1157,11 @@ Chapters covered:
     originalPrice: 999,
     currency: "INR",
     
-    category: "technology",
-    subcategory: "Mathematics",
+    category: "secondary-school",
+    subcategory: "mathematics-secondary",
     vertical: "school",
     targetAudience: ["class10-students"],
-    tags: ["class10", "mathematics", "cbse", "board-exam", "icse"],
+    tags: ["class10", "mathematics", "cbse", "board-exam", "icse", "School Education", "Secondary School", "Mathematics"],
     
     difficulty: "intermediate",
     language: "Hindi-English",
@@ -1077,11 +1261,11 @@ Topics covered:
     originalPrice: 1999,
     currency: "INR",
     
-    category: "business",
-    subcategory: "Accounting",
+    category: "commerce-business",
+    subcategory: "bcom-financial-accounting",
     vertical: "college",
     targetAudience: ["bcom-students", "ca-foundation-students"],
-    tags: ["bcom", "accounting", "financial-accounting", "commerce", "ca-foundation"],
+    tags: ["bcom", "accounting", "financial-accounting", "commerce", "ca-foundation", "College (UG)", "Commerce & Business", "B.Com Financial Accounting"],
     
     difficulty: "intermediate",
     language: "Hindi",
@@ -1155,7 +1339,7 @@ What you'll learn:
     subcategory: "Office Tools",
     vertical: "professional",
     targetAudience: ["professionals", "students", "entrepreneurs"],
-    tags: ["excel", "microsoft", "spreadsheet", "data-analysis", "office"],
+    tags: ["excel", "microsoft", "spreadsheet", "data-analysis", "office", "Professional / Career Skills", "Office Tools"],
     
     difficulty: "beginner",
     language: "Hindi-English",
@@ -2567,11 +2751,11 @@ What you'll learn:
     originalPrice: 9999,
     currency: "INR",
     
-    category: "business",
-    subcategory: "MBA Finance",
+    category: "Management (MBA)",
+    subcategory: "MBA in Finance",
     vertical: "pg",
     targetAudience: ["bba-graduates", "bcom-graduates", "working-professionals"],
-    tags: ["mba", "finance", "investment", "corporate-finance", "management"],
+    tags: ["mba", "finance", "investment", "corporate-finance", "management", "Post-Graduate (PG)", "Management (MBA)", "MBA in Finance"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -2661,11 +2845,11 @@ What you'll learn:
     originalPrice: 9999,
     currency: "INR",
     
-    category: "marketing",
-    subcategory: "MBA Marketing",
+    category: "Management (MBA)",
+    subcategory: "MBA in Marketing Management",
     vertical: "pg",
     targetAudience: ["bba-graduates", "communications-graduates", "working-professionals"],
-    tags: ["mba", "marketing", "digital-marketing", "brand-management", "strategy"],
+    tags: ["mba", "marketing", "digital-marketing", "brand-management", "strategy", "Post-Graduate (PG)", "Management (MBA)", "MBA in Marketing Management"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -2743,11 +2927,11 @@ What you'll learn:
     originalPrice: 9999,
     currency: "INR",
     
-    category: "business",
-    subcategory: "MBA HR",
+    category: "Management (MBA)",
+    subcategory: "MBA in Human Resource Management",
     vertical: "pg",
     targetAudience: ["bba-graduates", "psychology-graduates", "working-professionals"],
-    tags: ["mba", "human-resources", "talent-management", "organizational-behavior", "hr-analytics"],
+    tags: ["mba", "human-resources", "talent-management", "organizational-behavior", "hr-analytics", "Post-Graduate (PG)", "Management (MBA)", "MBA in Human Resource Management"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -2826,11 +3010,11 @@ What you'll learn:
     originalPrice: 7999,
     currency: "INR",
     
-    category: "finance",
-    subcategory: "M.Com Accounting",
+    category: "M.Com",
+    subcategory: "M.Com in Accounting",
     vertical: "pg",
     targetAudience: ["bcom-graduates", "ca-foundation", "working-accountants"],
-    tags: ["mcom", "accounting", "financial-reporting", "auditing", "corporate-finance"],
+    tags: ["mcom", "accounting", "financial-reporting", "auditing", "corporate-finance", "Post-Graduate (PG)", "M.Com", "M.Com in Accounting"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -2908,11 +3092,11 @@ What you'll learn:
     originalPrice: 7999,
     currency: "INR",
     
-    category: "finance",
-    subcategory: "M.Com Taxation",
+    category: "M.Com",
+    subcategory: "M.Com in Taxation",
     vertical: "pg",
     targetAudience: ["bcom-graduates", "tax-professionals", "ca-foundation"],
-    tags: ["mcom", "taxation", "income-tax", "gst", "tax-planning"],
+    tags: ["mcom", "taxation", "income-tax", "gst", "tax-planning", "Post-Graduate (PG)", "M.Com", "M.Com in Taxation"],
     
     difficulty: "advanced",
     language: "Hindi",
@@ -2991,11 +3175,11 @@ What you'll learn:
     originalPrice: 14999,
     currency: "INR",
     
-    category: "science",
-    subcategory: "Data Science",
+    category: "M.Sc",
+    subcategory: "M.Sc in Data Science",
     vertical: "pg",
     targetAudience: ["bsc-graduates", "engineering-graduates", "working-professionals"],
-    tags: ["data-science", "machine-learning", "python", "ai", "analytics"],
+    tags: ["data-science", "machine-learning", "python", "ai", "analytics", "Post-Graduate (PG)", "M.Sc", "M.Sc in Data Science"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -3086,11 +3270,11 @@ What you'll learn:
     originalPrice: 14999,
     currency: "INR",
     
-    category: "technology",
-    subcategory: "Cyber Security",
+    category: "M.Sc",
+    subcategory: "M.Sc in Cyber Security",
     vertical: "pg",
     targetAudience: ["bsc-graduates", "engineering-graduates", "it-professionals"],
-    tags: ["cyber-security", "ethical-hacking", "forensics", "network-security", "information-security"],
+    tags: ["cyber-security", "ethical-hacking", "forensics", "network-security", "information-security", "Post-Graduate (PG)", "M.Sc", "M.Sc in Cyber Security"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -3181,11 +3365,11 @@ What you'll learn:
     originalPrice: 12999,
     currency: "INR",
     
-    category: "technology",
-    subcategory: "MCA Cloud",
+    category: "MCA",
+    subcategory: "MCA in Cloud Computing",
     vertical: "pg",
     targetAudience: ["bcsc-graduates", "engineering-graduates", "it-professionals"],
-    tags: ["mca", "cloud-computing", "aws", "devops", "docker"],
+    tags: ["mca", "cloud-computing", "aws", "devops", "docker", "Post-Graduate (PG)", "MCA", "MCA in Cloud Computing"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -3265,11 +3449,11 @@ What you'll learn:
     originalPrice: 6999,
     currency: "INR",
     
-    category: "science",
-    subcategory: "M.A. Economics",
+    category: "M.A.",
+    subcategory: "M.A. in Economics",
     vertical: "pg",
     targetAudience: ["ba-economics-graduates", "commerce-graduates", "research-aspirants"],
-    tags: ["economics", "econometrics", "data-analysis", "policy", "research"],
+    tags: ["economics", "econometrics", "data-analysis", "policy", "research", "Post-Graduate (PG)", "M.A.", "M.A. in Economics"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -3348,11 +3532,11 @@ What you'll learn:
     originalPrice: 9999,
     currency: "INR",
     
-    category: "civics",
-    subcategory: "LL.M Corporate",
+    category: "LL.M",
+    subcategory: "LL.M in Corporate Law",
     vertical: "pg",
     targetAudience: ["llb-graduates", "law-professionals", "company-secretaries"],
-    tags: ["llm", "corporate-law", "mergers", "governance", "legal-compliance"],
+    tags: ["llm", "corporate-law", "mergers", "governance", "legal-compliance", "Post-Graduate (PG)", "LL.M", "LL.M in Corporate Law"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -3430,11 +3614,11 @@ What you'll learn:
     originalPrice: 9999,
     currency: "INR",
     
-    category: "civics",
-    subcategory: "LL.M IP Law",
+    category: "LL.M",
+    subcategory: "LL.M in Intellectual Property Law",
     vertical: "pg",
     targetAudience: ["llb-graduates", "patent-agents", "legal-professionals"],
-    tags: ["llm", "intellectual-property", "patents", "trademarks", "copyright"],
+    tags: ["llm", "intellectual-property", "patents", "trademarks", "copyright", "Post-Graduate (PG)", "LL.M", "LL.M in Intellectual Property Law"],
     
     difficulty: "advanced",
     language: "Hindi-English",
@@ -3486,6 +3670,419 @@ What you'll learn:
       "LL.B. degree from recognized university",
       "Basic understanding of law",
       "Interest in IP practice"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  // ==================== COMPETITIVE EXAMS ====================
+
+  {
+    id: "upsc-civil-services",
+    slug: "upsc-civil-services",
+    title: "UPSC Civil Services Foundation",
+    tagline: "Your Complete Guide to IAS, IPS, IFS Preparation",
+    description: "Comprehensive foundation course for UPSC Civil Services exam covering Prelims, Mains, and Interview preparation.",
+    longDescription: `Start your journey to become an IAS, IPS, or IFS officer with this comprehensive UPSC Civil Services Foundation course. Covering the complete syllabus from General Studies to Current Affairs, this course provides everything you need for Prelims and Mains success.
+
+What you'll learn:
+- Indian Polity & Governance
+- History & Culture of India
+- Geography & Environment
+- Economic Development
+- Science & Technology
+- Current Affairs & Ethics`,
+    thumbnail: "/assets/courses/upsc-civil-services.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Government & Entrance Exams",
+    subcategory: "UPSC Civil Services",
+    vertical: "competitive",
+    targetAudience: ["graduates", "working-professionals", "career-changers"],
+    tags: ["upsc", "ias", "ips", "ifs", "civil-services", "government-jobs", "Competitive Exams", "Government & Entrance Exams", "UPSC Civil Services"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 5000,
+    lessonCount: 250,
+    moduleCount: 20,
+    rating: 4.9,
+    reviewCount: 3500,
+    enrollmentCount: 25000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-upsc-1",
+        title: "Indian Polity & Governance",
+        order: 1,
+        lessons: [
+          { id: "les-upsc-1", title: "Constitution of India - Overview", type: "video", duration: 60, content: "", isFree: true, order: 1 },
+          { id: "les-upsc-2", title: "Preamble & Basic Structure", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-upsc-3", title: "Fundamental Rights & Duties", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-upsc-4", title: "Union & State Government", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-upsc-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-upsc-2",
+        title: "Indian History & Culture",
+        order: 2,
+        lessons: [
+          { id: "les-upsc-6", title: "Ancient India - Harappan to Maurya", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-upsc-7", title: "Medieval India - Sultanate & Mughals", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-upsc-8", title: "Modern India - British to Independence", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-upsc-9", title: "Indian Art & Culture", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-upsc-10", title: "Prelims Practice Test", type: "quiz", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[4],
+    
+    outcomes: [
+      "Understand Indian Constitution and governance",
+      "Master Indian history and cultural heritage",
+      "Develop analytical thinking for exam",
+      "Stay updated with current affairs"
+    ],
+    requirements: [
+      "Bachelor's degree in any discipline",
+      "Dedication and consistency",
+      "Basic awareness of current events"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "ssc-cgl-complete",
+    slug: "ssc-cgl-complete",
+    title: "SSC CGL Complete Preparation",
+    tagline: "Crack SSC CGL Tier I & Tier II with Confidence",
+    description: "Complete preparation course for SSC Combined Graduate Level exam covering Quantitative Aptitude, English, and General Awareness.",
+    longDescription: `Achieve your dream of a government job with our comprehensive SSC CGL preparation course. Covering all sections - Quantitative Aptitude, English Language, General Intelligence & Reasoning, and General Awareness - this course ensures complete exam readiness.
+
+What you'll master:
+- Quantitative Aptitude shortcuts & tricks
+- English grammar and comprehension
+- Logical reasoning and analytical ability
+- Current affairs and general awareness
+- Previous year paper solving strategies`,
+    thumbnail: "/assets/courses/ssc-cgl-complete.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 599,
+    originalPrice: 12999,
+    currency: "INR",
+    
+    category: "Government & Entrance Exams",
+    subcategory: "SSC CGL",
+    vertical: "competitive",
+    targetAudience: ["graduates", "final-year-students", "job-seekers"],
+    tags: ["ssc", "cgl", "government-exam", "sarkari-naukri", " Competitive Exams", "Government & Entrance Exams", "SSC CGL"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.8,
+    reviewCount: 4200,
+    enrollmentCount: 35000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ssc-1",
+        title: "Quantitative Aptitude",
+        order: 1,
+        lessons: [
+          { id: "les-ssc-1", title: "Number System Fundamentals", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-ssc-2", title: "Percentage & Profit/Loss", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ssc-3", title: "Ratio & Proportion", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-ssc-4", title: "Time & Work", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-ssc-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ssc-2",
+        title: "English Language",
+        order: 2,
+        lessons: [
+          { id: "les-ssc-6", title: "Grammar Essentials", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ssc-7", title: "Vocabulary Building", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-ssc-8", title: "Reading Comprehension", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-ssc-9", title: "Error Spotting", type: "video", duration: 35, content: "", isFree: false, order: 4 },
+          { id: "les-ssc-10", title: "Practice Paper", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Master quantitative aptitude concepts",
+      "Improve English language skills",
+      "Develop reasoning abilities",
+      "Score high in all sections"
+    ],
+    requirements: [
+      "Graduate in any discipline",
+      "Basic math and English knowledge",
+      "Consistent practice commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "banking-ibps-po",
+    slug: "banking-ibps-po",
+    title: "Banking & IBPS PO Complete Course",
+    tagline: "Crack IBPS PO, SBI PO & Other Bank Exams",
+    description: "Complete preparation for banking exams covering IBPS PO, SBI PO, Clerk, and RBI exams with focus on all sections.",
+    longDescription: `Launch your banking career with our comprehensive IBPS PO and banking exams preparation course. Covering Reasoning, Quantitative Aptitude, English, and General Awareness, this course provides everything you need to crack these competitive exams.
+
+Course highlights:
+- Financial Awareness preparation
+- Computer Knowledge basics
+- Interview preparation included
+- Mock tests and practice papers
+- Current affairs updates`,
+    thumbnail: "/assets/courses/banking-ibps-po.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 15999,
+    currency: "INR",
+    
+    category: "Government & Entrance Exams",
+    subcategory: "Banking",
+    vertical: "competitive",
+    targetAudience: ["graduates", "job-seekers", "working-professionals"],
+    tags: ["banking", "ibps", "sbi", "po", "clerk", "government-jobs", "Competitive Exams", "Government & Entrance Exams", "Banking"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 3800,
+    enrollmentCount: 30000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-bank-1",
+        title: "Reasoning Ability",
+        order: 1,
+        lessons: [
+          { id: "les-bank-1", title: "Logical Reasoning Basics", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-bank-2", title: "Seating Arrangement", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-bank-3", title: "Puzzles & Syllogisms", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-bank-4", title: "Blood Relations", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-bank-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-bank-2",
+        title: "Financial Awareness",
+        order: 2,
+        lessons: [
+          { id: "les-bank-6", title: "Indian Banking System", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-bank-7", title: "RBI & Monetary Policy", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-bank-8", title: "Current Affairs - BFSI", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-bank-9", title: "Banking Terminology", type: "video", duration: 35, content: "", isFree: false, order: 4 },
+          { id: "les-bank-10", title: "Mock Test", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Master all exam sections",
+      "Understand banking concepts",
+      "Build speed and accuracy",
+      "ClearPrelims and Mains"
+    ],
+    requirements: [
+      "Graduate in any discipline",
+      "Basic numerical ability",
+      "Willingness to learn banking sector"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "railways-rrb-alp",
+    slug: "railways-rrb-alp",
+    title: "Railways RRB ALP & Technician",
+    tagline: "Complete Preparation for Railway Recruitment",
+    description: "Comprehensive course for RRB ALP, Technician, and Group D exams covering technical and non-technical sections.",
+    longDescription: `Join Indian Railways with our complete RRB ALP and Technician preparation course. Covering Mathematics, General Science, General Awareness, and Technical subjects, this course prepares you for all stages of the recruitment process.
+
+What you'll learn:
+- Mathematics shortcuts and formulas
+- General Science concepts
+- Current affairs for railway exams
+- Technical subjects for ALP
+- Computer fundamentals`,
+    thumbnail: "/assets/courses/railways-rrb-alp.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 449,
+    originalPrice: 9999,
+    currency: "INR",
+    
+    category: "Government & Entrance Exams",
+    subcategory: "Railways",
+    vertical: "competitive",
+    targetAudience: ["10th-pass", "12th-pass", "diploma-holders"],
+    tags: ["railways", "rrb", "alp", "technician", "sarkari-naukri", "Competitive Exams", "Government & Entrance Exams", "Railways"],
+    
+    difficulty: "beginner",
+    language: "Hindi",
+    totalDuration: 2500,
+    lessonCount: 125,
+    moduleCount: 10,
+    rating: 4.7,
+    reviewCount: 2800,
+    enrollmentCount: 45000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-rrb-1",
+        title: "Mathematics",
+        order: 1,
+        lessons: [
+          { id: "les-rrb-1", title: "Number System", type: "video", duration: 40, content: "", isFree: true, order: 1 },
+          { id: "les-rrb-2", title: "Simplification Tricks", type: "video", duration: 35, content: "", isFree: false, order: 2 },
+          { id: "les-rrb-3", title: "Algebra Basics", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-rrb-4", title: "Geometry Fundamentals", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-rrb-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-rrb-2",
+        title: "General Science",
+        order: 2,
+        lessons: [
+          { id: "les-rrb-6", title: "Physics Fundamentals", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-rrb-7", title: "Chemistry Basics", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-rrb-8", title: "Biology Essentials", type: "video", duration: 35, content: "", isFree: false, order: 3 },
+          { id: "les-rrb-9", title: "Environmental Science", type: "video", duration: 30, content: "", isFree: false, order: 4 },
+          { id: "les-rrb-10", title: "Practice Test", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[0],
+    
+    outcomes: [
+      "Master mathematics for railway exams",
+      "Understand general science concepts",
+      "Clear all exam stages",
+      "Secure railway job"
+    ],
+    requirements: [
+      "10th/12th pass or equivalent",
+      "Basic math and science knowledge",
+      "Dedication for exam preparation"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cat-mba-prep",
+    slug: "cat-mba-prep",
+    title: "CAT & MBA Entrance Preparation",
+    tagline: "Crack CAT, XAT, CMAT, MAT with Expert Guidance",
+    description: "Complete preparation course for CAT and other MBA entrance exams covering Quantitative Ability, Verbal Ability, Data Interpretation, and Logical Reasoning.",
+    longDescription: `Get into top IIMs and MBA colleges with our comprehensive CAT and MBA entrance preparation course. Covering all sections - QA, VA, DI, and LR - this course provides strategies, shortcuts, and extensive practice.
+
+What you'll master:
+- Quantitative Ability shortcuts
+- Verbal Ability and Reading Comprehension
+- Data Interpretation techniques
+- Logical Reasoning puzzles
+- Mock tests and performance analysis`,
+    thumbnail: "/assets/courses/cat-mba-prep.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 899,
+    originalPrice: 19999,
+    currency: "INR",
+    
+    category: "Government & Entrance Exams",
+    subcategory: "CAT/CMAT/MAT",
+    vertical: "competitive",
+    targetAudience: ["graduates", "working-professionals", "mba-aspirants"],
+    tags: ["cat", "xat", "cmat", "mat", "iim", "mba-entrance", "Competitive Exams", "Government & Entrance Exams", "CAT/CMAT/MAT"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 2200,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cat-1",
+        title: "Quantitative Ability",
+        order: 1,
+        lessons: [
+          { id: "les-cat-1", title: "Number System Advanced", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cat-2", title: "Arithmetic Mastery", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cat-3", title: "Algebra Crash Course", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cat-4", title: "Geometry & Mensuration", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cat-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cat-2",
+        title: "Verbal Ability & Reading Comprehension",
+        order: 2,
+        lessons: [
+          { id: "les-cat-6", title: "RC Strategies", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cat-7", title: "Grammar Refresher", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-cat-8", title: "Para Jumbles & Summary", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cat-9", title: "Vocabulary Building", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-cat-10", title: "Full Length Mock", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[2],
+    
+    outcomes: [
+      "Score 95+ percentile in CAT",
+      "Master all exam sections",
+      "Develop test-taking strategies",
+      "Get into top MBA colleges"
+    ],
+    requirements: [
+      "Graduate or final year student",
+      "Basic quantitative ability",
+      "Willingness to practice extensively"
     ],
     
     createdAt: "2025-01-01",
