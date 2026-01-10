@@ -283,6 +283,7 @@ export default function CoursesPage() {
             ma: ['ma', 'm.a', 'master-of-arts', 'pg-ma', 'pg_ma', 'ma-economics', 'ma-history', 'ma-psychology', 'ma-english'],
             llm: ['llm', 'l.l.m', 'master-of-laws', 'pg-llm', 'pg_llm', 'llm-corporate', 'llm-criminal', 'llm-constitutional'],
             // Professional sub-filters
+            certification: ['certification', 'professional-certifications', 'ca', 'chartered-accountancy', 'ca-foundation', 'ca-intermediate', 'ca-final', 'cs', 'company-secretary', 'cs-foundation', 'cs-executive', 'cs-professional', 'cma', 'cost-management', 'cma-foundation', 'cma-intermediate', 'cma-final', 'cfa', 'chartered-financial-analyst', 'cfa-level1', 'cfa-level2', 'cfa-level3', 'frm', 'financial-risk-manager', 'frm-part1', 'frm-part2', 'acca', 'acca-level1', 'acca-level2', 'acca-level3', 'actuarial', 'actuarial-science'],
             technology: ['technology', 'programming', 'web-development', 'python', 'javascript', 'react', 'nodejs', 'coding'],
             design: ['design', 'ui', 'ux', 'figma', 'graphic-design', 'ui-ux'],
             business: ['business', 'entrepreneurship', 'startup', 'strategy', 'management'],
@@ -326,6 +327,7 @@ export default function CoursesPage() {
           ma: ['ma', 'm.a', 'master-of-arts', 'pg-ma', 'pg_ma', 'ma-economics', 'ma-history', 'ma-psychology', 'ma-english'],
           llm: ['llm', 'l.l.m', 'master-of-laws', 'pg-llm', 'pg_llm', 'llm-corporate', 'llm-criminal', 'llm-constitutional'],
           // Professional sub-filters
+          certification: ['certification', 'professional-certifications', 'ca', 'chartered-accountancy', 'ca-foundation', 'ca-intermediate', 'ca-final', 'cs', 'company-secretary', 'cs-foundation', 'cs-executive', 'cs-professional', 'cma', 'cost-management', 'cma-foundation', 'cma-intermediate', 'cma-final', 'cfa', 'chartered-financial-analyst', 'cfa-level1', 'cfa-level2', 'cfa-level3', 'frm', 'financial-risk-manager', 'frm-part1', 'frm-part2', 'acca', 'acca-level1', 'acca-level2', 'acca-level3', 'actuarial', 'actuarial-science'],
           technology: ['technology', 'programming', 'web-development', 'python', 'javascript', 'react', 'nodejs', 'coding'],
           design: ['design', 'ui', 'ux', 'figma', 'graphic-design', 'ui-ux'],
           business: ['business', 'entrepreneurship', 'startup', 'strategy', 'management'],
