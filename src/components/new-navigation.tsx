@@ -59,7 +59,6 @@ export function NewNavigation() {
 
   const navLinks = [
     { href: '/courses', label: 'Courses' },
-    { href: '/courses?filter=school', label: 'School' },
     { href: '/learning-paths', label: 'Learning Paths' },
     { href: '/instructors', label: 'Instructors' },
     { href: '/community', label: 'Community' },
