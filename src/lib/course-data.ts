@@ -4087,9 +4087,3918 @@ What you'll master:
     
     createdAt: "2025-01-01",
     updatedAt: "2025-01-01"
+  },
+
+  // ==================== PROFESSIONAL CERTIFICATIONS ====================
+
+  {
+    id: "course-ca-foundation",
+    slug: "ca-foundation",
+    title: "CA Foundation Course",
+    tagline: "Your Gateway to Chartered Accountancy",
+    description: "Complete preparation for CA Foundation exam covering all four papers - Accounting, Business Laws, Mathematics, and General Economics.",
+    longDescription: `Start your journey to become a Chartered Accountant with our comprehensive CA Foundation course. This course covers all four papers required for the ICAI CA Foundation exam.
+
+What you'll learn:
+- Principles and Practice of Accounting
+- Business Laws & Business Correspondence
+- Business Mathematics & Statistics
+- General Economics & Business Environment`,
+    thumbnail: "/assets/courses/ca-foundation.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 499,
+    originalPrice: 9999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CA",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "ca-aspirants", "commerce-students"],
+    tags: ["ca", "chartered-accountant", "icai", "foundation", "accounting", "Professional / Career Skills", "Professional Certifications", "CA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 180,
+    moduleCount: 14,
+    rating: 4.9,
+    reviewCount: 4500,
+    enrollmentCount: 35000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ca-f1",
+        title: "Principles of Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-ca-f1-1", title: "Accounting Standards Overview", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-ca-f1-2", title: "Bank Reconciliation Statement", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f1-3", title: "Depreciation Accounting", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f1-4", title: "Inventory Valuation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-f2",
+        title: "Business Laws",
+        order: 2,
+        lessons: [
+          { id: "les-ca-f2-1", title: "Indian Contract Act Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-f2-2", title: "Sale of Goods Act", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f2-3", title: "Partnership Laws", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f2-4", title: "Company Law Basics", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f2-5", title: "Business Correspondence", type: "video", duration: 40, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-f3",
+        title: "Business Mathematics",
+        order: 3,
+        lessons: [
+          { id: "les-ca-f3-1", title: "Ratio & Proportion", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-ca-f3-2", title: "Time Value of Money", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f3-3", title: "Permutations & Combinations", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f3-4", title: "Statistical Analysis", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f3-5", title: "Probability Basics", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-f4",
+        title: "General Economics",
+        order: 4,
+        lessons: [
+          { id: "les-ca-f4-1", title: "Indian Economy Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-f4-2", title: "Economic Reforms", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f4-3", title: "Money & Banking", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f4-4", title: "Fiscal Policy", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f4-5", title: "Practice Papers", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CA Foundation in first attempt",
+      "Master all four papers",
+      "Understand accounting principles",
+      "Develop analytical skills"
+    ],
+    requirements: [
+      "12th pass from recognized board",
+      "Basic mathematics knowledge",
+      "Dedication for regular study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "course-ca-intermediate",
+    slug: "ca-intermediate",
+    title: "CA Intermediate Course",
+    tagline: "Advanced Level Chartered Accountancy",
+    description: "Comprehensive CA Intermediate preparation covering Advanced Accounting, Taxation, Costing, and Auditing as per ICAI syllabus.",
+    longDescription: `Progress to the second level of Chartered Accountancy with our detailed CA Intermediate course. Covering advanced topics in accounting, taxation, cost management, and auditing.
+
+What you'll master:
+- Advanced Accounting Standards
+- Corporate Tax Planning
+- Cost Management Techniques
+- Auditing Standards & Practices`,
+    thumbnail: "/assets/courses/ca-intermediate.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 15999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CA",
+    vertical: "professional",
+    targetAudience: ["ca-foundation-passed", "ca-aspirants", "commerce-graduates"],
+    tags: ["ca", "chartered-accountant", "icai", "intermediate", "accounting", "tax", "audit", "Professional / Career Skills", "Professional Certifications", "CA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.8,
+    reviewCount: 3200,
+    enrollmentCount: 25000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ca-i1",
+        title: "Advanced Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-ca-i1-1", title: "AS 12, 14, 16 Complex Cases", type: "video", duration: 60, content: "", isFree: true, order: 1 },
+          { id: "les-ca-i1-2", title: "Company Accounts - Advanced", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i1-3", title: "Accounting for Branches", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i1-4", title: "Amalgamation & Reconstruction", type: "video", duration: 60, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-i2",
+        title: "Corporate Tax",
+        order: 2,
+        lessons: [
+          { id: "les-ca-i2-1", title: "Income Tax Provisions", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-ca-i2-2", title: "Tax Planning Strategies", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i2-3", title: "International Taxation", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i2-4", title: "Deduction Planning", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i2-5", title: "Tax Return Filing", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-i3",
+        title: "Cost Management",
+        order: 3,
+        lessons: [
+          { id: "les-ca-i3-1", title: "Cost Accounting Standards", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-i3-2", title: "Activity Based Costing", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i3-3", title: "Budgetary Control", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i3-4", title: "Standard Costing", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i3-5", title: "Cost Audit", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-i4",
+        title: "Auditing",
+        order: 4,
+        lessons: [
+          { id: "les-ca-i4-1", title: "Auditing Standards", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-i4-2", title: "Audit Procedures", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i4-3", title: "Internal Audit", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i4-4", title: "Audit Reports", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i4-5", title: "Case Study", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CA Intermediate successfully",
+      "Master advanced accounting",
+      "Understand tax planning",
+      "Develop audit expertise"
+    ],
+    requirements: [
+      "CA Foundation cleared",
+      "Strong accounting basics",
+      "Regular study commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "course-ca-final",
+    slug: "ca-final",
+    title: "CA Final Course",
+    tagline: "Complete Preparation for CA Final",
+    description: "Expert-level CA Final preparation covering Advanced Management Accounting, Financial Reporting, Direct Tax, Indirect Tax, and Strategic Management.",
+    longDescription: `Achieve the highest level of Chartered Accountancy with our comprehensive CA Final course. Covering advanced topics required for the final level examination.
+
+What you'll master:
+- Advanced Financial Reporting
+- Strategic Financial Management
+- Direct & Indirect Tax Management
+- Advanced Auditing & Professional Ethics`,
+    thumbnail: "/assets/courses/ca-final.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CA",
+    vertical: "professional",
+    targetAudience: ["ca-intermediate-passed", "ca-final-aspirants", "ca-professionals"],
+    tags: ["ca", "chartered-accountant", "icai", "final", "financial-reporting", "tax-management", "Professional / Career Skills", "Professional Certifications", "CA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 5500,
+    lessonCount: 275,
+    moduleCount: 22,
+    rating: 4.9,
+    reviewCount: 2800,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ca-final1",
+        title: "Financial Reporting",
+        order: 1,
+        lessons: [
+          { id: "les-ca-final1-1", title: "Ind AS Implementation", type: "video", duration: 60, content: "", isFree: true, order: 1 },
+          { id: "les-ca-final1-2", title: "Group Accounting Complex", type: "video", duration: 65, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final1-3", title: "Financial Instruments", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final1-4", title: "Business Combinations", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-final2",
+        title: "Strategic Financial Management",
+        order: 2,
+        lessons: [
+          { id: "les-ca-final2-1", title: "Capital Budgeting", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-ca-final2-2", title: "Working Capital Management", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final2-3", title: "Merger & Acquisition", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final2-4", title: "Valuation Methods", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final2-5", title: "Project Finance", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-final3",
+        title: "Direct Tax",
+        order: 3,
+        lessons: [
+          { id: "les-ca-final3-1", title: "Advanced Tax Planning", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-ca-final3-2", title: "International Tax Planning", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final3-3", title: "Transfer Pricing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final3-4", title: "Tax Avoidance vs Evasion", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final3-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-final4",
+        title: "Indirect Tax",
+        order: 4,
+        lessons: [
+          { id: "les-ca-final4-1", title: "GST Comprehensive", type: "video", duration: 60, content: "", isFree: false, order: 1 },
+          { id: "les-ca-final4-2", title: "Customs Duty", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final4-3", title: "Input Tax Credit", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final4-4", title: "GST Returns & Audit", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final4-5", title: "Practice Papers", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Become a Chartered Accountant",
+      "Master financial reporting",
+      "Expert in tax planning",
+      "Strategic management skills"
+    ],
+    requirements: [
+      "CA Intermediate cleared",
+      "Strong analytical skills",
+      "Full dedication required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cs_foundation",
+    slug: "cs-foundation",
+    title: "CS Foundation Course",
+    tagline: "Company Secretary Foundation Program",
+    description: "Complete CS Foundation preparation covering Company Law, Company Secretaryship, Financial Accounting, and Business Management.",
+    longDescription: `Begin your journey as a Company Secretary with our comprehensive CS Foundation course. This program covers the fundamentals required for the ICSI Foundation examination.
+
+What you'll learn:
+- Company Law Fundamentals
+- Company Secretaryship Role
+- Financial Accounting Basics
+- Business Management Principles`,
+    thumbnail: "/assets/courses/cs-foundation.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 349,
+    originalPrice: 7999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Company Secretary",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "cs-aspirants", "commerce-students"],
+    tags: ["cs", "company-secretary", "icsi", "foundation", "corporate-law", "Professional / Career Skills", "Professional Certifications", "Company Secretary"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 2500,
+    lessonCount: 125,
+    moduleCount: 10,
+    rating: 4.7,
+    reviewCount: 1800,
+    enrollmentCount: 12000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-cs-f1",
+        title: "Company Law",
+        order: 1,
+        lessons: [
+          { id: "les-cs-f1-1", title: "Companies Act 2013 Overview", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-cs-f1-2", title: "Types of Companies", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f1-3", title: "Company Formation", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f1-4", title: "Board of Directors", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-f2",
+        title: "Company Secretaryship",
+        order: 2,
+        lessons: [
+          { id: "les-cs-f2-1", title: "Role of Company Secretary", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cs-f2-2", title: "Meetings & Resolutions", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f2-3", title: "Statutory Registers", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f2-4", title: "Annual Returns", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f2-5", title: "Practice Exercise", type: "assignment", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-f3",
+        title: "Financial Accounting",
+        order: 3,
+        lessons: [
+          { id: "les-cs-f3-1", title: "Accounting Fundamentals", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cs-f3-2", title: "Journal & Ledger", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f3-3", title: "Trial Balance", type: "video", duration: 35, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f3-4", title: "Final Accounts", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f3-5", title: "Accounting Standards", type: "video", duration: 40, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-f4",
+        title: "Business Management",
+        order: 4,
+        lessons: [
+          { id: "les-cs-f4-1", title: "Management Principles", type: "video", duration: 40, content: "", isFree: false, order: 1 },
+          { id: "les-cs-f4-2", title: "Organizational Behavior", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f4-3", title: "Business Communication", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f4-4", title: "Corporate Governance", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f4-5", title: "Full Mock Test", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[6],
+    
+    outcomes: [
+      "Clear CS Foundation exam",
+      "Understand company law",
+      "Master corporate procedures",
+      "Build career foundation"
+    ],
+    requirements: [
+      "12th pass from recognized board",
+      "Basic business awareness",
+      "Dedication to studies"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cs_executive",
+    slug: "cs-executive",
+    title: "CS Executive Course",
+    tagline: "Intermediate Level Company Secretary",
+    description: "Advanced CS Executive preparation covering Company Law, Corporate Secretarial Practice, Financial Management, and Tax Laws.",
+    longDescription: `Progress to the executive level of Company Secretary with our detailed CS Executive course. Covering advanced topics in corporate law, secretarial practice, and financial management.
+
+What you'll master:
+- Corporate Secretarial Practice
+- Company Law Advanced
+- Financial Management
+- Tax Compliance`,
+    thumbnail: "/assets/courses/cs-executive.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 549,
+    originalPrice: 12999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Company Secretary",
+    vertical: "professional",
+    targetAudience: ["cs-foundation-passed", "cs-executive-aspirants", "legal-professionals"],
+    tags: ["cs", "company-secretary", "icsi", "executive", "corporate-law", "secretarial-practice", "Professional / Career Skills", "Professional Certifications", "Company Secretary"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 1500,
+    enrollmentCount: 10000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cs-e1",
+        title: "Corporate Secretarial Practice",
+        order: 1,
+        lessons: [
+          { id: "les-cs-e1-1", title: "Secretarial Audit", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-cs-e1-2", title: "Due Diligence", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e1-3", title: "Corporate Governance", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e1-4", title: "Compliance Management", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-e2",
+        title: "Company Law Advanced",
+        order: 2,
+        lessons: [
+          { id: "les-cs-e2-1", title: "Share Capital & Debentures", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-e2-2", title: "Dividend & Distribution", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e2-3", title: "Oppression & Mismanagement", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e2-4", title: "Winding Up", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e2-5", title: "Case Studies", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-e3",
+        title: "Financial Management",
+        order: 3,
+        lessons: [
+          { id: "les-cs-e3-1", title: "Capital Structure", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cs-e3-2", title: "Working Capital", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e3-3", title: "Cash Flow Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e3-4", title: "Financial Statement Analysis", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e3-5", title: "Investment Decisions", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-e4",
+        title: "Tax Laws",
+        order: 4,
+        lessons: [
+          { id: "les-cs-e4-1", title: "Income Tax Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cs-e4-2", title: "Corporate Tax Planning", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e4-3", title: "GST Compliance", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e4-4", title: "Tax Returns", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e4-5", title: "Practice Papers", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[6],
+    
+    outcomes: [
+      "Clear CS Executive exam",
+      "Expert in secretarial practice",
+      "Corporate law proficiency",
+      "Financial management skills"
+    ],
+    requirements: [
+      "CS Foundation cleared",
+      "Strong legal aptitude",
+      "Regular study required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cs_professional",
+    slug: "cs-professional",
+    title: "CS Professional Course",
+    tagline: "Advanced Level Company Secretary",
+    description: "Expert-level CS Professional preparation covering Corporate Governance, Secretarial Audit, Due Diligence, and Corporate Restructuring.",
+    longDescription: `Achieve the highest level as a Company Secretary with our comprehensive CS Professional course. Covering advanced topics required for the professional level examination.
+
+What you'll master:
+- Corporate Governance & Ethics
+- Secretarial Audit & Due Diligence
+- Corporate Restructuring
+- Insolvency & Bankruptcy`,
+    thumbnail: "/assets/courses/cs-professional.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 17999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Company Secretary",
+    vertical: "professional",
+    targetAudience: ["cs-executive-passed", "cs-professional-aspirants", "cs-practitioners"],
+    tags: ["cs", "company-secretary", "icsi", "professional", "corporate-governance", "secretarial-audit", "Professional / Career Skills", "Professional Certifications", "Company Secretary"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.8,
+    reviewCount: 1200,
+    enrollmentCount: 8000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cs-p1",
+        title: "Corporate Governance",
+        order: 1,
+        lessons: [
+          { id: "les-cs-p1-1", title: "Governance Frameworks", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cs-p1-2", title: "Board Composition", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p1-3", title: "Audit Committee", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p1-4", title: "SEBI Regulations", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-p2",
+        title: "Secretarial Audit",
+        order: 2,
+        lessons: [
+          { id: "les-cs-p2-1", title: "Audit Methodology", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-p2-2", title: "Compliance Audit", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p2-3", title: "Reporting Standards", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p2-4", title: "Best Practices", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p2-5", title: "Case Study", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-p3",
+        title: "Due Diligence",
+        order: 3,
+        lessons: [
+          { id: "les-cs-p3-1", title: "Due Diligence Process", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-p3-2", title: "Legal Due Diligence", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p3-3", title: "Financial Due Diligence", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p3-4", title: "Regulatory Due Diligence", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p3-5", title: "Documentation", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-p4",
+        title: "Corporate Restructuring",
+        order: 4,
+        lessons: [
+          { id: "les-cs-p4-1", title: "Merger & Acquisition", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-p4-2", title: "Amalgamation Process", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p4-3", title: "Insolvency Framework", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p4-4", title: "Bankruptcy Code", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p4-5", title: "Mock Exam", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[6],
+    
+    outcomes: [
+      "Become a qualified CS",
+      "Expert in corporate governance",
+      "Master secretarial audit",
+      "Corporate restructuring skills"
+    ],
+    requirements: [
+      "CS Executive cleared",
+      "Extensive knowledge required",
+      "Professional commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cma_foundation",
+    slug: "cma-foundation",
+    title: "CMA Foundation Course",
+    tagline: "Cost Management Accounting Foundation",
+    description: "Complete CMA Foundation preparation covering Fundamentals of Financial Accounting, Cost Accounting, Laws, and Statistics.",
+    longDescription: `Begin your journey in Cost and Management Accounting with our comprehensive CMA Foundation course. This program covers the fundamentals required for the ICWAI CMA Foundation examination.
+
+What you'll learn:
+- Fundamentals of Financial Accounting
+- Cost Accounting Basics
+- Mercantile Law
+- Statistics & Mathematics`,
+    thumbnail: "/assets/courses/cma-foundation.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 349,
+    originalPrice: 7999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CMA",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "cma-aspirants", "commerce-students"],
+    tags: ["cma", "cost-management", "accounting", "icwai", "foundation", "Professional / Career Skills", "Professional Certifications", "CMA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 2500,
+    lessonCount: 125,
+    moduleCount: 10,
+    rating: 4.7,
+    reviewCount: 1600,
+    enrollmentCount: 11000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-cma-f1",
+        title: "Fundamentals of Financial Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-cma-f1-1", title: "Accounting Basics", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-cma-f1-2", title: "Journal Entries", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f1-3", title: "Ledger & Trial Balance", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f1-4", title: "Final Accounts", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-f2",
+        title: "Cost Accounting",
+        order: 2,
+        lessons: [
+          { id: "les-cma-f2-1", title: "Cost Concepts", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cma-f2-2", title: "Materials Costing", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f2-3", title: "Labor Costing", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f2-4", title: "Overhead Allocation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f2-5", title: "Cost Sheet", type: "assignment", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-f3",
+        title: "Mercantile Law",
+        order: 3,
+        lessons: [
+          { id: "les-cma-f3-1", title: "Indian Contract Act", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cma-f3-2", title: "Sale of Goods Act", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f3-3", title: "Partnership Act", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f3-4", title: "Companies Act Basics", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f3-5", title: "Practice Questions", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-f4",
+        title: "Statistics & Mathematics",
+        order: 4,
+        lessons: [
+          { id: "les-cma-f4-1", title: "Statistical Methods", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cma-f4-2", title: "Probability Basics", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f4-3", title: "Correlation & Regression", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f4-4", title: "Time Series Analysis", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f4-5", title: "Full Mock Test", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CMA Foundation",
+      "Master accounting fundamentals",
+      "Understand cost concepts",
+      "Statistical analysis skills"
+    ],
+    requirements: [
+      "12th pass from recognized board",
+      "Basic mathematics knowledge",
+      "Regular study commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cma_intermediate",
+    slug: "cma-intermediate",
+    title: "CMA Intermediate Course",
+    tagline: "Intermediate Cost Management Accounting",
+    description: "Advanced CMA Intermediate preparation covering Financial Accounting, Cost Accounting, Laws, and Direct & Indirect Taxation.",
+    longDescription: `Progress to the intermediate level of Cost and Management Accounting with our detailed CMA Intermediate course. Covering advanced topics in financial management and taxation.
+
+What you'll master:
+- Advanced Financial Accounting
+- Cost Management Techniques
+- Tax Laws & Returns
+- Financial Management`,
+    thumbnail: "/assets/courses/cma-intermediate.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 549,
+    originalPrice: 12999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CMA",
+    vertical: "professional",
+    targetAudience: ["cma-foundation-passed", "cma-intermediate-aspirants", "accountants"],
+    tags: ["cma", "cost-management", "accounting", "icwai", "intermediate", "taxation", "financial-management", "Professional / Career Skills", "Professional Certifications", "CMA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 1400,
+    enrollmentCount: 9000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cma-i1",
+        title: "Financial Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-cma-i1-1", title: "Advanced Accounting Standards", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-cma-i1-2", title: "Company Accounts", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i1-3", title: "Accounting for Special Transactions", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i1-4", title: "Financial Statement Analysis", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-i2",
+        title: "Cost Accounting",
+        order: 2,
+        lessons: [
+          { id: "les-cma-i2-1", title: "Job & Batch Costing", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cma-i2-2", title: "Process Costing", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i2-3", title: "Operation Costing", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i2-4", title: "Standard Costing", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i2-5", title: "Cost Audit", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-i3",
+        title: "Direct Tax",
+        order: 3,
+        lessons: [
+          { id: "les-cma-i3-1", title: "Income Tax Computation", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cma-i3-2", title: "Tax Planning", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i3-3", title: "Deductions & Exemptions", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i3-4", title: "TDS & TCS", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i3-5", title: "Tax Returns", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-i4",
+        title: "Indirect Tax",
+        order: 4,
+        lessons: [
+          { id: "les-cma-i4-1", title: "GST Comprehensive", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cma-i4-2", title: "Input Tax Credit", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i4-3", title: "GST Returns", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i4-4", title: "Customs Duty", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i4-5", title: "Practice Papers", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CMA Intermediate",
+      "Advanced accounting skills",
+      "Cost management expertise",
+      "Taxation knowledge"
+    ],
+    requirements: [
+      "CMA Foundation cleared",
+      "Strong accounting background",
+      "Regular study required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cma_final",
+    slug: "cma-final",
+    title: "CMA Final Course",
+    tagline: "Advanced Cost Management Accounting",
+    description: "Expert-level CMA Final preparation covering Strategic Financial Management, Corporate Finance, and Strategic Cost Management.",
+    longDescription: `Achieve the highest level in Cost and Management Accounting with our comprehensive CMA Final course. Covering strategic financial management and advanced costing techniques.
+
+What you'll master:
+- Strategic Financial Management
+- Corporate Restructuring
+- Strategic Cost Management
+- Financial Analysis & Decisions`,
+    thumbnail: "/assets/courses/cma-final.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 19999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CMA",
+    vertical: "professional",
+    targetAudience: ["cma-intermediate-passed", "cma-final-aspirants", "finance-managers"],
+    tags: ["cma", "cost-management", "accounting", "icwai", "final", "financial-management", "strategic-costing", "Professional / Career Skills", "Professional Certifications", "CMA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 1100,
+    enrollmentCount: 7000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cma-final1",
+        title: "Strategic Financial Management",
+        order: 1,
+        lessons: [
+          { id: "les-cma-final1-1", title: "Financial Strategy", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cma-final1-2", title: "Capital Budgeting Advanced", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final1-3", title: "Working Capital Strategy", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final1-4", title: "Dividend Policy", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-final2",
+        title: "Corporate Finance",
+        order: 2,
+        lessons: [
+          { id: "les-cma-final2-1", title: "Corporate Valuation", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cma-final2-2", title: "Mergers & Acquisitions", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final2-3", title: "Corporate Restructuring", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final2-4", title: "Project Finance", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final2-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-final3",
+        title: "Strategic Cost Management",
+        order: 3,
+        lessons: [
+          { id: "les-cma-final3-1", title: "ABC Costing", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cma-final3-2", title: "Target Costing", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final3-3", title: "Life Cycle Costing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final3-4", title: "Kaizen Costing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final3-5", title: "Cost Optimization", type: "video", duration: 55, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-final4",
+        title: "Financial Analysis",
+        order: 4,
+        lessons: [
+          { id: "les-cma-final4-1", title: "Advanced Ratio Analysis", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cma-final4-2", title: "Cash Flow Analysis", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final4-3", title: "Risk Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final4-4", title: "Decision Making", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final4-5", title: "Final Mock Test", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Become a qualified CMA",
+      "Strategic financial skills",
+      "Corporate finance expertise",
+      "Cost management mastery"
+    ],
+    requirements: [
+      "CMA Intermediate cleared",
+      "Advanced knowledge required",
+      "Professional dedication"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cfa_level1",
+    slug: "cfa-level1",
+    title: "CFA Level 1 Course",
+    tagline: "Chartered Financial Analyst Level 1",
+    description: "Comprehensive CFA Level 1 preparation covering Financial Analysis, Ethics, Quantitative Methods, and Portfolio Management.",
+    longDescription: `Start your journey to become a Chartered Financial Analyst with our detailed CFA Level 1 course. Covering the fundamental knowledge required for the CFA exam.
+
+What you'll master:
+- Ethical & Professional Standards
+- Quantitative Methods
+- Financial Statement Analysis
+- Economics & Portfolio Management`,
+    thumbnail: "/assets/courses/cfa-level1.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 899,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CFA",
+    vertical: "professional",
+    targetAudience: ["graduates", "cfa-aspirants", "finance-professionals"],
+    tags: ["cfa", "chartered-financial-analyst", "cfa-institute", "level1", "financial-analysis", "portfolio-management", "Professional / Career Skills", "Professional Certifications", "CFA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.9,
+    reviewCount: 3500,
+    enrollmentCount: 25000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cfa1-1",
+        title: "Ethical & Professional Standards",
+        order: 1,
+        lessons: [
+          { id: "les-cfa1-1-1", title: "Code of Ethics Overview", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-cfa1-1-2", title: "Standards of Professional Conduct", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-1-3", title: "GIPS Standards", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-1-4", title: "Ethics Case Studies", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa1-2",
+        title: "Quantitative Methods",
+        order: 2,
+        lessons: [
+          { id: "les-cfa1-2-1", title: "Time Value of Money", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa1-2-2", title: "Statistical Concepts", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-2-3", title: "Probability Distributions", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-2-4", title: "Hypothesis Testing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-2-5", title: "Regression Analysis", type: "video", duration: 55, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa1-3",
+        title: "Financial Statement Analysis",
+        order: 3,
+        lessons: [
+          { id: "les-cfa1-3-1", title: "Financial Statement Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa1-3-2", title: "Revenue Recognition", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-3-3", title: "Asset Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-3-4", title: "Liability Analysis", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-3-5", title: "Ratio Analysis", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa1-4",
+        title: "Economics & Portfolio",
+        order: 4,
+        lessons: [
+          { id: "les-cfa1-4-1", title: "Microeconomics", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa1-4-2", title: "Macroeconomics", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-4-3", title: "Portfolio Management Basics", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-4-4", title: "Capital Market Theory", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-4-5", title: "Full Mock Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CFA Level 1 exam",
+      "Master financial analysis",
+      "Understand ethical standards",
+      "Portfolio management foundation"
+    ],
+    requirements: [
+      "Bachelor's degree or final year student",
+      "Basic mathematics knowledge",
+      "Strong English proficiency",
+      "300+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cfa_level2",
+    slug: "cfa-level2",
+    title: "CFA Level 2 Course",
+    tagline: "Intermediate Chartered Financial Analyst",
+    description: "Advanced CFA Level 2 preparation covering Asset Valuation, Derivatives, Fixed Income, and Equity Analysis.",
+    longDescription: `Progress to Level 2 of the CFA program with our detailed course focusing on valuation analysis and advanced financial concepts.
+
+What you'll master:
+- Equity Valuation
+- Fixed Income Analysis
+- Derivatives & Alternative Investments
+- Financial Reporting Analysis Advanced`,
+    thumbnail: "/assets/courses/cfa-level2.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 29999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CFA",
+    vertical: "professional",
+    targetAudience: ["cfa-level1-passed", "cfa-level2-aspirants", "investment-analysts"],
+    tags: ["cfa", "chartered-financial-analyst", "cfa-institute", "level2", "equity-analysis", "fixed-income", "derivatives", "Professional / Career Skills", "Professional Certifications", "CFA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 2800,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cfa2-1",
+        title: "Equity Valuation",
+        order: 1,
+        lessons: [
+          { id: "les-cfa2-1-1", title: "Valuation Models Overview", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cfa2-1-2", title: "Discounted Cash Flow", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-1-3", title: "Comparable Company Analysis", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-1-4", title: "Precedent Transaction Analysis", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa2-2",
+        title: "Fixed Income",
+        order: 2,
+        lessons: [
+          { id: "les-cfa2-2-1", title: "Bond Valuation", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa2-2-2", title: "Yield Curves & Term Structure", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-2-3", title: "Credit Analysis", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-2-4", title: "Mortgage-Backed Securities", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-2-5", title: "Interest Rate Derivatives", type: "video", duration: 55, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa2-3",
+        title: "Derivatives",
+        order: 3,
+        lessons: [
+          { id: "les-cfa2-3-1", title: "Forward Contracts", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa2-3-2", title: "Futures Markets", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-3-3", title: "Options Strategies", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-3-4", title: "Option Pricing Models", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-3-5", title: "Swaps & Hedging", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa2-4",
+        title: "Alternative Investments",
+        order: 4,
+        lessons: [
+          { id: "les-cfa2-4-1", title: "Private Equity", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa2-4-2", title: "Real Estate Valuation", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-4-3", title: "Hedge Fund Strategies", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-4-4", title: "Commodity Markets", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-4-5", title: "Practice Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CFA Level 2 exam",
+      "Advanced valuation skills",
+      "Fixed income expertise",
+      "Derivatives knowledge"
+    ],
+    requirements: [
+      "CFA Level 1 cleared",
+      "Strong financial analysis skills",
+      "500+ hours of study",
+      "English proficiency"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cfa_level3",
+    slug: "cfa-level3",
+    title: "CFA Level 3 Course",
+    tagline: "Advanced Chartered Financial Analyst",
+    description: "Expert-level CFA Level 3 preparation covering Wealth Management, Portfolio Strategy, and Advanced Ethics.",
+    longDescription: `Complete your CFA journey with our comprehensive Level 3 course focusing on portfolio management and wealth planning strategies.
+
+What you'll master:
+- Portfolio Management
+- Wealth Planning
+- Advanced Asset Allocation
+- Performance Attribution`,
+    thumbnail: "/assets/courses/cfa-level3.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 1199,
+    originalPrice: 34999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CFA",
+    vertical: "professional",
+    targetAudience: ["cfa-level2-passed", "cfa-level3-aspirants", "portfolio-managers"],
+    tags: ["cfa", "chartered-financial-analyst", "cfa-institute", "level3", "portfolio-management", "wealth-planning", "asset-allocation", "Professional / Career Skills", "Professional Certifications", "CFA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 5000,
+    lessonCount: 250,
+    moduleCount: 20,
+    rating: 4.9,
+    reviewCount: 2200,
+    enrollmentCount: 15000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cfa3-1",
+        title: "Portfolio Management",
+        order: 1,
+        lessons: [
+          { id: "les-cfa3-1-1", title: "IPS Development", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cfa3-1-2", title: "Risk Management Framework", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-1-3", title: "Strategic Asset Allocation", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-1-4", title: "Tactical Asset Allocation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa3-2",
+        title: "Wealth Planning",
+        order: 2,
+        lessons: [
+          { id: "les-cfa3-2-1", title: "Personal Financial Planning", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa3-2-2", title: "Retirement Planning", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-2-3", title: "Tax-Efficient Investing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-2-4", title: "Estate Planning", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-2-5", title: "Comprehensive Case Study", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa3-3",
+        title: "Advanced Ethics",
+        order: 3,
+        lessons: [
+          { id: "les-cfa3-3-1", title: "GIPS Compliance", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa3-3-2", title: "Soft Dollar Standards", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-3-3", title: "Trading Ethics", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-3-4", title: "Corporate Governance", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-3-5", title: "Ethics Workshop", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa3-4",
+        title: "Alternative Investments",
+        order: 4,
+        lessons: [
+          { id: "les-cfa3-4-1", title: "Hedge Fund Strategies", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa3-4-2", title: "Private Equity Structures", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-4-3", title: "Real Estate Analysis", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-4-4", title: "Infrastructure Investing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-4-5", title: "Final Mock Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CFA Level 3 exam",
+      "Become CFA Charterholder",
+      "Portfolio management expertise",
+      "Wealth planning skills"
+    ],
+    requirements: [
+      "CFA Level 2 cleared",
+      "4 years work experience",
+      "Strong analytical writing",
+      "Professional commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_fa",
+    slug: "acca-fa",
+    title: "ACCA FA Course",
+    tagline: "ACCA Accountant in Business",
+    description: "Complete ACCA FA (F1) preparation covering Business & Technology, Accounting Principles, and Organization Management.",
+    longDescription: `Begin your ACCA journey with our comprehensive FA (F1) course. This paper provides foundational knowledge of business environments and accounting principles.
+
+What you'll master:
+- Business Organization Environment
+- Accounting Fundamentals
+- Management Information Systems
+- Leading and Managing Teams`,
+    thumbnail: "/assets/courses/acca-fa.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 299,
+    originalPrice: 6999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "acca-aspirants", "accountants"],
+    tags: ["acca", "chartered-certified-accountant", "accounting", "business-technology", "fa", "accountant-in-business", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 2000,
+    lessonCount: 100,
+    moduleCount: 8,
+    rating: 4.7,
+    reviewCount: 2000,
+    enrollmentCount: 15000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-acca-fa1",
+        title: "Business Organization",
+        order: 1,
+        lessons: [
+          { id: "les-acca-fa1-1", title: "Types of Business Entities", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-acca-fa1-2", title: "Stakeholders and Governance", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fa1-3", title: "Business Ethics", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fa1-4", title: "Macro Economic Environment", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fa1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-fa2",
+        title: "Accounting Principles",
+        order: 2,
+        lessons: [
+          { id: "les-acca-fa2-1", title: "Double Entry System", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca-fa2-2", title: "Ledger and Journals", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fa2-3", title: "Trial Balance", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fa2-4", title: "Basic Financial Statements", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fa2-5", title: "Practice Exercise", type: "assignment", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-fa3",
+        title: "Management Information",
+        order: 3,
+        lessons: [
+          { id: "les-acca-fa3-1", title: "Role of Accounting", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-acca-fa3-2", title: "Cost Classification", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fa3-3", title: "Budgeting Basics", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fa3-4", title: "Performance Measurement", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fa3-5", title: "Practice Quiz", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-fa4",
+        title: "Leading and Managing",
+        order: 4,
+        lessons: [
+          { id: "les-acca-fa4-1", title: "Leadership Theories", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-acca-fa4-2", title: "Team Development", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fa4-3", title: "Communication Skills", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fa4-4", title: "Conflict Management", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fa4-5", title: "Full Mock Test", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear ACCA FA exam",
+      "Understand business environment",
+      "Master accounting basics",
+      "Management skills foundation"
+    ],
+    requirements: [
+      "10+2 or equivalent",
+      "Basic English proficiency",
+      "Dedication to study",
+      "No prior accounting required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_ma",
+    slug: "acca-ma",
+    title: "ACCA MA Course",
+    tagline: "ACCA Managing Finance",
+    description: "Advanced ACCA MA (F2) preparation covering Costing Techniques, Budgeting, and Variance Analysis.",
+    longDescription: `Progress with our detailed MA (F2) course covering management accounting techniques essential for financial decision-making.
+
+What you'll master:
+- Cost Accounting Systems
+- Budgeting Techniques
+- Variance Analysis
+- Performance Measurement`,
+    thumbnail: "/assets/courses/acca-ma.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 399,
+    originalPrice: 8999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["acca-fa-passed", "acca-ma-aspirants", "accountants"],
+    tags: ["acca", "chartered-certified-accountant", "management-accounting", "ma", "budgeting", "variance-analysis", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 2500,
+    lessonCount: 125,
+    moduleCount: 10,
+    rating: 4.8,
+    reviewCount: 1800,
+    enrollmentCount: 12000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-acca-ma1",
+        title: "Costing Techniques",
+        order: 1,
+        lessons: [
+          { id: "les-acca-ma1-1", title: "Absorption Costing", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-acca-ma1-2", title: "Marginal Costing", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca-ma1-3", title: "Activity Based Costing", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-ma1-4", title: "Job and Batch Costing", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca-ma1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-ma2",
+        title: "Budgeting",
+        order: 2,
+        lessons: [
+          { id: "les-acca-ma2-1", title: "Nature of Budgeting", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-acca-ma2-2", title: "Functional Budgets", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-ma2-3", title: "Cash Budgeting", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca-ma2-4", title: "Zero-Based Budgeting", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-ma2-5", title: "Budget Case Study", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-ma3",
+        title: "Variance Analysis",
+        order: 3,
+        lessons: [
+          { id: "les-acca-ma3-1", title: "Material Variances", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca-ma3-2", title: "Labor Variances", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-acca-ma3-3", title: "Overhead Variances", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-ma3-4", title: "Sales Variances", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca-ma3-5", title: "Variance Investigation", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-ma4",
+        title: "Performance Measurement",
+        order: 4,
+        lessons: [
+          { id: "les-acca-ma4-1", title: "ROI and RI", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca-ma4-2", title: "Balanced Scorecard", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca-ma4-3", title: "Benchmarking", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca-ma4-4", title: "Non-Financial Measures", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-ma4-5", title: "Comprehensive Mock", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear ACCA MA exam",
+      "Master cost accounting",
+      "Advanced budgeting skills",
+      "Performance analysis expertise"
+    ],
+    requirements: [
+      "ACCA FA cleared",
+      "Basic mathematics",
+      "Analytical thinking",
+      "Regular practice"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_fa_int",
+    slug: "acca-fa-int",
+    title: "ACCA FA (INTL) Course",
+    tagline: "ACCA Financial Accounting International",
+    description: "ACCA FA (F3) preparation covering Financial Statement Preparation, Accounting for Partnerships, and Incomplete Records.",
+    longDescription: `Advance your ACCA journey with our comprehensive FA (F3) course covering financial accounting from preparation to analysis.
+
+What you'll master:
+- Financial Statement Preparation
+- Accounting for Partnerships
+- Incomplete Records
+- Consolidated Financial Statements`,
+    thumbnail: "/assets/courses/acca-fa-int.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 449,
+    originalPrice: 9999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["acca-ma-passed", "acca-fa-int-aspirants", "accountants"],
+    tags: ["acca", "chartered-certified-accountant", "financial-accounting", "fa-intl", "financial-statements", "partnerships", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3000,
+    lessonCount: 150,
+    moduleCount: 12,
+    rating: 4.8,
+    reviewCount: 1600,
+    enrollmentCount: 10000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-acca-fai1",
+        title: "Financial Statements",
+        order: 1,
+        lessons: [
+          { id: "les-acca-fai1-1", title: "Statement of Financial Position", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-acca-fai1-2", title: "Statement of Profit or Loss", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fai1-3", title: "Statement of Changes in Equity", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fai1-4", title: "Cash Flow Statement", type: "video", duration: 60, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fai1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-fai2",
+        title: "Accounting for Partnerships",
+        order: 2,
+        lessons: [
+          { id: "les-acca-fai2-1", title: "Partnership Formation", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca-fai2-2", title: "Profit Sharing Ratio", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fai2-3", title: "Partner Remuneration", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fai2-4", title: "Partnership Dissolution", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fai2-5", title: "Practice Exercise", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-fai3",
+        title: "Incomplete Records",
+        order: 3,
+        lessons: [
+          { id: "les-acca-fai3-1", title: "Restoring Records", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca-fai3-2", title: "Markov Analysis", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fai3-3", title: "Missing Invoice Method", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fai3-4", title: "Bank Reconciliation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fai3-5", title: "Case Study", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-fai4",
+        title: "Groups and Consolidations",
+        order: 4,
+        lessons: [
+          { id: "les-acca-fai4-1", title: "Subsidiary Accounting", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca-fai4-2", title: "Non-Controlling Interest", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-fai4-3", title: "Goodwill Calculation", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-acca-fai4-4", title: "Associate Accounting", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-acca-fai4-5", title: "Full Mock Exam", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear ACCA FA (INTL)",
+      "Advanced financial statements",
+      "Partnership accounting",
+      "Consolidation skills"
+    ],
+    requirements: [
+      "ACCA MA cleared",
+      "Strong accounting basics",
+      "Attention to detail",
+      "Practice orientation"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_applied_skills",
+    slug: "acca-applied-skills",
+    title: "ACCA Applied Skills Course",
+    tagline: "ACCA Strategic Professional Foundation",
+    description: "Comprehensive ACCA Applied Skills preparation covering Corporate & Business Law, Performance Management, and Taxation.",
+    longDescription: `Complete the Applied Skills level with our integrated course covering LW, PM, TX, FR, AA, and FM papers essential for strategic professional level.
+
+What you'll master:
+- Corporate and Business Law
+- Performance Management
+- Taxation Systems
+- Audit and Assurance`,
+    thumbnail: "/assets/courses/acca-applied-skills.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 699,
+    originalPrice: 17999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["acca-fa-int-passed", "acca-applied-skills-aspirants", "accountants"],
+    tags: ["acca", "chartered-certified-accountant", "applied-skills", "strategic-professional", "law", "performance-management", "taxation", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.9,
+    reviewCount: 2000,
+    enrollmentCount: 14000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-acca-as1",
+        title: "Corporate & Business Law",
+        order: 1,
+        lessons: [
+          { id: "les-acca-as1-1", title: "Legal Systems", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-acca-as1-2", title: "Company Law Fundamentals", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-acca-as1-3", title: "Employment Law", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-as1-4", title: "Contract Law", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-acca-as1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-as2",
+        title: "Performance Management",
+        order: 2,
+        lessons: [
+          { id: "les-acca-as2-1", title: "Decision-Making Techniques", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca-as2-2", title: "Pricing Decisions", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca-as2-3", title: "Risk Management", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca-as2-4", title: "Performance Analysis", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca-as2-5", title: "Case Study", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-as3",
+        title: "Taxation",
+        order: 3,
+        lessons: [
+          { id: "les-acca-as3-1", title: "Income Tax Computation", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca-as3-2", title: "Corporation Tax", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-acca-as3-3", title: "VAT and Customs", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-as3-4", title: "International Taxation", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-acca-as3-5", title: "Tax Planning", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca-as4",
+        title: "Audit and Assurance",
+        order: 4,
+        lessons: [
+          { id: "les-acca-as4-1", title: "Audit Framework", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca-as4-2", title: "Audit Planning", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca-as4-3", title: "Audit Evidence", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca-as4-4", title: "Audit Reports", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca-as4-5", title: "Mock Audit", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Complete Applied Skills level",
+      "Legal compliance knowledge",
+      "Advanced performance management",
+      "Taxation expertise"
+    ],
+    requirements: [
+      "ACCA FA (INTL) passed",
+      "Strong analytical skills",
+      "3 years relevant experience",
+      "Professional commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_strategic_professional",
+    slug: "acca-strategic-professional",
+    title: "ACCA Strategic Professional Course",
+    tagline: "ACCA Strategic Professional Complete",
+    description: "Expert-level ACCA Strategic Professional preparation covering Advanced Financial Reporting, Advanced Audit and Assurance, and Strategic Business Leadership.",
+    longDescription: `Complete your ACCA qualification with our comprehensive Strategic Professional course covering essential advanced papers for becoming a Chartered Certified Accountant.
+
+What you'll master:
+- Advanced Financial Reporting
+- Advanced Audit and Assurance
+- Strategic Business Leadership
+- Advanced Performance Management`,
+    thumbnail: "/assets/courses/acca-strategic-professional.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 899,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["acca-applied-skills-passed", "acca-strategic-aspirants", "finance-managers"],
+    tags: ["acca", "chartered-certified-accountant", "accounting", "strategic-professional", "advanced-audit", "financial-reporting", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 5000,
+    lessonCount: 250,
+    moduleCount: 20,
+    rating: 4.9,
+    reviewCount: 1500,
+    enrollmentCount: 10000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-acca3-1",
+        title: "Advanced Financial Reporting",
+        order: 1,
+        lessons: [
+          { id: "les-acca3-1-1", title: "IFRS Advanced", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-acca3-1-2", title: "Group Accounting Complex", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-1-3", title: "Financial Instruments", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-1-4", title: "Impairment Testing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca3-2",
+        title: "Advanced Audit and Assurance",
+        order: 2,
+        lessons: [
+          { id: "les-acca3-2-1", title: "Audit Risk Assessment", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca3-2-2", title: "Group Audits", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-2-3", title: "Forensic Auditing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-2-4", title: "Professional Ethics", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-2-5", title: "Audit Case Study", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca3-3",
+        title: "Strategic Business Leader",
+        order: 3,
+        lessons: [
+          { id: "les-acca3-3-1", title: "Strategic Analysis", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca3-3-2", title: "Leadership and Management", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-3-3", title: "Governance and Risk", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-3-4", title: "Technology and Data", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-3-5", title: "Business Simulation", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca3-4",
+        title: "Advanced Performance Management",
+        order: 4,
+        lessons: [
+          { id: "les-acca3-4-1", title: "Strategic Performance Management", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca3-4-2", title: "Performance Measurement", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-4-3", title: "Variance Analysis Advanced", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-4-4", title: "Decision Making", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-4-5", title: "Final Mock Exam", type: "assignment", duration: 240, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Complete ACCA qualification",
+      "Advanced financial reporting",
+      "Audit expertise",
+      "Strategic leadership skills"
+    ],
+    requirements: [
+      "ACCA Applied Skills passed",
+      "3 years relevant experience",
+      "Strong analytical skills",
+      "Professional commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "frm_part1",
+    slug: "frm-part1",
+    title: "FRM Part 1 Course",
+    tagline: "Financial Risk Manager Part 1",
+    description: "Comprehensive FRM Part 1 preparation covering Financial Risk Foundations, Quantitative Analysis, and Market Risk.",
+    longDescription: `Begin your journey to become a Financial Risk Manager with our detailed FRM Part 1 course. Covering foundational risk management concepts.
+
+What you'll master:
+- Foundations of Risk Management
+- Quantitative Analysis
+- Financial Markets and Products
+- Value at Risk Methods`,
+    thumbnail: "/assets/courses/frm-part1.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 19999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "FRM",
+    vertical: "professional",
+    targetAudience: ["graduates", "frm-aspirants", "risk-analysts"],
+    tags: ["frm", "financial-risk-manager", "garp", "risk-management", "quantitative-analysis", "market-risk", "Professional / Career Skills", "Professional Certifications", "FRM"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 2500,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-frm1-1",
+        title: "Foundations of Risk Management",
+        order: 1,
+        lessons: [
+          { id: "les-frm1-1-1", title: "Risk Management Overview", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-frm1-1-2", title: "Corporate Governance", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-1-3", title: "Risk Culture", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-1-4", title: "Model Risk", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm1-2",
+        title: "Quantitative Analysis",
+        order: 2,
+        lessons: [
+          { id: "les-frm1-2-1", title: "Probability Theory", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-frm1-2-2", title: "Statistical Methods", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-2-3", title: "Regression Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-2-4", title: "Monte Carlo Simulation", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-2-5", title: "Extreme Value Theory", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm1-3",
+        title: "Financial Markets",
+        order: 3,
+        lessons: [
+          { id: "les-frm1-3-1", title: "Bonds and Fixed Income", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-frm1-3-2", title: "Equities and Derivatives", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-3-3", title: "Foreign Exchange", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-3-4", title: "Commodities", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-3-5", title: "Structured Products", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm1-4",
+        title: "Value at Risk",
+        order: 4,
+        lessons: [
+          { id: "les-frm1-4-1", title: "VaR Methods", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-frm1-4-2", title: "Backtesting VaR", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-4-3", title: "Stress Testing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-4-4", title: "Expected Shortfall", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-4-5", title: "Full Mock Exam", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear FRM Part 1 exam",
+      "Foundational risk knowledge",
+      "Quantitative skills",
+      "Market risk understanding"
+    ],
+    requirements: [
+      "2 years work experience waiver available",
+      "Strong mathematics",
+      "English proficiency",
+      "200+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "frm_part2",
+    slug: "frm-part2",
+    title: "FRM Part 2 Course",
+    tagline: "Financial Risk Manager Part 2",
+    description: "Advanced FRM Part 2 preparation covering Market Risk, Credit Risk, Operational Risk, and Integrated Risk Management.",
+    longDescription: `Complete your FRM journey with our detailed Part 2 course covering advanced risk management topics and real-world applications.
+
+What you'll master:
+- Market Risk Management
+- Credit Risk Management
+- Operational Risk Management
+- Current Issues in Risk Management`,
+    thumbnail: "/assets/courses/frm-part2.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "FRM",
+    vertical: "professional",
+    targetAudience: ["frm-part1-passed", "frm-part2-aspirants", "risk-managers"],
+    tags: ["frm", "financial-risk-manager", "garp", "risk-management", "credit-risk", "operational-risk", "Professional / Career Skills", "Professional Certifications", "FRM"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 2000,
+    enrollmentCount: 14000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-frm2-1",
+        title: "Market Risk",
+        order: 1,
+        lessons: [
+          { id: "les-frm2-1-1", title: "VaR and Volatility", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-frm2-1-2", title: "Interest Rate Risk", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-1-3", title: "Option Pricing Models", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-1-4", title: "Exotic Options", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm2-2",
+        title: "Credit Risk",
+        order: 2,
+        lessons: [
+          { id: "les-frm2-2-1", title: "Credit Risk Modeling", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-frm2-2-2", title: "Default Probability", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-2-3", title: "Credit Derivatives", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-2-4", title: "Counterparty Risk", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-2-5", title: "CVA and DVA", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm2-3",
+        title: "Operational Risk",
+        order: 3,
+        lessons: [
+          { id: "les-frm2-3-1", title: "Operational Risk Framework", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-frm2-3-2", title: "Basel Accords", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-3-3", title: "Model Validation", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-3-4", title: "Liquidity Risk", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-3-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm2-4",
+        title: "Current Issues",
+        order: 4,
+        lessons: [
+          { id: "les-frm2-4-1", title: "FinTech Risk", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-frm2-4-2", title: "Climate Risk", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-4-3", title: "Cyber Security Risk", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-4-4", title: "Regulatory Changes", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-4-5", title: "Final Mock Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear FRM Part 2 exam",
+      "Become FRM Certified",
+      "Advanced risk management",
+      "Career advancement"
+    ],
+    requirements: [
+      "FRM Part 1 cleared",
+      "2 years work experience",
+      "Advanced quantitative skills",
+      "300+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  // ==================== PROFESSIONAL CERTIFICATIONS ====================
+
+  {
+    id: "course-ca-foundation",
+    slug: "ca-foundation",
+    title: "CA Foundation Course",
+    tagline: "Your Gateway to Chartered Accountancy",
+    description: "Complete preparation for CA Foundation exam covering all four papers - Accounting, Business Laws, Mathematics, and General Economics.",
+    longDescription: `Start your journey to become a Chartered Accountant with our comprehensive CA Foundation course. This course covers all four papers required for the ICAI CA Foundation exam.
+
+What you'll learn:
+- Principles and Practice of Accounting
+- Business Laws & Business Correspondence
+- Business Mathematics & Statistics
+- General Economics & Business Environment`,
+    thumbnail: "/assets/courses/ca-foundation.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 499,
+    originalPrice: 9999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CA",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "ca-aspirants", "commerce-students"],
+    tags: ["ca", "chartered-accountant", "icai", "foundation", "accounting", "Professional / Career Skills", "Professional Certifications", "CA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 180,
+    moduleCount: 14,
+    rating: 4.9,
+    reviewCount: 4500,
+    enrollmentCount: 35000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ca-f1",
+        title: "Principles of Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-ca-f1-1", title: "Accounting Standards Overview", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-ca-f1-2", title: "Bank Reconciliation Statement", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f1-3", title: "Depreciation Accounting", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f1-4", title: "Inventory Valuation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-f2",
+        title: "Business Laws",
+        order: 2,
+        lessons: [
+          { id: "les-ca-f2-1", title: "Indian Contract Act Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-f2-2", title: "Sale of Goods Act", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f2-3", title: "Partnership Laws", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f2-4", title: "Company Law Basics", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f2-5", title: "Business Correspondence", type: "video", duration: 40, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-f3",
+        title: "Business Mathematics",
+        order: 3,
+        lessons: [
+          { id: "les-ca-f3-1", title: "Ratio & Proportion", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-ca-f3-2", title: "Time Value of Money", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f3-3", title: "Permutations & Combinations", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f3-4", title: "Statistical Analysis", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f3-5", title: "Probability Basics", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-f4",
+        title: "General Economics",
+        order: 4,
+        lessons: [
+          { id: "les-ca-f4-1", title: "Indian Economy Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-f4-2", title: "Economic Reforms", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-ca-f4-3", title: "Money & Banking", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-f4-4", title: "Fiscal Policy", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-ca-f4-5", title: "Practice Papers", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CA Foundation in first attempt",
+      "Master all four papers",
+      "Understand accounting principles",
+      "Develop analytical skills"
+    ],
+    requirements: [
+      "12th pass from recognized board",
+      "Basic mathematics knowledge",
+      "Dedication for regular study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "course-ca-intermediate",
+    slug: "ca-intermediate",
+    title: "CA Intermediate Course",
+    tagline: "Advanced Level Chartered Accountancy",
+    description: "Comprehensive CA Intermediate preparation covering Advanced Accounting, Taxation, Costing, and Auditing as per ICAI syllabus.",
+    longDescription: `Progress to the second level of Chartered Accountancy with our detailed CA Intermediate course. Covering advanced topics in accounting, taxation, cost management, and auditing.
+
+What you'll master:
+- Advanced Accounting Standards
+- Corporate Tax Planning
+- Cost Management Techniques
+- Auditing Standards & Practices`,
+    thumbnail: "/assets/courses/ca-intermediate.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 15999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CA",
+    vertical: "professional",
+    targetAudience: ["ca-foundation-passed", "ca-aspirants", "commerce-graduates"],
+    tags: ["ca", "chartered-accountant", "icai", "intermediate", "accounting", "tax", "audit", "Professional / Career Skills", "Professional Certifications", "CA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.8,
+    reviewCount: 3200,
+    enrollmentCount: 25000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ca-i1",
+        title: "Advanced Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-ca-i1-1", title: "AS 12, 14, 16 Complex Cases", type: "video", duration: 60, content: "", isFree: true, order: 1 },
+          { id: "les-ca-i1-2", title: "Company Accounts - Advanced", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i1-3", title: "Accounting for Branches", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i1-4", title: "Amalgamation & Reconstruction", type: "video", duration: 60, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-i2",
+        title: "Corporate Tax",
+        order: 2,
+        lessons: [
+          { id: "les-ca-i2-1", title: "Income Tax Provisions", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-ca-i2-2", title: "Tax Planning Strategies", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i2-3", title: "International Taxation", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i2-4", title: "Deduction Planning", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i2-5", title: "Tax Return Filing", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-i3",
+        title: "Cost Management",
+        order: 3,
+        lessons: [
+          { id: "les-ca-i3-1", title: "Cost Accounting Standards", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-i3-2", title: "Activity Based Costing", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i3-3", title: "Budgetary Control", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i3-4", title: "Standard Costing", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i3-5", title: "Cost Audit", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-i4",
+        title: "Auditing",
+        order: 4,
+        lessons: [
+          { id: "les-ca-i4-1", title: "Auditing Standards", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-ca-i4-2", title: "Audit Procedures", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-i4-3", title: "Internal Audit", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-i4-4", title: "Audit Reports", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-ca-i4-5", title: "Case Study", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CA Intermediate successfully",
+      "Master advanced accounting",
+      "Understand tax planning",
+      "Develop audit expertise"
+    ],
+    requirements: [
+      "CA Foundation cleared",
+      "Strong accounting basics",
+      "Regular study commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "course-ca-final",
+    slug: "ca-final",
+    title: "CA Final Course",
+    tagline: "Complete Preparation for CA Final",
+    description: "Expert-level CA Final preparation covering Advanced Management Accounting, Financial Reporting, Direct Tax, Indirect Tax, and Strategic Management.",
+    longDescription: `Achieve the highest level of Chartered Accountancy with our comprehensive CA Final course. Covering advanced topics required for the final level examination.
+
+What you'll master:
+- Advanced Financial Reporting
+- Strategic Financial Management
+- Direct & Indirect Tax Management
+- Advanced Auditing & Professional Ethics`,
+    thumbnail: "/assets/courses/ca-final.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CA",
+    vertical: "professional",
+    targetAudience: ["ca-intermediate-passed", "ca-final-aspirants", "ca-professionals"],
+    tags: ["ca", "chartered-accountant", "icai", "final", "financial-reporting", "tax-management", "Professional / Career Skills", "Professional Certifications", "CA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 5500,
+    lessonCount: 275,
+    moduleCount: 22,
+    rating: 4.9,
+    reviewCount: 2800,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-ca-final1",
+        title: "Financial Reporting",
+        order: 1,
+        lessons: [
+          { id: "les-ca-final1-1", title: "Ind AS Implementation", type: "video", duration: 60, content: "", isFree: true, order: 1 },
+          { id: "les-ca-final1-2", title: "Group Accounting Complex", type: "video", duration: 65, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final1-3", title: "Financial Instruments", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final1-4", title: "Business Combinations", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-final2",
+        title: "Strategic Financial Management",
+        order: 2,
+        lessons: [
+          { id: "les-ca-final2-1", title: "Capital Budgeting", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-ca-final2-2", title: "Working Capital Management", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final2-3", title: "Merger & Acquisition", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final2-4", title: "Valuation Methods", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final2-5", title: "Project Finance", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-final3",
+        title: "Direct Tax",
+        order: 3,
+        lessons: [
+          { id: "les-ca-final3-1", title: "Advanced Tax Planning", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-ca-final3-2", title: "International Tax Planning", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final3-3", title: "Transfer Pricing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final3-4", title: "Tax Avoidance vs Evasion", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final3-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-ca-final4",
+        title: "Indirect Tax",
+        order: 4,
+        lessons: [
+          { id: "les-ca-final4-1", title: "GST Comprehensive", type: "video", duration: 60, content: "", isFree: false, order: 1 },
+          { id: "les-ca-final4-2", title: "Customs Duty", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-ca-final4-3", title: "Input Tax Credit", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-ca-final4-4", title: "GST Returns & Audit", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-ca-final4-5", title: "Practice Papers", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Become a Chartered Accountant",
+      "Master financial reporting",
+      "Expert in tax planning",
+      "Strategic management skills"
+    ],
+    requirements: [
+      "CA Intermediate cleared",
+      "Strong analytical skills",
+      "Full dedication required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cs_foundation",
+    slug: "cs-foundation",
+    title: "CS Foundation Course",
+    tagline: "Company Secretary Foundation Program",
+    description: "Complete CS Foundation preparation covering Company Law, Company Secretaryship, Financial Accounting, and Business Management.",
+    longDescription: `Begin your journey as a Company Secretary with our comprehensive CS Foundation course. This program covers the fundamentals required for the ICSI Foundation examination.
+
+What you'll learn:
+- Company Law Fundamentals
+- Company Secretaryship Role
+- Financial Accounting Basics
+- Business Management Principles`,
+    thumbnail: "/assets/courses/cs-foundation.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 349,
+    originalPrice: 7999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Company Secretary",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "cs-aspirants", "commerce-students"],
+    tags: ["cs", "company-secretary", "icsi", "foundation", "corporate-law", "Professional / Career Skills", "Professional Certifications", "Company Secretary"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 2500,
+    lessonCount: 125,
+    moduleCount: 10,
+    rating: 4.7,
+    reviewCount: 1800,
+    enrollmentCount: 12000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-cs-f1",
+        title: "Company Law",
+        order: 1,
+        lessons: [
+          { id: "les-cs-f1-1", title: "Companies Act 2013 Overview", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-cs-f1-2", title: "Types of Companies", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f1-3", title: "Company Formation", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f1-4", title: "Board of Directors", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-f2",
+        title: "Company Secretaryship",
+        order: 2,
+        lessons: [
+          { id: "les-cs-f2-1", title: "Role of Company Secretary", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cs-f2-2", title: "Meetings & Resolutions", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f2-3", title: "Statutory Registers", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f2-4", title: "Annual Returns", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f2-5", title: "Practice Exercise", type: "assignment", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-f3",
+        title: "Financial Accounting",
+        order: 3,
+        lessons: [
+          { id: "les-cs-f3-1", title: "Accounting Fundamentals", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cs-f3-2", title: "Journal & Ledger", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f3-3", title: "Trial Balance", type: "video", duration: 35, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f3-4", title: "Final Accounts", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f3-5", title: "Accounting Standards", type: "video", duration: 40, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-f4",
+        title: "Business Management",
+        order: 4,
+        lessons: [
+          { id: "les-cs-f4-1", title: "Management Principles", type: "video", duration: 40, content: "", isFree: false, order: 1 },
+          { id: "les-cs-f4-2", title: "Organizational Behavior", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-cs-f4-3", title: "Business Communication", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-cs-f4-4", title: "Corporate Governance", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-f4-5", title: "Full Mock Test", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[6],
+    
+    outcomes: [
+      "Clear CS Foundation exam",
+      "Understand company law",
+      "Master corporate procedures",
+      "Build career foundation"
+    ],
+    requirements: [
+      "12th pass from recognized board",
+      "Basic business awareness",
+      "Dedication to studies"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cs_executive",
+    slug: "cs-executive",
+    title: "CS Executive Course",
+    tagline: "Intermediate Level Company Secretary",
+    description: "Advanced CS Executive preparation covering Company Law, Corporate Secretarial Practice, Financial Management, and Tax Laws.",
+    longDescription: `Progress to the executive level of Company Secretary with our detailed CS Executive course. Covering advanced topics in corporate law, secretarial practice, and financial management.
+
+What you'll master:
+- Corporate Secretarial Practice
+- Company Law Advanced
+- Financial Management
+- Tax Compliance`,
+    thumbnail: "/assets/courses/cs-executive.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 549,
+    originalPrice: 12999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Company Secretary",
+    vertical: "professional",
+    targetAudience: ["cs-foundation-passed", "cs-executive-aspirants", "legal-professionals"],
+    tags: ["cs", "company-secretary", "icsi", "executive", "corporate-law", "secretarial-practice", "Professional / Career Skills", "Professional Certifications", "Company Secretary"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 1500,
+    enrollmentCount: 10000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cs-e1",
+        title: "Corporate Secretarial Practice",
+        order: 1,
+        lessons: [
+          { id: "les-cs-e1-1", title: "Secretarial Audit", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-cs-e1-2", title: "Due Diligence", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e1-3", title: "Corporate Governance", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e1-4", title: "Compliance Management", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-e2",
+        title: "Company Law Advanced",
+        order: 2,
+        lessons: [
+          { id: "les-cs-e2-1", title: "Share Capital & Debentures", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-e2-2", title: "Dividend & Distribution", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e2-3", title: "Oppression & Mismanagement", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e2-4", title: "Winding Up", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e2-5", title: "Case Studies", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-e3",
+        title: "Financial Management",
+        order: 3,
+        lessons: [
+          { id: "les-cs-e3-1", title: "Capital Structure", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cs-e3-2", title: "Working Capital", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e3-3", title: "Cash Flow Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e3-4", title: "Financial Statement Analysis", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e3-5", title: "Investment Decisions", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-e4",
+        title: "Tax Laws",
+        order: 4,
+        lessons: [
+          { id: "les-cs-e4-1", title: "Income Tax Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cs-e4-2", title: "Corporate Tax Planning", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cs-e4-3", title: "GST Compliance", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cs-e4-4", title: "Tax Returns", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cs-e4-5", title: "Practice Papers", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[6],
+    
+    outcomes: [
+      "Clear CS Executive exam",
+      "Expert in secretarial practice",
+      "Corporate law proficiency",
+      "Financial management skills"
+    ],
+    requirements: [
+      "CS Foundation cleared",
+      "Strong legal aptitude",
+      "Regular study required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cs_professional",
+    slug: "cs-professional",
+    title: "CS Professional Course",
+    tagline: "Advanced Level Company Secretary",
+    description: "Expert-level CS Professional preparation covering Corporate Governance, Secretarial Audit, Due Diligence, and Corporate Restructuring.",
+    longDescription: `Achieve the highest level as a Company Secretary with our comprehensive CS Professional course. Covering advanced topics required for the professional level examination.
+
+What you'll master:
+- Corporate Governance & Ethics
+- Secretarial Audit & Due Diligence
+- Corporate Restructuring
+- Insolvency & Bankruptcy`,
+    thumbnail: "/assets/courses/cs-professional.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 17999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Company Secretary",
+    vertical: "professional",
+    targetAudience: ["cs-executive-passed", "cs-professional-aspirants", "cs-practitioners"],
+    tags: ["cs", "company-secretary", "icsi", "professional", "corporate-governance", "secretarial-audit", "Professional / Career Skills", "Professional Certifications", "Company Secretary"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.8,
+    reviewCount: 1200,
+    enrollmentCount: 8000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cs-p1",
+        title: "Corporate Governance",
+        order: 1,
+        lessons: [
+          { id: "les-cs-p1-1", title: "Governance Frameworks", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cs-p1-2", title: "Board Composition", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p1-3", title: "Audit Committee", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p1-4", title: "SEBI Regulations", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-p2",
+        title: "Secretarial Audit",
+        order: 2,
+        lessons: [
+          { id: "les-cs-p2-1", title: "Audit Methodology", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-p2-2", title: "Compliance Audit", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p2-3", title: "Reporting Standards", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p2-4", title: "Best Practices", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p2-5", title: "Case Study", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-p3",
+        title: "Due Diligence",
+        order: 3,
+        lessons: [
+          { id: "les-cs-p3-1", title: "Due Diligence Process", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-p3-2", title: "Legal Due Diligence", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p3-3", title: "Financial Due Diligence", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p3-4", title: "Regulatory Due Diligence", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p3-5", title: "Documentation", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cs-p4",
+        title: "Corporate Restructuring",
+        order: 4,
+        lessons: [
+          { id: "les-cs-p4-1", title: "Merger & Acquisition", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cs-p4-2", title: "Amalgamation Process", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cs-p4-3", title: "Insolvency Framework", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cs-p4-4", title: "Bankruptcy Code", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cs-p4-5", title: "Mock Exam", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[6],
+    
+    outcomes: [
+      "Become a qualified CS",
+      "Expert in corporate governance",
+      "Master secretarial audit",
+      "Corporate restructuring skills"
+    ],
+    requirements: [
+      "CS Executive cleared",
+      "Extensive knowledge required",
+      "Professional commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cma_foundation",
+    slug: "cma-foundation",
+    title: "CMA Foundation Course",
+    tagline: "Cost Management Accounting Foundation",
+    description: "Complete CMA Foundation preparation covering Fundamentals of Financial Accounting, Cost Accounting, Laws, and Statistics.",
+    longDescription: `Begin your journey in Cost and Management Accounting with our comprehensive CMA Foundation course. This program covers the fundamentals required for the ICWAI CMA Foundation examination.
+
+What you'll learn:
+- Fundamentals of Financial Accounting
+- Cost Accounting Basics
+- Mercantile Law
+- Statistics & Mathematics`,
+    thumbnail: "/assets/courses/cma-foundation.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 349,
+    originalPrice: 7999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CMA",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "cma-aspirants", "commerce-students"],
+    tags: ["cma", "cost-management", "accounting", "icwai", "foundation", "Professional / Career Skills", "Professional Certifications", "CMA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 2500,
+    lessonCount: 125,
+    moduleCount: 10,
+    rating: 4.7,
+    reviewCount: 1600,
+    enrollmentCount: 11000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-cma-f1",
+        title: "Fundamentals of Financial Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-cma-f1-1", title: "Accounting Basics", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-cma-f1-2", title: "Journal Entries", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f1-3", title: "Ledger & Trial Balance", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f1-4", title: "Final Accounts", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-f2",
+        title: "Cost Accounting",
+        order: 2,
+        lessons: [
+          { id: "les-cma-f2-1", title: "Cost Concepts", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cma-f2-2", title: "Materials Costing", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f2-3", title: "Labor Costing", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f2-4", title: "Overhead Allocation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f2-5", title: "Cost Sheet", type: "assignment", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-f3",
+        title: "Mercantile Law",
+        order: 3,
+        lessons: [
+          { id: "les-cma-f3-1", title: "Indian Contract Act", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cma-f3-2", title: "Sale of Goods Act", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f3-3", title: "Partnership Act", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f3-4", title: "Companies Act Basics", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f3-5", title: "Practice Questions", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-f4",
+        title: "Statistics & Mathematics",
+        order: 4,
+        lessons: [
+          { id: "les-cma-f4-1", title: "Statistical Methods", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-cma-f4-2", title: "Probability Basics", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-cma-f4-3", title: "Correlation & Regression", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-f4-4", title: "Time Series Analysis", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cma-f4-5", title: "Full Mock Test", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CMA Foundation",
+      "Master accounting fundamentals",
+      "Understand cost concepts",
+      "Statistical analysis skills"
+    ],
+    requirements: [
+      "12th pass from recognized board",
+      "Basic mathematics knowledge",
+      "Regular study commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cma_intermediate",
+    slug: "cma-intermediate",
+    title: "CMA Intermediate Course",
+    tagline: "Intermediate Cost Management Accounting",
+    description: "Advanced CMA Intermediate preparation covering Financial Accounting, Cost Accounting, Laws, and Direct & Indirect Taxation.",
+    longDescription: `Progress to the intermediate level of Cost and Management Accounting with our detailed CMA Intermediate course. Covering advanced topics in financial management and taxation.
+
+What you'll master:
+- Advanced Financial Accounting
+- Cost Management Techniques
+- Tax Laws & Returns
+- Financial Management`,
+    thumbnail: "/assets/courses/cma-intermediate.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 549,
+    originalPrice: 12999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CMA",
+    vertical: "professional",
+    targetAudience: ["cma-foundation-passed", "cma-intermediate-aspirants", "accountants"],
+    tags: ["cma", "cost-management", "accounting", "icwai", "intermediate", "taxation", "financial-management", "Professional / Career Skills", "Professional Certifications", "CMA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 1400,
+    enrollmentCount: 9000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cma-i1",
+        title: "Financial Accounting",
+        order: 1,
+        lessons: [
+          { id: "les-cma-i1-1", title: "Advanced Accounting Standards", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-cma-i1-2", title: "Company Accounts", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i1-3", title: "Accounting for Special Transactions", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i1-4", title: "Financial Statement Analysis", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-i2",
+        title: "Cost Accounting",
+        order: 2,
+        lessons: [
+          { id: "les-cma-i2-1", title: "Job & Batch Costing", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cma-i2-2", title: "Process Costing", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i2-3", title: "Operation Costing", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i2-4", title: "Standard Costing", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i2-5", title: "Cost Audit", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-i3",
+        title: "Direct Tax",
+        order: 3,
+        lessons: [
+          { id: "les-cma-i3-1", title: "Income Tax Computation", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cma-i3-2", title: "Tax Planning", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i3-3", title: "Deductions & Exemptions", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i3-4", title: "TDS & TCS", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i3-5", title: "Tax Returns", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-i4",
+        title: "Indirect Tax",
+        order: 4,
+        lessons: [
+          { id: "les-cma-i4-1", title: "GST Comprehensive", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cma-i4-2", title: "Input Tax Credit", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cma-i4-3", title: "GST Returns", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cma-i4-4", title: "Customs Duty", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-i4-5", title: "Practice Papers", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CMA Intermediate",
+      "Advanced accounting skills",
+      "Cost management expertise",
+      "Taxation knowledge"
+    ],
+    requirements: [
+      "CMA Foundation cleared",
+      "Strong accounting background",
+      "Regular study required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cma_final",
+    slug: "cma-final",
+    title: "CMA Final Course",
+    tagline: "Advanced Cost Management Accounting",
+    description: "Expert-level CMA Final preparation covering Strategic Financial Management, Corporate Finance, and Strategic Cost Management.",
+    longDescription: `Achieve the highest level in Cost and Management Accounting with our comprehensive CMA Final course. Covering strategic financial management and advanced costing techniques.
+
+What you'll master:
+- Strategic Financial Management
+- Corporate Restructuring
+- Strategic Cost Management
+- Financial Analysis & Decisions`,
+    thumbnail: "/assets/courses/cma-final.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 19999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CMA",
+    vertical: "professional",
+    targetAudience: ["cma-intermediate-passed", "cma-final-aspirants", "finance-managers"],
+    tags: ["cma", "cost-management", "accounting", "icwai", "final", "financial-management", "strategic-costing", "Professional / Career Skills", "Professional Certifications", "CMA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 1100,
+    enrollmentCount: 7000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cma-final1",
+        title: "Strategic Financial Management",
+        order: 1,
+        lessons: [
+          { id: "les-cma-final1-1", title: "Financial Strategy", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cma-final1-2", title: "Capital Budgeting Advanced", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final1-3", title: "Working Capital Strategy", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final1-4", title: "Dividend Policy", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-final2",
+        title: "Corporate Finance",
+        order: 2,
+        lessons: [
+          { id: "les-cma-final2-1", title: "Corporate Valuation", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cma-final2-2", title: "Mergers & Acquisitions", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final2-3", title: "Corporate Restructuring", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final2-4", title: "Project Finance", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final2-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-final3",
+        title: "Strategic Cost Management",
+        order: 3,
+        lessons: [
+          { id: "les-cma-final3-1", title: "ABC Costing", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cma-final3-2", title: "Target Costing", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final3-3", title: "Life Cycle Costing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final3-4", title: "Kaizen Costing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final3-5", title: "Cost Optimization", type: "video", duration: 55, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cma-final4",
+        title: "Financial Analysis",
+        order: 4,
+        lessons: [
+          { id: "les-cma-final4-1", title: "Advanced Ratio Analysis", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cma-final4-2", title: "Cash Flow Analysis", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cma-final4-3", title: "Risk Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cma-final4-4", title: "Decision Making", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cma-final4-5", title: "Final Mock Test", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Become a qualified CMA",
+      "Strategic financial skills",
+      "Corporate finance expertise",
+      "Cost management mastery"
+    ],
+    requirements: [
+      "CMA Intermediate cleared",
+      "Advanced knowledge required",
+      "Professional dedication"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cfa_level1",
+    slug: "cfa-level1",
+    title: "CFA Level 1 Course",
+    tagline: "Chartered Financial Analyst Level 1",
+    description: "Comprehensive CFA Level 1 preparation covering Financial Analysis, Ethics, Quantitative Methods, and Portfolio Management.",
+    longDescription: `Start your journey to become a Chartered Financial Analyst with our detailed CFA Level 1 course. Covering the fundamental knowledge required for the CFA exam.
+
+What you'll master:
+- Ethical & Professional Standards
+- Quantitative Methods
+- Financial Statement Analysis
+- Economics & Portfolio Management`,
+    thumbnail: "/assets/courses/cfa-level1.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 899,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CFA",
+    vertical: "professional",
+    targetAudience: ["graduates", "cfa-aspirants", "finance-professionals"],
+    tags: ["cfa", "chartered-financial-analyst", "cfa-institute", "level1", "financial-analysis", "portfolio-management", "Professional / Career Skills", "Professional Certifications", "CFA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.9,
+    reviewCount: 3500,
+    enrollmentCount: 25000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cfa1-1",
+        title: "Ethical & Professional Standards",
+        order: 1,
+        lessons: [
+          { id: "les-cfa1-1-1", title: "Code of Ethics Overview", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-cfa1-1-2", title: "Standards of Professional Conduct", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-1-3", title: "GIPS Standards", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-1-4", title: "Ethics Case Studies", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa1-2",
+        title: "Quantitative Methods",
+        order: 2,
+        lessons: [
+          { id: "les-cfa1-2-1", title: "Time Value of Money", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa1-2-2", title: "Statistical Concepts", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-2-3", title: "Probability Distributions", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-2-4", title: "Hypothesis Testing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-2-5", title: "Regression Analysis", type: "video", duration: 55, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa1-3",
+        title: "Financial Statement Analysis",
+        order: 3,
+        lessons: [
+          { id: "les-cfa1-3-1", title: "Financial Statement Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa1-3-2", title: "Revenue Recognition", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-3-3", title: "Asset Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-3-4", title: "Liability Analysis", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-3-5", title: "Ratio Analysis", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa1-4",
+        title: "Economics & Portfolio",
+        order: 4,
+        lessons: [
+          { id: "les-cfa1-4-1", title: "Microeconomics", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa1-4-2", title: "Macroeconomics", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa1-4-3", title: "Portfolio Management Basics", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa1-4-4", title: "Capital Market Theory", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa1-4-5", title: "Full Mock Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CFA Level 1 exam",
+      "Master financial analysis",
+      "Understand ethical standards",
+      "Portfolio management foundation"
+    ],
+    requirements: [
+      "Bachelor's degree or final year student",
+      "Basic mathematics knowledge",
+      "Strong English proficiency",
+      "300+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cfa_level2",
+    slug: "cfa-level2",
+    title: "CFA Level 2 Course",
+    tagline: "Intermediate Chartered Financial Analyst",
+    description: "Advanced CFA Level 2 preparation covering Asset Valuation, Derivatives, Fixed Income, and Equity Analysis.",
+    longDescription: `Progress to Level 2 of the CFA program with our detailed course focusing on valuation analysis and advanced financial concepts.
+
+What you'll master:
+- Equity Valuation
+- Fixed Income Analysis
+- Derivatives & Alternative Investments
+- Financial Reporting Analysis Advanced`,
+    thumbnail: "/assets/courses/cfa-level2.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 29999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CFA",
+    vertical: "professional",
+    targetAudience: ["cfa-level1-passed", "cfa-level2-aspirants", "investment-analysts"],
+    tags: ["cfa", "chartered-financial-analyst", "cfa-institute", "level2", "equity-analysis", "fixed-income", "derivatives", "Professional / Career Skills", "Professional Certifications", "CFA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 2800,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cfa2-1",
+        title: "Equity Valuation",
+        order: 1,
+        lessons: [
+          { id: "les-cfa2-1-1", title: "Valuation Models Overview", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cfa2-1-2", title: "Discounted Cash Flow", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-1-3", title: "Comparable Company Analysis", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-1-4", title: "Precedent Transaction Analysis", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa2-2",
+        title: "Fixed Income",
+        order: 2,
+        lessons: [
+          { id: "les-cfa2-2-1", title: "Bond Valuation", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa2-2-2", title: "Yield Curves & Term Structure", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-2-3", title: "Credit Analysis", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-2-4", title: "Mortgage-Backed Securities", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-2-5", title: "Interest Rate Derivatives", type: "video", duration: 55, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa2-3",
+        title: "Derivatives",
+        order: 3,
+        lessons: [
+          { id: "les-cfa2-3-1", title: "Forward Contracts", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa2-3-2", title: "Futures Markets", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-3-3", title: "Options Strategies", type: "video", duration: 60, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-3-4", title: "Option Pricing Models", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-3-5", title: "Swaps & Hedging", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa2-4",
+        title: "Alternative Investments",
+        order: 4,
+        lessons: [
+          { id: "les-cfa2-4-1", title: "Private Equity", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa2-4-2", title: "Real Estate Valuation", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa2-4-3", title: "Hedge Fund Strategies", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa2-4-4", title: "Commodity Markets", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-cfa2-4-5", title: "Practice Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear CFA Level 2 exam",
+      "Advanced valuation skills",
+      "Fixed income expertise",
+      "Derivatives knowledge"
+    ],
+    requirements: [
+      "CFA Level 1 cleared",
+      "Strong financial analysis skills",
+      "500+ hours of study",
+      "English proficiency"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "cfa_level3",
+    slug: "cfa-level3",
+    title: "CFA Level 3 Course",
+    tagline: "Advanced Chartered Financial Analyst",
+    description: "Expert-level CFA Level 3 preparation covering Wealth Management, Portfolio Strategy, and Advanced Ethics.",
+    longDescription: `Complete your CFA journey with our comprehensive Level 3 course focusing on portfolio management and wealth planning strategies.
+
+What you'll master:
+- Portfolio Management
+- Wealth Planning
+- Advanced Asset Allocation
+- Performance Attribution`,
+    thumbnail: "/assets/courses/cfa-level3.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 1199,
+    originalPrice: 34999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "CFA",
+    vertical: "professional",
+    targetAudience: ["cfa-level2-passed", "cfa-level3-aspirants", "portfolio-managers"],
+    tags: ["cfa", "chartered-financial-analyst", "cfa-institute", "level3", "portfolio-management", "wealth-planning", "asset-allocation", "Professional / Career Skills", "Professional Certifications", "CFA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 5000,
+    lessonCount: 250,
+    moduleCount: 20,
+    rating: 4.9,
+    reviewCount: 2200,
+    enrollmentCount: 15000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-cfa3-1",
+        title: "Portfolio Management",
+        order: 1,
+        lessons: [
+          { id: "les-cfa3-1-1", title: "IPS Development", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-cfa3-1-2", title: "Risk Management Framework", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-1-3", title: "Strategic Asset Allocation", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-1-4", title: "Tactical Asset Allocation", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa3-2",
+        title: "Wealth Planning",
+        order: 2,
+        lessons: [
+          { id: "les-cfa3-2-1", title: "Personal Financial Planning", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa3-2-2", title: "Retirement Planning", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-2-3", title: "Tax-Efficient Investing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-2-4", title: "Estate Planning", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-2-5", title: "Client Communication", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa3-3",
+        title: "Advanced Economics",
+        order: 3,
+        lessons: [
+          { id: "les-cfa3-3-1", title: "Economic Cycles", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-cfa3-3-2", title: "Global Economic Analysis", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-3-3", title: "Currency Management", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-3-4", title: "Emerging Markets", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-3-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-cfa3-4",
+        title: "Ethics & Regulation",
+        order: 4,
+        lessons: [
+          { id: "les-cfa3-4-1", title: "Advanced Ethics Cases", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-cfa3-4-2", title: "GIPS Compliance", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-cfa3-4-3", title: "Soft Dollars", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-cfa3-4-4", title: "Trading Ethics", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-cfa3-4-5", title: "Final Mock Exam", type: "assignment", duration: 240, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Become a CFA Charterholder",
+      "Portfolio management expertise",
+      "Wealth planning skills",
+      "Advanced analytical abilities"
+    ],
+    requirements: [
+      "CFA Level 2 cleared",
+      "4 years qualified work experience",
+      "Strong ethics understanding",
+      "500+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_level1",
+    slug: "acca-level1",
+    title: "ACCA Level 1 (Applied Knowledge)",
+    tagline: "ACCA Applied Knowledge Level",
+    description: "Complete ACCA Applied Knowledge preparation covering Business and Technology, Management Accounting, and Financial Accounting.",
+    longDescription: `Begin your ACCA journey with our comprehensive Applied Knowledge level course. This is the first step towards becoming an ACCA Chartered Certified Accountant.
+
+What you'll master:
+- Business and Technology
+- Management Accounting Fundamentals
+- Financial Accounting Basics
+- Corporate Governance`,
+    thumbnail: "/assets/courses/acca-level1.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 599,
+    originalPrice: 14999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "acca-aspirants", "accounting-students"],
+    tags: ["acca", "chartered-certified-accountant", "accounting", "applied-knowledge", "business-technology", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3000,
+    lessonCount: 150,
+    moduleCount: 12,
+    rating: 4.7,
+    reviewCount: 2000,
+    enrollmentCount: 15000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-acca1-1",
+        title: "Business and Technology",
+        order: 1,
+        lessons: [
+          { id: "les-acca1-1-1", title: "Business Organizations", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-acca1-1-2", title: "Accounting Functions", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-acca1-1-3", title: "IT Systems", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca1-1-4", title: "Ethics in Business", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-acca1-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca1-2",
+        title: "Management Accounting",
+        order: 2,
+        lessons: [
+          { id: "les-acca1-2-1", title: "Cost Classification", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-acca1-2-2", title: "Absorption Costing", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca1-2-3", title: "Marginal Costing", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-acca1-2-4", title: "Budgeting", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca1-2-5", title: "Variance Analysis", type: "assignment", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca1-3",
+        title: "Financial Accounting",
+        order: 3,
+        lessons: [
+          { id: "les-acca1-3-1", title: "Double Entry System", type: "video", duration: 45, content: "", isFree: false, order: 1 },
+          { id: "les-acca1-3-2", title: " ledger & Journals", type: "video", duration: 40, content: "", isFree: false, order: 2 },
+          { id: "les-acca1-3-3", title: "Trial Balance", type: "video", duration: 35, content: "", isFree: false, order: 3 },
+          { id: "les-acca1-3-4", title: "Final Accounts", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca1-3-5", title: "Incomplete Records", type: "video", duration: 45, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca1-4",
+        title: "Practice & Revision",
+        order: 4,
+        lessons: [
+          { id: "les-acca1-4-1", title: "Practice Questions", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca1-4-2", title: "Mock Test 1", type: "assignment", duration: 90, content: "", isFree: false, order: 2 },
+          { id: "les-acca1-4-3", title: "Mock Test 2", type: "assignment", duration: 90, content: "", isFree: false, order: 3 },
+          { id: "les-acca1-4-4", title: "Exam Techniques", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-acca1-4-5", title: "Final Review", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear ACCA Applied Knowledge",
+      "Understand business environment",
+      "Master management accounting",
+      "Financial accounting basics"
+    ],
+    requirements: [
+      "10+2 from recognized board",
+      "Basic mathematics",
+      "English proficiency",
+      "Regular study commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_level2",
+    slug: "acca-level2",
+    title: "ACCA Level 2 (Applied Skills)",
+    tagline: "ACCA Applied Skills Level",
+    description: "Advanced ACCA Applied Skills preparation covering Corporate Law, Audit, Tax, and Financial Management.",
+    longDescription: `Progress to the Applied Skills level of ACCA with our comprehensive course covering essential professional accounting skills.
+
+What you'll master:
+- Corporate and Business Law
+- Audit and Assurance
+- Taxation
+- Financial Management`,
+    thumbnail: "/assets/courses/acca-level2.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 19999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["acca-applied-knowledge-passed", "acca-applied-skills-aspirants", "accountants"],
+    tags: ["acca", "chartered-certified-accountant", "accounting", "applied-skills", "audit", "tax", "financial-management", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4000,
+    lessonCount: 200,
+    moduleCount: 16,
+    rating: 4.8,
+    reviewCount: 1800,
+    enrollmentCount: 12000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-acca2-1",
+        title: "Corporate and Business Law",
+        order: 1,
+        lessons: [
+          { id: "les-acca2-1-1", title: "Legal Systems", type: "video", duration: 45, content: "", isFree: true, order: 1 },
+          { id: "les-acca2-1-2", title: "Contract Law", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca2-1-3", title: "Company Law", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca2-1-4", title: "Employment Law", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca2-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca2-2",
+        title: "Audit and Assurance",
+        order: 2,
+        lessons: [
+          { id: "les-acca2-2-1", title: "Audit Framework", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca2-2-2", title: "Audit Planning", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca2-2-3", title: "Audit Evidence", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca2-2-4", title: "Audit Reports", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca2-2-5", title: "Audit Case Study", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca2-3",
+        title: "Taxation",
+        order: 3,
+        lessons: [
+          { id: "les-acca2-3-1", title: "Income Tax Overview", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca2-3-2", title: "Corporate Tax", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca2-3-3", title: "Individual Tax", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca2-3-4", title: "VAT and Customs", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca2-3-5", title: "Tax Planning", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca2-4",
+        title: "Financial Management",
+        order: 4,
+        lessons: [
+          { id: "les-acca2-4-1", title: "Financial Management Functions", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-acca2-4-2", title: "Investment Appraisal", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-acca2-4-3", title: "Working Capital Management", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-acca2-4-4", title: "Finance Sources", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-acca2-4-5", title: "Full Mock Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear ACCA Applied Skills",
+      "Corporate law understanding",
+      "Audit and assurance skills",
+      "Taxation knowledge"
+    ],
+    requirements: [
+      "ACCA Applied Knowledge passed",
+      "Strong accounting background",
+      "English proficiency",
+      "Dedicated study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "acca_level3",
+    slug: "acca-level3",
+    title: "ACCA Level 3 (Strategic Professional)",
+    tagline: "ACCA Strategic Professional Level",
+    description: "Expert-level ACCA Strategic Professional preparation covering Advanced Audit, Financial Reporting, and Business Analysis.",
+    longDescription: `Complete your ACCA journey with our Strategic Professional level course covering advanced audit, reporting, and business strategies.
+
+What you'll master:
+- Advanced Financial Reporting
+- Advanced Audit and Assurance
+- Strategic Business Leader
+- Advanced Performance Management`,
+    thumbnail: "/assets/courses/acca-level3.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 29999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "ACCA",
+    vertical: "professional",
+    targetAudience: ["acca-applied-skills-passed", "acca-strategic-aspirants", "finance-managers"],
+    tags: ["acca", "chartered-certified-accountant", "accounting", "strategic-professional", "advanced-audit", "financial-reporting", "Professional / Career Skills", "Professional Certifications", "ACCA"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 5000,
+    lessonCount: 250,
+    moduleCount: 20,
+    rating: 4.9,
+    reviewCount: 1500,
+    enrollmentCount: 10000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-acca3-1",
+        title: "Advanced Financial Reporting",
+        order: 1,
+        lessons: [
+          { id: "les-acca3-1-1", title: "IFRS Advanced", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-acca3-1-2", title: "Group Accounting Complex", type: "video", duration: 60, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-1-3", title: "Financial Instruments", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-1-4", title: "Impairment Testing", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca3-2",
+        title: "Advanced Audit and Assurance",
+        order: 2,
+        lessons: [
+          { id: "les-acca3-2-1", title: "Audit Risk Assessment", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca3-2-2", title: "Group Audits", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-2-3", title: "Forensic Auditing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-2-4", title: "Professional Ethics", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-2-5", title: "Audit Case Study", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca3-3",
+        title: "Strategic Business Leader",
+        order: 3,
+        lessons: [
+          { id: "les-acca3-3-1", title: "Strategic Analysis", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca3-3-2", title: "Leadership and Management", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-3-3", title: "Governance and Risk", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-3-4", title: "Technology and Data", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-3-5", title: "Business Simulation", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-acca3-4",
+        title: "Advanced Performance Management",
+        order: 4,
+        lessons: [
+          { id: "les-acca3-4-1", title: "Strategic Performance Management", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-acca3-4-2", title: "Performance Measurement", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-acca3-4-3", title: "Variance Analysis Advanced", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-acca3-4-4", title: "Decision Making", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-acca3-4-5", title: "Final Mock Exam", type: "assignment", duration: 240, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Complete ACCA qualification",
+      "Advanced financial reporting",
+      "Audit expertise",
+      "Strategic leadership skills"
+    ],
+    requirements: [
+      "ACCA Applied Skills passed",
+      "3 years relevant experience",
+      "Strong analytical skills",
+      "Professional commitment"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "frm_part1",
+    slug: "frm-part1",
+    title: "FRM Part 1 Course",
+    tagline: "Financial Risk Manager Part 1",
+    description: "Comprehensive FRM Part 1 preparation covering Financial Risk Foundations, Quantitative Analysis, and Market Risk.",
+    longDescription: `Begin your journey to become a Financial Risk Manager with our detailed FRM Part 1 course. Covering foundational risk management concepts.
+
+What you'll master:
+- Foundations of Risk Management
+- Quantitative Analysis
+- Financial Markets and Products
+- Value at Risk Methods`,
+    thumbnail: "/assets/courses/frm-part1.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 799,
+    originalPrice: 19999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "FRM",
+    vertical: "professional",
+    targetAudience: ["graduates", "frm-aspirants", "risk-analysts"],
+    tags: ["frm", "financial-risk-manager", "garp", "risk-management", "quantitative-analysis", "market-risk", "Professional / Career Skills", "Professional Certifications", "FRM"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 2500,
+    enrollmentCount: 18000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-frm1-1",
+        title: "Foundations of Risk Management",
+        order: 1,
+        lessons: [
+          { id: "les-frm1-1-1", title: "Risk Management Overview", type: "video", duration: 50, content: "", isFree: true, order: 1 },
+          { id: "les-frm1-1-2", title: "Corporate Governance", type: "video", duration: 45, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-1-3", title: "Risk Culture", type: "video", duration: 40, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-1-4", title: "Model Risk", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm1-2",
+        title: "Quantitative Analysis",
+        order: 2,
+        lessons: [
+          { id: "les-frm1-2-1", title: "Probability Theory", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-frm1-2-2", title: "Statistical Methods", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-2-3", title: "Regression Analysis", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-2-4", title: "Monte Carlo Simulation", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-2-5", title: "Extreme Value Theory", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm1-3",
+        title: "Financial Markets",
+        order: 3,
+        lessons: [
+          { id: "les-frm1-3-1", title: "Bonds and Fixed Income", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-frm1-3-2", title: "Equities and Derivatives", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-3-3", title: "Foreign Exchange", type: "video", duration: 45, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-3-4", title: "Commodities", type: "video", duration: 40, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-3-5", title: "Structured Products", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm1-4",
+        title: "Value at Risk",
+        order: 4,
+        lessons: [
+          { id: "les-frm1-4-1", title: "VaR Methods", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-frm1-4-2", title: "Backtesting VaR", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm1-4-3", title: "Stress Testing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-frm1-4-4", title: "Expected Shortfall", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-frm1-4-5", title: "Full Mock Exam", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear FRM Part 1 exam",
+      "Foundational risk knowledge",
+      "Quantitative skills",
+      "Market risk understanding"
+    ],
+    requirements: [
+      "2 years work experience waiver available",
+      "Strong mathematics",
+      "English proficiency",
+      "200+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "frm_part2",
+    slug: "frm-part2",
+    title: "FRM Part 2 Course",
+    tagline: "Financial Risk Manager Part 2",
+    description: "Advanced FRM Part 2 preparation covering Market Risk, Credit Risk, Operational Risk, and Integrated Risk Management.",
+    longDescription: `Complete your FRM journey with our detailed Part 2 course covering advanced risk management topics and real-world applications.
+
+What you'll master:
+- Market Risk Management
+- Credit Risk Management
+- Operational Risk Management
+- Current Issues in Risk Management`,
+    thumbnail: "/assets/courses/frm-part2.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 999,
+    originalPrice: 24999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "FRM",
+    vertical: "professional",
+    targetAudience: ["frm-part1-passed", "frm-part2-aspirants", "risk-managers"],
+    tags: ["frm", "financial-risk-manager", "garp", "risk-management", "credit-risk", "operational-risk", "Professional / Career Skills", "Professional Certifications", "FRM"],
+    
+    difficulty: "advanced",
+    language: "Hindi-English",
+    totalDuration: 4500,
+    lessonCount: 225,
+    moduleCount: 18,
+    rating: 4.9,
+    reviewCount: 2000,
+    enrollmentCount: 14000,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-frm2-1",
+        title: "Market Risk",
+        order: 1,
+        lessons: [
+          { id: "les-frm2-1-1", title: "VaR and Volatility", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-frm2-1-2", title: "Interest Rate Risk", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-1-3", title: "Option Pricing Models", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-1-4", title: "Exotic Options", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm2-2",
+        title: "Credit Risk",
+        order: 2,
+        lessons: [
+          { id: "les-frm2-2-1", title: "Credit Risk Modeling", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-frm2-2-2", title: "Default Probability", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-2-3", title: "Credit Derivatives", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-2-4", title: "Counterparty Risk", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-2-5", title: "CVA and DVA", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm2-3",
+        title: "Operational Risk",
+        order: 3,
+        lessons: [
+          { id: "les-frm2-3-1", title: "Operational Risk Framework", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-frm2-3-2", title: "Basel Accords", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-3-3", title: "Model Validation", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-3-4", title: "Liquidity Risk", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-3-5", title: "Case Studies", type: "assignment", duration: 90, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-frm2-4",
+        title: "Current Issues",
+        order: 4,
+        lessons: [
+          { id: "les-frm2-4-1", title: "FinTech Risk", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-frm2-4-2", title: "Climate Risk", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-frm2-4-3", title: "Cyber Security Risk", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-frm2-4-4", title: "Regulatory Changes", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-frm2-4-5", title: "Final Mock Exam", type: "assignment", duration: 180, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[1],
+    
+    outcomes: [
+      "Clear FRM Part 2 exam",
+      "Become FRM Certified",
+      "Advanced risk management",
+      "Career advancement"
+    ],
+    requirements: [
+      "FRM Part 1 cleared",
+      "2 years work experience",
+      "Advanced quantitative skills",
+      "300+ hours of study"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
+  },
+
+  {
+    id: "course-actuarial-science",
+    slug: "actuarial-science",
+    title: "Actuarial Science Foundation",
+    tagline: "Foundation to Actuarial Profession",
+    description: "Complete Actuarial Science preparation covering Mathematics, Statistics, Economics, and Financial Mathematics.",
+    longDescription: `Begin your journey to become an Actuary with our comprehensive foundation course covering essential mathematical and statistical concepts.
+
+What you'll master:
+- Mathematical Methods
+- Statistical Analysis
+- Economic Principles
+- Financial Mathematics`,
+    thumbnail: "/assets/courses/actuarial.svg",
+    previewVideo: "https://www.youtube.com/embed/UxTPtQ8c80c",
+    price: 699,
+    originalPrice: 17999,
+    currency: "INR",
+    
+    category: "Professional Certifications",
+    subcategory: "Actuarial Science",
+    vertical: "professional",
+    targetAudience: ["12th-pass-students", "actuarial-aspirants", "mathematics-students"],
+    tags: ["actuarial", "actuary", "statistics", "mathematics", "financial-mathematics", "risk-analysis", "Professional / Career Skills", "Professional Certifications", "Actuarial Science"],
+    
+    difficulty: "intermediate",
+    language: "Hindi-English",
+    totalDuration: 3500,
+    lessonCount: 175,
+    moduleCount: 14,
+    rating: 4.8,
+    reviewCount: 1500,
+    enrollmentCount: 10000,
+    isActive: true,
+    isFeatured: false,
+    
+    modules: [
+      {
+        id: "mod-act-1",
+        title: "Mathematical Methods",
+        order: 1,
+        lessons: [
+          { id: "les-act-1-1", title: "Calculus", type: "video", duration: 55, content: "", isFree: true, order: 1 },
+          { id: "les-act-1-2", title: "Linear Algebra", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-act-1-3", title: "Differential Equations", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-act-1-4", title: "Numerical Methods", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-act-1-5", title: "Module Assessment", type: "quiz", duration: 30, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-act-2",
+        title: "Statistical Analysis",
+        order: 2,
+        lessons: [
+          { id: "les-act-2-1", title: "Probability Theory", type: "video", duration: 55, content: "", isFree: false, order: 1 },
+          { id: "les-act-2-2", title: "Distributions", type: "video", duration: 50, content: "", isFree: false, order: 2 },
+          { id: "les-act-2-3", title: "Hypothesis Testing", type: "video", duration: 55, content: "", isFree: false, order: 3 },
+          { id: "les-act-2-4", title: "Regression Analysis", type: "video", duration: 50, content: "", isFree: false, order: 4 },
+          { id: "les-act-2-5", title: "Statistical Modeling", type: "assignment", duration: 60, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-act-3",
+        title: "Economics",
+        order: 3,
+        lessons: [
+          { id: "les-act-3-1", title: "Microeconomics", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-act-3-2", title: "Macroeconomics", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-act-3-3", title: "Economic Indicators", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-act-3-4", title: "Market Dynamics", type: "video", duration: 45, content: "", isFree: false, order: 4 },
+          { id: "les-act-3-5", title: "Economic Analysis", type: "video", duration: 50, content: "", isFree: false, order: 5 }
+        ]
+      },
+      {
+        id: "mod-act-4",
+        title: "Financial Mathematics",
+        order: 4,
+        lessons: [
+          { id: "les-act-4-1", title: "Time Value of Money", type: "video", duration: 50, content: "", isFree: false, order: 1 },
+          { id: "les-act-4-2", title: "Annuities and Sinking Funds", type: "video", duration: 55, content: "", isFree: false, order: 2 },
+          { id: "les-act-4-3", title: "Amortization Schedules", type: "video", duration: 50, content: "", isFree: false, order: 3 },
+          { id: "les-act-4-4", title: "Bond Valuation", type: "video", duration: 55, content: "", isFree: false, order: 4 },
+          { id: "les-act-4-5", title: "Full Mock Exam", type: "assignment", duration: 120, content: "", isFree: false, order: 5 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[0],
+    
+    outcomes: [
+      "Clear initial actuarial exams",
+      "Strong mathematical foundation",
+      "Statistical analysis skills",
+      "Financial mathematics knowledge"
+    ],
+    requirements: [
+      "10+2 with mathematics",
+      "Strong analytical skills",
+      "Passion for numbers",
+      "Regular practice required"
+    ],
+    
+    createdAt: "2025-01-01",
+    updatedAt: "2025-01-01"
   }
 
 ];
+
 
 // ============================================
 // Utility Functions
