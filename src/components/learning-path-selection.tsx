@@ -131,7 +131,7 @@ export const LearningPathSelection: React.FC = () => {
         "Workplace Readiness"
       ],
       color: "border-indigo-200",
-      href: "/career"
+      href: "/careers"
     },
     {
       title: "💰 Money & Business",
