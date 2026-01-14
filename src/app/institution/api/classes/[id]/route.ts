@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { createClient } from '@/lib/db';
 
 // GET /api/institution/classes/[id] - Get single class
 export async function GET(
@@ -7,9 +7,10 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const db = createClient()
     const { id } = await params;
 
-    const schoolClass = await prisma.schoolClass.findUnique({
+    const schoolClass = await db.schoolClass.findUnique({
       where: { id },
       include: {
         subjects: {
@@ -72,12 +73,13 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const db = createClient()
     const { id } = await params;
     const body = await request.json();
     const { name, level, sortOrder, isActive } = body;
 
     // Check if class exists
-    const existingClass = await prisma.schoolClass.findUnique({
+    const existingClass = await db.schoolClass.findUnique({
       where: { id },
     });
 
@@ -90,7 +92,7 @@ export async function PUT(
 
     // Check if new name conflicts with existing class
     if (name && name !== existingClass.name) {
-      const nameConflict = await prisma.schoolClass.findUnique({
+      const nameConflict = await db.schoolClass.findUnique({
         where: { name },
       });
 
@@ -102,7 +104,7 @@ export async function PUT(
       }
     }
 
-    const updatedClass = await prisma.schoolClass.update({
+    const updatedClass = await db.schoolClass.update({
       where: { id },
       data: {
         ...(name && { name }),
@@ -137,10 +139,11 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const db = createClient()
     const { id } = await params;
 
     // Check if class exists
-    const existingClass = await prisma.schoolClass.findUnique({
+    const existingClass = await db.schoolClass.findUnique({
       where: { id },
     });
 
@@ -152,7 +155,7 @@ export async function DELETE(
     }
 
     // Check if class has students
-    const studentCount = await prisma.studentProfile.count({
+    const studentCount = await db.studentProfile.count({
       where: { classId: id },
     });
 
@@ -163,7 +166,7 @@ export async function DELETE(
       );
     }
 
-    await prisma.schoolClass.delete({
+    await db.schoolClass.delete({
       where: { id },
     });
 

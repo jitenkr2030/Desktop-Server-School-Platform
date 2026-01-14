@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { createClient } from '@/lib/db';
 
 // GET /api/institution/classes - List all classes
 export async function GET(request: NextRequest) {
   try {
+    const db = createClient()
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get('page') || '1');
     const pageSize = parseInt(searchParams.get('pageSize') || '20');
@@ -28,7 +29,7 @@ export async function GET(request: NextRequest) {
     }
 
     const [classes, total] = await Promise.all([
-      prisma.schoolClass.findMany({
+      db.schoolClass.findMany({
         where,
         include: {
           _count: {
@@ -43,7 +44,7 @@ export async function GET(request: NextRequest) {
         skip: (page - 1) * pageSize,
         take: pageSize,
       }),
-      prisma.schoolClass.count({ where }),
+      db.schoolClass.count({ where }),
     ]);
 
     return NextResponse.json({
@@ -65,6 +66,7 @@ export async function GET(request: NextRequest) {
 // POST /api/institution/classes - Create new class
 export async function POST(request: NextRequest) {
   try {
+    const db = createClient()
     const body = await request.json();
     const { name, level, sortOrder, isActive = true } = body;
 
@@ -76,7 +78,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if class with same name exists
-    const existingClass = await prisma.schoolClass.findUnique({
+    const existingClass = await db.schoolClass.findUnique({
       where: { name },
     });
 
@@ -87,7 +89,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const newClass = await prisma.schoolClass.create({
+    const newClass = await db.schoolClass.create({
       data: {
         name,
         level,

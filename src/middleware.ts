@@ -48,7 +48,7 @@ export async function middleware(request: NextRequest) {
     // For tenant subdomains, rewrite URL to use tenant route group
     // This allows us to have a completely separate UI for tenants
     const url = request.nextUrl.clone()
-    url.pathname = `/(tenant)${pathname}`
+    url.pathname = `/tenant-pages${pathname}`
     url.search = request.nextUrl.search
 
     // Add tenant info as header for downstream use

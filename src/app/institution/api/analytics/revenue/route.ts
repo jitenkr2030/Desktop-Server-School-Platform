@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { createClient } from '@/lib/db';
 
 // GET /api/institution/analytics/revenue - Get revenue analytics
 export async function GET(request: NextRequest) {
   try {
+    const db = createClient()
     const searchParams = request.nextUrl.searchParams;
     const period = searchParams.get('period') || '30d'; // 7d, 30d, 90d, 1y, all
     const startDate = searchParams.get('startDate');
