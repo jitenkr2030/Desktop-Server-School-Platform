@@ -1347,3 +1347,106 @@ enum ReviewAction {
   PUBLISH
   ARCHIVE
 }
+
+// ============================================
+// CONTENT PERMISSIONS MODELS
+// ============================================
+
+model ContentPermission {
+  id          String             @id @default(cuid())
+  contentType ContentPermissionType
+  contentId   String
+  permission  PermissionType
+  role        PermissionRole
+  conditions  String?            // JSON conditions for granular control
+  priority    Int                @default(0)
+  isActive    Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@unique([contentType, contentId, permission, role])
+  @@index([contentType, contentId])
+  @@index([role])
+  @@index([isActive])
+  @@map("content_permissions")
+}
+
+model ContentAccessLog {
+  id          String              @id @default(cuid())
+  contentType String
+  contentId   String
+  userId      String
+  action      AccessAction
+  ipAddress   String?
+  userAgent   String?
+  metadata    String?             // JSON additional data
+  createdAt   DateTime            @default(now())
+
+  @@index([contentType, contentId])
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("content_access_logs")
+}
+
+model RolePermission {
+  id              String   @id @default(cuid())
+  role            String
+  permission      String
+  resourceType    String?
+  resourceId      String?
+  conditions      String?  // JSON conditions
+  isAllowed       Boolean  @default(true)
+  priority        Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([role, permission, resourceType, resourceId])
+  @@index([role])
+  @@map("role_permissions")
+}
+
+enum ContentPermissionType {
+  COURSE
+  LESSON
+  MODULE
+  ASSESSMENT
+  RESOURCE
+  LIVE_SESSION
+  ANNOUNCEMENT
+  DISCUSSION
+  ALL
+}
+
+enum PermissionType {
+  VIEW
+  CREATE
+  EDIT
+  DELETE
+  PUBLISH
+  ARCHIVE
+  SHARE
+  DOWNLOAD
+  MANAGE
+}
+
+enum PermissionRole {
+  STUDENT
+  PARENT
+  TEACHER
+  INSTRUCTOR
+  ADMIN
+  SUPER_ADMIN
+  GUEST
+  OWNER
+}
+
+enum AccessAction {
+  VIEWED
+  DOWNLOADED
+  SHARED
+  ATTEMPTED
+  COMPLETED
+  FAILED
+}
+
