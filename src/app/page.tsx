@@ -763,6 +763,312 @@ export default function NewLandingPage() {
         </div>
       </section>
 
+      {/* White-Label / Multi-Tenant Section */}
+      <section style={{
+        background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%)',
+        padding: '5rem 1rem'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: '#bbf7d0',
+              color: '#166534',
+              borderRadius: '9999px',
+              padding: '0.5rem 1rem',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              marginBottom: '1rem'
+            }}>
+              🏢 White-Label Platform
+            </div>
+            <h2 style={{
+              fontSize: '2.25rem',
+              fontWeight: '700',
+              color: '#1f2937',
+              marginBottom: '0.75rem'
+            }}>
+              Launch Your Own Learning Platform
+            </h2>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1.125rem',
+              maxWidth: '800px',
+              margin: '0 auto',
+              lineHeight: '1.6'
+            }}>
+              A powerful, multi-tenant learning infrastructure that empowers institutions, businesses, and entrepreneurs to launch their own branded learning platforms in minutes.
+            </p>
+          </div>
+
+          {/* White-Label Features Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem',
+            marginBottom: '3rem'
+          }}>
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#dbeafe',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                🎨
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Custom Branding
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Your logo, colors, and domain - create a fully branded learning experience that represents your organization
+              </p>
+            </div>
+
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#fef3c7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                🔗
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Auto-Provisioned Subdomains
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Get instant subdomain access with automatic DNS configuration. Your platform, your subdomain, zero hassle
+              </p>
+            </div>
+
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#fce7f3',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                🔒
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Secure Isolation
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Multi-tenant architecture with complete data isolation. Each institution's data stays completely separate
+              </p>
+            </div>
+
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: '#e0e7ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem',
+                margin: '0 auto 1.25rem'
+              }}>
+                ⚡
+              </div>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                Go Live in Minutes
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6'
+              }}>
+                Set up your branded platform in minutes, not months. Focus on education, let us handle the infrastructure
+              </p>
+            </div>
+          </div>
+
+          {/* CTA for Schools and Colleges */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {/* Schools Card */}
+            <div style={{
+              background: 'white',
+              padding: '2.5rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center',
+              border: '2px solid #3b82f6'
+            }}>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏫</div>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                For Schools
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6',
+                marginBottom: '1.5rem'
+              }}>
+                Create a branded learning platform for your school. Offer online classes, assignments, and assessments with your school's identity.
+              </p>
+              <a href="/institution/signup" style={{
+                display: 'inline-block',
+                background: '#3b82f6',
+                color: 'white',
+                padding: '0.875rem 2rem',
+                borderRadius: '0.5rem',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '1rem',
+                transition: 'background 0.2s, transform 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#2563eb'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#3b82f6'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+              >
+                Start Your School Platform
+              </a>
+            </div>
+
+            {/* Colleges Card */}
+            <div style={{
+              background: 'white',
+              padding: '2.5rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center',
+              border: '2px solid #7c3aed'
+            }}>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎓</div>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                color: '#1f2937',
+                marginBottom: '0.75rem'
+              }}>
+                For Colleges
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.9375rem',
+                lineHeight: '1.6',
+                marginBottom: '1.5rem'
+              }}>
+                Launch a professional learning platform for your college. Offer degree programs, certifications, and skill development courses.
+              </p>
+              <a href="/institution/signup" style={{
+                display: 'inline-block',
+                background: '#7c3aed',
+                color: 'white',
+                padding: '0.875rem 2rem',
+                borderRadius: '0.5rem',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '1rem',
+                transition: 'background 0.2s, transform 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#6d28d9'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#7c3aed'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+              >
+                Start Your College Platform
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Philosophy Section */}
       <section style={{
         background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
