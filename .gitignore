@@ -19,14 +19,6 @@
 **/eggs/
 **/.eggs/
 **/lib/
-# Allow specific lib directories for white-label and tenant features
-!src/lib/
-!src/lib/brand/
-!src/lib/brand/*
-!src/lib/middleware/
-!src/lib/middleware/*
-!src/app/tenant-pages/lib/
-!src/app/tenant-pages/lib/*
 **/lib64/
 **/parts/
 **/sdist/
