@@ -1,13 +1,143 @@
-Dockerfile
-.dockerignore
-node_modules
-npm-debug.log
-README.md
-.next
+# ============================================
+# INR99 Academy - .dockerignore
+# Excludes unnecessary files from Docker build
+# ============================================
+
+# ====================
+# Version Control
+# ====================
 .git
+.gitignore
+.gitattributes
+
+# ====================
+# IDE & Editor
+# ====================
+.idea
+.vscode
+*.swp
+*.swo
+*.swn
+*~
+
+# ====================
+# OS Files
+# ====================
+.DS_Store
+Thumbs.db
+*.log
+logs/
+tmp/
+temp/
+
+# ====================
+# Dependencies
+# ====================
+node_modules/
+bun.lockb
+.pnp
+.pnp.js
+
+# ====================
+# Next.js Build
+# ====================
+.next/
+out/
+build/
+dist/
+
+# ====================
+# Testing
+# ====================
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+*.test.*
+*.spec.*
+__tests__/
+tests/
+
+# ====================
+# Docker
+# ====================
+Dockerfile
+docker-compose*.yml
+.docker/
+docker.mk
+
+# ====================
+# Deployment
+# ====================
+deployment/
+deploy-output/
+deploy_dist/
+.deploy/
+
+# ====================
+# Documentation
+# ====================
+README.md
+README.*
+docs/
+*.md
+*.markdown
+
+# ====================
+# Configuration (Secrets)
+# ====================
+.env
+.env.local
+.env.development
+.env.staging
+.env.production
+.env.test
+.env.*.local
+
+# ====================
+# Database
+# ====================
+prisma/migrations/
+*.db
+*.sqlite
+*.sqlite3
+db/
+
+# ====================
+# Temporary Files
+# ====================
+*.tmp
+*.temp
+*.bak
+*~
+.*.swp
+
+# ====================
+# Build Scripts
+# ====================
+scripts/*.sh
+scripts/*.bat
+scripts/*.ps1
+
+# ====================
+# Package Lock Files (use bun.lock)
+# ====================
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
-test
-*.log
-local-*
+
+# ====================
+# TypeScript
+# ====================
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ====================
+# Misc
+# ====================
+*.pem
+*.key
+*.crt
+!.dockerignore
+!.env.example
+!.env.production.example

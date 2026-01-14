@@ -1,0 +1,56 @@
+# ============================================
+# INR99 Academy - Grafana Provisioning Configuration
+# Auto-provision dashboards and datasources
+# ============================================
+
+# Dashboard providers
+dashboardProviders:
+  file:
+    directory: /etc/grafana/provisioning/dashboards
+
+# Dashboards to load on startup
+dashboards:
+  # Default dashboard provider
+  - name: default
+    orgId: 1
+    folder: ""
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    options:
+      path: /etc/grafana/provisioning/dashboards
+    foldersFromFilesStructure: true
+
+  # Custom dashboards
+  - name: inr99-dashboards
+    orgId: 1
+    folder: INR99 Academy
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 60
+    options:
+      path: /etc/grafana/provisioning/dashboards
+    foldersFromFilesStructure: true
+
+# ============================================
+# Notifiers
+# ============================================
+# Uncomment to enable alert notifications
+# notifiers:
+#   - name: Slack
+#     type: slack
+#     uid: slack-notifier
+#     orgId: 1
+#     isDefault: false
+#     sendReminder: true
+#     frequency: 30m
+#     disableResolveMessage: false
+#     settings:
+#       recipient: "#alerts"
+#       username: Grafana
+#       icon_emoji: ":bell:"
+#       icon_url: ""
+#       mentionUsers: ""
+#       mentionGroups: ""
+#       token: "${GRAFANA_SLACK_TOKEN}"
+#       url: "${GRAFANA_SLACK_WEBHOOK_URL}"

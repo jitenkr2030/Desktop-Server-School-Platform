@@ -1,0 +1,62 @@
+# ============================================
+# INR99 Academy - Grafana Datasource Configuration
+# Prometheus and Loki connections
+# ============================================
+
+apiVersion: 1
+
+# Delete datasources (for cleanup)
+deleteDatasources:
+  - name: Prometheus
+  - name: Loki
+
+# Create datasources
+datasources:
+  # ========================================
+  # Prometheus Datasource
+  # ========================================
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    jsonData:
+      timeInterval: 15s
+      queryTimeout: 60s
+      httpMethod: POST
+      alertmanagerConfig:
+        uid: alertmanager
+      prometheusType: Prometheus
+    secureJsonData:
+      # Add API key for cloud Prometheus if needed
+      # apiKey: your-api-key
+    editable: false
+    version: 1
+
+  # ========================================
+  # Loki Datasource (Log Aggregation)
+  # ========================================
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    jsonData:
+      derivedFields:
+        - datasourceUid: prometheus
+          matcherRegex: "trace_id=(\\w+)"
+          name: Trace ID
+          url: "$${__value.raw}"
+    editable: false
+    version: 1
+
+  # ========================================
+  # Alertmanager Datasource
+  # ========================================
+  - name: Alertmanager
+    type: alertmanager
+    access: proxy
+    url: http://alertmanager:9093
+    jsonData:
+      implementation: prometheus
+    editable: false
+    version: 1
