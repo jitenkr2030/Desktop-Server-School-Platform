@@ -97,16 +97,17 @@ model LearningPath {
 }
 
 model SchoolClass {
-  id             String            @id @default(cuid())
-  name           String            @unique
+  id             String                  @id @default(cuid())
+  name           String                  @unique
   level          SchoolLevel
-  sortOrder      Int               @default(0)
-  isActive       Boolean           @default(true)
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  sortOrder      Int                     @default(0)
+  isActive       Boolean                 @default(true)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
   courses        Course[]
   subjects       SchoolSubject[]
   studentProfiles StudentProfile[]
+  courseAssignments CourseClassAssignment[]
 
   @@map("school_classes")
 }
@@ -220,20 +221,20 @@ model SubCategory {
 }
 
 model Course {
-  id               String           @id @default(cuid())
+  id               String                  @id @default(cuid())
   title            String
   description      String
   thumbnail        String?
-  difficulty       Difficulty       @default(BEGINNER)
-  duration         Int              @default(0)
-  price            Float            @default(0)
-  isActive         Boolean          @default(true)
-  isPublished      Boolean          @default(false)
+  difficulty       Difficulty              @default(BEGINNER)
+  duration         Int                     @default(0)
+  price            Float                   @default(0)
+  isActive         Boolean                 @default(true)
+  isPublished      Boolean                 @default(false)
   instructorId     String
   categoryId       String?
   subCategoryId    String?
   learningPathId   String?
-  courseType       CourseType       @default(GENERAL)
+  courseType       CourseType              @default(GENERAL)
   classId          String?
   schoolSubjectId  String?
   collegeSubjectId String?
@@ -242,23 +243,24 @@ model Course {
   semester         Int?
   chapter          String?
   conceptFocus     String?
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
   assessments      Assessment[]
   progress         CourseProgress[]
-  board            CurriculumBoard? @relation(fields: [boardId], references: [id])
-  category         Category?        @relation(fields: [categoryId], references: [id])
-  class            SchoolClass?     @relation(fields: [classId], references: [id])
-  collegeSubject   CollegeSubject?  @relation(fields: [collegeSubjectId], references: [id])
-  degree           CollegeDegree?   @relation(fields: [degreeId], references: [id])
-  instructor       Instructor       @relation(fields: [instructorId], references: [id])
-  learningPath     LearningPath?    @relation(fields: [learningPathId], references: [id])
-  schoolSubject    SchoolSubject?   @relation(fields: [schoolSubjectId], references: [id])
-  subCategory      SubCategory?     @relation(fields: [subCategoryId], references: [id])
+  board            CurriculumBoard?        @relation(fields: [boardId], references: [id])
+  category         Category?               @relation(fields: [categoryId], references: [id])
+  class            SchoolClass?            @relation(fields: [classId], references: [id])
+  collegeSubject   CollegeSubject?         @relation(fields: [collegeSubjectId], references: [id])
+  degree           CollegeDegree?          @relation(fields: [degreeId], references: [id])
+  instructor       Instructor              @relation(fields: [instructorId], references: [id])
+  learningPath     LearningPath?           @relation(fields: [learningPathId], references: [id])
+  schoolSubject    SchoolSubject?          @relation(fields: [schoolSubjectId], references: [id])
+  subCategory      SubCategory?            @relation(fields: [subCategoryId], references: [id])
   discussions      Discussion[]
   modules          Module[]
   lessons          Lesson[]
   liveSessions     LiveSession[]
+  classAssignments CourseClassAssignment[]
 
   @@map("courses")
 }
@@ -1177,6 +1179,39 @@ model StudentProfile {
   @@index([userId])
   @@index([parentCode])
   @@map("student_profiles")
+}
+
+// ============================================
+// COURSE CLASS ASSIGNMENT MODELS
+// ============================================
+
+model CourseClassAssignment {
+  id           String              @id @default(cuid())
+  courseId     String
+  classId      String
+  assignedBy   String?
+  status       AssignmentStatus    @default(ACTIVE)
+  startDate    DateTime?
+  endDate      DateTime?
+  isMandatory Boolean             @default(false)
+  notes        String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  course       Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  class        SchoolClass        @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, classId])
+  @@index([courseId])
+  @@index([classId])
+  @@index([status])
+  @@map("course_class_assignments")
+}
+
+enum AssignmentStatus {
+  ACTIVE
+  INACTIVE
+  SCHEDULED
+  EXPIRED
 }
 
 model ContactMessage {

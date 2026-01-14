@@ -94,6 +94,12 @@ export default async function TenantLayout({
                   My Learning
                 </a>
                 <a
+                  href="/my-courses"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  My Courses
+                </a>
+                <a
                   href="/student/parent-links"
                   className="text-gray-700 hover:text-gray-900"
                 >
