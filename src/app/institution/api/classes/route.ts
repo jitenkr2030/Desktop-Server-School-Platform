@@ -1,133 +1,116 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/db'
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
+// GET /api/institution/classes - List all classes
 export async function GET(request: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams
-    const tenantId = searchParams.get('tenantId')
+    const searchParams = request.nextUrl.searchParams;
+    const page = parseInt(searchParams.get('page') || '1');
+    const pageSize = parseInt(searchParams.get('pageSize') || '20');
+    const search = searchParams.get('search') || '';
+    const level = searchParams.get('level') || '';
+    const isActive = searchParams.get('isActive');
 
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID is required' },
-        { status: 400 }
-      )
+    const where: Record<string, unknown> = {};
+
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } },
+      ];
     }
 
-    const db = createClient()
+    if (level) {
+      where.level = level;
+    }
 
-    // For now, we'll return mock data since the actual tenant structure
-    // needs to be integrated with the existing school classes
-    // In production, this would query the tenant-specific classes
+    if (isActive !== null && isActive !== '') {
+      where.isActive = isActive === 'true';
+    }
 
-    const classes = [
-      {
-        id: 'class-6-a',
-        name: 'Class 6 - A',
-        grade: 6,
-        section: 'A',
-        studentCount: 35,
-        teacherCount: 2,
-        courseCount: 5,
-      },
-      {
-        id: 'class-7-a',
-        name: 'Class 7 - A',
-        grade: 7,
-        section: 'A',
-        studentCount: 32,
-        teacherCount: 2,
-        courseCount: 5,
-      },
-      {
-        id: 'class-8-a',
-        name: 'Class 8 - A',
-        grade: 8,
-        section: 'A',
-        studentCount: 30,
-        teacherCount: 2,
-        courseCount: 6,
-      },
-      {
-        id: 'class-9-a',
-        name: 'Class 9 - A',
-        grade: 9,
-        section: 'A',
-        studentCount: 28,
-        teacherCount: 3,
-        courseCount: 6,
-      },
-      {
-        id: 'class-10-a',
-        name: 'Class 10 - A',
-        grade: 10,
-        section: 'A',
-        studentCount: 25,
-        teacherCount: 3,
-        courseCount: 7,
-      },
-    ]
+    const [classes, total] = await Promise.all([
+      prisma.schoolClass.findMany({
+        where,
+        include: {
+          _count: {
+            select: {
+              studentProfiles: true,
+              subjects: true,
+              courseAssignments: true,
+            },
+          },
+        },
+        orderBy: { sortOrder: 'asc' },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.schoolClass.count({ where }),
+    ]);
 
     return NextResponse.json({
-      success: true,
       classes,
-    })
+      total,
+      page,
+      pageSize,
+      totalPages: Math.ceil(total / pageSize),
+    });
   } catch (error) {
-    console.error('Get classes error:', error)
+    console.error('Error fetching classes:', error);
     return NextResponse.json(
       { error: 'Failed to fetch classes' },
       { status: 500 }
-    )
+    );
   }
 }
 
+// POST /api/institution/classes - Create new class
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { tenantId, name, grade, section, teacherIds } = body
+    const body = await request.json();
+    const { name, level, sortOrder, isActive = true } = body;
 
-    if (!tenantId || !name || !grade) {
+    if (!name || !level) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Name and level are required' },
         { status: 400 }
-      )
+      );
     }
 
-    const db = createClient()
+    // Check if class with same name exists
+    const existingClass = await prisma.schoolClass.findUnique({
+      where: { name },
+    });
 
-    // Verify tenant
-    const tenant = await db.tenant.findUnique({
-      where: { id: tenantId },
-    })
-
-    if (!tenant) {
+    if (existingClass) {
       return NextResponse.json(
-        { error: 'Tenant not found' },
-        { status: 404 }
-      )
+        { error: 'A class with this name already exists' },
+        { status: 409 }
+      );
     }
 
-    // In production, create a class record linked to tenant
-    // For now, return success with mock data
-    const newClass = {
-      id: `class-${Date.now()}`,
-      name,
-      grade,
-      section: section || '',
-      studentCount: 0,
-      teacherCount: teacherIds?.length || 0,
-      courseCount: 0,
-      createdAt: new Date().toISOString(),
-    }
+    const newClass = await prisma.schoolClass.create({
+      data: {
+        name,
+        level,
+        sortOrder: sortOrder || 0,
+        isActive,
+      },
+      include: {
+        _count: {
+          select: {
+            studentProfiles: true,
+            subjects: true,
+            courseAssignments: true,
+          },
+        },
+      },
+    });
 
-    return NextResponse.json({
-      success: true,
-      class: newClass,
-    })
+    return NextResponse.json(newClass, { status: 201 });
   } catch (error) {
-    console.error('Create class error:', error)
+    console.error('Error creating class:', error);
     return NextResponse.json(
       { error: 'Failed to create class' },
       { status: 500 }
-    )
+    );
   }
 }
