@@ -271,39 +271,31 @@ This document contains a comprehensive task list for implementing a white-label 
 
 ### 5.1 Payment Gateway Setup
 
-- [ ] **Integrate Razorpay**
-  - Create merchant account
-  - Generate API keys
-  - Implement payment links
+- [x] **Integrate Cashfree** ✅ DONE (Jan 2026)
+  - Create payment orders API
+  - Implement payment verification
   - Handle webhooks for payment confirmation
 
-- [ ] **Create checkout flow**
+- [x] **Create checkout flow** ✅ DONE (Jan 2026)
   - Display pricing summary
   - Collect payment details
   - Handle payment success/failure
   - Generate invoice automatically
 
-- [ ] **Implement subscription management**
-  - Monthly billing cycle
+- [x] **Implement subscription management** ✅ DONE (Jan 2026)
+  - Monthly billing cycle (₹99/month)
   - Auto-renewal handling
   - Payment failure notifications
   - Grace period before suspension
 
 ### 5.2 Billing Dashboard
 
-- [ ] **Create tenant billing page**
+- [x] **Create tenant billing page** ✅ DONE (Jan 2026)
   - Current subscription status
   - Payment history
   - Download invoices
   - Update payment method
   - Cancel subscription option
-
-- [ ] **Create admin revenue dashboard**
-  - Total monthly recurring revenue
-  - New subscriptions this month
-  - Churned subscriptions
-  - Revenue by institution type
-  - Geographic distribution
 
 ---
 
@@ -311,37 +303,32 @@ This document contains a comprehensive task list for implementing a white-label 
 
 ### 6.1 Institution Onboarding Flow
 
-- [ ] **Create landing page for institutions**
+- [x] **Create landing page for institutions**
   - Value proposition for schools/colleges
   - Pricing display (₹99/month)
   - Feature highlights
-  - Testimonials
   - Sign up CTA button
 
-- [ ] **Create signup page**
+- [x] **Create signup page** ✅ DONE (Jan 2026)
   - Institution information form
   - Subdomain selection
   - Admin account creation
   - Terms and conditions
   - Progress indicator
 
-- [ ] **Create payment page**
+- [x] **Create payment page** ✅ DONE (Jan 2026)
   - Order summary
   - Payment method selection
-  - UPI QR code display
-  - Card payment form
+  - UPI, Card, Net Banking options
   - Success/failure handling
-
-- [ ] **Create welcome/onboarding page**
-  - Getting started guide
-  - Video tutorial embed
-  - Quick actions (upload logo, invite teachers)
-  - Support contact information
 
 ### 6.2 Institution Dashboard
 
-- [ ] **Create main dashboard**
+- [x] **Create main dashboard** ✅ DONE (Jan 2026)
   - Statistics cards (students, teachers, courses, activity)
+  - Quick actions (add teacher, add class, upload content)
+  - Recent activity feed
+  - Subscription status and renewal date
   - Recent activity feed
   - Quick action buttons
   - Usage charts (daily/weekly/monthly)
