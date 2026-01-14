@@ -1,4 +1,4 @@
-import { getCurrentTenant } from '../lib/tenant'
+import { getCurrentTenant } from '../../lib/tenant'
 import Link from 'next/link'
 
 export default async function TenantCoursesPage() {

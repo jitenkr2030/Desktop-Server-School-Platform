@@ -1,5 +1,4 @@
 import { getCurrentTenant } from './lib/tenant'
-import { generateBrandedCss, generateBrandingCssVariables } from '@/lib/brand/dynamic-css'
 import { TenantBrandingWrapper } from '@/components/tenant/tenant-branding-wrapper'
 import './globals.css'
 
@@ -33,41 +32,13 @@ export default async function TenantLayout({
   // Apply tenant branding
   const branding = tenant.branding
   const primaryColor = branding?.primaryColor || '#3b82f6'
-  const secondaryColor = branding?.secondaryColor || '#1e40af'
-  const accentColor = branding?.accentColor || '#f59e0b'
   const backgroundColor = branding?.backgroundColor || '#ffffff'
   const textColor = branding?.textColor || '#1f2937'
   const fontFamily = branding?.fontFamily || 'Inter'
 
-  // Generate dynamic CSS from branding configuration
-  const brandingTheme = {
-    primaryColor,
-    secondaryColor,
-    accentColor,
-    backgroundColor,
-    textColor,
-    fontFamily,
-    logoUrl: branding?.logoUrl,
-    faviconUrl: branding?.faviconUrl,
-    customCss: branding?.customCss,
-  }
-
-  // Generate complete branded CSS
-  const brandedCss = generateBrandedCss(brandingTheme)
-
-  // Generate CSS variables for inline styles
-  const cssVariables = generateBrandingCssVariables(brandingTheme, {
-    prefix: '--tenant',
-    includeBase: true,
-  })
-
   return (
     <html lang="en">
       <head>
-        {/* Inject dynamic tenant branding CSS */}
-        <style dangerouslySetInnerHTML={{ __html: brandedCss }} />
-        {/* Apply CSS variables for Tailwind integration */}
-        <style dangerouslySetInnerHTML={{ __html: `:root { ${cssVariables} }` }} />
         {/* Tenant's custom CSS if available */}
         {branding?.customCss && (
           <style dangerouslySetInnerHTML={{ __html: branding.customCss }} />
