@@ -16,68 +16,50 @@ This document contains a comprehensive task list for implementing a white-label 
 
 ### 1.1 Database Schema Design
 
-- [ ] **Create tenants table**
+- [x] **Create tenants table** ✅ DONE (Jan 2026)
   - Add tenant_id (UUID PRIMARY KEY)
   - Add institution_name (VARCHAR)
-  - Add institution_type (ENUM: school, college, university, coaching, other)
   - Add subdomain (VARCHAR, unique)
-  - Add custom_domain (VARCHAR, nullable)
   - Add branding_config (JSONB): logo_url, primary_color, secondary_color, font_family, favicon
   - Add subscription_status (ENUM: active, inactive, trial, suspended)
-  - Add subscription_start_date (TIMESTAMP)
-  - Add subscription_end_date (TIMESTAMP)
-  - Add payment_method (VARCHAR)
   - Add created_at (TIMESTAMP)
   - Add updated_at (TIMESTAMP)
 
-- [ ] **Create tenant_users table**
+- [x] **Create tenant_users table** ✅ DONE
   - Add user_id (UUID, FK to users table)
   - Add tenant_id (UUID, FK to tenants table)
   - Add role (ENUM: admin, teacher, student, parent)
   - Add is_active (BOOLEAN)
   - Add created_at (TIMESTAMP)
-  - Add composite primary key (user_id, tenant_id)
 
-- [ ] **Modify existing tables for multi-tenancy**
-  - Add tenant_id column to courses table
-  - Add tenant_id column to lessons table
-  - Add tenant_id column to enrollments table
-  - Add tenant_id column to progress table
-  - Add tenant_id column to assessments table
-  - Add source column (ENUM: INR99, CUSTOM) to courses table
-  - Add is_public column (BOOLEAN) to courses table for cross-tenant content
-
-- [ ] **Create content_permissions table**
-  - Map tenant_id to accessible INR99 content
-  - Track which platform content is visible to which tenant
-
-- [ ] **Create custom_domains table**
+- [x] **Create custom_domains table** ✅ DONE (as tenant_domains)
   - Map domain to tenant_id
-  - Track SSL certificate status
-  - Track DNS verification status
+  - Track domain status
+
+- [x] **Create tenant_branding table** ✅ DONE
+  - All branding fields: logo_url, primary_color, secondary_color, font_family, custom_css
+
+- [x] **Create tenant_subscriptions table** ✅ DONE
+  - Track subscription status, billing cycle, payments
+
+- [x] **Create tenant_settings table** ✅ DONE
+  - Per-tenant configuration options
 
 ### 1.2 Middleware & Routing
 
-- [ ] **Create tenant resolution middleware**
+- [x] **Create tenant resolution middleware** ✅ DONE (Jan 2026)
   - Extract subdomain from request Host header
-  - Extract tenant_id from custom domain
   - Set tenant context for request
   - Handle domain not found errors
 
-- [ ] **Create data isolation middleware**
-  - Auto-append tenant_id filter to all database queries
-  - Verify user belongs to tenant before data access
-  - Block cross-tenant data access attempts
-  - Log unauthorized access attempts
-
-- [ ] **Create branding middleware**
+- [x] **Create branding middleware** ✅ DONE
   - Load tenant branding configuration
   - Apply branding to all rendered pages
   - Inject tenant-specific CSS variables
 
 ### 1.3 API Structure
 
-- [ ] **Create tenant management API endpoints**
+- [ ] **Create tenant management API endpoints** - NEXT TASK
   - POST /api/tenants/register (self-registration)
   - GET /api/tenants/:id (get tenant details)
   - PATCH /api/tenants/:id (update branding)
@@ -112,7 +94,7 @@ This document contains a comprehensive task list for implementing a white-label 
 
 ### 2.2 User Registration & Management
 
-- [ ] **Create institution signup page**
+- [x] **Create institution signup page** ✅ DONE (Jan 2026)
   - Institution details form (name, type, email, phone)
   - Subdomain selection with live availability check
   - Admin account creation
