@@ -38,6 +38,7 @@ model User {
   activityLogs      UserActivityLog[]
   assessments       UserAssessment[]
   badges            UserBadge[]
+  studentProfile    StudentProfile?
 
   @@map("users")
 }
@@ -96,15 +97,16 @@ model LearningPath {
 }
 
 model SchoolClass {
-  id        String          @id @default(cuid())
-  name      String          @unique
-  level     SchoolLevel
-  sortOrder Int             @default(0)
-  isActive  Boolean         @default(true)
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  courses   Course[]
-  subjects  SchoolSubject[]
+  id             String            @id @default(cuid())
+  name           String            @unique
+  level          SchoolLevel
+  sortOrder      Int               @default(0)
+  isActive       Boolean           @default(true)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  courses        Course[]
+  subjects       SchoolSubject[]
+  studentProfiles StudentProfile[]
 
   @@map("school_classes")
 }
@@ -1118,6 +1120,65 @@ enum TenantSubscriptionStatus {
   PAUSED
 }
 
+// ============================================
+// PARENT ACCESS MODELS
+// ============================================
+
+model ParentUser {
+  id            String            @id @default(cuid())
+  email         String            @unique
+  password      String
+  name          String?
+  mobileNumber  String?
+  status        ParentStatus      @default(ACTIVE)
+  isVerified    Boolean           @default(false)
+  lastLogin     DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  links         ParentStudentLink[]
+
+  @@index([email])
+  @@map("parent_users")
+}
+
+model ParentStudentLink {
+  id           String          @id @default(cuid())
+  parentId     String
+  studentId    String
+  relationType ParentRelation  @default(PARENT)
+  isVerified   Boolean         @default(false)
+  verifiedAt   DateTime?
+  status       LinkStatus      @default(PENDING)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  parent       ParentUser      @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  student      StudentProfile  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([parentId, studentId])
+  @@index([studentId])
+  @@map("parent_student_links")
+}
+
+model StudentProfile {
+  id              String            @id @default(cuid())
+  userId          String            @unique
+  admissionNumber String?
+  classId         String?
+  rollNumber      String?
+  section         String?
+  parentCode      String?           @unique
+  codeExpiresAt   DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  class           SchoolClass?      @relation(fields: [classId], references: [id])
+  parentLinks     ParentStudentLink[]
+
+  @@index([userId])
+  @@index([parentCode])
+  @@map("student_profiles")
+}
+
 model ContactMessage {
   id           String        @id @default(cuid())
   firstName    String
@@ -1136,4 +1197,24 @@ model ContactMessage {
   @@index([email])
   @@index([status])
   @@map("contact_messages")
+}
+
+enum ParentStatus {
+  PENDING
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum ParentRelation {
+  PARENT
+  GUARDIAN
+  OTHER
+}
+
+enum LinkStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  REMOVED
 }

@@ -93,6 +93,12 @@ export default async function TenantLayout({
                 >
                   My Learning
                 </a>
+                <a
+                  href="/student/parent-links"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  Parent Access
+                </a>
               </nav>
 
               {/* Login/Register buttons */}
