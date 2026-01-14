@@ -101,11 +101,30 @@ This document contains a comprehensive task list for implementing a white-label 
   - Terms of service acceptance
   - Redirect to payment after submission
 
-- [ ] **Create admin dashboard**
+- [x] **Create admin dashboard** ✅ DONE (Jan 2026)
   - Overview statistics (users, courses, usage)
   - Quick actions (add teacher, add class, upload content)
   - Recent activity feed
   - Subscription status and renewal date
+
+- [x] **Create branding settings page** ✅ DONE (Jan 2026)
+  - Logo upload (file upload to cloud storage)
+  - Primary color picker
+  - Secondary color picker
+  - Font family selection (dropdown with 10+ options)
+  - Live preview of changes
+
+- [x] **Create billing dashboard** ✅ DONE (Jan 2026)
+  - Current subscription status
+  - Payment history
+  - Download invoices
+  - Update payment method
+
+- [x] **Create user management** ✅ DONE (Jan 2026)
+  - Invite teachers via email
+  - Bulk student management
+  - Role-based user listing
+  - Search and filter functionality
 
 - [ ] **Create teacher management**
   - Invite teachers via email
