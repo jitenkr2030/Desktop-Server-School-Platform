@@ -897,6 +897,227 @@ enum ConversionTarget {
   BOTH
 }
 
+model Tenant {
+  id                  String              @id @default(cuid())
+  name                String
+  slug                String              @unique
+  description         String?
+  logoUrl             String?
+  faviconUrl          String?
+  status              TenantStatus        @default(ACTIVE)
+  subscriptionTier    SubscriptionTier    @default(FREE)
+  maxUsers            Int                 @default(100)
+  currentUsers        Int                 @default(0)
+  allowCustomDomain   Boolean             @default(false)
+  allowWhiteLabel     Boolean             @default(true)
+  metadata            String?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  branding            TenantBranding?
+  domains             TenantDomain[]
+  users               TenantUser[]
+  subscription        TenantSubscription?
+  settings            TenantSettings?
+  contentOverrides    ContentOverride[]
+
+  @@index([slug])
+  @@index([status])
+  @@map("tenants")
+}
+
+model TenantBranding {
+  id                   String   @id @default(cuid())
+  tenantId             String   @unique
+  primaryColor         String   @default("#3b82f6")
+  secondaryColor       String   @default("#1e40af")
+  accentColor          String   @default("#f59e0b")
+  backgroundColor      String   @default("#ffffff")
+  textColor            String   @default("#1f2937")
+  fontFamily           String   @default("Inter")
+  customCss            String?
+  logoLightUrl         String?
+  logoDarkUrl          String?
+  loginBackgroundUrl   String?
+  faviconUrl           String?
+  socialImageUrl       String?
+  metaTitle            String?
+  metaDescription      String?
+  headerHtml           String?
+  footerHtml           String?
+  customScripts        String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  tenant               Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_branding")
+}
+
+model TenantDomain {
+  id          String           @id @default(cuid())
+  tenantId    String
+  domain      String           @unique
+  type        DomainType       @default(SUBDOMAIN)
+  status      DomainStatus     @default(ACTIVE)
+  verifiedAt  DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  tenant      Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([domain])
+  @@index([tenantId])
+  @@map("tenant_domains")
+}
+
+model TenantUser {
+  id        String           @id @default(cuid())
+  tenantId  String
+  userId    String?
+  email     String
+  name      String?
+  role      TenantUserRole   @default(MEMBER)
+  status    TenantUserStatus @default(ACTIVE)
+  invitedAt DateTime         @default(now())
+  joinedAt  DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  tenant    Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([userId])
+  @@map("tenant_users")
+}
+
+model TenantSubscription {
+  id                   String                 @id @default(cuid())
+  tenantId             String                 @unique
+  billingCycle         TenantBillingCycle     @default(MONTHLY)
+  status               TenantSubscriptionStatus @default(ACTIVE)
+  monthlyPrice         Float                  @default(99)
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean                @default(false)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  tenant               Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  payments             TenantPayment[]
+
+  @@map("tenant_subscriptions")
+}
+
+model TenantPayment {
+  id              String                 @id @default(cuid())
+  subscriptionId  String
+  amount          Float
+  currency        String                 @default("INR")
+  status          PaymentStatus
+  paymentId       String?
+  invoiceUrl      String?
+  createdAt       DateTime               @default(now())
+  subscription    TenantSubscription     @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([subscriptionId])
+  @@map("tenant_payments")
+}
+
+enum TenantBillingCycle {
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+model TenantSettings {
+  id                    String   @id @default(cuid())
+  tenantId              String   @unique
+  allowRegistration     Boolean  @default(true)
+  requireApproval       Boolean  @default(false)
+  defaultUserRole       String   @default("STUDENT")
+  maxCoursesPerUser     Int      @default(10)
+  enableLiveSessions    Boolean  @default(true)
+  enableCertificates    Boolean  @default(true)
+  enableDiscussion      Boolean  @default(true)
+  enableAnalytics       Boolean  @default(true)
+  customFields          String?
+  welcomeMessage        String?
+  termsOfService        String?
+  privacyPolicy         String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  tenant                Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_settings")
+}
+
+model ContentOverride {
+  id          String   @id @default(cuid())
+  tenantId    String
+  contentType String
+  contentId   String
+  title       String?
+  description String?
+  thumbnail   String?
+  isHidden    Boolean  @default(false)
+  customData  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, contentType, contentId])
+  @@index([tenantId])
+  @@map("content_overrides")
+}
+
+enum TenantStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  CANCELLED
+}
+
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum DomainType {
+  SUBDOMAIN
+  CUSTOM
+}
+
+enum DomainStatus {
+  PENDING
+  VERIFIED
+  ACTIVE
+  FAILED
+  REMOVED
+}
+
+enum TenantUserRole {
+  OWNER
+  ADMIN
+  INSTRUCTOR
+  MEMBER
+}
+
+enum TenantUserStatus {
+  PENDING
+  ACTIVE
+  INACTIVE
+  REMOVED
+}
+
+enum TenantSubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  TRIALING
+  PAUSED
+}
+
 model ContactMessage {
   id           String        @id @default(cuid())
   firstName    String
