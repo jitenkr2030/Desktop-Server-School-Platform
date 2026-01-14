@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/db'
 import { hash } from 'bcryptjs'
+import {
+  createDnsProvider,
+  SubdomainProvisioningService,
+  SubdomainProvisioningConfig,
+} from '@/lib/brand/dns-provider'
 
 export async function POST(request: NextRequest) {
   try {
@@ -48,7 +53,7 @@ export async function POST(request: NextRequest) {
 
     const db = createClient()
 
-    // Check if subdomain is available
+    // Check if subdomain is available in database
     const existingTenant = await db.tenant.findUnique({
       where: { slug: subdomain.toLowerCase() },
     })
@@ -75,6 +80,48 @@ export async function POST(request: NextRequest) {
     // Hash password
     const hashedPassword = await hash(adminPassword, 12)
 
+    // Initialize DNS provider for subdomain auto-provisioning
+    const dnsProviderConfig = {
+      provider: (process.env.DNS_PROVIDER as 'cloudflare' | 'route53') || 'cloudflare',
+      apiKey: process.env.DNS_PROVIDER_API_KEY,
+      apiSecret: process.env.DNS_PROVIDER_API_SECRET,
+      region: process.env.AWS_REGION || 'us-east-1',
+    }
+
+    let dnsProvisioningResult = null
+    let domainStatus: 'PENDING' | 'ACTIVE' | 'FAILED' = 'PENDING'
+
+    // Try to provision subdomain in DNS if provider is configured
+    if (process.env.DNS_PROVIDER_API_KEY) {
+      const dnsProvider = createDnsProvider(dnsProviderConfig)
+
+      if (dnsProvider) {
+        const initialized = await dnsProvider.initialize(dnsProviderConfig)
+
+        if (initialized) {
+          const subdomainService = new SubdomainProvisioningService({
+            baseDomain: 'inr99.academy',
+            dnsProvider,
+            sslProvider: 'cloudflare',
+            defaultTtl: 3600,
+          })
+
+          // Provision the subdomain
+          dnsProvisioningResult = await subdomainService.provisionSubdomain(
+            subdomain.toLowerCase(),
+            '' // tenantId will be added after tenant creation
+          )
+
+          // Update domain status based on DNS provisioning
+          if (dnsProvisioningResult.sslStatus === 'provisioned') {
+            domainStatus = 'ACTIVE'
+          } else if (dnsProvisioningResult.sslStatus === 'failed') {
+            domainStatus = 'FAILED'
+          }
+        }
+      }
+    }
+
     // Create the tenant and admin user in a transaction
     const tenant = await db.tenant.create({
       data: {
@@ -97,7 +144,9 @@ export async function POST(request: NextRequest) {
           create: {
             domain: `${subdomain.toLowerCase()}.inr99.academy`,
             type: 'SUBDOMAIN',
-            status: 'PENDING',
+            status: domainStatus,
+            dnsProvisioned: dnsProvisioningResult?.sslStatus === 'provisioned',
+            dnsRecords: dnsProvisioningResult?.dnsRecords as any,
           },
         },
         settings: {
@@ -141,6 +190,7 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    // Return success with DNS provisioning details
     return NextResponse.json({
       success: true,
       message: 'Institution registered successfully',
@@ -149,12 +199,21 @@ export async function POST(request: NextRequest) {
         name: tenant.name,
         slug: tenant.slug,
         subdomain: `${subdomain.toLowerCase()}.inr99.academy`,
+        domainStatus: domainStatus,
       },
       user: {
         id: user.id,
         email: user.email,
         name: user.name,
       },
+      dnsProvisioning: dnsProvisioningResult
+        ? {
+            subdomain: dnsProvisioningResult.subdomain,
+            fullDomain: dnsProvisioningResult.fullDomain,
+            sslStatus: dnsProvisioningResult.sslStatus,
+            records: dnsProvisioningResult.dnsRecords,
+          }
+        : null,
     })
   } catch (error) {
     console.error('Tenant registration error:', error)

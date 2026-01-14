@@ -957,15 +957,18 @@ model TenantBranding {
 }
 
 model TenantDomain {
-  id          String           @id @default(cuid())
-  tenantId    String
-  domain      String           @unique
-  type        DomainType       @default(SUBDOMAIN)
-  status      DomainStatus     @default(ACTIVE)
-  verifiedAt  DateTime?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
-  tenant      Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  id            String           @id @default(cuid())
+  tenantId      String
+  domain        String           @unique
+  type          DomainType       @default(SUBDOMAIN)
+  status        DomainStatus     @default(ACTIVE)
+  dnsProvisioned Boolean         @default(false)
+  dnsRecords    String?          // JSON array of DNS records created
+  sslStatus     SslStatus        @default(PENDING)
+  verifiedAt    DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  tenant        Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([domain])
   @@index([tenantId])
@@ -1098,6 +1101,13 @@ enum DomainStatus {
   ACTIVE
   FAILED
   REMOVED
+}
+
+enum SslStatus {
+  PENDING
+  PROVISIONED
+  FAILED
+  REVOKED
 }
 
 enum TenantUserRole {
