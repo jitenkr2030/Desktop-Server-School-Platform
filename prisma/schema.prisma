@@ -1253,3 +1253,97 @@ enum LinkStatus {
   REJECTED
   REMOVED
 }
+
+// ============================================
+// CONTENT APPROVAL WORKFLOW MODELS
+// ============================================
+
+model ContentApprovalRequest {
+  id            String              @id @default(cuid())
+  contentType   ContentType
+  contentId     String
+  title         String
+  description   String?
+  status        ApprovalStatus      @default(DRAFT)
+  priority      ApprovalPriority    @default(MEDIUM)
+  submittedBy   String
+  reviewedBy    String?
+  reviewedAt    DateTime?
+  reviewNotes   String?
+  dueDate       DateTime?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  reviews       ContentReview[]
+  comments      ContentComment[]
+
+  @@index([contentType, contentId])
+  @@index([status])
+  @@index([submittedBy])
+  @@map("content_approval_requests")
+}
+
+model ContentReview {
+  id           String               @id @default(cuid())
+  requestId    String
+  reviewerId   String
+  action       ReviewAction
+  notes        String?              @db.Text
+  createdAt    DateTime             @default(now())
+  request      ContentApprovalRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@index([requestId])
+  @@index([reviewerId])
+  @@map("content_reviews")
+}
+
+model ContentComment {
+  id          String               @id @default(cuid())
+  requestId   String
+  authorId    String
+  authorName  String
+  content     String               @db.Text
+  isInternal  Boolean              @default(false)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  request     ContentApprovalRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@index([requestId])
+  @@map("content_comments")
+}
+
+enum ContentType {
+  COURSE
+  LESSON
+  ASSESSMENT
+  LIVE_SESSION
+  ANNOUNCEMENT
+  RESOURCE
+}
+
+enum ApprovalStatus {
+  DRAFT
+  PENDING_REVIEW
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  REVISION_REQUESTED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ApprovalPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ReviewAction {
+  SUBMIT_FOR_REVIEW
+  START_REVIEW
+  APPROVE
+  REJECT
+  REQUEST_REVISION
+  PUBLISH
+  ARCHIVE
+}
