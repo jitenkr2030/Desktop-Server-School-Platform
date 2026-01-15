@@ -38,8 +38,10 @@ export default function AdminVerificationPage() {
   const [tenants, setTenants] = useState<Tenant[]>([])
   const [pagination, setPagination] = useState<Pagination>({ page: 1, limit: 20, total: 0, totalPages: 0 })
   const [selectedTenant, setSelectedTenant] = useState<Tenant | null>(null)
+  const [selectedTenants, setSelectedTenants] = useState<Set<string>>(new Set())
   const [reviewAction, setReviewAction] = useState('')
   const [reviewNotes, setReviewNotes] = useState('')
+  const [bulkNotes, setBulkNotes] = useState('')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -67,6 +69,70 @@ export default function AdminVerificationPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleBulkAction = async (action: 'APPROVE' | 'REQUIRES_MORE_INFO' | 'REJECT') => {
+    if (selectedTenants.size === 0) {
+      setError('Please select at least one institution')
+      return
+    }
+
+    if (action === 'REJECT' && !bulkNotes.trim()) {
+      setError('Please provide a reason for bulk rejection')
+      return
+    }
+
+    setProcessing(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      const response = await fetch('/api/admin/verification/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tenantIds: Array.from(selectedTenants),
+          action,
+          reviewNotes: bulkNotes || 'Bulk action',
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to process bulk action')
+      }
+
+      setSuccess(`Successfully processed ${data.count} institutions`)
+      setSelectedTenants(new Set())
+      setBulkNotes('')
+      fetchTenants()
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => setSuccess(''), 5000)
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setProcessing(false)
+    }
+  }
+
+  const toggleSelectAll = () => {
+    if (selectedTenants.size === tenants.length) {
+      setSelectedTenants(new Set())
+    } else {
+      setSelectedTenants(new Set(tenants.map(t => t.id)))
+    }
+  }
+
+  const toggleTenant = (id: string) => {
+    const newSelected = new Set(selectedTenants)
+    if (newSelected.has(id)) {
+      newSelected.delete(id)
+    } else {
+      newSelected.add(id)
+    }
+    setSelectedTenants(newSelected)
   }
 
   const handleReview = async () => {
@@ -217,14 +283,29 @@ export default function AdminVerificationPage() {
                       className={`px-6 py-4 cursor-pointer hover:bg-gray-50 ${
                         selectedTenant?.id === tenant.id ? 'bg-blue-50' : ''
                       }`}
-                      onClick={() => setSelectedTenant(tenant)}
+                      onClick={(e) => {
+                        // Don't select tenant if clicking checkbox
+                        if ((e.target as HTMLElement).closest('.tenant-checkbox')) return
+                        setSelectedTenant(tenant)
+                      }}
                     >
                       <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-900">{tenant.name}</h3>
-                          <p className="text-sm text-gray-500">
-                            {tenant.domains[0]?.domain || `${tenant.slug}.inr99.academy`}
-                          </p>
+                        <div className="flex items-center">
+                          <input
+                            type="checkbox"
+                            className="tenant-checkbox h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-4"
+                            checked={selectedTenants.has(tenant.id)}
+                            onChange={(e) => {
+                              e.stopPropagation()
+                              toggleTenant(tenant.id)
+                            }}
+                          />
+                          <div>
+                            <h3 className="text-sm font-medium text-gray-900">{tenant.name}</h3>
+                            <p className="text-sm text-gray-500">
+                              {tenant.domains[0]?.domain || `${tenant.slug}.inr99.academy`}
+                            </p>
+                          </div>
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-medium text-gray-900">
@@ -248,6 +329,56 @@ export default function AdminVerificationPage() {
                     </li>
                   ))}
                 </ul>
+
+                {/* Bulk Actions Bar */}
+                {selectedTenants.size > 0 && (
+                  <div className="px-6 py-3 bg-blue-50 border-t border-blue-200 flex items-center justify-between">
+                    <span className="text-sm text-blue-700 font-medium">
+                      {selectedTenants.size} institution(s) selected
+                    </span>
+                    <div className="flex items-center space-x-3">
+                      <input
+                        type="text"
+                        value={bulkNotes}
+                        onChange={(e) => setBulkNotes(e.target.value)}
+                        placeholder="Notes (required for rejection)"
+                        className="px-3 py-1.5 text-sm border border-gray-300 rounded-md w-64"
+                      />
+                      <button
+                        onClick={() => handleBulkAction('APPROVE')}
+                        disabled={processing}
+                        className="px-3 py-1.5 bg-green-600 text-white text-sm rounded-md font-medium hover:bg-green-700 disabled:opacity-50"
+                      >
+                        Approve All ({selectedTenants.size})
+                      </button>
+                      <button
+                        onClick={() => handleBulkAction('REQUIRES_MORE_INFO')}
+                        disabled={processing}
+                        className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md font-medium hover:bg-blue-700 disabled:opacity-50"
+                      >
+                        Request More Info
+                      </button>
+                      <button
+                        onClick={() => handleBulkAction('REJECT')}
+                        disabled={processing || !bulkNotes.trim()}
+                        className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-md font-medium hover:bg-red-700 disabled:opacity-50"
+                      >
+                        Reject All ({selectedTenants.size})
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Select All Header */}
+                <div className="px-6 py-3 bg-gray-50 border-b border-gray-200 flex items-center">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-3"
+                    checked={tenants.length > 0 && selectedTenants.size === tenants.length}
+                    onChange={toggleSelectAll}
+                  />
+                  <span className="text-sm text-gray-700">Select All</span>
+                </div>
               )}
 
               {/* Pagination */}
