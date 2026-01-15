@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+// Eligibility threshold constant
+const ELIGIBILITY_THRESHOLD = 1500
+
 export default function InstitutionSignupPage() {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -11,6 +14,7 @@ export default function InstitutionSignupPage() {
   const [error, setError] = useState('')
   const [subdomainAvailable, setSubdomainAvailable] = useState<boolean | null>(null)
   const [checkingSubdomain, setCheckingSubdomain] = useState(false)
+  const [eligible, setEligible] = useState<boolean | null>(null)
 
   const [formData, setFormData] = useState({
     institutionName: '',
@@ -21,6 +25,7 @@ export default function InstitutionSignupPage() {
     adminPassword: '',
     confirmPassword: '',
     subdomain: '',
+    studentCount: '',
   })
 
   // Check subdomain availability
@@ -31,6 +36,16 @@ export default function InstitutionSignupPage() {
       setSubdomainAvailable(null)
     }
   }, [formData.subdomain])
+
+  // Check eligibility based on student count
+  useEffect(() => {
+    const count = parseInt(formData.studentCount)
+    if (formData.studentCount && !isNaN(count) && count > 0) {
+      setEligible(count >= ELIGIBILITY_THRESHOLD)
+    } else {
+      setEligible(null)
+    }
+  }, [formData.studentCount])
 
   const checkSubdomain = async () => {
     setCheckingSubdomain(true)
@@ -77,6 +92,11 @@ export default function InstitutionSignupPage() {
     }
     if (!formData.phone || formData.phone.length < 10) {
       return 'Please enter a valid phone number'
+    }
+    // Validate student count
+    const studentCount = parseInt(formData.studentCount)
+    if (!formData.studentCount || isNaN(studentCount) || studentCount < 10) {
+      return 'Please enter a valid number of students (minimum 10)'
     }
     return null
   }
@@ -152,6 +172,7 @@ export default function InstitutionSignupPage() {
           subdomain: formData.subdomain,
           adminName: formData.adminName,
           adminPassword: formData.adminPassword,
+          studentCount: parseInt(formData.studentCount),
         }),
       })
 
@@ -296,6 +317,50 @@ export default function InstitutionSignupPage() {
                   <option value="corporate">Corporate Training</option>
                   <option value="other">Other</option>
                 </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Number of Students *
+                </label>
+                <input
+                  type="number"
+                  name="studentCount"
+                  value={formData.studentCount}
+                  onChange={handleChange}
+                  min="10"
+                  max="100000"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., 2000"
+                />
+                <p className="mt-1 text-sm text-gray-500">
+                  Enter the total number of students enrolled in your institution
+                </p>
+                
+                {/* Eligibility Indicator */}
+                {formData.studentCount && (
+                  <div className="mt-3 flex items-center p-3 rounded-lg">
+                    {eligible === true ? (
+                      <div className="flex items-center text-green-700 bg-green-50 w-full p-3 rounded-lg">
+                        <svg className="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="font-medium">
+                          ✓ Your institution qualifies for free white-label access!
+                        </span>
+                      </div>
+                    ) : eligible === false ? (
+                      <div className="flex items-center text-amber-700 bg-amber-50 w-full p-3 rounded-lg">
+                        <svg className="w-5 h-5 mr-2 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <span className="font-medium">
+                          Institutions with 1500+ students qualify for free white-label access
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                )}
               </div>
 
               <div>

@@ -914,6 +914,13 @@ model Tenant {
   currentUsers        Int                 @default(0)
   allowCustomDomain   Boolean             @default(false)
   allowWhiteLabel     Boolean             @default(true)
+  
+  // Eligibility fields for white-label access
+  studentCount        Int?
+  eligibilityStatus   EligibilityStatus   @default(PENDING)
+  eligibilityDeadline DateTime?
+  verifiedAt          DateTime?
+  
   metadata            String?
   createdAt           DateTime            @default(now())
   updatedAt           DateTime            @updatedAt
@@ -923,9 +930,11 @@ model Tenant {
   subscription        TenantSubscription?
   settings            TenantSettings?
   contentOverrides    ContentOverride[]
+  verificationDocs    VerificationDocument[]
 
   @@index([slug])
   @@index([status])
+  @@index([eligibilityStatus])
   @@map("tenants")
 }
 
@@ -1130,6 +1139,57 @@ enum TenantSubscriptionStatus {
   CANCELLED
   TRIALING
   PAUSED
+}
+
+enum EligibilityStatus {
+  ELIGIBLE
+  PENDING
+  UNDER_REVIEW
+  REJECTED
+  EXPIRED
+}
+
+// ============================================
+// VERIFICATION DOCUMENT MODEL
+// ============================================
+
+model VerificationDocument {
+  id            String              @id @default(cuid())
+  tenantId      String
+  documentType  VerificationDocType
+  fileName      String
+  fileUrl       String
+  fileSize      Int
+  mimeType      String
+  status        DocVerificationStatus @default(PENDING)
+  reviewedBy    String?
+  reviewedAt    DateTime?
+  reviewNotes   String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  tenant        Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([status])
+  @@map("verification_documents")
+}
+
+enum VerificationDocType {
+  AICTE_APPROVAL
+  NCTE_RECOGNITION
+  STATE_GOVERNMENT_APPROVAL
+  UNIVERSITY_AFFILIATION
+  ENROLLMENT_DATA
+  STUDENT_ID_SAMPLE
+  INSTITUTION_REGISTRATION
+  OTHER
+}
+
+enum DocVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REQUIRES_MORE_INFO
 }
 
 // ============================================
@@ -1397,23 +1457,6 @@ model ContentAccessLog {
   @@index([action])
   @@index([createdAt])
   @@map("content_access_logs")
-}
-
-model RolePermission {
-  id              String   @id @default(cuid())
-  role            String
-  permission      String
-  resourceType    String?
-  resourceId      String?
-  conditions      String?  // JSON conditions
-  isAllowed       Boolean  @default(true)
-  priority        Int      @default(0)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  @@unique([role, permission, resourceType, resourceId])
-  @@index([role])
-  @@map("role_permissions")
 }
 
 enum ContentPermissionType {

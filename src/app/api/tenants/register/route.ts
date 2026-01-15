@@ -7,10 +7,21 @@ import {
   SubdomainProvisioningConfig,
 } from '@/lib/brand/dns-provider'
 
+// Eligibility threshold for free white-label access
+const ELIGIBILITY_THRESHOLD = 1500
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { institutionName, email, phone, subdomain, adminName, adminPassword } = body
+    const { 
+      institutionName, 
+      email, 
+      phone, 
+      subdomain, 
+      adminName, 
+      adminPassword,
+      studentCount 
+    } = body
 
     // Validate required fields
     if (!institutionName || !email || !subdomain || !adminName || !adminPassword) {
@@ -19,6 +30,23 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    // Validate student count
+    if (!studentCount || isNaN(studentCount) || studentCount < 10) {
+      return NextResponse.json(
+        { error: 'Please enter a valid number of students (minimum 10)' },
+        { status: 400 }
+      )
+    }
+
+    // Determine eligibility status based on student count
+    const isEligible = studentCount >= ELIGIBILITY_THRESHOLD
+    const eligibilityStatus = isEligible ? 'PENDING' : 'EXPIRED'
+    
+    // Set verification deadline (30 days from now if eligible)
+    const eligibilityDeadline = isEligible 
+      ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+      : null
 
     // Validate subdomain format
     const subdomainRegex = /^[a-z0-9][a-z0-9-]*[a-z0-9]$/
@@ -130,6 +158,9 @@ export async function POST(request: NextRequest) {
         status: 'PENDING',
         subscriptionTier: 'FREE',
         maxUsers: 100,
+        studentCount: studentCount,
+        eligibilityStatus: eligibilityStatus,
+        eligibilityDeadline: eligibilityDeadline,
         branding: {
           create: {
             primaryColor: '#3b82f6',
@@ -200,6 +231,10 @@ export async function POST(request: NextRequest) {
         slug: tenant.slug,
         subdomain: `${subdomain.toLowerCase()}.inr99.academy`,
         domainStatus: domainStatus,
+        studentCount: studentCount,
+        eligibilityStatus: eligibilityStatus,
+        eligibilityDeadline: eligibilityDeadline,
+        isEligible: isEligible,
       },
       user: {
         id: user.id,
@@ -214,6 +249,8 @@ export async function POST(request: NextRequest) {
             records: dnsProvisioningResult.dnsRecords,
           }
         : null,
+      verificationRequired: isEligible,
+      verificationDeadline: eligibilityDeadline,
     })
   } catch (error) {
     console.error('Tenant registration error:', error)

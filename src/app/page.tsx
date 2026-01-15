@@ -978,6 +978,13 @@ export default function NewLandingPage() {
               }}>
                 🏫 Schools / Colleges
               </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.875rem',
+                marginTop: '0.5rem'
+              }}>
+                For institutions with 1500+ students
+              </p>
             </div>
             <div style={{
               display: 'grid',
@@ -1016,6 +1023,18 @@ export default function NewLandingPage() {
                 <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
                 <span style={{ color: '#374151', fontSize: '1rem', fontWeight: '600' }}>Zero financial burden</span>
               </div>
+            </div>
+            <div style={{
+              marginTop: '1.5rem',
+              padding: '1rem',
+              background: '#f0fdf4',
+              borderRadius: '0.5rem',
+              textAlign: 'center'
+            }}>
+              <p style={{ color: '#166534', fontSize: '0.875rem' }}>
+                <strong>Eligibility:</strong> Institutions must have 1500+ students to qualify for free white-label access.
+                Verification required within 30 days of signup.
+              </p>
             </div>
           </div>
 
