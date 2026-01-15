@@ -327,7 +327,7 @@ export default function AdminVerificationAnalytics() {
               <div className="px-6 py-4 border-b border-gray-200">
                 <h2 className="text-lg font-medium text-gray-900">Quick Actions</h2>
               </div>
-              <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-6 grid grid-cols-1 md:grid-cols-4 gap-4">
                 <button
                   onClick={() => router.push('/dashboard/admin/verification')}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700"
@@ -335,16 +335,22 @@ export default function AdminVerificationAnalytics() {
                   Review Pending Verifications
                 </button>
                 <button
+                  onClick={() => router.push('/dashboard/admin/verification/export')}
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700"
+                >
+                  Export Data
+                </button>
+                <button
+                  onClick={() => router.push('/dashboard/admin/verification/audit')}
+                  className="px-4 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700"
+                >
+                  View Audit Log
+                </button>
+                <button
                   onClick={() => fetchAnalytics()}
                   className="px-4 py-2 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700"
                 >
                   Refresh Analytics
-                </button>
-                <button
-                  onClick={() => window.print()}
-                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300"
-                >
-                  Export Report
                 </button>
               </div>
             </div>
