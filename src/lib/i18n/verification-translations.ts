@@ -1,6 +1,6 @@
 // Multi-Language Support Infrastructure for Verification Portal
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/db'
 
 // Supported Languages
 export type SupportedLanguage = 'en' | 'hi' | 'ta' | 'te' | 'bn' | 'mr' | 'gu' | 'kn' | 'ml' | 'pa'

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/db'
 import { getAccessStatus } from '@/lib/verification/feature-access'
 
 export async function GET(request: NextRequest) {

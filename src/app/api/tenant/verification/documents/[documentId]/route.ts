@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/db'
 import { DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { s3Client, S3_BUCKET_NAME } from '@/lib/aws'
 
