@@ -159,6 +159,15 @@ export default function NewLandingPage() {
             }}>
               🎥 Live Learning Sessions
             </span>
+            <span style={{
+              background: 'rgba(168, 85, 247, 0.2)',
+              border: '1px solid rgba(168, 85, 247, 0.3)',
+              borderRadius: '9999px',
+              padding: '0.375rem 1rem',
+              fontSize: '0.875rem'
+            }}>
+              🏢 White Label Solution
+            </span>
           </div>
 
           {/* Headline */}
