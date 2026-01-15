@@ -1,0 +1,685 @@
+🌐 Full-Stack Web Development Curriculum
+
+16 Modules • 320 Lessons • 80 Hours
+
+Module 1: HTML Fundamentals (20 Lessons | 5h)
+
+Introduction to Web Development
+
+How the Web Works (HTTP, Browser, Server)
+
+HTML vs CSS vs JS
+
+HTML Document Structure
+
+Doctype & Meta Tags
+
+Head vs Body
+
+Text Elements (h1–h6, p, span)
+
+Formatting Tags
+
+Lists (ul, ol, dl)
+
+Links & Anchors
+
+Images & Attributes
+
+Audio & Video
+
+Tables Basics
+
+Semantic HTML
+
+Forms Overview
+
+Input Types
+
+Labels & Accessibility
+
+HTML Validation
+
+SEO Basics with HTML
+
+Mini Project: Static Page
+
+Module 2: CSS Styling (20 Lessons | 5h)
+
+CSS Introduction
+
+Inline vs Internal vs External CSS
+
+Selectors Deep Dive
+
+Colors & Units
+
+Typography
+
+Box Model
+
+Margin & Padding
+
+Borders & Shadows
+
+Display Property
+
+Positioning
+
+Flexbox Basics
+
+Flexbox Advanced
+
+CSS Grid Basics
+
+Grid Layouts
+
+Responsive Design Concepts
+
+Media Queries
+
+Animations
+
+Transitions
+
+CSS Best Practices
+
+Mini Project: Responsive Layout
+
+Module 3: JavaScript Essentials (20 Lessons | 5h)
+
+JavaScript Overview
+
+Variables & Data Types
+
+Operators
+
+Conditional Statements
+
+Loops
+
+Functions
+
+Arrow Functions
+
+Scope & Hoisting
+
+Arrays
+
+Objects
+
+DOM Basics
+
+DOM Manipulation
+
+Events
+
+Forms Handling
+
+Timers
+
+Error Handling
+
+ES6 Features
+
+JSON
+
+Debugging JS
+
+Project: Interactive Website
+
+Module 4: Advanced JavaScript (20 Lessons | 5h)
+
+Execution Context
+
+Call Stack
+
+Closures
+
+Callbacks
+
+Promises
+
+Async / Await
+
+Fetch API
+
+REST APIs
+
+LocalStorage
+
+SessionStorage
+
+Cookies
+
+Modules
+
+Event Delegation
+
+Throttling & Debouncing
+
+Memory Leaks
+
+Performance Optimization
+
+Security Basics
+
+JS Design Patterns
+
+Testing Basics
+
+Project: API App
+
+Module 5: Git & GitHub (20 Lessons | 5h)
+
+Version Control Basics
+
+Git Installation
+
+Git Init
+
+Git Status
+
+Git Add & Commit
+
+Branches
+
+Merging
+
+Rebasing
+
+Git Logs
+
+Git Ignore
+
+GitHub Overview
+
+Repositories
+
+Pull Requests
+
+Code Reviews
+
+Issues & Projects
+
+GitHub Actions
+
+CI/CD Basics
+
+Collaboration Workflow
+
+Best Practices
+
+Team Project Setup
+
+Module 6: UI/UX Fundamentals (20 Lessons | 5h)
+
+UI vs UX
+
+Design Thinking
+
+User Personas
+
+Wireframing
+
+Prototyping
+
+Color Theory
+
+Typography
+
+Spacing Systems
+
+Accessibility (WCAG)
+
+Responsive UX
+
+Mobile-First Design
+
+UX Laws
+
+Design Systems
+
+Figma Basics
+
+Figma Components
+
+UX Research
+
+Usability Testing
+
+Micro-Interactions
+
+UX Metrics
+
+Redesign Project
+
+Module 7: Frontend Framework – React (20 Lessons | 5h)
+
+React Introduction
+
+JSX
+
+Components
+
+Props
+
+State
+
+Events
+
+Conditional Rendering
+
+Lists & Keys
+
+Hooks Overview
+
+useState
+
+useEffect
+
+Forms
+
+Lifting State
+
+Context API
+
+Routing
+
+API Integration
+
+Error Boundaries
+
+Performance
+
+Deployment
+
+React Project
+
+Module 8: Backend Fundamentals (20 Lessons | 5h)
+
+Backend Overview
+
+Node.js Introduction
+
+npm & yarn
+
+Express.js Basics
+
+Routing
+
+Middleware
+
+REST Principles
+
+CRUD APIs
+
+Request/Response
+
+Status Codes
+
+Error Handling
+
+Logging
+
+Environment Variables
+
+CORS
+
+Security Basics
+
+API Versioning
+
+Rate Limiting
+
+Documentation
+
+Testing APIs
+
+Backend Mini Project
+
+Module 9: Databases (20 Lessons | 5h)
+
+Database Concepts
+
+SQL vs NoSQL
+
+MongoDB Basics
+
+Collections & Documents
+
+CRUD Operations
+
+Indexing
+
+Relationships
+
+Aggregation
+
+Mongoose
+
+Schema Design
+
+Validation
+
+Transactions
+
+Performance
+
+Security
+
+Backups
+
+PostgreSQL Intro
+
+SQL Queries
+
+Joins
+
+Optimization
+
+Database Project
+
+Module 10: Authentication & Authorization (20 Lessons | 5h)
+
+Auth Concepts
+
+Sessions
+
+Cookies
+
+JWT
+
+Password Hashing
+
+Login API
+
+Signup API
+
+Role-Based Access
+
+OAuth
+
+Social Login
+
+Email Verification
+
+Password Reset
+
+Refresh Tokens
+
+Token Security
+
+MFA
+
+Rate Limiting
+
+Brute Force Protection
+
+Audit Logs
+
+Compliance
+
+Auth Project
+
+Module 11: DevOps Basics (20 Lessons | 5h)
+
+DevOps Overview
+
+Linux Basics
+
+Servers
+
+Nginx
+
+Apache
+
+Environment Setup
+
+Docker Basics
+
+Dockerfiles
+
+Containers
+
+Docker Compose
+
+CI/CD
+
+GitHub Actions
+
+Cloud Basics
+
+AWS Overview
+
+VPS Deployment
+
+Monitoring
+
+Logging
+
+Scaling
+
+Backup Strategy
+
+Deploy Project
+
+Module 12: Security Essentials (20 Lessons | 5h)
+
+OWASP Top 10
+
+XSS
+
+CSRF
+
+SQL Injection
+
+Authentication Attacks
+
+Authorization Bugs
+
+API Security
+
+HTTPS
+
+Encryption
+
+Hashing
+
+Secrets Management
+
+Secure Headers
+
+Input Validation
+
+Rate Limiting
+
+Logging Attacks
+
+Security Testing
+
+Pen-Testing Intro
+
+Compliance Basics
+
+Incident Response
+
+Secure App Project
+
+Module 13: Performance Optimization (20 Lessons | 5h)
+
+Performance Metrics
+
+Lighthouse
+
+Frontend Optimization
+
+Image Optimization
+
+Code Splitting
+
+Lazy Loading
+
+Caching
+
+CDN
+
+Backend Optimization
+
+Database Indexing
+
+API Optimization
+
+Memory Management
+
+Profiling
+
+Load Testing
+
+Stress Testing
+
+Scaling Strategies
+
+Monitoring Tools
+
+Alerts
+
+Optimization Checklist
+
+Performance Project
+
+Module 14: Testing & Quality (20 Lessons | 5h)
+
+Testing Types
+
+Unit Testing
+
+Integration Testing
+
+End-to-End Testing
+
+Jest
+
+Mocha
+
+Cypress
+
+Test Coverage
+
+Mocking
+
+API Testing
+
+Load Testing
+
+Security Testing
+
+UI Testing
+
+Automation
+
+CI Testing
+
+Bug Tracking
+
+QA Process
+
+Documentation
+
+Best Practices
+
+Testing Project
+
+Module 15: Real-World Projects (20 Lessons | 5h)
+
+Project Planning
+
+Requirement Analysis
+
+Wireframes
+
+Architecture
+
+Tech Stack
+
+Frontend Build
+
+Backend Build
+
+Database Design
+
+Auth Integration
+
+API Integration
+
+Security
+
+Performance
+
+Testing
+
+Deployment
+
+Monitoring
+
+Bug Fixing
+
+Scaling
+
+Documentation
+
+Presentation
+
+Final Product
+
+Module 16: Career & Startup Readiness (20 Lessons | 5h)
+
+Developer Roadmap
+
+Portfolio Building
+
+GitHub Profile
+
+Resume Writing
+
+Interview Prep
+
+Coding Interviews
+
+System Design
+
+Freelancing
+
+Remote Jobs
+
+SaaS Basics
+
+Startup Ideas
+
+MVP Building
+
+Monetization
+
+Legal Basics
+
+Pricing Models
+
+Client Handling
+
+Scaling Products
+
+AI Integration
+
+Future Trends
+
+Capstone Demo
+
+✅ Final Summary
+
+Modules: 16
+
+Lessons: 320
+
+Duration: 80 Hours
+
+Level: Beginner → Advanced → Professional

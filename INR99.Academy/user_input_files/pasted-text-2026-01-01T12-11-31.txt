@@ -1,0 +1,235 @@
+17:28:49.956 Running build in Washington, D.C., USA (East) – iad1
+17:28:49.957 Build machine configuration: 2 cores, 8 GB
+17:28:50.089 Cloning github.com/jitenkr2030/INR99.Academy (Branch: main, Commit: 160a357)
+17:28:51.935 Cloning completed: 1.846s
+17:28:52.445 Restored build cache from previous deployment (8vKgoRLEVZF1P7D4wZuCJcQmJQrQ)
+17:28:53.393 Running "vercel build"
+17:28:53.790 Vercel CLI 50.1.3
+17:28:54.119 Installing dependencies...
+17:28:55.343 
+17:28:55.344 up to date in 1s
+17:28:55.344 
+17:28:55.345 278 packages are looking for funding
+17:28:55.345   run `npm fund` for details
+17:28:55.373 Detected Next.js version: 15.3.8
+17:28:55.379 Running "npm run build"
+17:28:56.727 
+17:28:56.727 > nextjs_tailwind_shadcn_ts@0.1.0 build
+17:28:56.727 > next build
+17:28:56.727 
+17:28:57.529  ⚠ Found lockfile missing swc dependencies, run next locally to automatically patch
+17:28:57.582  ⚠ Invalid next.config.ts options detected: 
+17:28:57.583  ⚠     Unrecognized key(s) in object: 'swcMinify'
+17:28:57.583  ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+17:28:57.645    ▲ Next.js 15.3.8
+17:28:57.645    - Environments: .env
+17:28:57.645 
+17:28:57.672    Creating an optimized production build ...
+17:28:58.158  ⚠ Found lockfile missing swc dependencies, run next locally to automatically patch
+17:29:03.410  ⚠ Compiled with warnings in 4.0s
+17:29:03.412 
+17:29:03.412 ./src/components/confusion/Certificate.tsx
+17:29:03.412 Module not found: Can't resolve 'html2canvas' in '/vercel/path0/src/components/confusion'
+17:29:03.413 
+17:29:03.413 Import trace for requested module:
+17:29:03.413 ./src/components/confusion/Certificate.tsx
+17:29:03.413 ./src/app/confusion/course/[id]/page.tsx
+17:29:03.417 
+17:29:03.417 ./src/components/confusion/Certificate.tsx
+17:29:03.417 Module not found: Can't resolve 'jspdf' in '/vercel/path0/src/components/confusion'
+17:29:03.417 
+17:29:03.417 Import trace for requested module:
+17:29:03.417 ./src/components/confusion/Certificate.tsx
+17:29:03.417 ./src/app/confusion/course/[id]/page.tsx
+17:29:03.417 
+17:29:03.418 ./src/app/api/user/subscription/route.ts
+17:29:03.418 Attempted import error: 'getServerSession' is not exported from 'next-auth' (imported as 'getServerSession').
+17:29:03.418 
+17:29:03.418 Import trace for requested module:
+17:29:03.418 ./src/app/api/user/subscription/route.ts
+17:29:03.418 
+17:29:03.418 ./src/app/api/user/subscription/route.ts
+17:29:03.418 Attempted import error: 'authOptions' is not exported from '@/lib/auth' (imported as 'authOptions').
+17:29:03.418 
+17:29:03.418 Import trace for requested module:
+17:29:03.418 ./src/app/api/user/subscription/route.ts
+17:29:03.419 
+17:29:03.992  ⚠ Found lockfile missing swc dependencies, run next locally to automatically patch
+17:29:05.180  ⚠ Found lockfile missing swc dependencies, run next locally to automatically patch
+17:29:07.654  ⚠ Compiled with warnings in 2000ms
+17:29:07.655 
+17:29:07.656 ./src/components/confusion/Certificate.tsx
+17:29:07.656 Module not found: Can't resolve 'html2canvas' in '/vercel/path0/src/components/confusion'
+17:29:07.656 
+17:29:07.656 Import trace for requested module:
+17:29:07.657 ./src/components/confusion/Certificate.tsx
+17:29:07.657 ./src/app/confusion/course/[id]/page.tsx
+17:29:07.657 
+17:29:07.657 ./src/components/confusion/Certificate.tsx
+17:29:07.657 Module not found: Can't resolve 'jspdf' in '/vercel/path0/src/components/confusion'
+17:29:07.657 
+17:29:07.658 Import trace for requested module:
+17:29:07.658 ./src/components/confusion/Certificate.tsx
+17:29:07.658 ./src/app/confusion/course/[id]/page.tsx
+17:29:07.658 
+17:29:07.686  ✓ Compiled successfully in 6.0s
+17:29:07.688    Skipping validation of types
+17:29:07.689    Skipping linting
+17:29:07.954    Collecting page data ...
+17:29:11.523    Generating static pages (0/103) ...
+17:29:12.358    Generating static pages (25/103) 
+17:29:12.487    Generating static pages (51/103) 
+17:29:12.831    Generating static pages (77/103) 
+17:29:13.372  ✓ Generating static pages (103/103)
+17:29:13.819    Finalizing page optimization ...
+17:29:13.824    Collecting build traces ...
+17:29:19.919 
+17:29:19.937 Route (app)                                            Size  First Load JS
+17:29:19.938 ┌ ƒ /                                               2.87 kB         113 kB
+17:29:19.938 ├ ƒ /_not-found                                       981 B         102 kB
+17:29:19.939 ├ ƒ /about                                          3.45 kB         114 kB
+17:29:19.939 ├ ƒ /admin                                          10.3 kB         111 kB
+17:29:19.939 ├ ƒ /api                                              320 B         101 kB
+17:29:19.939 ├ ƒ /api/admin/analytics                              320 B         101 kB
+17:29:19.939 ├ ƒ /api/admin/categories                             320 B         101 kB
+17:29:19.940 ├ ƒ /api/admin/categories/bulk                        320 B         101 kB
+17:29:19.940 ├ ƒ /api/admin/courses                                320 B         101 kB
+17:29:19.940 ├ ƒ /api/admin/discussions                            320 B         101 kB
+17:29:19.942 ├ ƒ /api/admin/financial                              320 B         101 kB
+17:29:19.943 ├ ƒ /api/admin/settings                               320 B         101 kB
+17:29:19.943 ├ ƒ /api/admin/stats                                  320 B         101 kB
+17:29:19.943 ├ ƒ /api/admin/subcategories                          320 B         101 kB
+17:29:19.943 ├ ƒ /api/admin/users                                  320 B         101 kB
+17:29:19.944 ├ ƒ /api/assessments                                  320 B         101 kB
+17:29:19.944 ├ ƒ /api/assessments/[id]                             320 B         101 kB
+17:29:19.944 ├ ƒ /api/auth/[...nextauth]                           320 B         101 kB
+17:29:19.944 ├ ƒ /api/auth/register                                320 B         101 kB
+17:29:19.944 ├ ƒ /api/auth/send-otp                                320 B         101 kB
+17:29:19.944 ├ ƒ /api/auth/verify-otp                              320 B         101 kB
+17:29:19.944 ├ ƒ /api/bandwidth-test                               320 B         101 kB
+17:29:19.945 ├ ƒ /api/categories                                   320 B         101 kB
+17:29:19.945 ├ ƒ /api/categories/[slug]                            320 B         101 kB
+17:29:19.945 ├ ƒ /api/certificates                                 320 B         101 kB
+17:29:19.945 ├ ƒ /api/certificates/verify/[certificateNumber]      320 B         101 kB
+17:29:19.945 ├ ƒ /api/college/degrees                              320 B         101 kB
+17:29:19.945 ├ ƒ /api/confusion/[id]/stories                       320 B         101 kB
+17:29:19.945 ├ ƒ /api/confusion/[id]/translations                  320 B         101 kB
+17:29:19.945 ├ ƒ /api/confusion/featured/stories                   320 B         101 kB
+17:29:19.945 ├ ƒ /api/confusion/story                              320 B         101 kB
+17:29:19.946 ├ ƒ /api/confusion/submit                             320 B         101 kB
+17:29:19.946 ├ ƒ /api/courses                                      320 B         101 kB
+17:29:19.946 ├ ƒ /api/courses/[id]                                 320 B         101 kB
+17:29:19.946 ├ ƒ /api/discussions                                  320 B         101 kB
+17:29:19.946 ├ ƒ /api/discussions/[id]                             320 B         101 kB
+17:29:19.946 ├ ƒ /api/discussions/[id]/replies                     320 B         101 kB
+17:29:19.946 ├ ƒ /api/enrollments                                  320 B         101 kB
+17:29:19.946 ├ ƒ /api/expert/qna                                   320 B         101 kB
+17:29:19.946 ├ ƒ /api/instructor/assessments                       320 B         101 kB
+17:29:19.946 ├ ƒ /api/instructor/assessments/[id]                  320 B         101 kB
+17:29:19.946 ├ ƒ /api/instructor/courses                           320 B         101 kB
+17:29:19.947 ├ ƒ /api/instructor/lessons                           320 B         101 kB
+17:29:19.947 ├ ƒ /api/instructor/lessons/[id]                      320 B         101 kB
+17:29:19.947 ├ ƒ /api/instructor/profile                           320 B         101 kB
+17:29:19.947 ├ ƒ /api/instructor/stats                             320 B         101 kB
+17:29:19.947 ├ ƒ /api/instructor/students                          320 B         101 kB
+17:29:19.947 ├ ƒ /api/instructors                                  320 B         101 kB
+17:29:19.947 ├ ƒ /api/languages                                    320 B         101 kB
+17:29:19.947 ├ ƒ /api/learning-categories                          320 B         101 kB
+17:29:19.948 ├ ƒ /api/learning-ledger                              320 B         101 kB
+17:29:19.948 ├ ƒ /api/learning-path-categories                     320 B         101 kB
+17:29:19.952 ├ ƒ /api/learning-paths                               320 B         101 kB
+17:29:19.952 ├ ƒ /api/lessons/[id]                                 320 B         101 kB
+17:29:19.952 ├ ƒ /api/live-sessions                                320 B         101 kB
+17:29:19.952 ├ ƒ /api/live-sessions/[id]                           320 B         101 kB
+17:29:19.952 ├ ƒ /api/live-sessions/[id]/attendance                320 B         101 kB
+17:29:19.952 ├ ƒ /api/payments                                     320 B         101 kB
+17:29:19.952 ├ ƒ /api/payments/[paymentId]/status                  320 B         101 kB
+17:29:19.952 ├ ƒ /api/payments/verify                              320 B         101 kB
+17:29:19.952 ├ ƒ /api/profile                                      320 B         101 kB
+17:29:19.953 ├ ƒ /api/profile/settings                             320 B         101 kB
+17:29:19.953 ├ ƒ /api/progress                                     320 B         101 kB
+17:29:19.953 ├ ƒ /api/school/classes                               320 B         101 kB
+17:29:19.953 ├ ƒ /api/seed                                         320 B         101 kB
+17:29:19.953 ├ ƒ /api/stats                                        320 B         101 kB
+17:29:19.954 ├ ƒ /api/subscription                                 320 B         101 kB
+17:29:19.954 ├ ƒ /api/subscription/cancel                          320 B         101 kB
+17:29:19.954 ├ ƒ /api/user                                         320 B         101 kB
+17:29:19.954 ├ ƒ /api/user/assessments                             320 B         101 kB
+17:29:19.954 ├ ƒ /api/user/enrollments                             320 B         101 kB
+17:29:19.954 ├ ƒ /api/user/progress/courses                        320 B         101 kB
+17:29:19.955 ├ ƒ /api/user/stats                                   320 B         101 kB
+17:29:19.955 ├ ƒ /api/user/subscription                            320 B         101 kB
+17:29:19.955 ├ ƒ /assessments/[id]                               2.74 kB         110 kB
+17:29:19.955 ├ ƒ /auth/login                                     1.63 kB         106 kB
+17:29:19.955 ├ ƒ /auth/register                                  12.7 kB         127 kB
+17:29:19.955 ├ ƒ /blog                                             201 B         110 kB
+17:29:19.956 ├ ƒ /business                                       6.51 kB         145 kB
+17:29:19.956 ├ ƒ /career                                         5.86 kB         138 kB
+17:29:19.956 ├ ƒ /careers                                          201 B         110 kB
+17:29:19.956 ├ ƒ /categories                                     6.21 kB         147 kB
+17:29:19.956 ├ ƒ /categories/[slug]                               9.1 kB         150 kB
+17:29:19.956 ├ ƒ /certificates                                   2.16 kB         110 kB
+17:29:19.956 ├ ƒ /college                                        6.58 kB         145 kB
+17:29:19.956 ├ ƒ /community                                      9.95 kB         156 kB
+17:29:19.956 ├ ƒ /community/[id]                                 6.91 kB         124 kB
+17:29:19.956 ├ ƒ /confusion-removers                               179 B         105 kB
+17:29:19.956 ├ ƒ /confusion/[id]                                 6.39 kB         107 kB
+17:29:19.956 ├ ƒ /confusion/course/[id]                          5.23 kB         128 kB
+17:29:19.956 ├ ƒ /contact                                          201 B         110 kB
+17:29:19.956 ├ ƒ /courses                                        3.13 kB         113 kB
+17:29:19.956 ├ ƒ /courses/[id]                                   8.39 kB         135 kB
+17:29:19.956 ├ ƒ /dashboard                                        320 B         101 kB
+17:29:19.956 ├ ƒ /dashboard/admin/overview                       2.43 kB         110 kB
+17:29:19.956 ├ ƒ /dashboard/admin/settings                       5.17 kB         113 kB
+17:29:19.956 ├ ƒ /dashboard/admin/users                          4.83 kB         112 kB
+17:29:19.956 ├ ƒ /dashboard/instructor                            3.9 kB         108 kB
+17:29:19.956 ├ ƒ /dashboard/instructor/courses                   4.76 kB         109 kB
+17:29:19.956 ├ ƒ /dashboard/instructor/courses/[id]              5.32 kB         110 kB
+17:29:19.956 ├ ƒ /dashboard/instructor/courses/[id]/lessons/new  4.28 kB         109 kB
+17:29:19.957 ├ ƒ /dashboard/instructor/courses/new               3.96 kB         108 kB
+17:29:19.957 ├ ƒ /dashboard/instructor/overview                  3.12 kB         111 kB
+17:29:19.957 ├ ƒ /dashboard/instructor/students                     4 kB         105 kB
+17:29:19.957 ├ ƒ /dashboard/simple-test                          1.18 kB         105 kB
+17:29:19.957 ├ ƒ /dashboard/standalone                             179 B         105 kB
+17:29:19.957 ├ ƒ /dashboard/student                              3.23 kB         104 kB
+17:29:19.957 ├ ƒ /dashboard/student/certificates                 4.14 kB         122 kB
+17:29:19.957 ├ ƒ /dashboard/student/courses                      3.86 kB         112 kB
+17:29:19.957 ├ ƒ /dashboard/student/overview                     1.27 kB         106 kB
+17:29:19.957 ├ ƒ /dashboard/student/profile                      1.27 kB         106 kB
+17:29:19.957 ├ ƒ /faq                                              201 B         110 kB
+17:29:19.957 ├ ƒ /instructor                                      2.7 kB         104 kB
+17:29:19.957 ├ ƒ /instructors                                      201 B         110 kB
+17:29:19.957 ├ ƒ /learning-ledger                                2.98 kB         111 kB
+17:29:19.957 ├ ƒ /learning-paths                                 3.41 kB         118 kB
+17:29:19.957 ├ ƒ /learning-paths/[id]                             7.2 kB         125 kB
+17:29:19.957 ├ ƒ /lessons/[id]                                    5.9 kB         144 kB
+17:29:19.957 ├ ƒ /live-sessions                                  2.76 kB         117 kB
+17:29:19.957 ├ ƒ /live-sessions/[id]                             4.18 kB         119 kB
+17:29:19.957 ├ ƒ /privacy                                          201 B         110 kB
+17:29:19.957 ├ ƒ /profile                                        10.2 kB         157 kB
+17:29:19.957 ├ ƒ /school                                         6.53 kB         145 kB
+17:29:19.957 ├ ƒ /simple                                           320 B         101 kB
+17:29:19.957 ├ ƒ /subscription                                   3.33 kB         113 kB
+17:29:19.957 ├ ƒ /terms                                            201 B         110 kB
+17:29:19.957 ├ ƒ /verify-certificate                             3.92 kB         115 kB
+17:29:19.957 └ ƒ /verify-certificate/[certificateNumber]         4.36 kB         115 kB
+17:29:19.957 + First Load JS shared by all                        101 kB
+17:29:19.957   ├ chunks/1684-422a72cad85a7517.js                   46 kB
+17:29:19.957   ├ chunks/4bd1b696-b638aa3d70fba23c.js             53.2 kB
+17:29:19.957   └ other shared chunks (total)                     1.94 kB
+17:29:19.957 
+17:29:19.957 
+17:29:19.957 ƒ Middleware                                        33.3 kB
+17:29:19.957 
+17:29:19.961 ƒ  (Dynamic)  server-rendered on demand
+17:29:19.961 
+17:29:20.256 Traced Next.js server files in: 107.214ms
+17:29:20.789 Created all serverless functions in: 533.1ms
+17:29:20.860 Collected static files (public/, static/, .next/static): 34.318ms
+17:29:21.029 Build Completed in /vercel/output [27s]
+17:29:21.333 Deploying outputs...
+17:29:35.884 Deployment completed
+17:29:36.788 Creating build cache...
+17:30:05.062 Created build cache: 28.266s
+17:30:05.063 Uploading build cache [354.97 MB]
+17:30:08.968 Build cache uploaded: 3.911s

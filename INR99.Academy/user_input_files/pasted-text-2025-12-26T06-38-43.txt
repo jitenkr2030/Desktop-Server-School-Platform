@@ -1,0 +1,135 @@
+12:02:24.689 Running build in Washington, D.C., USA (East) – iad1
+12:02:24.690 Build machine configuration: 2 cores, 8 GB
+12:02:24.999 Cloning github.com/jitenkr2030/INR99.Academy (Branch: main, Commit: 69f614f)
+12:02:26.358 Cloning completed: 1.359s
+12:02:27.965 Restored build cache from previous deployment (9S4Wz4DzRvXWrpJqKXzpeMwRVVGX)
+12:02:29.023 Running "vercel build"
+12:02:29.420 Vercel CLI 50.1.3
+12:02:29.890 Installing dependencies...
+12:02:29.923 bun install v1.3.4 (5eb2145b)
+12:02:29.956 Resolving dependencies
+12:02:31.498 Resolved, downloaded and extracted [74]
+12:02:31.632 Saved lockfile
+12:02:31.633 
+12:02:31.633 Checked 818 installs across 905 packages (no changes) [1.72s]
+12:02:31.649 Detected Next.js version: 15.3.8
+12:02:31.652 Running "bun run build"
+12:02:31.656 $ next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/
+12:02:32.577    ▲ Next.js 15.3.8
+12:02:32.578 
+12:02:32.598    Creating an optimized production build ...
+12:02:43.837  ✓ Compiled successfully in 7.0s
+12:02:43.840    Skipping validation of types
+12:02:43.840    Skipping linting
+12:02:44.078    Collecting page data ...
+12:02:46.873    Generating static pages (0/68) ...
+12:02:47.744    Generating static pages (17/68) 
+12:02:47.798    Generating static pages (34/68) 
+12:02:48.426    Generating static pages (51/68) 
+12:02:48.427  ✓ Generating static pages (68/68)
+12:02:48.800    Finalizing page optimization ...
+12:02:48.807    Collecting build traces ...
+12:02:55.043 
+12:02:55.065 Route (app)                                          Size  First Load JS
+12:02:55.065 ┌ ○ /                                             2.87 kB         113 kB
+12:02:55.066 ├ ○ /_not-found                                     981 B         102 kB
+12:02:55.066 ├ ○ /about                                        3.45 kB         113 kB
+12:02:55.066 ├ ○ /admin                                        3.67 kB         111 kB
+12:02:55.066 ├ ƒ /api                                            286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/categories                           286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/categories/bulk                      286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/courses                              286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/discussions                          286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/stats                                286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/subcategories                        286 B         102 kB
+12:02:55.066 ├ ƒ /api/admin/users                                286 B         102 kB
+12:02:55.066 ├ ƒ /api/assessments                                286 B         102 kB
+12:02:55.066 ├ ƒ /api/assessments/[id]                           286 B         102 kB
+12:02:55.066 ├ ƒ /api/auth/[...nextauth]                         286 B         102 kB
+12:02:55.066 ├ ƒ /api/auth/register                              286 B         102 kB
+12:02:55.067 ├ ƒ /api/auth/send-otp                              286 B         102 kB
+12:02:55.067 ├ ƒ /api/auth/verify-otp                            286 B         102 kB
+12:02:55.067 ├ ƒ /api/bandwidth-test                             286 B         102 kB
+12:02:55.067 ├ ƒ /api/categories                                 286 B         102 kB
+12:02:55.067 ├ ƒ /api/categories/[slug]                          286 B         102 kB
+12:02:55.067 ├ ƒ /api/certificates                               286 B         102 kB
+12:02:55.067 ├ ƒ /api/certificates/verify/[certificateNumber]    286 B         102 kB
+12:02:55.067 ├ ƒ /api/college/degrees                            286 B         102 kB
+12:02:55.067 ├ ƒ /api/confusion/[id]/stories                     286 B         102 kB
+12:02:55.067 ├ ƒ /api/confusion/[id]/translations                286 B         102 kB
+12:02:55.067 ├ ƒ /api/confusion/featured/stories                 286 B         102 kB
+12:02:55.067 ├ ƒ /api/confusion/story                            286 B         102 kB
+12:02:55.068 ├ ƒ /api/confusion/submit                           286 B         102 kB
+12:02:55.068 ├ ƒ /api/courses                                    286 B         102 kB
+12:02:55.068 ├ ƒ /api/courses/[id]                               286 B         102 kB
+12:02:55.068 ├ ƒ /api/discussions                                286 B         102 kB
+12:02:55.068 ├ ƒ /api/discussions/[id]                           286 B         102 kB
+12:02:55.068 ├ ƒ /api/discussions/[id]/replies                   286 B         102 kB
+12:02:55.068 ├ ƒ /api/expert/qna                                 286 B         102 kB
+12:02:55.068 ├ ƒ /api/instructor/courses                         286 B         102 kB
+12:02:55.068 ├ ƒ /api/instructor/profile                         286 B         102 kB
+12:02:55.069 ├ ƒ /api/instructor/stats                           286 B         102 kB
+12:02:55.069 ├ ƒ /api/instructor/students                        286 B         102 kB
+12:02:55.069 ├ ƒ /api/languages                                  286 B         102 kB
+12:02:55.069 ├ ƒ /api/learning-categories                        286 B         102 kB
+12:02:55.069 ├ ƒ /api/learning-ledger                            286 B         102 kB
+12:02:55.069 ├ ƒ /api/learning-path-categories                   286 B         102 kB
+12:02:55.069 ├ ƒ /api/learning-paths                             286 B         102 kB
+12:02:55.069 ├ ƒ /api/lessons/[id]                               286 B         102 kB
+12:02:55.072 ├ ƒ /api/live-sessions                              286 B         102 kB
+12:02:55.072 ├ ƒ /api/live-sessions/[id]                         286 B         102 kB
+12:02:55.075 ├ ƒ /api/live-sessions/[id]/attendance              286 B         102 kB
+12:02:55.076 ├ ƒ /api/payments                                   286 B         102 kB
+12:02:55.079 ├ ƒ /api/payments/[paymentId]/status                286 B         102 kB
+12:02:55.079 ├ ƒ /api/payments/verify                            286 B         102 kB
+12:02:55.079 ├ ƒ /api/profile                                    286 B         102 kB
+12:02:55.079 ├ ƒ /api/profile/settings                           286 B         102 kB
+12:02:55.079 ├ ƒ /api/progress                                   286 B         102 kB
+12:02:55.079 ├ ƒ /api/school/classes                             286 B         102 kB
+12:02:55.080 ├ ƒ /api/stats                                      286 B         102 kB
+12:02:55.080 ├ ƒ /api/subscription                               286 B         102 kB
+12:02:55.080 ├ ƒ /api/subscription/cancel                        286 B         102 kB
+12:02:55.080 ├ ƒ /api/user/stats                                 286 B         102 kB
+12:02:55.080 ├ ƒ /assessments/[id]                             2.75 kB         111 kB
+12:02:55.080 ├ ○ /auth/login                                   2.39 kB         110 kB
+12:02:55.081 ├ ○ /auth/register                                12.7 kB         127 kB
+12:02:55.081 ├ ○ /business                                     6.74 kB         127 kB
+12:02:55.081 ├ ○ /career                                       6.64 kB         121 kB
+12:02:55.081 ├ ○ /categories                                   6.13 kB         147 kB
+12:02:55.081 ├ ƒ /categories/[slug]                               9 kB         150 kB
+12:02:55.081 ├ ○ /certificates                                 2.19 kB         110 kB
+12:02:55.081 ├ ○ /college                                      5.95 kB         127 kB
+12:02:55.081 ├ ○ /community                                    3.02 kB         113 kB
+12:02:55.081 ├ ƒ /community/[id]                               2.52 kB         110 kB
+12:02:55.081 ├ ƒ /confusion/[id]                               6.42 kB         108 kB
+12:02:55.081 ├ ○ /courses                                      3.15 kB         113 kB
+12:02:55.081 ├ ƒ /courses/[id]                                 4.54 kB         128 kB
+12:02:55.081 ├ ƒ /dashboard                                      286 B         102 kB
+12:02:55.081 ├ ○ /dashboard/student                             4.1 kB         112 kB
+12:02:55.081 ├ ○ /instructor                                    3.8 kB         112 kB
+12:02:55.081 ├ ○ /learning-ledger                              2.99 kB         111 kB
+12:02:55.081 ├ ○ /learning-paths                               3.43 kB         118 kB
+12:02:55.081 ├ ƒ /learning-paths/[id]                          6.77 kB         121 kB
+12:02:55.081 ├ ƒ /lessons/[id]                                 5.76 kB         123 kB
+12:02:55.081 ├ ○ /live-sessions                                2.76 kB         117 kB
+12:02:55.081 ├ ƒ /live-sessions/[id]                           4.18 kB         119 kB
+12:02:55.081 ├ ○ /profile                                      10.1 kB         157 kB
+12:02:55.081 ├ ○ /school                                       5.35 kB         126 kB
+12:02:55.081 ├ ○ /simple                                         286 B         102 kB
+12:02:55.081 ├ ○ /subscription                                 3.33 kB         113 kB
+12:02:55.081 ├ ○ /verify-certificate                           3.92 kB         115 kB
+12:02:55.081 └ ƒ /verify-certificate/[certificateNumber]       4.34 kB         115 kB
+12:02:55.081 + First Load JS shared by all                      101 kB
+12:02:55.081   ├ chunks/1684-941a4941be5e01a0.js               46.1 kB
+12:02:55.081   ├ chunks/4bd1b696-b638aa3d70fba23c.js           53.2 kB
+12:02:55.081   └ other shared chunks (total)                   1.94 kB
+12:02:55.081 
+12:02:55.081 
+12:02:55.081 ƒ Middleware                                      89.1 kB
+12:02:55.081 
+12:02:55.082 ○  (Static)   prerendered as static content
+12:02:55.082 ƒ  (Dynamic)  server-rendered on demand
+12:02:55.082 
+12:02:55.107 cp: cannot create directory '.next/standalone/.next/': No such file or directory
+12:02:55.108 error: script "build" exited with code 1
+12:02:55.116 Error: Command "bun run build" exited with 1
