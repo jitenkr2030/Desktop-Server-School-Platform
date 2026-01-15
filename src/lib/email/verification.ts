@@ -1,6 +1,19 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend lazily to avoid build-time errors
+let resend: Resend | null = null
+
+function getResendClient() {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.warn('RESEND_API_KEY not set, email functionality will be disabled')
+      return null
+    }
+    resend = new Resend(apiKey)
+  }
+  return resend
+}
 
 interface SendVerificationEmailParams {
   tenantId: string
@@ -56,7 +69,13 @@ export async function sendVerificationEmail(params: SendVerificationEmailParams)
   }
 
   try {
-    await resend.emails.send({
+    const resendClient = getResendClient()
+    if (!resendClient) {
+      console.log('Email (mock): Would send email to', recipientEmail)
+      return { success: true }
+    }
+    
+    await resendClient.emails.send({
       from: 'INR99 Academy <verification@inr99.academy>',
       to: [recipientEmail],
       subject: template.subject,

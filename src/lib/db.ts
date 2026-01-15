@@ -10,4 +10,9 @@ export const db =
     log: ['query'],
   })
 
+export const prisma = db
+
+// For backward compatibility - some files import createClient
+export const createClient = db
+
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db

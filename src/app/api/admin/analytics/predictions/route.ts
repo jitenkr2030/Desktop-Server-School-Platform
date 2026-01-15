@@ -1,19 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
+import { db } from '@/lib/db'
 import { advancedAnalyticsService } from '@/lib/analytics/advanced-analytics'
 
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = auth()
+    const user = currentUser()
     
-    if (!userId) {
+    if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     // Verify admin permissions
-    const admin = await prisma.user.findFirst({
+    const admin = await db.user.findFirst({
       where: {
-        clerkId: userId,
+        clerkId: user.id,
         role: 'ADMIN'
       }
     })

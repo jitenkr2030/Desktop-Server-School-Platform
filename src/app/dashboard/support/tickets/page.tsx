@@ -20,7 +20,7 @@ import {
   Mail,
   MessageCircle,
   Globe,
-  Api
+  Settings
 } from 'lucide-react';
 import { 
   SupportTicket, 
