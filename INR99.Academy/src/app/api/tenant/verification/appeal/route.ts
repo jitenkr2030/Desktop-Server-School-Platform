@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/db'
 import { v4 as uuidv4 } from 'uuid'
 import { s3Client, S3_BUCKET_NAME } from '@/lib/aws'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
