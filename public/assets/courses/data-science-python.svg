@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <defs>
+    <linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#bg9)"/>
+  <text x="200" y="85" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle" opacity="0.9">DATA SCIENCE</text>
+  <text x="200" y="120" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">📊</text>
+  <path d="M160 145 L180 135 L200 145 L220 130 L240 140 L260 125" stroke="white" stroke-width="2" fill="none"/>
+  <text x="200" y="160" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" opacity="0.8">Machine Learning & AI</text>
+</svg>

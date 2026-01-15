@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EA580C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+  <circle cx="350" cy="50" r="80" fill="#ffffff" opacity="0.1"/>
+  <circle cx="50" cy="250" r="100" fill="#ffffff" opacity="0.1"/>
+  
+  <!-- Skills icon - Star -->
+  <g transform="translate(140, 50)">
+    <circle cx="60" cy="60" r="50" fill="#ffffff" opacity="0.95"/>
+    <polygon points="60,20 70,50 100,50 75,70 85,100 60,80 35,100 45,70 20,50 50,50" fill="#F97316"/>
+  </g>
+  
+  <!-- Skill icons -->
+  <g transform="translate(80, 150)">
+    <!-- Pencil -->
+    <rect x="0" y="10" width="8" height="40" rx="2" fill="#ffffff" transform="rotate(-30, 4, 30)"/>
+    <!-- Book -->
+    <rect x="40" y="15" width="25" height="35" rx="3" fill="#ffffff" opacity="0.8"/>
+    <rect x="45" y="15" width="15" height="35" rx="2" fill="#F97316"/>
+    <!-- Brain -->
+    <ellipse cx="110" cy="30" rx="20" ry="15" fill="#ffffff" opacity="0.8"/>
+  </g>
+  
+  <text x="200" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Skill Add-ons</text>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#FBBF24">For School Students</text>
+</svg>

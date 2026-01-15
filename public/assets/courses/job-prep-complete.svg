@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <defs>
+    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891B2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E7490;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#bg7)"/>
+  <text x="200" y="85" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle" opacity="0.9">CAREER</text>
+  <text x="200" y="125" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">💼</text>
+  <text x="200" y="155" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" opacity="0.8">Job Preparation Course</text>
+  <rect x="160" y="175" width="80" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+</svg>

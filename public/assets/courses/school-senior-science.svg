@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+  <circle cx="350" cy="50" r="80" fill="#ffffff" opacity="0.1"/>
+  <circle cx="50" cy="250" r="100" fill="#ffffff" opacity="0.1"/>
+  
+  <!-- Science icon -->
+  <g transform="translate(130, 70)">
+    <circle cx="80" cy="60" r="55" fill="#ffffff" opacity="0.95"/>
+    <circle cx="80" cy="60" r="45" fill="#7C3AED"/>
+    <!-- Atom symbol -->
+    <ellipse cx="80" cy="60" rx="35" ry="15" fill="none" stroke="#ffffff" stroke-width="3"/>
+    <ellipse cx="80" cy="60" rx="35" ry="15" fill="none" stroke="#ffffff" stroke-width="3" transform="rotate(60, 80, 60)"/>
+    <ellipse cx="80" cy="60" rx="35" ry="15" fill="none" stroke="#ffffff" stroke-width="3" transform="rotate(-60, 80, 60)"/>
+    <circle cx="80" cy="60" r="8" fill="#ffffff"/>
+  </g>
+  
+  <!-- Numbers 11-12 -->
+  <text x="70" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff">11</text>
+  <text x="110" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff">12</text>
+  
+  <text x="200" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Senior Secondary</text>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#FBBF24">Science Stream</text>
+</svg>

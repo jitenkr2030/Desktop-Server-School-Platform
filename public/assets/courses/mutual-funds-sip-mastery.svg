@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="225" viewBox="0 0 400 225">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d4c2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a3d23;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4ade80;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0.05" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="225" rx="12" fill="url(#bg-gradient)"/>
+  
+  <!-- Decorative Elements -->
+  <rect x="0" y="185" width="400" height="40" fill="#0a3d23" opacity="0.6"/>
+  <line x1="0" y1="185" x2="400" y2="185" stroke="#4ade80" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Background Grid Pattern -->
+  <g opacity="0.08">
+    <line x1="40" y1="50" x2="40" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="90" y1="50" x2="90" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="140" y1="50" x2="140" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="190" y1="50" x2="190" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="240" y1="50" x2="240" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="290" y1="50" x2="290" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="340" y1="50" x2="340" y2="180" stroke="#fff" stroke-width="1"/>
+    <line x1="40" y1="80" x2="360" y2="80" stroke="#fff" stroke-width="1"/>
+    <line x1="40" y1="110" x2="360" y2="110" stroke="#fff" stroke-width="1"/>
+    <line x1="40" y1="140" x2="360" y2="140" stroke="#fff" stroke-width="1"/>
+    <line x1="40" y1="170" x2="360" y2="170" stroke="#fff" stroke-width="1"/>
+  </g>
+  
+  <!-- Main Growth Chart -->
+  <g transform="translate(50, 45)" filter="url(#shadow)">
+    <!-- Chart Area Background -->
+    <rect x="0" y="0" width="300" height="120" rx="6" fill="#0f5c30" opacity="0.5"/>
+    
+    <!-- Chart Fill -->
+    <path d="M 0 120 L 0 90 Q 30 85, 50 75 T 100 60 T 150 50 T 200 35 T 250 25 T 300 15 L 300 120 Z" fill="url(#chart-gradient)"/>
+    
+    <!-- Chart Line -->
+    <path d="M 0 90 Q 30 85, 50 75 T 100 60 T 150 50 T 200 35 T 250 25 T 300 15" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+    
+    <!-- Data Points -->
+    <circle cx="0" cy="90" r="4" fill="#4ade80"/>
+    <circle cx="50" cy="75" r="4" fill="#4ade80"/>
+    <circle cx="100" cy="60" r="4" fill="#4ade80"/>
+    <circle cx="150" cy="50" r="4" fill="#4ade80"/>
+    <circle cx="200" cy="35" r="4" fill="#4ade80"/>
+    <circle cx="250" cy="25" r="4" fill="#4ade80"/>
+    <circle cx="300" cy="15" r="4" fill="#4ade80"/>
+    
+    <!-- Upward Arrow -->
+    <g transform="translate(260, 5)">
+      <path d="M 0 20 L 10 10 L 5 10 L 5 0 L 15 0 L 15 10 L 20 10 L 10 20 Z" fill="#4ade80" filter="url(#glow)"/>
+    </g>
+  </g>
+  
+  <!-- SIP Icon/Stacked Coins -->
+  <g transform="translate(310, 75)" filter="url(#shadow)">
+    <!-- Coin 1 (Bottom) -->
+    <ellipse cx="25" cy="45" rx="22" ry="8" fill="#fbbf24"/>
+    <rect x="3" y="25" width="44" height="20" fill="#fcd34d"/>
+    <ellipse cx="25" cy="25" rx="22" ry="8" fill="#fde68a"/>
+    
+    <!-- Coin 2 (Middle) -->
+    <ellipse cx="25" cy="35" rx="22" ry="8" fill="#f59e0b"/>
+    <rect x="3" y="15" width="44" height="20" fill="#fbbf24"/>
+    <ellipse cx="25" cy="15" rx="22" ry="8" fill="#fcd34d"/>
+    
+    <!-- Coin 3 (Top) -->
+    <ellipse cx="25" cy="25" rx="22" ry="8" fill="#d97706"/>
+    <rect x="3" y="5" width="44" height="20" fill="#f59e0b"/>
+    <ellipse cx="25" cy="5" rx="22" ry="8" fill="#fbbf24"/>
+    
+    <!-- Plus sign indicating growth -->
+    <rect x="45" y="15" width="12" height="4" rx="1" fill="#4ade80"/>
+    <rect x="49" y="11" width="4" height="12" rx="1" fill="#4ade80"/>
+  </g>
+  
+  <!-- Percentage Growth Badge -->
+  <g transform="translate(280, 35)" filter="url(#shadow)">
+    <rect x="0" y="0" width="70" height="22" rx="11" fill="#4ade80"/>
+    <text x="35" y="15" fill="#0d4c2a" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">+15% ROI</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="193" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+    Mutual Funds & SIP Mastery
+  </text>
+  
+  <!-- Subtitle/Level -->
+  <text x="200" y="211" fill="#4ade80" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" opacity="0.9">
+    Beginner to Intermediate • 18 Hours
+  </text>
+  
+  <!-- Decorative corner elements -->
+  <g stroke="#4ade80" stroke-width="2" fill="none" opacity="0.4">
+    <path d="M 15 25 L 15 15 L 25 15"/>
+    <path d="M 385 25 L 385 15 L 375 15"/>
+    <path d="M 15 200 L 15 210 L 25 210"/>
+    <path d="M 385 200 L 385 210 L 375 210"/>
+  </g>
+  
+  <!-- Small floating elements -->
+  <g fill="#4ade80" opacity="0.3">
+    <rect x="55" y="160" width="20" height="3" rx="1"/>
+    <rect x="60" y="166" width="15" height="3" rx="1"/>
+    <rect x="50" y="172" width="25" height="3" rx="1"/>
+  </g>
+</svg>

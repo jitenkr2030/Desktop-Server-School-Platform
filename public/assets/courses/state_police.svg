@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#283593;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffc107;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb300;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="350" cy="50" r="80" fill="#ffc107" opacity="0.1"/>
+  <circle cx="50" cy="250" r="60" fill="#ffc107" opacity="0.08"/>
+  
+  <!-- Police Badge Icon -->
+  <g transform="translate(200, 120)">
+    <!-- Star Badge -->
+    <polygon points="0,-50 12,-18 48,-18 20,8 30,42 0,22 -30,42 -20,8 -48,-18 -12,-18" 
+             fill="none" stroke="#ffc107" stroke-width="3"/>
+    <polygon points="0,-40 10,-15 38,-15 16,6 24,34 0,18 -24,34 -16,6 -38,-15 -10,-15" 
+             fill="#ffc107" opacity="0.2"/>
+    <!-- Center emblem -->
+    <circle cx="0" cy="0" r="15" fill="#ffc107"/>
+    <text x="0" y="5" text-anchor="middle" fill="#1a237e" font-size="12" font-weight="bold">POLICE</text>
+  </g>
+  
+  <!-- Text Content -->
+  <text x="200" y="220" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">
+    State Police
+  </text>
+  <text x="200" y="245" text-anchor="middle" fill="#ffc107" font-size="14" font-weight="500">
+    Constable & SI Preparation
+  </text>
+  
+  <!-- Bottom indicator -->
+  <rect x="160" y="265" width="80" height="4" rx="2" fill="url(#accentGradient)"/>
+  
+  <!-- Side lines -->
+  <line x1="40" y1="100" x2="40" y2="200" stroke="#ffc107" stroke-width="2" opacity="0.3"/>
+  <line x1="360" y1="100" x2="360" y2="200" stroke="#ffc107" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Small stars decoration -->
+  <text x="60" y="80" fill="#ffc107" font-size="12" opacity="0.4">★</text>
+  <text x="340" y="70" fill="#ffc107" font-size="10" opacity="0.3">★</text>
+  <text x="80" y="260" fill="#ffc107" font-size="8" opacity="0.3">★</text>
+  <text x="320" y="255" fill="#ffc107" font-size="11" opacity="0.4">★</text>
+</svg>

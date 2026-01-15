@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="350" cy="60" r="70" fill="#fbbf24" opacity="0.1"/>
+  <circle cx="50" cy="240" r="50" fill="#fbbf24" opacity="0.08"/>
+  
+  <!-- Book Icon -->
+  <g transform="translate(200, 115)">
+    <!-- Open Book -->
+    <path d="M-50 -30 Q-25 -40 0 -35 Q25 -40 50 -30 L50 30 Q25 40 0 35 Q-25 40 -50 30 Z" 
+          fill="none" stroke="#fbbf24" stroke-width="3"/>
+    <path d="M0 -35 Q25 -40 50 -30 L50 30 Q25 40 0 35" 
+          fill="#fbbf24" opacity="0.15"/>
+    <path d="M0 -35 Q-25 -40 -50 -30 L-50 30 Q-25 40 0 35" 
+          fill="#fbbf24" opacity="0.1"/>
+    <!-- Book spine -->
+    <line x1="0" y1="-35" x2="0" y2="35" stroke="#fbbf24" stroke-width="2"/>
+    <!-- Lines representing text -->
+    <line x1="-40" y1="-15" x2="-10" y2="-18" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="-40" y1="-5" x2="-10" y2="-8" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="-40" y1="5" x2="-10" y2="2" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="-40" y1="15" x2="-10" y2="12" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="10" y1="-18" x2="40" y2="-15" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="10" y1="-8" x2="40" y2="-5" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="10" y1="2" x2="40" y2="5" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="10" y1="12" x2="40" y2="15" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <!-- Text Content -->
+  <text x="200" y="185" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="bold">
+    TET
+  </text>
+  <text x="200" y="210" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="500">
+    Teacher Eligibility Test
+  </text>
+  <text x="200" y="230" text-anchor="middle" fill="#ffffff" font-size="12" opacity="0.9">
+    Complete Preparation
+  </text>
+  
+  <!-- Bottom indicator -->
+  <rect x="160" y="250" width="80" height="4" rx="2" fill="url(#accentGradient)"/>
+  
+  <!-- Side decorations -->
+  <text x="60" y="100" fill="#fbbf24" font-size="14" opacity="0.4">📚</text>
+  <text x="340" y="90" fill="#fbbf24" font-size="12" opacity="0.3">✏️</text>
+  <text x="70" y="270" fill="#fbbf24" font-size="10" opacity="0.3">📖</text>
+  <text x="330" y="260" fill="#fbbf24" font-size="11" opacity="0.4">🎓</text>
+  
+  <!-- Small star decorations -->
+  <text x="90" y="75" fill="#fbbf24" font-size="8" opacity="0.3">★</text>
+  <text x="310" y="280" fill="#fbbf24" font-size="9" opacity="0.3">★</text>
+</svg>

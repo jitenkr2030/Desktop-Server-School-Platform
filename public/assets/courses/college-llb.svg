@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#37474f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#546e7a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+  <circle cx="200" cy="120" r="50" fill="rgba(255,255,255,0.15)"/>
+  <text x="200" y="135" font-family="Arial, sans-serif" font-size="40" fill="white" text-anchor="middle">⚖️</text>
+  <text x="200" y="200" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle" font-weight="bold">LLB</text>
+  <text x="200" y="225" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)" text-anchor="middle">Law Program</text>
+  <rect x="140" y="250" width="120" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+</svg>
