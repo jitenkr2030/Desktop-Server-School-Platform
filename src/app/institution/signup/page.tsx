@@ -188,6 +188,47 @@ export default function InstitutionSignupPage() {
           </p>
         </div>
 
+        {/* Schools/Colleges Statement */}
+        <div className="bg-white rounded-xl shadow-sm border border-green-200 p-6 mb-8">
+          <div className="text-center mb-4">
+            <h3 className="text-lg font-bold text-green-800">🏫 Schools / Colleges</h3>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Pay NOTHING</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Get full platform access</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Get ready-made content</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Get live sessions</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Get course builder</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Get branding/subdomain</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700">Get student dashboards</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-gray-700 font-semibold">Zero financial burden</span>
+            </div>
+          </div>
+        </div>
+
         {/* Progress Steps */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
