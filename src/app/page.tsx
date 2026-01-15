@@ -960,6 +960,65 @@ export default function NewLandingPage() {
             </div>
           </div>
 
+          {/* Schools/Colleges Statement */}
+          <div style={{
+            background: 'white',
+            borderRadius: '1rem',
+            padding: '2.5rem',
+            marginBottom: '3rem',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            border: '2px solid #16a34a'
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                color: '#166534',
+                marginBottom: '0.5rem'
+              }}>
+                🏫 Schools / Colleges
+              </h3>
+            </div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1rem'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Pay NOTHING</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Get full platform access</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Get ready-made content</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Get live sessions</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Get course builder</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Get branding/subdomain</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem' }}>Get student dashboards</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#16a34a', fontSize: '1.25rem' }}>✓</span>
+                <span style={{ color: '#374151', fontSize: '1rem', fontWeight: '600' }}>Zero financial burden</span>
+              </div>
+            </div>
+          </div>
+
           {/* CTA for Schools and Colleges */}
           <div style={{
             display: 'grid',
