@@ -301,7 +301,9 @@ export default function TenantVerificationPortal() {
                     {daysRemaining === 0 ? (
                       <strong>Your verification deadline has passed. Please complete your verification immediately to avoid feature restrictions.</strong>
                     ) : (
-                      <strong>{daysRemaining} days remaining</strong> to complete your verification requirements.
+                      <>
+                        <strong>{daysRemaining} days remaining</strong> to complete your verification requirements.
+                      </>
                     )}
                   </span>
                 </div>
