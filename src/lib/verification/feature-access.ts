@@ -131,7 +131,8 @@ export async function checkExpiredInstitutions(): Promise<{ updated: number; err
         updated++
         console.log(`[GRACE_PERIOD] Updated ${tenant.name} (${tenant.id}) to status: ${newStatus}`)
       } catch (err) {
-        const errorMsg = `Failed to update tenant ${tenant.id}: ${err instanceof Error ? err.message}`
+        const errorDetail = err instanceof Error ? err.message : 'Unknown error'
+        const errorMsg = `Failed to update tenant ${tenant.id}: ${errorDetail}`
         errors.push(errorMsg)
         console.error('[GRACE_PERIOD]', errorMsg)
       }
@@ -139,7 +140,8 @@ export async function checkExpiredInstitutions(): Promise<{ updated: number; err
 
     return { updated, errors }
   } catch (err) {
-    const errorMsg = `Failed to check expired institutions: ${err instanceof Error ? err.message}`
+    const errorDetail = err instanceof Error ? err.message : 'Unknown error'
+    const errorMsg = `Failed to check expired institutions: ${errorDetail}`
     errors.push(errorMsg)
     console.error('[GRACE_PERIOD]', errorMsg)
     return { updated, errors }
