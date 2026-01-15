@@ -569,6 +569,3 @@ function formatTimeAgo(date: Date): string {
   if (diffHours < 24) return `${diffHours}h ago`;
   return `${diffDays}d ago`;
 }
-
-// Import useState
-import { useState } from 'react';
