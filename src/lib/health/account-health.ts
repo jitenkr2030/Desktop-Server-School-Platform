@@ -472,7 +472,7 @@ export class HealthManager {
         'warning',
         'Account Inactivity',
         `No login for ${daysSinceLogin} days.`,
-        'Log in to your account to stay connected and catch up on updates.`,
+        'Log in to your account to stay connected and catch up on updates.',
         'login_activity'
       ));
     }

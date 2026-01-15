@@ -679,4 +679,4 @@ function getAllUniqueFeatures(): TierFeature[] {
 }
 
 // Import TIER_FEATURES for the getAllUniqueFeatures function
-import { TIER_FEATURES } from './feature-flags';
+import { TIER_FEATURES } from '@/lib/tiers/feature-flags';
