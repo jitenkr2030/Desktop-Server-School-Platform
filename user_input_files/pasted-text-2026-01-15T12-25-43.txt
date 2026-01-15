@@ -1,0 +1,107 @@
+17:50:39.003 Running build in Washington, D.C., USA (East) – iad1
+17:50:39.004 Build machine configuration: 2 cores, 8 GB
+17:50:39.143 Cloning github.com/jitenkr2030/INR99.Academy (Branch: main, Commit: 1027917)
+17:50:40.858 Cloning completed: 1.715s
+17:50:42.468 Restored build cache from previous deployment (3eYK1ykDCTt9HDxAJxm7Ytttmr2t)
+17:50:42.814 Running "vercel build"
+17:50:43.845 Vercel CLI 50.3.1
+17:50:44.279 Installing dependencies...
+17:50:50.665 npm warn ERESOLVE overriding peer dependency
+17:50:50.666 npm warn While resolving: @auth/core@0.41.0
+17:50:50.666 npm warn Found: nodemailer@7.0.12
+17:50:50.667 npm warn node_modules/nodemailer
+17:50:50.667 npm warn   nodemailer@"^7.0.7" from the root project
+17:50:50.667 npm warn   1 more (next-auth)
+17:50:50.668 npm warn
+17:50:50.668 npm warn Could not resolve dependency:
+17:50:50.668 npm warn peerOptional nodemailer@"^6.8.0" from @auth/core@0.41.0
+17:50:50.669 npm warn node_modules/@auth/core
+17:50:50.669 npm warn   @auth/core@"0.41.0" from next-auth@5.0.0-beta.30
+17:50:50.669 npm warn   node_modules/next-auth
+17:50:50.669 npm warn
+17:50:50.670 npm warn Conflicting peer dependency: nodemailer@6.10.1
+17:50:50.670 npm warn node_modules/nodemailer
+17:50:50.670 npm warn   peerOptional nodemailer@"^6.8.0" from @auth/core@0.41.0
+17:50:50.670 npm warn   node_modules/@auth/core
+17:50:50.671 npm warn     @auth/core@"0.41.0" from next-auth@5.0.0-beta.30
+17:50:50.671 npm warn     node_modules/next-auth
+17:50:56.110 
+17:50:56.111 added 95 packages, and changed 31 packages in 12s
+17:50:56.111 
+17:50:56.112 293 packages are looking for funding
+17:50:56.112   run `npm fund` for details
+17:50:56.150 Detected Next.js version: 15.3.8
+17:50:56.157 Running "npm run build"
+17:50:56.260 
+17:50:56.260 > nextjs_tailwind_shadcn_ts@0.1.0 build
+17:50:56.261 > next build
+17:50:56.261 
+17:50:56.988  ⚠ Found lockfile missing swc dependencies, run next locally to automatically patch
+17:50:57.106    ▲ Next.js 15.3.8
+17:50:57.106    - Environments: .env
+17:50:57.107 
+17:50:57.147    Creating an optimized production build ...
+17:50:57.709  ⚠ Found lockfile missing swc dependencies, run next locally to automatically patch
+17:51:19.065 Failed to compile.
+17:51:19.066 
+17:51:19.067 ./src/app/dashboard/admin/verification/page.tsx
+17:51:19.067 Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+17:51:19.068      ,-[[36;1;4m/vercel/path0/src/app/dashboard/admin/verification/page.tsx[0m:202:1]
+17:51:19.068  [2m199[0m |   }
+17:51:19.068  [2m200[0m | 
+17:51:19.069  [2m201[0m |   return (
+17:51:19.069  [2m202[0m |     <div className="min-h-screen bg-gray-100">
+17:51:19.069      : [35;1m     ^^^[0m
+17:51:19.069  [2m203[0m |       {/* Header */}
+17:51:19.070  [2m204[0m |       <header className="bg-white shadow">
+17:51:19.070  [2m205[0m |         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+17:51:19.070      `----
+17:51:19.070 
+17:51:19.070 Caused by:
+17:51:19.070     Syntax Error
+17:51:19.070 
+17:51:19.070 Import trace for requested module:
+17:51:19.070 ./src/app/dashboard/admin/verification/page.tsx
+17:51:19.071 
+17:51:19.071 ./src/app/dashboard/tenant/verification/page.tsx
+17:51:19.071 Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+17:51:19.071      ,-[[36;1;4m/vercel/path0/src/app/dashboard/tenant/verification/page.tsx[0m:237:1]
+17:51:19.071  [2m234[0m |   const statusBadge = verificationStatus ? getStatusBadge(verificationStatus.eligibilityStatus) : null
+17:51:19.071  [2m235[0m | 
+17:51:19.072  [2m236[0m |   return (
+17:51:19.072  [2m237[0m |     <div className="min-h-screen bg-gray-100">
+17:51:19.072      : [35;1m     ^^^[0m
+17:51:19.072  [2m238[0m |       {/* Header */}
+17:51:19.073  [2m239[0m |       <header className="bg-white shadow">
+17:51:19.073  [2m240[0m |         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+17:51:19.073      `----
+17:51:19.073 
+17:51:19.074 Caused by:
+17:51:19.074     Syntax Error
+17:51:19.074 
+17:51:19.074 Import trace for requested module:
+17:51:19.074 ./src/app/dashboard/tenant/verification/page.tsx
+17:51:19.074 
+17:51:19.075 ./src/lib/verification/feature-access.ts
+17:51:19.075 Error:   [31mx[0m Expected ':', got '}'
+17:51:19.075      ,-[[36;1;4m/vercel/path0/src/lib/verification/feature-access.ts[0m:134:1]
+17:51:19.075  [2m131[0m |         updated++
+17:51:19.075  [2m132[0m |         console.log(`[GRACE_PERIOD] Updated ${tenant.name} (${tenant.id}) to status: ${newStatus}`)
+17:51:19.075  [2m133[0m |       } catch (err) {
+17:51:19.075  [2m134[0m |         const errorMsg = `Failed to update tenant ${tenant.id}: ${err instanceof Error ? err.message}`
+17:51:19.076      : [35;1m                                                                                                    ^[0m
+17:51:19.076  [2m135[0m |         errors.push(errorMsg)
+17:51:19.076  [2m136[0m |         console.error('[GRACE_PERIOD]', errorMsg)
+17:51:19.076  [2m137[0m |       }
+17:51:19.076      `----
+17:51:19.076 
+17:51:19.076 Caused by:
+17:51:19.076     Syntax Error
+17:51:19.076 
+17:51:19.076 Import trace for requested module:
+17:51:19.076 ./src/lib/verification/feature-access.ts
+17:51:19.077 ./src/app/api/tenant/feature-access/route.ts
+17:51:19.077 
+17:51:19.083 
+17:51:19.084 > Build failed because of webpack errors
+17:51:19.117 Error: Command "npm run build" exited with 1
