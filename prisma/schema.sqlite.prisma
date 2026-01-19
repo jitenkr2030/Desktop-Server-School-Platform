@@ -1,0 +1,291 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL_SQLITE")
+}
+
+// User model for authentication
+model User {
+  id              String             @id @default(cuid())
+  email           String             @unique
+  password        String
+  name            String?
+  avatar          String?
+  role            String             @default("STUDENT")
+  isActive        Boolean            @default(true)
+  isVerified      Boolean            @default(false)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  
+  studentProfile  StudentProfile?
+  instructorProfile InstructorProfile?
+  progress        CourseProgress[]
+  subscriptions   Subscription[]
+  
+  @@map("users")
+}
+
+model StudentProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  admissionNumber String?
+  classId         String?
+  rollNumber      String?
+  parentCode      String?
+  codeExpiresAt   DateTime?
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("student_profiles")
+}
+
+model InstructorProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  bio         String?
+  expertise   String?
+  isApproved  Boolean  @default(false)
+  rating      Float    @default(0)
+  totalStudents Int    @default(0)
+  totalCourses Int     @default(0)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("instructor_profiles")
+}
+
+model Subscription {
+  id        String             @id @default(cuid())
+  userId    String
+  type      String
+  status    String
+  startDate DateTime
+  endDate   DateTime?
+  autoRenew Boolean            @default(true)
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("subscriptions")
+}
+
+model SchoolClass {
+  id        String           @id @default(cuid())
+  name      String           @unique
+  level     String
+  sortOrder Int              @default(0)
+  isActive  Boolean          @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  
+  @@map("school_classes")
+}
+
+model Course {
+  id          String           @id @default(cuid())
+  title       String
+  description String
+  thumbnail   String?
+  difficulty  String           @default("BEGINNER")
+  duration    Int              @default(0)
+  price       Float            @default(0)
+  isActive    Boolean          @default(true)
+  isPublished Boolean          @default(false)
+  instructorId String
+  categoryId  String?
+  courseType  String           @default("GENERAL")
+  classId     String?
+  subjectId   String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  modules     Module[]
+  progress    CourseProgress[]
+  
+  @@map("courses")
+}
+
+model Module {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  order       Int      @default(0)
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons     Lesson[]
+  
+  @@map("modules")
+}
+
+model Lesson {
+  id           String   @id @default(cuid())
+  courseId     String
+  moduleId     String?
+  title        String
+  content      String?
+  type         String   @default("VIDEO")
+  videoUrl     String?
+  duration     Int?
+  order        Int      @default(0)
+  isActive     Boolean  @default(true)
+  isFree       Boolean  @default(false)
+  isPublished  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  module       Module?  @relation(fields: [moduleId], references: [id])
+  progress     CourseProgress[]
+  
+  @@map("lessons")
+}
+
+model CourseProgress {
+  id         String    @id @default(cuid())
+  userId     String
+  courseId   String
+  lessonId   String?
+  completed  Boolean   @default(false)
+  progress   Float     @default(0)
+  timeSpent  Int       @default(0)
+  lastAccess DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  
+  course     Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lesson     Lesson?   @relation(fields: [lessonId], references: [id])
+  
+  @@unique([userId, courseId])
+  @@map("course_progress")
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  icon        String?
+  color       String?
+  sortOrder   Int        @default(0)
+  isActive    Boolean    @default(true)
+  isFeatured  Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  
+  @@map("categories")
+}
+
+model LearningPath {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  icon        String?
+  color       String?
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  categoryId  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  @@map("learning_paths")
+}
+
+model Attendance {
+  id        String   @id @default(cuid())
+  userId    String
+  sessionId String
+  joinedAt  DateTime @default(now())
+  leftAt    DateTime?
+  status    String   @default("PRESENT")
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, sessionId])
+  @@map("attendances")
+}
+
+model LiveSession {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?
+  scheduledAt     DateTime
+  duration        Int
+  status          String    @default("SCHEDULED")
+  hostId          String
+  courseId        String?
+  roomUrl         String?
+  maxParticipants Int?
+  startedAt       DateTime?
+  endedAt         DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@map("live_sessions")
+}
+
+model Certificate {
+  id                String   @id @default(cuid())
+  userId            String
+  courseId          String
+  certificateNumber String   @unique
+  issuedAt          DateTime @default(now())
+  verified          Boolean  @default(false)
+  
+  @@unique([userId, courseId])
+  @@map("certificates")
+}
+
+model Assessment {
+  id        String     @id @default(cuid())
+  courseId  String
+  title     String
+  type      String
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  
+  @@map("assessments")
+}
+
+model PaymentRecord {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  amount    Float
+  currency  String   @default("INR")
+  status    String
+  paymentId String?
+  createdAt DateTime @default(now())
+  
+  @@map("payment_records")
+}
+
+model PlatformSettings {
+  id                  String   @id @default(cuid())
+  siteName            String   @default("INR99 Academy")
+  siteDescription     String   @default("School Platform")
+  maintenanceMode     Boolean  @default(false)
+  allowRegistration   Boolean  @default(true)
+  defaultCurrency     String   @default("INR")
+  primaryColor        String   @default("#dc2626")
+  secondaryColor      String   @default("#3b82f6")
+  supportEmail        String   @default("support@inr99.com")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  @@map("platform_settings")
+}
+
+model Tenant {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  description    String?
+  logoUrl        String?
+  status         String   @default("ACTIVE")
+  subscriptionTier String @default("FREE")
+  maxUsers       Int      @default(100)
+  currentUsers   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  @@map("tenants")
+}

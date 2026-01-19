@@ -1,128 +1,101 @@
-# INR99.Academy
+# Desktop-Server School Platform
 
-## India's Learning Infrastructure - As reliable and affordable as UPI
+## Comprehensive Educational Management System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)
+[![Tauri](https://img.shields.io/badge/Tauri-2.0-24c9a6)](https://tauri.app/)
+[![Docker](https://img.shields.io/badge/Docker-2496ed)](https://www.docker.com/)
 
-INR99.Academy is a comprehensive learning platform designed to make quality education accessible to every Indian at just ₹99/month. Built with a mobile-first approach, it works perfectly on low-end smartphones with low bandwidth optimization.
+The Desktop-Server School Platform is a comprehensive educational management system designed for schools, coaching institutes, and educational institutions. It supports both **desktop deployment** (Tauri + SQLite) and **server deployment** (Docker + PostgreSQL), making it versatile for various institutional needs.
 
 ---
 
 ## 🌟 About
 
-INR99.Academy addresses the critical gap in affordable quality education in India. While premium platforms charge ₹10,000-50,000/year, INR99 offers the same value proposition at ₹1,188/year—making it 10x more accessible.
+This platform addresses the critical need for affordable, accessible educational technology in institutions of all sizes. Whether you need a standalone desktop application for a single computer lab or a full server deployment for a networked school, this platform delivers enterprise-grade features with consumer-friendly simplicity.
 
 ### Our Mission
 
-To democratize quality education in India by making it as accessible and affordable as UPI payments. Every Indian, regardless of their economic background, deserves access to world-class educational content.
+To democratize quality educational infrastructure by providing institutions with a flexible, scalable, and affordable platform that works both online and offline, ensuring uninterrupted learning regardless of connectivity constraints.
 
-### Why INR99?
+### Why This Platform?
 
-- **Affordable**: Just ₹99/month (₹3/day)
-- **Accessible**: Works on low-end smartphones
-- **Comprehensive**: From school education to professional skills
-- **Localized**: Content in Hindi and English
-- **Flexible**: Learn at your own pace, anywhere
+- **Dual Deployment**: Desktop (offline-first) and Server (cloud-based) options
+- **Comprehensive**: From student management to assessments and certificates
+- **Scalable**: Supports single users to thousands of concurrent users
+- **Affordable**: Open-source with no licensing costs
+- **Offline-First**: Full functionality without constant internet connectivity
+- **Customizable**: White-label support for institution branding
 
 ---
 
 ## 🚀 Key Features
 
-### 📚 Learning Experience
+### 📚 Core Educational Features
 
 | Feature | Description |
 |---------|-------------|
-| **Micro-lessons** | 5-12 minute lessons designed for learning anytime, anywhere |
-| **Learning Paths** | Curated journeys from beginner to advanced with clear outcomes |
-| **Progress Tracking** | Comprehensive learning progress tracking and resume functionality |
-| **Low-bandwidth Mode** | Audio-first and text-only options for areas with poor connectivity |
-| **Assessments** | Quizzes and practice questions to reinforce learning |
-| **Certificate System** | Verified digital certificates upon course completion |
+| **Student Management** | Complete student lifecycle management with profiles, attendance, and progress tracking |
+| **Course Management** | Create and manage courses, modules, and lessons with multimedia support |
+| **Assessment System** | Quizzes, exams, and practice assessments with automatic grading |
+| **Progress Tracking** | Real-time learning progress with detailed analytics |
+| **Certificate Generation** | Automated certificate generation upon course completion |
+| **Attendance Management** | Track student attendance for classes and live sessions |
 
-### 🎓 Course Taxonomy
+### 🎓 Academic Structure
 
-The platform offers a comprehensive 6-tier course structure:
+The platform supports multiple educational levels:
 
 #### 🏫 School Education (Class 1-12)
-- **Primary (1-5)**: English Grammar, Mathematics, Science Fundamentals
-- **Middle (6-8)**: Mathematics, Science, English Literature
-- **Secondary (9-10)**: Mathematics, Physics, Chemistry, Biology
-- **Senior Secondary (11-12)**: Physics, Chemistry, Biology, Advanced Mathematics
+- Primary Education (Classes 1-5)
+- Middle School (Classes 6-8)
+- Secondary Education (Classes 9-10)
+- Senior Secondary (Classes 11-12)
 
-#### 🎓 College (Undergraduate)
-- **Arts & Humanities**: Communication, Philosophy, History, Literature
-- **Commerce & Business**: Accounting, Economics, Marketing, B.Com, BBA
-- **Engineering & Technology**: Programming, Mathematics, Physics, B.Tech
-- **Medical Sciences**: Anatomy, Physiology, Biochemistry, Research
+#### 🎓 Higher Education
+- Undergraduate Programs (BBA, B.Com, B.Sc, B.Tech)
+- Postgraduate Programs (MBA, M.Com, M.Sc, M.Tech)
+- Diploma and Certificate Courses
 
-#### 🎓 Post-Graduate
-- **MBA**: Finance, Marketing, HR, Operations
-- **M.Com**: Accounting, Finance, Business, Taxation
-- **M.Sc/MCA**: Data Science, Cyber Security, Computer Science
-- **M.A./LL.M**: Economics, History, Psychology, Law
+#### 💼 Professional Development
+- Corporate Training Programs
+- Skill Development Courses
+- Certification Programs
 
-#### 💼 Professional / Career Skills
-- **Technology & Programming**: Python, Web Development, Mobile Development, Data Science
-- **Business & Entrepreneurship**: Strategy, Project Management, Startup
-- **Design & Creative**: UI/UX, Graphic Design, Photography, Video Editing
-- **Marketing & Communication**: Digital Marketing, SEO, Public Speaking
+### 👨‍🏫 Role-Based Access Control
 
-#### 📋 Competitive Exams & Certifications
-- **Professional Certifications**: CA, CS, CMA, CFA, FRM, ACCA, Actuarial
-- **Government Exams**: UPSC, SSC, Banking, Police, TET, Defense
-
-#### 🧠 Citizen & Life Systems
-- **Personal Finance**: Tax, Insurance, Investment, Stock Market
-- **Digital Literacy**: UPI, Banking, Government Portals, Online Safety
-- **Community Systems**: Food Work, Bulk Buying, Work Models
+| Role | Capabilities |
+|------|--------------|
+| **Administrator** | Full system management, user administration, content approval |
+| **Teacher/Instructor** | Course creation, student management, assessment creation |
+| **Student** | Course access, progress tracking, certificate download |
+| **Parent** | Student progress monitoring (optional) |
 
 ### 🎥 Live Learning
 
-- **Interactive Live Classes**: Real-time video sessions with expert instructors
-- **Live Q&A**: Ask questions and get instant answers during sessions
-- **Session Scheduling**: Browse upcoming sessions and register in advance
-- **Attendance Tracking**: Track participation and session duration
-- **Session Recording**: Option to record and playback live sessions
+- **Interactive Live Classes**: Real-time video sessions with instructors
+- **Live Q&A**: Interactive question and answer sessions
+- **Session Scheduling**: Schedule and manage live sessions
+- **Attendance Tracking**: Automatic attendance for live sessions
+- **Recording Playback**: Access recorded sessions anytime
 
-### 👨‍🏫 Instructor Dashboard
+### 💻 Desktop Application Features (Tauri)
 
-- **Course Management**: Create and manage courses and lessons
-- **Student Progress**: Track student engagement and completion rates
-- **Live Session Hosting**: Schedule and conduct live learning sessions
-- **Earnings Dashboard**: View earnings and payout information
-- **Discussion Forums**: Course-specific Q&A and discussion threads
+- **Offline Mode**: Full functionality without internet connection
+- **Local Database**: SQLite database for standalone operation
+- **System Notifications**: Important alerts and reminders
+- **Auto-Sync**: Automatic data synchronization when online
+- **Compact Size**: ~50MB installer (10x smaller than Electron alternatives)
 
-### 🛡️ Admin Dashboard
+### 🖥️ Server Deployment Features (Docker)
 
-- **User Management**: Complete user lifecycle management
-- **Content Management**: Course, lesson, and assessment management
-- **Live Session Management**: Create, schedule, and manage live sessions
-- **Analytics Dashboard**: Real-time statistics on users, courses, and revenue
-- **Discussion Moderation**: Tools to manage community discussions
-
-### 💳 Subscription & Payments
-
-- **Affordable Pricing**: Just ₹99/month with quarterly and yearly plans
-- **Multiple Payment Methods**: UPI, Credit/Debit Cards, Digital Wallets
-- **Flexible Plans**: Monthly (₹99), Quarterly (₹297), Yearly (₹1188)
-- **Subscription Management**: Automatic renewal and cancellation
-
-### 🎓 Certification System
-
-- **Course Completion Certificates**: Verified certificates upon completion
-- **Digital Verification**: Unique certificate numbers with public verification
-- **Shareable Credentials**: Download and share with employers
-
-### 🏢 Confusion Removers
-
-Specialized content to clear common confusion points:
-
-- **Digital Confusion**: UPI, Banking, Government Portals
-- **Financial Confusion**: Stock Market, Mutual Funds, Insurance
-- **Government Services**: Schemes, Certificates, Benefits
+- **Multi-User Support**: Thousands of concurrent users
+- **PostgreSQL Database**: Robust data management
+- **Real-Time Updates**: Socket.IO for live features
+- **Docker Containerization**: Easy deployment and scaling
+- **Load Balancing**: Ready for horizontal scaling
 
 ---
 
@@ -133,110 +106,81 @@ Specialized content to clear common confusion points:
 - **Language**: TypeScript 5.0
 - **Styling**: Tailwind CSS 4
 - **Components**: shadcn/ui with Lucide Icons
-- **State Management**: React Context + Custom Hooks
+- **State Management**: React Context + Zustand
 
-### Backend
-- **Runtime**: Node.js
+### Desktop (Tauri)
+- **Backend**: Rust 2.0
+- **Frontend**: Next.js in WebView
 - **Database**: SQLite with Prisma ORM
-- **Authentication**: NextAuth.js with JWT tokens
-- **API**: RESTful endpoints with Next.js API Routes
+- **System Integration**: Native notifications, file system access
+
+### Server (Docker)
+- **Runtime**: Node.js 20 LTS
+- **Database**: PostgreSQL 15
+- **ORM**: Prisma with connection pooling
+- **Real-Time**: Socket.IO with Redis adapter
+- **Caching**: Redis for session and cache management
 
 ### Infrastructure
-- **Deployment**: Vercel / Docker
+- **Containerization**: Docker & Docker Compose
+- **Reverse Proxy**: Caddy (automatic HTTPS)
 - **Version Control**: GitHub
-- **Package Manager**: Bun / npm
+- **Package Manager**: npm / Bun
 
 ---
 
 ## 📁 Project Structure
 
 ```
-INR99.Academy/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── api/               # API routes
-│   │   │   ├── admin/         # Admin management APIs
-│   │   │   ├── auth/          # Authentication APIs
-│   │   │   ├── categories/    # Category management
-│   │   │   ├── courses/       # Course APIs
-│   │   │   ├── enrollments/   # Enrollment management
-│   │   │   ├── live-sessions/ # Live session APIs
-│   │   │   ├── payments/      # Payment processing
-│   │   │   ├── progress/      # Progress tracking
-│   │   │   ├── school/        # School data APIs
-│   │   │   └── subscriptions/ # Subscription management
-│   │   ├── admin/             # Admin dashboard
-│   │   ├── auth/              # Login/Register pages
-│   │   ├── business/          # Business landing page
-│   │   ├── categories/        # Course categories
-│   │   ├── certificates/      # Certificate management
-│   │   ├── community/         # Community discussions
-│   │   ├── confusion/         # Confusion remover content
-│   │   ├── courses/           # Course catalog & details
-│   │   ├── dashboard/         # User dashboards
-│   │   │   ├── admin/         # Admin dashboard
-│   │   │   ├── instructor/    # Instructor dashboard
-│   │   │   └── student/       # Student dashboard
-│   │   ├── instructor/        # Instructor portal
-│   │   ├── learning-paths/    # Learning path pages
-│   │   ├── learning-ledger/   # Progress tracking
-│   │   ├── live-sessions/     # Live learning
-│   │   ├── profile/           # User profile
-│   │   ├── school/            # School education
-│   │   ├── subscription/      # Subscription management
-│   │   └── verify-certificate/# Certificate verification
-│   ├── components/            # React components
-│   │   ├── ui/               # shadcn/ui components
-│   │   ├── auth-modal.tsx    # Authentication modal
-│   │   ├── course-card.tsx   # Course display card
-│   │   ├── footer.tsx        # Footer component
-│   │   ├── navigation.tsx    # Navigation bar
-│   │   ├── payment-processor.tsx # Payment handling
-│   │   ├── lesson-player.tsx # Video lesson player
-│   │   ├── assessment-player.tsx # Quiz system
-│   │   ├── discussion-*.tsx  # Community features
-│   │   └── bandwidth-toggle.tsx # Low-bandwidth option
-│   ├── contexts/             # React contexts
-│   │   ├── auth-context.tsx  # Authentication state
-│   │   └── bandwidth-context.tsx # Bandwidth settings
-│   ├── hooks/                # Custom React hooks
-│   ├── lib/                  # Utility libraries
-│   │   ├── auth.ts          # Auth utilities
-│   │   ├── db.ts            # Database connection
-│   │   ├── course-data.ts   # Static course data
-│   │   └── utils.ts         # Helper functions
-│   ├── middleware.ts         # Route protection
-│   └── auth.ts              # Auth configuration
-├── prisma/
-│   ├── schema.prisma        # Database schema
-│   └── seed.ts              # Database seeding
-├── public/
-│   ├── assets/              # Static assets
-│   └── images/              # Image files
-├── docs/                    # Documentation
-├── scripts/                 # Utility scripts
-└── package.json
+Desktop-Server-School-Platform/
+├── src/                                   # Next.js Web Application
+│   ├── app/                              # Pages and Routes
+│   │   ├── page.tsx                      # Landing page
+│   │   ├── layout.tsx                    # Main layout
+│   │   ├── admin/                        # Admin dashboard
+│   │   ├── auth/                         # Authentication
+│   │   ├── courses/                      # Course management
+│   │   ├── dashboard/                    # User dashboards
+│   │   ├── live-sessions/                # Live learning
+│   │   └── api/                          # API routes
+│   ├── components/                       # React Components
+│   │   ├── ui/                           # Reusable UI components
+│   │   ├── providers/                    # Context providers
+│   │   └── dashboard/                    # Dashboard components
+│   ├── lib/                              # Core Libraries
+│   │   ├── desktop-service.ts            # Desktop integration
+│   │   ├── offline-manager.ts            # Offline content
+│   │   ├── db-manager.ts                 # Database utilities
+│   │   └── auth.ts                       # Authentication
+│   ├── hooks/                            # Custom React Hooks
+│   │   └── usePlatform.ts                # Platform detection
+│   └── contexts/                         # React Contexts
+│
+├── src-tauri/                            # Tauri Desktop Application
+│   ├── tauri.conf.json                   # Main configuration
+│   ├── Cargo.toml                        # Rust dependencies
+│   ├── build.rs                          # Build script
+│   ├── src/
+│   │   ├── main.rs                       # Entry point
+│   │   ├── commands.rs                   # Tauri commands
+│   │   └── lib.rs                        # Library exports
+│   └── icons/                            # Application icons
+│
+├── prisma/                               # Database Layer
+│   ├── schema.prisma                     # PostgreSQL schema (Server)
+│   ├── schema.sqlite.prisma              # SQLite schema (Desktop)
+│   └── seed.ts                           # Database seeding
+│
+├── scripts/                              # Build Scripts
+│   └── build.sh                          # Build automation
+│
+├── docker/                               # Docker Configuration
+│   ├── Dockerfile                        # Application container
+│   └── docker-compose.yml                # Full stack deployment
+│
+├── docs/                                 # Documentation
+└── public/                               # Static Assets
 ```
-
----
-
-## 📊 Database Schema
-
-Key Prisma models include:
-
-- **User**: Authentication, profile, and role management
-- **Course**: Course catalog with taxonomy (vertical, category, subcategory)
-- **Lesson**: Modular micro-lessons with video/text/quiz types
-- **LearningPath**: Curated learning journeys
-- **Enrollment**: Student course enrollments
-- **Progress**: Lesson completion tracking
-- **Assessment**: Quizzes and practice questions
-- **Certificate**: Course completion certificates
-- **Discussion**: Community Q&A and forums
-- **LiveSession**: Scheduled live learning sessions
-- **Attendance**: Session attendance records
-- **Subscription**: User subscription management
-- **Payment**: Transaction history
 
 ---
 
@@ -244,206 +188,199 @@ Key Prisma models include:
 
 ### Prerequisites
 
-- Node.js 18+ 
+#### For Desktop Application
+- Node.js 18+
+- Rust and Cargo (for Tauri)
 - Bun or npm
-- SQLite (or PostgreSQL for production)
+
+#### For Server Deployment
+- Docker & Docker Compose
+- 4GB RAM minimum (8GB recommended)
+- 10GB disk space
 
 ### Installation
 
+#### Option 1: Desktop Application
+
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/jitenkr2030/INR99.Academy.git
-   cd INR99.Academy
+   git clone https://github.com/your-repo/desktop-server-school-platform.git
+   cd desktop-server-school-platform
    ```
 
 2. **Install dependencies**
    ```bash
-   bun install
-   # or
    npm install
    ```
 
-3. **Set up environment variables**
+3. **Install Rust (required for Tauri)**
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   cargo install tauri-cli
+   ```
+
+4. **Set up database**
+   ```bash
+   npm run db:sqlite:generate
+   npm run db:sqlite:push
+   ```
+
+5. **Run desktop application**
+   ```bash
+   npm run desktop:dev
+   ```
+
+6. **Build desktop installer**
+   ```bash
+   npm run desktop:build
+   ```
+
+#### Option 2: Server Deployment
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-repo/desktop-server-school-platform.git
+   cd desktop-server-school-platform
+   ```
+
+2. **Configure environment**
    ```bash
    cp .env.example .env
-   # Edit .env with your database URL and other variables
+   # Edit .env with your configuration
    ```
 
-4. **Set up the database**
+3. **Deploy with Docker**
    ```bash
-   bun run db:push
-   bun run db:generate
+   docker-compose up -d
    ```
 
-5. **Start the development server**
-   ```bash
-   bun run dev
-   ```
-
-6. **Open your browser**
+4. **Access the application**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Available Scripts
 
 ```bash
-# Development
-bun run dev              # Start development server
-bun run build            # Build for production
-bun run start            # Start production server
-bun run lint             # Run ESLint
+# Desktop Development
+npm run desktop:dev          # Start Tauri desktop development
+npm run desktop:build        # Build desktop installer
+
+# Web Development
+npm run dev                  # Start web development server
+npm run build                # Build for production
+npm run start                # Start production server
 
 # Database
-bun run db:push          # Push schema to database
-bun run db:generate      # Generate Prisma client
-bun run db:migrate       # Run migrations
-bun run db:seed          # Seed database with initial data
+npm run db:generate          # Generate Prisma client
+npm run db:push              # Push schema (PostgreSQL)
+npm run db:sqlite:push       # Push schema (SQLite)
+npm run db:migrate           # Run migrations
+npm run db:seed              # Seed database
+
+# Docker
+docker-compose up -d         # Start all services
+docker-compose down          # Stop all services
+docker-compose logs -f       # View logs
 ```
 
 ---
 
-## 🔐 Authentication System
+## 📊 Database Schema
 
-The platform uses a secure authentication system:
+### Core Models
 
-- **Mobile Number Authentication**: OTP-based verification for Indian users
-- **NextAuth.js Integration**: Session-based authentication with JWT tokens
-- **Role-Based Access Control**: Student, Instructor, Admin roles
-- **Protected Routes**: Middleware-based route protection
-
-### User Roles
-
-| Role | Description |
-|------|-------------|
-| **Student** | Access to courses, progress tracking, certificates |
-| **Instructor** | Course creation, student management, earnings |
-| **Admin** | Full platform management, user moderation |
-
----
-
-## 💳 Payment Integration
-
-Multiple Indian payment methods supported:
-
-- **UPI**: Direct transfers and QR code scanning
-- **Cards**: Credit and debit card processing
-- **Wallets**: Paytm, PhonePe, Google Pay, Amazon Pay
-
-### Subscription Plans
-
-| Plan | Price | Savings |
-|------|-------|---------|
-| Monthly | ₹99/month | - |
-| Quarterly | ₹297/3 months | 10% |
-| Yearly | ₹1,188/year | 15% |
+- **User**: Authentication, profile, and role management
+- **StudentProfile**: Extended student information
+- **InstructorProfile**: Instructor qualifications and ratings
+- **SchoolClass**: Academic class/grade management
+- **Course**: Course catalog with taxonomy
+- **Module**: Course modules for content organization
+- **Lesson**: Individual lessons (video, text, quiz)
+- **CourseProgress**: Student progress tracking
+- **Assessment**: Quizzes and examinations
+- **Certificate**: Course completion certificates
+- **LiveSession**: Scheduled live learning sessions
+- **Attendance**: Session attendance records
+- **Subscription**: Institutional subscription management
+- **Tenant**: Multi-tenant support for multiple schools
 
 ---
 
-## 🎯 Course Categories
+## 🔐 Authentication & Security
 
-### Technology & Programming
-- Python, JavaScript, Java, C/C++, PHP, Go, Rust
-- Web Development (React, Next.js, Node.js)
-- Mobile App Development
-- AI & Machine Learning
-- Data Science & Analytics
-- Cybersecurity
-
-### Design & Creative
-- Graphic Design
-- UI/UX Design (Figma)
-- Video & Audio Production
-- Photography
-- Content Writing
-
-### Business & Finance
-- Financial Markets
-- Personal Finance & Investing
-- Taxation (India)
-- Business Strategy
-- Entrepreneurship
-- Accounting
-
-### Marketing & Sales
-- Digital Marketing
-- SEO & SEM
-- Social Media Marketing
-- Brand Building
-- Sales Skills
-
-### Professional Development
-- Resume Building
-- Interview Preparation
-- Public Speaking
-- Leadership Skills
-- Time Management
-
-### School & Academic
-- CBSE/ICSE Curriculum (Class 1-12)
-- JEE/NEET Preparation
-- English & Communication
-- Mathematics & Science
-
-### Competitive Exams
-- UPSC Civil Services
-- SSC CGL/CHSL
-- Banking Exams
-- Teaching Exams (TET)
-- Defense & Police Exams
+- **JWT-based Authentication**: Secure session management
+- **Role-Based Access Control**: Granular permission system
+- **Password Encryption**: bcrypt with salt rounds
+- **API Rate Limiting**: Protection against abuse
+- **SQL Injection Protection**: Parameterized queries
+- **XSS Prevention**: Content sanitization
 
 ---
 
-## 🌐 Deployment
+## 📈 Deployment Options
 
-### Vercel (Recommended)
+### Development
+- Local development server
+- Hot reload for both desktop and web
 
-1. Push to GitHub
-2. Import project in Vercel
-3. Configure environment variables
-4. Deploy automatically
+### Production - Desktop
+- Windows Installer (.msi)
+- macOS Application (.dmg)
+- Linux Package (.deb, .AppImage)
 
-### Docker
+### Production - Server
+- Single server deployment
+- Containerized with Docker
+- Ready for cloud platforms (AWS, GCP, Azure)
+- Kubernetes-ready manifests available
 
-```bash
-# Build image
-docker build -t inr99-academy .
+---
 
-# Run container
-docker run -p 3000:3000 inr99-academy
-```
+## 🎨 Customization
 
-### Environment Variables
+### White-Label Support
 
-```env
-DATABASE_URL=your_database_url
-NEXTAUTH_SECRET=your_secret_key
-NEXTAUTH_URL=https://your-domain.com
-```
+Customize the platform for your institution:
+
+- Logo and branding colors
+- Custom domain support
+- Institution-specific content
+- Custom landing pages
+- Email templates
+
+### Theming
+
+- Light/Dark mode support
+- Custom color schemes
+- Typography options
+- Layout customization
 
 ---
 
 ## 📈 Roadmap
 
 ### Short-term (1-3 months)
-- [ ] Mobile app launch (React Native)
-- [ ] Hindi content expansion
-- [ ] Payment gateway integration (Razorpay)
-- [ ] School partnership program launch
+- [ ] Mobile app companion (React Native)
+- [ ] Advanced analytics dashboard
+- [ ] Parent portal launch
+- [ ] Bulk student import/export
 
 ### Medium-term (3-6 months)
-- [ ] Regional language content (Tamil, Telugu, Marathi)
-- [ ] WhatsApp-based learning
-- [ ] Instructor certification program
-- [ ] Government tender applications
+- [ ] AI-powered recommendations
+- [ ] WhatsApp integration
+- [ ] Multi-language support
+- [ ] Advanced examination system
 
 ### Long-term (6-12 months)
-- [ ] AI-powered personalized learning
-- [ ] Virtual reality learning experiences
-- [ ] International expansion
-- [ ] IPO preparation
+- [ ] Virtual classroom integration
+- [ ] Learning analytics AI
+- [ ] Blockchain certificates
+- [ ] ERP module integration
 
 ---
 
 ## 🤝 Contributing
+
+We welcome contributions! Please see our contributing guidelines:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -463,6 +400,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Next.js team for the excellent framework
 - shadcn/ui for the beautiful component library
+- Tauri team for the desktop framework
 - Prisma team for the amazing ORM
 - Tailwind CSS for utility-first styling
 - All contributors who help make this project better
@@ -471,12 +409,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact & Support
 
-- **Website**: [https://inr99.academy](https://inr99.academy)
-- **Email**: support@inr99.academy
-- **GitHub**: [https://github.com/jitenkr2030/INR99.Academy](https://github.com/jitenkr2030/INR99.Academy)
+- **Documentation**: See `/docs` directory
+- **Deployment Guide**: See `README-DESKTOP-SERVER.md`
+- **Implementation Status**: See `IMPLEMENTATION_STATUS.md`
+- **GitHub Issues**: Report bugs and request features
 
 ---
 
-**INR99.Academy** - India's Digital Public Learning Infrastructure
+**Desktop-Server School Platform** - Empowering Education Through Technology
 
-*Not just a course site, but a learning utility, just like UPI.*
+*Whether you need a desktop application for offline learning or a server-based platform for networked schools, we've got you covered.*

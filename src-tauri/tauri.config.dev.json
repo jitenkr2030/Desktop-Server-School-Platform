@@ -1,0 +1,64 @@
+/**
+ * @type {import('@tauri-apps/api/config').Config}
+ */
+export default {
+  /**
+   * Build configuration
+   */
+  build: {
+    /**
+     * Directory where the frontend build is located
+     */
+    beforeDevCommand: "npm run dev",
+    beforeBuildCommand: "npm run build",
+    devUrl: "http://localhost:3000",
+    frontendDist: ".next/standalone",
+  },
+  /**
+   * App configuration
+   */
+  app: {
+    windows: [
+      {
+        title: "INR99 Academy - School Platform",
+        width: 1200,
+        height: 800,
+        minWidth: 800,
+        minHeight: 600,
+        resizable: true,
+        fullscreen: false,
+        decorations: true,
+        transparent: false,
+        alwaysOnTop: false,
+        visible: true,
+        center: true,
+        icon: "icons/icon.icns",
+      },
+    ],
+    security: {
+      csp: null,
+    },
+  },
+  /**
+   * Bundle configuration
+   */
+  bundle: {
+    active: true,
+    targets: "all",
+    icon: [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico",
+    ],
+  },
+  /**
+   * Plugins
+   */
+  plugins: {
+    shell: {
+      open: true,
+    },
+  },
+};

@@ -1,0 +1,35 @@
+[package]
+name = "inr99-academy-desktop"
+version = "1.0.0"
+description = "INR99 Academy - Desktop-Server School Platform"
+authors = ["INR99"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["shell-open", "fs-all", "dialog-all", "notification-all", "sqlite"] }
+tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-notification = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.7", features = ["sqlite", "runtime-tokio"] }
+tokio = { version = "1", features = ["full"] }
+bcrypt = "0.15"
+jsonwebtoken = "9"
+uuid = { version = "1", features = ["v4"] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile]
+release = {
+  opt-level = "s",
+  lto = true,
+  codegen-units = 4,
+  strip = true
+}

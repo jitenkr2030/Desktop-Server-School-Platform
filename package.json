@@ -1,6 +1,6 @@
 {
-  "name": "nextjs_tailwind_shadcn_ts",
-  "version": "0.1.0",
+  "name": "inr99-academy",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
@@ -11,7 +11,16 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "db:sqlite:push": "prisma db push --schema=prisma/schema.sqlite.prisma",
+    "db:sqlite:generate": "prisma generate --schema=prisma/schema.sqlite.prisma",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build",
+    "desktop:bundle": "tauri build --bundles app",
+    "build:standalone": "next build && cp .next/standalone/server.js .next/standalone-bundle/ && cp -r .next/static .next/standalone-bundle/",
+    "build:desktop": "npm run build:standalone && tauri build",
+    "setup:desktop": "npm install && cargo install tauri-cli",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.700.0",
