@@ -139,12 +139,12 @@ const instructors: Instructor[] = [
     expertise: ["Startup Strategy", "Business Planning", "Fundraising", "Growth Hacking"]
   },
   {
-    id: "instructor-8",
-    name: "Dr. Meera Krishnan",
-    title: "Physics Professor",
-    avatar: "/instructors/meera.jpg",
-    bio: "PhD from Cambridge University. 20 years of teaching experience with expertise in making complex concepts simple.",
-    expertise: ["Physics", "Mathematics", "Exam Preparation", "Competitive Exams"]
+    id: "instructor-legal",
+    name: "Adv. Raj Sharma",
+    title: "Constitutional Law Expert & Legal Awareness Advocate",
+    avatar: "/instructors/legal.jpg",
+    bio: "Senior advocate with 15+ years of experience in constitutional law and public interest litigation. Dedicated to making Indian law accessible to every citizen through simple, practical legal education.",
+    expertise: ["Constitutional Law", "Criminal Law", "RTI", "Consumer Rights", "Public Interest Litigation"]
   }
 ];
 
@@ -170,6 +170,7 @@ export const CATEGORIES = [
   { id: "tools", name: "DIY, Tools & Practical Skills", icon: "🧰" },
   { id: "spirituality", name: "Spirituality, Philosophy & Thinking", icon: "🧭" },
   { id: "safety", name: "Safety, Law & Awareness", icon: "🔒" },
+  { id: "legal-awareness", name: "Legal Awareness & Rights", icon: "⚖️" },
   { id: "community", name: "Community-led Learning", icon: "🧑‍🤝‍🧑" },
   { id: "exam-prep", name: "Exam Support", icon: "📚" },
   { id: "confusion-remover", name: "Confusion Removers", icon: "💡" },
@@ -7995,6 +7996,412 @@ What you'll master:
     
     createdAt: "2025-01-01",
     updatedAt: "2025-01-01"
+  },
+
+  // ==================== CITIZEN LAW SCHOOL ====================
+  {
+    id: "survival-law",
+    slug: "survival-law",
+    title: "Survival Law for Every Indian Citizen",
+    tagline: "Protect Yourself from Daily Legal Exploitation",
+    description: "Learn essential legal rights and laws that every Indian citizen must know to protect themselves from exploitation and fear.",
+    longDescription: `This comprehensive course empowers Indian citizens with practical legal knowledge to navigate everyday situations confidently. From understanding police interactions to filing RTI applications, you'll gain the tools to assert your rights legally and effectively.
+
+What you'll learn:
+- Understanding police powers and your rights during interactions
+- How to file an FIR and escalate complaints legally
+- Fundamental rights under the Indian Constitution
+- Using RTI to hold government accountable
+- Consumer protection and digital safety basics`,
+    thumbnail: "/assets/courses/survival-law.svg",
+    previewVideo: "https://www.youtube.com/embed/example",
+    price: 99,
+    originalPrice: 499,
+    currency: "INR",
+    
+    category: "Legal Awareness",
+    subcategory: "Citizen Rights",
+    vertical: "citizen",
+    targetAudience: ["citizens", "working-professionals", "students", "parents"],
+    tags: ["law", "legal-rights", "police", "fir", "rti", "consumer-rights", "constitution", "Citizen & Life Systems", "Legal Awareness", "Citizen Rights"],
+    
+    difficulty: "beginner",
+    language: "Simple English",
+    totalDuration: 285,
+    lessonCount: 16,
+    moduleCount: 5,
+    rating: 0,
+    reviewCount: 0,
+    enrollmentCount: 0,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-survival-1",
+        title: "Why Every Citizen Must Know the Law",
+        order: 1,
+        lessons: [
+          { id: "les-s1-1", title: "Law Is Not Only for Lawyers", type: "video", duration: 15, content: "", isFree: true, order: 1 },
+          { id: "les-s1-2", title: "Common Situations Where Citizens Get Exploited", type: "video", duration: 20, content: "", isFree: false, order: 2 },
+          { id: "les-s1-3", title: "Fear vs Rights — Changing the Mindset", type: "video", duration: 18, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-survival-2",
+        title: "Police & FIR Basics",
+        order: 2,
+        lessons: [
+          { id: "les-s2-1", title: "What Police Can and Cannot Do", type: "video", duration: 22, content: "", isFree: false, order: 1 },
+          { id: "les-s2-2", title: "Arrest Rules Every Citizen Must Know", type: "video", duration: 25, content: "", isFree: false, order: 2 },
+          { id: "les-s2-3", title: "FIR — Your Legal Right", type: "video", duration: 20, content: "", isFree: false, order: 3 },
+          { id: "les-s2-4", title: "What to Say If Police Refuse an FIR", type: "video", duration: 18, content: "", isFree: false, order: 4 }
+        ]
+      },
+      {
+        id: "mod-survival-3",
+        title: "Fundamental Rights (Indian Constitution)",
+        order: 3,
+        lessons: [
+          { id: "les-s3-1", title: "Right to Equality (Article 14)", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-s3-2", title: "Freedom of Speech & Movement (Article 19)", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-s3-3", title: "Right to Life & Dignity (Article 21)", type: "video", duration: 22, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-survival-4",
+        title: "RTI for Beginners",
+        order: 4,
+        lessons: [
+          { id: "les-s4-1", title: "What Is RTI and Why It Is Powerful", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-s4-2", title: "How to File an RTI (Online & Offline)", type: "video", duration: 25, content: "", isFree: false, order: 2 },
+          { id: "les-s4-3", title: "Using RTI to Fix Government Delays", type: "video", duration: 18, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-survival-5",
+        title: "Consumer & Digital Safety",
+        order: 5,
+        lessons: [
+          { id: "les-s5-1", title: "Consumer Rights Explained Simply", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-s5-2", title: "Online Fraud & Cyber Crime Basics", type: "video", duration: 22, content: "", isFree: false, order: 2 },
+          { id: "les-s5-3", title: "Using the 1930 Cyber Helpline", type: "video", duration: 15, content: "", isFree: false, order: 3 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[8],
+    
+    outcomes: [
+      "Understand your fundamental legal rights as an Indian citizen",
+      "Confidently interact with police and file complaints",
+      "File RTI applications to access government information",
+      "Protect yourself from consumer fraud and cyber crimes",
+      "Navigate the legal system without fear"
+    ],
+    requirements: [
+      "Basic understanding of Hindi or English",
+      "Willingness to learn and apply legal knowledge",
+      "No prior legal education required"
+    ],
+    
+    createdAt: "2026-01-19",
+    updatedAt: "2026-01-19"
+  },
+  
+  {
+    id: "power-law",
+    slug: "power-law",
+    title: "Power Law – How Citizens Handle the System",
+    tagline: "Confidently Deal with Police, Officials, and Authorities",
+    description: "Master the art of dealing with government officials, police, and authorities using legal methods and written documentation.",
+    longDescription: `This course teaches citizens how to confidently navigate interactions with the system. Learn the power of written complaints, understand legal notices, and discover how to escalate issues through proper channels.
+
+What you'll learn:
+- Power dynamics between citizens and authorities
+- How written complaints create legal records
+- Understanding notices, summons, and warrants
+- Escalating complaints through the legal ladder
+- Building strong evidence and documentation`,
+    thumbnail: "/assets/courses/power-law.svg",
+    previewVideo: "https://www.youtube.com/embed/example",
+    price: 99,
+    originalPrice: 499,
+    currency: "INR",
+    
+    category: "Legal Awareness",
+    subcategory: "Citizen Rights",
+    vertical: "citizen",
+    targetAudience: ["citizens", "working-professionals", "students", "community-leaders"],
+    tags: ["law", "legal-rights", "police", "complaints", "authorities", "documentation", "Citizen & Life Systems", "Legal Awareness", "Citizen Rights"],
+    
+    difficulty: "beginner",
+    language: "Simple English",
+    totalDuration: 195,
+    lessonCount: 13,
+    moduleCount: 4,
+    rating: 0,
+    reviewCount: 0,
+    enrollmentCount: 0,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-power-1",
+        title: "Legal Power of a Citizen",
+        order: 1,
+        lessons: [
+          { id: "les-p1-1", title: "Authority vs Citizen — Who Has Real Power", type: "video", duration: 18, content: "", isFree: true, order: 1 },
+          { id: "les-p1-2", title: "How Written Complaints Change Everything", type: "video", duration: 22, content: "", isFree: false, order: 2 }
+        ]
+      },
+      {
+        id: "mod-power-2",
+        title: "Notices, Summons & Warrants",
+        order: 2,
+        lessons: [
+          { id: "les-p2-1", title: "Police Notice vs Summon Explained", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-p2-2", title: "What Is a Warrant and When It Applies", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-p2-3", title: "Section 41A Notice in Simple Terms", type: "video", duration: 15, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-power-3",
+        title: "Complaint Escalation System",
+        order: 3,
+        lessons: [
+          { id: "les-p3-1", title: "Police Station to SP — The Legal Ladder", type: "video", duration: 22, content: "", isFree: false, order: 1 },
+          { id: "les-p3-2", title: "Role of DM, SDM & Magistrate", type: "video", duration: 20, content: "", isFree: false, order: 2 },
+          { id: "les-p3-3", title: "When and How to Approach Higher Authorities", type: "video", duration: 18, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-power-4",
+        title: "Proof & Documentation",
+        order: 4,
+        lessons: [
+          { id: "les-p4-1", title: "Why Evidence Is More Powerful Than Arguments", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-p4-2", title: "Legal Use of Audio, Video & Documents", type: "video", duration: 20, content: "", isFree: false, order: 2 },
+          { id: "les-p4-3", title: "How to Maintain a Complaint Record", type: "video", duration: 14, content: "", isFree: false, order: 3 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[8],
+    
+    outcomes: [
+      "Understand your legal power as a citizen",
+      "Confidently handle notices and summons",
+      "Escalate complaints through proper channels",
+      "Build strong evidence and documentation",
+      "Deal with authorities without fear"
+    ],
+    requirements: [
+      "Basic understanding of Hindi or English",
+      "Willingness to document interactions",
+      "No prior legal education required"
+    ],
+    
+    createdAt: "2026-01-19",
+    updatedAt: "2026-01-19"
+  },
+  
+  {
+    id: "case-handling-law",
+    slug: "case-handling-law",
+    title: "Case Handling Law for Non-Lawyers",
+    tagline: "Understand What Happens After an FIR",
+    description: "Learn what happens after an FIR is filed and how to avoid common legal mistakes that citizens often make.",
+    longDescription: `This course breaks down the complex legal process after an FIR into simple, understandable steps. Learn about investigation, bail, evidence collection, and court procedures without getting overwhelmed.
+
+What you'll learn:
+- The journey from FIR to charge sheet
+- Your rights during police investigation
+- Understanding bail types and when to apply
+- Evidence collection and preservation
+- Smart interaction with lawyers and courts`,
+    thumbnail: "/assets/courses/case-handling-law.svg",
+    previewVideo: "https://www.youtube.com/embed/example",
+    price: 99,
+    originalPrice: 499,
+    currency: "INR",
+    
+    category: "Legal Awareness",
+    subcategory: "Case Management",
+    vertical: "citizen",
+    targetAudience: ["citizens", "working-professionals", "students", "legal-aid"],
+    tags: ["law", "fir", "bail", "court", "investigation", "evidence", "Citizen & Life Systems", "Legal Awareness", "Case Management"],
+    
+    difficulty: "beginner",
+    language: "Simple English",
+    totalDuration: 210,
+    lessonCount: 13,
+    moduleCount: 4,
+    rating: 0,
+    reviewCount: 0,
+    enrollmentCount: 0,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-case-1",
+        title: "After FIR — The Real Process",
+        order: 1,
+        lessons: [
+          { id: "les-c1-1", title: "FIR to Charge Sheet Explained", type: "video", duration: 20, content: "", isFree: true, order: 1 },
+          { id: "les-c1-2", title: "Police Investigation Basics", type: "video", duration: 22, content: "", isFree: false, order: 2 },
+          { id: "les-c1-3", title: "Your Rights During Investigation", type: "video", duration: 18, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-case-2",
+        title: "Bail & Legal Safety",
+        order: 2,
+        lessons: [
+          { id: "les-c2-1", title: "What Is Bail and Why It Matters", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-c2-2", title: "Regular vs Anticipatory Bail", type: "video", duration: 22, content: "", isFree: false, order: 2 },
+          { id: "les-c2-3", title: "Common Bail Mistakes Citizens Make", type: "video", duration: 16, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-case-3",
+        title: "Evidence & Case Strength",
+        order: 3,
+        lessons: [
+          { id: "les-c3-1", title: "What Counts as Legal Evidence", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-c3-2", title: "How Citizens Can Collect Evidence", type: "video", duration: 20, content: "", isFree: false, order: 2 },
+          { id: "les-c3-3", title: "Protecting Evidence from Tampering", type: "video", duration: 16, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-case-4",
+        title: "Court & Lawyer Interaction",
+        order: 4,
+        lessons: [
+          { id: "les-c4-1", title: "How to Behave in Court", type: "video", duration: 15, content: "", isFree: false, order: 1 },
+          { id: "les-c4-2", title: "How to Work Smartly With a Lawyer", type: "video", duration: 20, content: "", isFree: false, order: 2 },
+          { id: "les-c4-3", title: "Tracking Your Case Without Stress", type: "video", duration: 15, content: "", isFree: false, order: 3 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[8],
+    
+    outcomes: [
+      "Understand the legal process after FIR filing",
+      "Know your rights during investigation",
+      "Make informed decisions about bail",
+      "Collect and preserve evidence effectively",
+      "Work efficiently with lawyers and courts"
+    ],
+    requirements: [
+      "Basic understanding of Hindi or English",
+      "Willingness to learn legal processes",
+      "No prior legal education required"
+    ],
+    
+    createdAt: "2026-01-19",
+    updatedAt: "2026-01-19"
+  },
+  
+  {
+    id: "citizen-leader-law",
+    slug: "citizen-leader-law",
+    title: "Citizen Leader Law – Creating Legal Impact",
+    tagline: "Raise Community Issues Legally and Responsibly",
+    description: "Enable citizens to raise community issues legally through RTI, PIL, and responsible citizen action.",
+    longDescription: `This course empowers community-minded citizens to create positive change through legal means. Learn advanced RTI strategies, understand PIL (Public Interest Litigation), and discover how to organize community action without legal trouble.
+
+What you'll learn:
+- Advanced RTI strategies for community issues
+- Using media responsibly for public causes
+- Understanding PIL and when to file
+- Organizing peaceful community action
+- Documentation for legal protection`,
+    thumbnail: "/assets/courses/citizen-leader-law.svg",
+    previewVideo: "https://www.youtube.com/embed/example",
+    price: 99,
+    originalPrice: 499,
+    currency: "INR",
+    
+    category: "Legal Awareness",
+    subcategory: "Community Leadership",
+    vertical: "citizen",
+    targetAudience: ["citizens", "community-leaders", "activists", "social-workers"],
+    tags: ["law", "rti", "pil", "community", "activism", "citizen-action", "Citizen & Life Systems", "Legal Awareness", "Community Leadership"],
+    
+    difficulty: "beginner",
+    language: "Simple English",
+    totalDuration: 180,
+    lessonCount: 12,
+    moduleCount: 4,
+    rating: 0,
+    reviewCount: 0,
+    enrollmentCount: 0,
+    isActive: true,
+    isFeatured: true,
+    
+    modules: [
+      {
+        id: "mod-leader-1",
+        title: "Citizen Leadership Through Law",
+        order: 1,
+        lessons: [
+          { id: "les-l1-1", title: "Difference Between Activism and Legal Action", type: "video", duration: 15, content: "", isFree: true, order: 1 },
+          { id: "les-l1-2", title: "Lawful Ways to Raise Public Issues", type: "video", duration: 18, content: "", isFree: false, order: 2 }
+        ]
+      },
+      {
+        id: "mod-leader-2",
+        title: "RTI, Media & Public Pressure",
+        order: 2,
+        lessons: [
+          { id: "les-l2-1", title: "Advanced RTI Strategies", type: "video", duration: 20, content: "", isFree: false, order: 1 },
+          { id: "les-l2-2", title: "Using Media Without Legal Risk", type: "video", duration: 18, content: "", isFree: false, order: 2 },
+          { id: "les-l2-3", title: "Documentation for Public Issues", type: "video", duration: 15, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-leader-3",
+        title: "PIL & Public Complaints",
+        order: 3,
+        lessons: [
+          { id: "les-l3-1", title: "What Is PIL (Public Interest Litigation)", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-l3-2", title: "When PIL Should and Should Not Be Filed", type: "video", duration: 16, content: "", isFree: false, order: 2 },
+          { id: "les-l3-3", title: "Alternatives to PIL", type: "video", duration: 14, content: "", isFree: false, order: 3 }
+        ]
+      },
+      {
+        id: "mod-leader-4",
+        title: "Community Action Safely",
+        order: 4,
+        lessons: [
+          { id: "les-l4-1", title: "Organizing Citizens Without Legal Trouble", type: "video", duration: 18, content: "", isFree: false, order: 1 },
+          { id: "les-l4-2", title: "Protest Rules & Permissions", type: "video", duration: 16, content: "", isFree: false, order: 2 },
+          { id: "les-l4-3", title: "Responsible Citizen Leadership", type: "video", duration: 12, content: "", isFree: false, order: 3 }
+        ]
+      }
+    ],
+    
+    instructor: instructors[8],
+    
+    outcomes: [
+      "Lead community issues through legal channels",
+      "Use RTI effectively for public causes",
+      "Understand PIL and its alternatives",
+      "Organize community action legally",
+      "Document and protect yourself while advocating"
+    ],
+    requirements: [
+      "Basic understanding of Hindi or English",
+      "Interest in community leadership",
+      "Commitment to legal and peaceful action"
+    ],
+    
+    createdAt: "2026-01-19",
+    updatedAt: "2026-01-19"
   }
 
 ];
