@@ -447,7 +447,7 @@ export default function NewLandingPage() {
                   fontSize: '0.75rem',
                   color: '#6b7280'
                 }}>
-                  One-time
+                  /month
                 </span>
               </div>
             </div>
@@ -591,7 +591,7 @@ export default function NewLandingPage() {
                   fontSize: '0.75rem',
                   color: '#6b7280'
                 }}>
-                  One-time
+                  /month
                 </span>
               </div>
             </div>
@@ -663,7 +663,7 @@ export default function NewLandingPage() {
                   fontSize: '0.75rem',
                   color: '#6b7280'
                 }}>
-                  One-time
+                  /month
                 </span>
               </div>
             </div>
@@ -686,7 +686,7 @@ export default function NewLandingPage() {
               margin: '0 auto 1.5rem',
               lineHeight: '1.6'
             }}>
-              Each Course Only ₹99 | Lifetime Access | Build Confidence & Rights Awareness
+              Each Course Only ₹99/month | Full Access | Build Confidence & Rights Awareness
             </p>
             <a href="/courses" style={{
               display: 'inline-block',
