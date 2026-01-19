@@ -56,6 +56,12 @@ export default function NewLandingPage() {
       title: 'Money & Business',
       description: 'Financial literacy - Investment, Business basics',
       color: '#fef3c7'
+    },
+    {
+      icon: '⚖️',
+      title: 'Citizen & Law',
+      description: 'Constitution, Citizen Law, RTI, Consumer Rights, Cyber Law',
+      color: '#e0e7ff'
     }
   ]
 
@@ -255,7 +261,7 @@ export default function NewLandingPage() {
               color: '#1f2937',
               marginBottom: '0.75rem'
             }}>
-              Six Learning Paths
+              Seven Learning Paths
             </h2>
             <p style={{
               color: '#6b7280',
@@ -323,6 +329,387 @@ export default function NewLandingPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Flagship ₹99 Courses Section */}
+      <section style={{
+        padding: '5rem 1rem',
+        background: 'linear-gradient(180deg, #fef3c7 0%, #fef9c3 50%, #fef3c7 100%)'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: '#fde68a',
+              color: '#b45309',
+              borderRadius: '9999px',
+              padding: '0.5rem 1rem',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              marginBottom: '1rem'
+            }}>
+              ⭐ Most Popular
+            </div>
+            <h2 style={{
+              fontSize: '2.25rem',
+              fontWeight: '700',
+              color: '#1f2937',
+              marginBottom: '0.75rem'
+            }}>
+              Flagship ₹99 Courses
+            </h2>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1.125rem',
+              maxWidth: '700px',
+              margin: '0 auto',
+              lineHeight: '1.6'
+            }}>
+              Build Skills. Build Confidence. Know Your Rights.
+            </p>
+          </div>
+
+          {/* Courses Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {/* English Speaking */}
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              border: '2px solid #e5e7eb',
+              transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)'
+              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+              e.currentTarget.style.borderColor = '#3b82f6'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              e.currentTarget.style.borderColor = '#e5e7eb'
+            }}
+            >
+              <div style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '0.75rem',
+                background: '#dbeafe',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.75rem',
+                marginBottom: '1rem'
+              }}>
+                🗣️
+              </div>
+              <h3 style={{
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.5rem'
+              }}>
+                English Speaking
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.875rem',
+                lineHeight: '1.5',
+                marginBottom: '1rem'
+              }}>
+                Practical English for Daily Life. Speak confidently in office, interviews, and daily conversations.
+              </p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: '1rem',
+                borderTop: '1px solid #f3f4f6'
+              }}>
+                <span style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#16a34a'
+                }}>
+                  ₹99
+                </span>
+                <span style={{
+                  fontSize: '0.75rem',
+                  color: '#6b7280'
+                }}>
+                  One-time
+                </span>
+              </div>
+            </div>
+
+            {/* Public Speaking */}
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              border: '2px solid #e5e7eb',
+              transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)'
+              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+              e.currentTarget.style.borderColor = '#8b5cf6'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              e.currentTarget.style.borderColor = '#e5e7eb'
+            }}
+            >
+              <div style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '0.75rem',
+                background: '#ede9fe',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.75rem',
+                marginBottom: '1rem'
+              }}>
+                🎤
+              </div>
+              <h3 style={{
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.5rem'
+              }}>
+                Public Speaking
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.875rem',
+                lineHeight: '1.5',
+                marginBottom: '1rem'
+              }}>
+                Speak with Confidence Anywhere. Remove stage fear. Improve voice, clarity, and impact.
+              </p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: '1rem',
+                borderTop: '1px solid #f3f4f6'
+              }}>
+                <span style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#16a34a'
+                }}>
+                  ₹99
+                </span>
+                <span style={{
+                  fontSize: '0.75rem',
+                  color: '#6b7280'
+                }}>
+                  One-time
+                </span>
+              </div>
+            </div>
+
+            {/* Indian Constitution */}
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              border: '2px solid #e5e7eb',
+              transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)'
+              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+              e.currentTarget.style.borderColor = '#f59e0b'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              e.currentTarget.style.borderColor = '#e5e7eb'
+            }}
+            >
+              <div style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '0.75rem',
+                background: '#fef3c7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.75rem',
+                marginBottom: '1rem'
+              }}>
+                📜
+              </div>
+              <h3 style={{
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.5rem'
+              }}>
+                Indian Constitution
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.875rem',
+                lineHeight: '1.5',
+                marginBottom: '1rem'
+              }}>
+                Know Your Fundamental Rights. Understand Articles 14, 19, 21 in simple language. Become an aware citizen.
+              </p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: '1rem',
+                borderTop: '1px solid #f3f4f6'
+              }}>
+                <span style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#16a34a'
+                }}>
+                  ₹99
+                </span>
+                <span style={{
+                  fontSize: '0.75rem',
+                  color: '#6b7280'
+                }}>
+                  One-time
+                </span>
+              </div>
+            </div>
+
+            {/* Citizen Law */}
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              border: '2px solid #e5e7eb',
+              transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)'
+              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+              e.currentTarget.style.borderColor = '#06b6d4'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              e.currentTarget.style.borderColor = '#e5e7eb'
+            }}
+            >
+              <div style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '0.75rem',
+                background: '#cffafe',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.75rem',
+                marginBottom: '1rem'
+              }}>
+                ⚖️
+              </div>
+              <h3 style={{
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '0.5rem'
+              }}>
+                Citizen Law
+              </h3>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '0.875rem',
+                lineHeight: '1.5',
+                marginBottom: '1rem'
+              }}>
+                Know Your Rights. Police, FIR, RTI, consumer rights, cyber safety — all in one.
+              </p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: '1rem',
+                borderTop: '1px solid #f3f4f6'
+              }}>
+                <span style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#16a34a'
+                }}>
+                  ₹99
+                </span>
+                <span style={{
+                  fontSize: '0.75rem',
+                  color: '#6b7280'
+                }}>
+                  One-time
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '3rem',
+            padding: '2rem',
+            background: 'white',
+            borderRadius: '1rem',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1rem',
+              marginBottom: '1.5rem',
+              maxWidth: '600px',
+              margin: '0 auto 1.5rem',
+              lineHeight: '1.6'
+            }}>
+              Each Course Only ₹99 | Lifetime Access | Build Confidence & Rights Awareness
+            </p>
+            <a href="/courses" style={{
+              display: 'inline-block',
+              background: '#f59e0b',
+              color: 'white',
+              padding: '0.875rem 2.5rem',
+              borderRadius: '0.5rem',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '1rem',
+              transition: 'background 0.2s, transform 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#d97706'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f59e0b'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+            >
+              Explore All ₹99 Courses
+            </a>
           </div>
         </div>
       </section>
