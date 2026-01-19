@@ -8090,7 +8090,7 @@ What you'll learn:
       }
     ],
     
-    instructor: instructors[8],
+    instructor: instructors[7],
     
     outcomes: [
       "Understand your fundamental legal rights as an Indian citizen",
@@ -8188,7 +8188,7 @@ What you'll learn:
       }
     ],
     
-    instructor: instructors[8],
+    instructor: instructors[7],
     
     outcomes: [
       "Understand your legal power as a citizen",
@@ -8287,7 +8287,7 @@ What you'll learn:
       }
     ],
     
-    instructor: instructors[8],
+    instructor: instructors[7],
     
     outcomes: [
       "Understand the legal process after FIR filing",
@@ -8385,7 +8385,7 @@ What you'll learn:
       }
     ],
     
-    instructor: instructors[8],
+    instructor: instructors[7],
     
     outcomes: [
       "Lead community issues through legal channels",
