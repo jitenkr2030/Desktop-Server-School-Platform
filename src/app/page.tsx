@@ -519,7 +519,7 @@ export default function NewLandingPage() {
                   fontSize: '0.75rem',
                   color: '#6b7280'
                 }}>
-                  One-time
+                  /month
                 </span>
               </div>
             </div>
