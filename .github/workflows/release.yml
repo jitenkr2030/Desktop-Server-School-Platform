@@ -1,0 +1,429 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+  attestations: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Linux Build Job
+  linux-build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-name: linux
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            src-tauri
+            apps
+            packages
+            scripts
+            package.json
+            turbo.json
+            tsconfig.json
+            next.config.ts
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Build Next.js Frontend
+        run: npm run build
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          rust-version: stable
+          toolchain: stable
+          components: rust-src, rust-std, cargo
+
+      - name: Install Linux Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            libssl-dev \
+            libsqlite3-dev \
+            build-essential \
+            libsoup-3.0 \
+            libgtk-3-0 \
+            librsvg2-dev \
+            webkit2gtk-4.1 \
+            libnotify4 \
+            libnss3 \
+            libxss1 \
+            libxtst6 \
+            libatspi2.0-0 \
+            libasound2
+
+      - name: Build Tauri App (Linux)
+        id: build-tauri
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: src-tauri
+          args: build --bundles deb
+
+      - name: Upload Linux DEB Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-deb
+          path: src-tauri/target/release/bundle/deb/*.deb
+          retention-days: 5
+
+      - name: Upload Linux RPM Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-rpm
+          path: src-tauri/target/release/bundle/rpm/*.rpm
+          retention-days: 5
+
+      - name: Upload Linux AppImage Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-appimage
+          path: src-tauri/target/release/bundle/appimage/*.AppImage
+          retention-days: 5
+
+  # Windows Build Job
+  windows-build:
+    runs-on: windows-latest
+    outputs:
+      artifact-name: windows
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            src-tauri
+            apps
+            packages
+            scripts
+            package.json
+            turbo.json
+            tsconfig.json
+            next.config.ts
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Build Next.js Frontend
+        run: npm run build
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          rust-version: stable
+          toolchain: stable
+          components: rust-src, rust-std, cargo
+
+      - name: Install WebView2
+        run: |
+          Invoke-WebRequest -Uri "https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download" -OutFile "WebView2Setup.exe"
+          Start-Process -FilePath "WebView2Setup.exe" -ArgumentList "/silent", "/install" -Wait
+
+      - name: Build Tauri App (Windows)
+        id: build-tauri-windows
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: src-tauri
+          args: build --bundles msi
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+
+      - name: Upload Windows MSI Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-msi
+          path: src-tauri/target/release/bundle/msi/*.msi
+          retention-days: 5
+
+      - name: Upload Windows EXE Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: src-tauri/target/release/bundle/nsis/*.exe
+          retention-days: 5
+
+  # macOS Build Job
+  macos-build:
+    runs-on: macos-latest
+    outputs:
+      artifact-name: macos
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            src-tauri
+            apps
+            packages
+            scripts
+            package.json
+            turbo.json
+            tsconfig.json
+            next.config.ts
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Build Next.js Frontend
+        run: npm run build
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          rust-version: stable
+          toolchain: stable
+          components: rust-src, rust-std, cargo
+
+      - name: Build Tauri App (macOS)
+        id: build-tauri-macos
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: src-tauri
+          args: build --bundles dmg
+        env:
+          TAURI_SIGNING_CERTIFICATE: ${{ secrets.TAURI_SIGNING_CERTIFICATE }}
+          TAURI_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.TAURI_SIGNING_CERTIFICATE_PASSWORD }}
+          TAURI_NOTARIZE_API_KEY: ${{ secrets.TAURI_NOTARIZE_API_KEY }}
+          TAURI_NOTARIZE_API_KEY_ID: ${{ secrets.TAURI_NOTARIZE_API_KEY_ID }}
+          TAURI_NOTARIZE_API_ISSUE: ${{ secrets.TAURI_NOTARIZE_API_ISSUE }}
+
+      - name: Upload macOS DMG Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-dmg
+          path: src-tauri/target/release/bundle/dmg/*.dmg
+          retention-days: 5
+
+      - name: Upload macOS PKG Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-pkg
+          path: src-tauri/target/release/bundle/pkg/*.pkg
+          retention-days: 5
+
+  # Release Creation Job
+  create-release:
+    needs: [linux-build, windows-build, macos-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display artifact structure
+        run: |
+          find artifacts -type f -name "*.msi" -o -name "*.exe" -o -name "*.deb" -o -name "*.rpm" -o -name "*.AppImage" -o -name "*.dmg" -o -name "*.pkg" | head -20
+
+      - name: Prepare Release Assets
+        run: |
+          mkdir -p release-assets
+          # Flatten artifacts
+          find artifacts -type f \( -name "*.msi" -o -name "*.exe" -o -name "*.deb" -o -name "*.rpm" -o -name "*.AppImage" -o -name "*.dmg" -o -name "*.pkg" \) -exec cp {} release-assets/ \;
+          ls -la release-assets/
+
+      - name: Generate Checksums
+        run: |
+          cd release-assets
+          echo "=== SHA256 Checksums ===" > SHA256SUMS.txt
+          shasum -a 256 * >> SHA256SUMS.txt
+          echo "" >> SHA256SUMS.txt
+          echo "=== MD5 Checksums ===" >> SHA256SUMS.txt
+          md5sum * >> MD5SUMS.txt 2>/dev/null || echo "md5sum not available, skipping"
+          cat SHA256SUMS.txt
+
+      - name: Get Version Tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create Release Notes
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          cat > release-notes.md << 'ENDRELEASE'
+          # INR99 Academy v${VERSION} Release Notes
+
+          ## Overview
+
+          Welcome to the INR99 Academy Desktop-Server School Platform v${VERSION} release! This release includes new features, performance improvements, and bug fixes for our comprehensive educational platform.
+
+          ## What's New in This Release
+
+          ### Features
+          - Hybrid cloud-on-premise architecture for educational institutions
+          - Multi-role user system (students, parents, instructors, administrators)
+          - Comprehensive course management and delivery system
+          - Assessment and examination management
+          - Attendance tracking and class management
+          - Secure sync agent for data synchronization
+          - Subscription and license management
+          - Revenue protection layer for subscription management
+
+          ### Performance Improvements
+          - Optimized application startup time
+          - Reduced memory consumption
+          - Improved sync efficiency
+          - Better offline functionality
+
+          ### Bug Fixes
+          - Fixed various issues reported by users
+          - Improved stability across all platforms
+          - Resolved platform-specific bugs
+
+          ## Installation Instructions
+
+          ### Windows
+          1. Download the `INR99_Academy_${VERSION}_x64.msi` file
+          2. Run the MSI installer as Administrator
+          3. Follow the installation wizard prompts
+          4. Launch INR99 Academy from the Start Menu
+
+          Alternative: Download the portable `.exe` version for use without installation.
+
+          ### Linux (Debian/Ubuntu)
+          ```bash
+          sudo apt install ./INR99_Academy_${VERSION}_amd64.deb
+          ```
+
+          ### Linux (Fedora/RHEL)
+          ```bash
+          sudo dnf install ./INR99_Academy-${VERSION}.x86_64.rpm
+          ```
+
+          ### Linux (AppImage)
+          ```bash
+          chmod +x INR99_Academy-${VERSION}.AppImage
+          ./INR99_Academy-${VERSION}.AppImage
+          ```
+
+          ### macOS
+          1. Download the `INR99_Academy_${VERSION}.dmg` file
+          2. Open the DMG file
+          3. Drag INR99 Academy to the Applications folder
+          4. Eject the DMG and launch the application
+
+          **Note**: On macOS, you may need to right-click and select "Open" for the first launch due to Gatekeeper.
+
+          ## System Requirements
+
+          ### Windows
+          - Windows 10 (version 1809+) or Windows 11
+          - 64-bit processor
+          - 4 GB RAM
+          - 200 MB disk space
+          - Internet connection for activation and sync
+
+          ### Linux
+          - Ubuntu 20.04+ / Fedora 35+ / Debian 11+
+          - 64-bit processor (x86_64)
+          - 2 GB RAM
+          - 200 MB disk space
+          - Internet connection for activation and sync
+
+          ### macOS
+          - macOS 11 (Big Sur) or later
+          - Intel or Apple Silicon (Rosetta 2 for Intel Macs)
+          - 4 GB RAM
+          - 200 MB disk space
+          - Internet connection for activation and sync
+
+          ## Upgrading
+
+          ### Automatic Updates
+          The application will automatically check for updates and notify you when a new version is available. You can configure update behavior in the application settings.
+
+          ### Manual Upgrade
+          Simply install the new version over the existing installation. Your data and settings will be preserved.
+
+          ## Support
+
+          - **Documentation**: https://github.com/jitenkr2030/Desktop-Server-School-Platform/wiki
+          - **Issues**: https://github.com/jitenkr2030/Desktop-Server-School-Platform/issues
+          - **Discussions**: https://github.com/jitenkr2030/Desktop-Server-School-Platform/discussions
+
+          ## Acknowledgments
+
+          Thank you to all contributors and users who have helped make this release possible!
+
+          ## Full Changelog
+
+          See [CHANGELOG.md](https://github.com/jitenkr2030/Desktop-Server-School-Platform/blob/main/CHANGELOG.md) for detailed changes.
+          ENDRELEASE
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-assets/*
+          name: INR99 Academy v${{ steps.version.outputs.version }}
+          tag_name: v${{ steps.version.outputs.version }}
+          body_path: release-notes.md
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify Release
+        run: |
+          echo "=== Release Created Successfully ==="
+          gh release view v${{ steps.version.outputs.version }} --json name,tagName,publishedAt,assets --jq '.'
+          echo ""
+          echo "=== Assets Uploaded ==="
+          gh release view v${{ steps.version.outputs.version }} --json assets --jq '.assets[].name'
