@@ -160,12 +160,11 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           projectPath: src-tauri
           args: build --bundles msi
-        env:
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
       - name: Upload Windows MSI Artifact
         uses: actions/upload-artifact@v4
@@ -228,15 +227,14 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          projectPath: src-tauri
-          args: build --bundles dmg
-        env:
           TAURI_SIGNING_CERTIFICATE: ${{ secrets.TAURI_SIGNING_CERTIFICATE }}
           TAURI_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.TAURI_SIGNING_CERTIFICATE_PASSWORD }}
           TAURI_NOTARIZE_API_KEY: ${{ secrets.TAURI_NOTARIZE_API_KEY }}
           TAURI_NOTARIZE_API_KEY_ID: ${{ secrets.TAURI_NOTARIZE_API_KEY_ID }}
           TAURI_NOTARIZE_API_ISSUE: ${{ secrets.TAURI_NOTARIZE_API_ISSUE }}
+        with:
+          projectPath: src-tauri
+          args: build --bundles dmg
 
       - name: Upload macOS DMG Artifact
         uses: actions/upload-artifact@v4
