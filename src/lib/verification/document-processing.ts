@@ -117,7 +117,7 @@ export class DocumentAnalysisService {
     this.initializeMLModels()
   }
 
-  private initializeMLModel
+  private initializeMLModels(): void {
     // Initialize ML models for document analysis
     // In production, this would load actual trained models
     this.mlModels.set('authenticity', {

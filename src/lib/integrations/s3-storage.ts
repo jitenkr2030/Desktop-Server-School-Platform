@@ -6,6 +6,22 @@
 import { z } from 'zod';
 import { Readable } from 'stream';
 
+// AWS SDK imports
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+  DeleteObjectCommand,
+  CopyObjectCommand,
+  ListObjectsV2Command,
+  HeadObjectCommand,
+  PutBucketLifecycleConfigurationCommand,
+  CreatePresignedPost,
+} from '@aws-sdk/client-s3';
+
+import { Upload } from '@aws-sdk/lib-storage';
+import { S3RequestPresigner, getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
 // Configuration
 export interface S3Config {
   region: string;
@@ -137,9 +153,6 @@ export class S3StorageIntegration {
    */
   private initializeClient(): void {
     try {
-      const { S3Client } = require('@aws-sdk/client-s3');
-      const { Upload } = require('@aws-sdk/lib-storage');
-      
       const clientConfig: any = {
         region: this.config.region,
         credentials: {
@@ -270,8 +283,6 @@ export class S3StorageIntegration {
     options: PresignedUrlOptions
   ): Promise<{ url: string; fields: Record<string, string> } | null> {
     try {
-      const { PutObjectCommand, CreatePresignedPost } = require('@aws-sdk/client-s3');
-      
       const key = this.getDocumentKeyFromId(options.documentId);
       
       const command = new PutObjectCommand({
@@ -280,8 +291,6 @@ export class S3StorageIntegration {
         ContentType: options.contentType,
       });
 
-      // Generate presigned URL
-      const { S3RequestPresigner } = require('@aws-sdk/s3-request-presigner');
       const presigner = new S3RequestPresigner({
         ...this.s3Client?.config || {},
       });
@@ -313,9 +322,6 @@ export class S3StorageIntegration {
     fileName?: string
   ): Promise<string | null> {
     try {
-      const { GetObjectCommand } = require('@aws-sdk/client-s3');
-      const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
-
       const key = this.getDocumentKeyFromId(documentId);
 
       const command = new GetObjectCommand({
@@ -342,7 +348,7 @@ export class S3StorageIntegration {
    */
   async downloadDocument(documentId: string): Promise<{ buffer: Buffer; metadata: DocumentMetadata } | null> {
     try {
-      const { GetObjectCommand } = require('@aws-sdk/client-s3');
+      
       
       const key = this.getDocumentKeyFromId(documentId);
 
@@ -384,7 +390,7 @@ export class S3StorageIntegration {
    */
   async deleteDocument(documentId: string): Promise<boolean> {
     try {
-      const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
+      
       
       const key = this.getDocumentKeyFromId(documentId);
 
@@ -424,7 +430,7 @@ export class S3StorageIntegration {
    */
   async getDocumentMetadata(documentId: string): Promise<DocumentMetadata | null> {
     try {
-      const { HeadObjectCommand } = require('@aws-sdk/client-s3');
+      
       
       const key = this.getDocumentKeyFromId(documentId);
 
@@ -470,7 +476,7 @@ export class S3StorageIntegration {
     isTruncated: boolean;
   }> {
     try {
-      const { ListObjectsV2Command } = require('@aws-sdk/client-s3');
+      
       
       let prefix = `${this.config.bucketPrefix}${organizationId}`;
       if (options?.category) {
@@ -529,7 +535,7 @@ export class S3StorageIntegration {
         sourceKey.split('/').pop() || 'copied-document'
       );
 
-      const { CopyObjectCommand } = require('@aws-sdk/client-s3');
+      
 
       await this.s3Client.send(new CopyObjectCommand({
         Bucket: this.config.bucketName,
@@ -554,7 +560,7 @@ export class S3StorageIntegration {
    */
   async setLifecycleRule(rule: LifecycleRule): Promise<boolean> {
     try {
-      const { PutBucketLifecycleConfigurationCommand } = require('@aws-sdk/client-s3');
+      
 
       await this.s3Client.send(new PutBucketLifecycleConfigurationCommand({
         Bucket: this.config.bucketName,
@@ -579,7 +585,7 @@ export class S3StorageIntegration {
     byCategory: Record<string, { count: number; size: number }>;
   }> {
     try {
-      const { ListObjectsV2Command } = require('@aws-sdk/client-s3');
+      
       
       const prefix = `${this.config.bucketPrefix}${organizationId}`;
       
@@ -660,7 +666,7 @@ export class S3StorageIntegration {
       return;
     }
 
-    const { PutObjectCommand } = require('@aws-sdk/client-s3');
+    
 
     await this.s3Client.send(new PutObjectCommand({
       Bucket: this.config.bucketName,

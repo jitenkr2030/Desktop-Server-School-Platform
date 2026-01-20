@@ -12,9 +12,9 @@ interface VerificationService {
 }
 
 interface VerificationResult {
- Valid: boolean
+  isValid: boolean
   approvalNumber: string
- is  institutionName: string
+  institutionName: string
   approvalType: string
   validFrom: string
   validUntil: string | null

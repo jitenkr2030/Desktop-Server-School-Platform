@@ -4,6 +4,7 @@
  */
 
 import { z } from 'zod';
+import crypto from 'crypto';
 
 // Configuration
 export interface SendGridConfig {
@@ -522,7 +523,6 @@ export class SendGridIntegration {
    */
   verifyWebhookSignature(payload: string, signature: string): boolean {
     try {
-      const crypto = require('crypto');
       const expectedSignature = crypto
         .createHmac('sha256', this.config.webhookKey)
         .update(payload)
