@@ -127,7 +127,7 @@ export async function createModule(courseId: string, data: { title: string; desc
   })
   const newOrder = (lastModule?.order || 0) + 1
 
-  const module = await db.module.create({
+  const newModule = await db.module.create({
     data: {
       title: data.title,
       description: data.description,
@@ -140,11 +140,11 @@ export async function createModule(courseId: string, data: { title: string; desc
   })
 
   revalidatePath(`/instructor/courses/${courseId}`)
-  return { success: true, module }
+  return { success: true, module: newModule }
 }
 
 export async function updateModule(moduleId: string, data: { title?: string; description?: string; order?: number }) {
-  const module = await db.module.update({
+  const updatedModule = await db.module.update({
     where: { id: moduleId },
     data: {
       ...(data.title && { title: data.title }),
@@ -156,21 +156,21 @@ export async function updateModule(moduleId: string, data: { title?: string; des
     }
   })
 
-  revalidatePath(`/instructor/courses/${module.courseId}`)
-  return { success: true, module }
+  revalidatePath(`/instructor/courses/${updatedModule.courseId}`)
+  return { success: true, module: updatedModule }
 }
 
 export async function deleteModule(moduleId: string) {
-  const module = await db.module.findUnique({
+  const moduleData = await db.module.findUnique({
     where: { id: moduleId },
     select: { courseId: true }
   })
 
-  if (module) {
+  if (moduleData) {
     await db.module.delete({
       where: { id: moduleId }
     })
-    revalidatePath(`/instructor/courses/${module.courseId}`)
+    revalidatePath(`/instructor/courses/${moduleData.courseId}`)
   }
 
   return { success: true }

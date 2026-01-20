@@ -34,15 +34,15 @@ function findLessonById(lessonId: string): {
   for (const course of courses) {
     if (!course.isActive) continue
     
-    for (const module of course.modules) {
-      const lessonIndex = module.lessons.findIndex(l => l.id === lessonId)
+    for (const mod of course.modules) {
+      const lessonIndex = mod.lessons.findIndex(l => l.id === lessonId)
       if (lessonIndex !== -1) {
         return {
           lesson: module.lessons[lessonIndex],
           course,
-          module,
+          mod,
           lessonIndex,
-          moduleIndex: course.modules.indexOf(module)
+          moduleIndex: course.modules.indexOf(mod)
         }
       }
     }

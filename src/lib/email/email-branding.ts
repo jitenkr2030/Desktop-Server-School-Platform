@@ -170,8 +170,7 @@ export function generateEmailHtml(
             <td style="background-color: #f8f9fa; padding: 30px 40px; border-top: 1px solid #e9ecef;">
               
               <!-- Footer text -->
-              ${branding.footerText ? `<p style="color: #6b7280; margin: 0 0 15px; font-size: 14px; text-align: center;">${escapeText)}</p>` : ''}
-Html(branding.footer              
+              ${branding.footerText ? `<p style="color: #6b7280; margin: 0 0 15px; font-size: 14px; text-align: center;">${branding.footerText}</p>` : ''}
               <!-- Footer HTML override -->
               ${branding.footerHtml ? `<div style="margin-bottom: 15px;">${branding.footerHtml}</div>` : ''}
 

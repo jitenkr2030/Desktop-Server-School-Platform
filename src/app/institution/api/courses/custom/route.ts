@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
     // If chapters are provided, create modules and lessons
     if (chapters && Array.isArray(chapters)) {
       for (const chapter of chapters) {
-        const module = await db.module.create({
+        const newModule = await db.module.create({
           data: {
             title: chapter.title,
             description: chapter.description || '',

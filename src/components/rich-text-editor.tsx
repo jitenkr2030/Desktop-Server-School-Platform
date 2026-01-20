@@ -249,7 +249,7 @@ export function RichTextEditor({
             className="h-8 w-8 p-0"
             title="Image"
           >
-            <Image className="h-4 w-4" />
+            <Image className="h-4 w-4" alt="" />
           </Button>
         )}
         
