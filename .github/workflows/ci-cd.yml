@@ -105,11 +105,6 @@ jobs:
       - name: Run Vitest
         run: bun run test
 
-      - name: Upload coverage
-        uses: codecov/codecov-action@v4
-        with:
-          files: ./coverage/lcov.info
-          fail_ci_if_error: false
 
   # ========================================
   # 3. Security Audit
@@ -387,6 +382,6 @@ jobs:
 # ============================================
 permissions:
   contents: read
-  security-events: read
+  security-events: write
   pull-requests: write
   deployments: write
