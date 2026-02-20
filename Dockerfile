@@ -5,8 +5,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json ./
-RUN npm install -g yarn && yarn install
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps --ignore-scripts
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -18,7 +18,7 @@ COPY . .
 RUN npx prisma generate
 
 # Build the application
-RUN yarn build
+RUN npm run build
 
 # Production image
 FROM base AS runner
