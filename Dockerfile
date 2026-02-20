@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps --ignore-scripts
+RUN npm install --legacy-peer-deps --no-audit --no-fund --prefer-offline || npm install --legacy-peer-deps --no-audit --no-fund
 
 # Rebuild the source code only when needed
 FROM base AS builder
