@@ -1,12 +1,15 @@
 FROM node:20-alpine AS base
 
+# Install bun
+RUN npm install -g bun
+
 # Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json bun.lock* ./
+RUN bun install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -15,10 +18,10 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma client
-RUN npx prisma generate
+RUN bunx prisma generate
 
 # Build the application
-RUN npm run build
+RUN bun run build
 
 # Production image
 FROM base AS runner
@@ -43,4 +46,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD ["bun", "run", "server.js"]
