@@ -122,7 +122,7 @@ scripts/*.ps1
 # ====================
 # Package Lock Files (use bun.lock)
 # ====================
-package-lock.json
+# package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
