@@ -1,12 +1,17 @@
 FROM node:20-alpine AS base
 
+# Install Bun
+RUN apk add --no-cache curl && \
+    curl -fsSL https://bun.sh/install | bash && \
+    ln -s /root/.bun/bin/bun /usr/local/bin/bun
+
 # Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install --legacy-peer-deps --no-audit --no-fund --prefer-offline || npm install --legacy-peer-deps --no-audit --no-fund
+COPY package.json ./
+RUN bun install
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -15,10 +20,10 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma client
-RUN npx prisma generate
+RUN bunx prisma generate
 
 # Build the application
-RUN npm run build
+RUN bun run build
 
 # Production image
 FROM base AS runner
