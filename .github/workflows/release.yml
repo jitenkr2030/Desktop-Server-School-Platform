@@ -45,7 +45,6 @@ jobs:
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          rust-version: stable
           toolchain: stable
           components: rust-src, rust-std, cargo
 
@@ -128,7 +127,6 @@ jobs:
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          rust-version: stable
           toolchain: stable
           components: rust-src, rust-std, cargo
 
@@ -191,7 +189,6 @@ jobs:
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          rust-version: stable
           toolchain: stable
           components: rust-src, rust-std, cargo
 
